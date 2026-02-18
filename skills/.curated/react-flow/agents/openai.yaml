@@ -1,0 +1,7 @@
+interface:
+  display_name: "React Flow Auto-Fix"
+  short_description: "Audit, repair, migrate, and scaffold React Flow projects."
+  default_prompt: "Use $react-flow to inspect this flow repo, run safe fixes and migration steps, and generate missing typed scaffolding."
+
+policy:
+  allow_implicit_invocation: true

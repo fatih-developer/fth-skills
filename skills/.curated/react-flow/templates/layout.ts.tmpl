@@ -1,0 +1,80 @@
+import type { Edge, Node, XYPosition } from "@xyflow/react";
+
+type LayoutOptions = {
+  gapX?: number;
+  gapY?: number;
+};
+
+const defaultOptions: Required<LayoutOptions> = {
+  gapX: 240,
+  gapY: 120
+};
+
+function fallbackPosition(index: number, options: Required<LayoutOptions>): XYPosition {
+  return {
+    x: (index % 4) * options.gapX,
+    y: Math.floor(index / 4) * options.gapY
+  };
+}
+
+export function applySimpleRankLayout<TNode extends Node, TEdge extends Edge>(
+  nodes: TNode[],
+  edges: TEdge[],
+  options: LayoutOptions = {}
+): TNode[] {
+  const merged = { ...defaultOptions, ...options };
+  if (nodes.length === 0) return [];
+
+  const incoming = new Map<string, number>();
+  const outgoing = new Map<string, string[]>();
+  const rank = new Map<string, number>();
+
+  for (const node of nodes) {
+    incoming.set(node.id, 0);
+    outgoing.set(node.id, []);
+    rank.set(node.id, 0);
+  }
+
+  for (const edge of edges) {
+    if (!incoming.has(edge.target) || !outgoing.has(edge.source)) continue;
+    incoming.set(edge.target, (incoming.get(edge.target) ?? 0) + 1);
+    outgoing.get(edge.source)?.push(edge.target);
+  }
+
+  const queue: string[] = [];
+  for (const [id, count] of incoming.entries()) {
+    if (count === 0) queue.push(id);
+  }
+
+  while (queue.length > 0) {
+    const current = queue.shift() as string;
+    const currentRank = rank.get(current) ?? 0;
+    for (const next of outgoing.get(current) ?? []) {
+      rank.set(next, Math.max(rank.get(next) ?? 0, currentRank + 1));
+      const nextIncoming = (incoming.get(next) ?? 0) - 1;
+      incoming.set(next, nextIncoming);
+      if (nextIncoming === 0) queue.push(next);
+    }
+  }
+
+  const rankOffsets = new Map<number, number>();
+  const byId = new Map(nodes.map((node) => [node.id, node]));
+
+  return nodes.map((node, index) => {
+    const nodeRank = rank.get(node.id) ?? 0;
+    const rankIndex = rankOffsets.get(nodeRank) ?? 0;
+    rankOffsets.set(nodeRank, rankIndex + 1);
+
+    const hasRealRank =
+      edges.length === 0 ||
+      (rank.get(node.id) ?? 0) > 0 ||
+      (outgoing.get(node.id)?.length ?? 0) > 0;
+
+    const position = hasRealRank
+      ? { x: nodeRank * merged.gapX, y: rankIndex * merged.gapY }
+      : fallbackPosition(index, merged);
+
+    const original = byId.get(node.id) as TNode;
+    return { ...original, position };
+  });
+}

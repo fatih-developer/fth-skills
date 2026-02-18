@@ -1,0 +1,16 @@
+import { memo } from "react";
+import {
+  BaseEdge,
+  getBezierPath,
+  type EdgeProps,
+  type EdgeTypes
+} from "@xyflow/react";
+
+const DefaultEdge = memo(function DefaultEdge(props: EdgeProps) {
+  const [path] = getBezierPath(props);
+  return <BaseEdge id={props.id} path={path} style={{ strokeWidth: 2 }} />;
+});
+
+export const edgeTypes: EdgeTypes = {
+  default: DefaultEdge
+};

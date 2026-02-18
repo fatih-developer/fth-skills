@@ -1,0 +1,22 @@
+type PersistedFlowV1 = {
+  nodes: Array<Record<string, unknown>>;
+  edges: Array<Record<string, unknown>>;
+};
+
+type PersistedFlowV2 = {
+  schemaVersion: 2;
+  nodes: Array<Record<string, unknown>>;
+  edges: Array<Record<string, unknown>>;
+};
+
+export function adaptFlowPayload(input: unknown): PersistedFlowV2 {
+  const source = input as Partial<PersistedFlowV1 & PersistedFlowV2>;
+  const nodes = Array.isArray(source.nodes) ? source.nodes : [];
+  const edges = Array.isArray(source.edges) ? source.edges : [];
+
+  return {
+    schemaVersion: 2,
+    nodes,
+    edges
+  };
+}

@@ -1,0 +1,28 @@
+import { memo } from "react";
+import type { NodeProps, NodeTypes } from "@xyflow/react";
+
+type LabelNodeData = {
+  label: string;
+};
+
+const LabelNode = memo(function LabelNode({ data }: NodeProps<{ label: string }>) {
+  return (
+    <div
+      style={{
+        border: "1px solid #222",
+        borderRadius: 8,
+        background: "#fff",
+        padding: "8px 12px",
+        fontSize: 14
+      }}
+    >
+      {data.label}
+    </div>
+  );
+});
+
+export type { LabelNodeData };
+
+export const nodeTypes: NodeTypes = {
+  labelNode: LabelNode
+};

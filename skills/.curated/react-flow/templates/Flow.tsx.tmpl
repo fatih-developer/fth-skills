@@ -1,0 +1,63 @@
+import { useCallback, useMemo } from "react";
+import {
+  addEdge,
+  Background,
+  Controls,
+  MiniMap,
+  ReactFlow,
+  useEdgesState,
+  useNodesState,
+  type Connection,
+  type Edge,
+  type Node
+} from "@xyflow/react";
+import "@xyflow/react/dist/style.css";
+
+import { edgeTypes } from "./edgeTypes";
+import { nodeTypes } from "./nodeTypes";
+
+type AppNode = Node<{ label: string }, "labelNode">;
+type AppEdge = Edge<Record<string, never>, "default">;
+
+const initialNodes: AppNode[] = [
+  { id: "n1", type: "labelNode", position: { x: 0, y: 0 }, data: { label: "Start" } },
+  { id: "n2", type: "labelNode", position: { x: 260, y: 0 }, data: { label: "End" } }
+];
+
+const initialEdges: AppEdge[] = [
+  { id: "e1-2", source: "n1", target: "n2", type: "default" }
+];
+
+export function Flow() {
+  const [nodes, setNodes, onNodesChange] = useNodesState<AppNode>(initialNodes);
+  const [edges, setEdges, onEdgesChange] = useEdgesState<AppEdge>(initialEdges);
+
+  const onConnect = useCallback(
+    (connection: Connection) => {
+      setEdges((current) => addEdge({ ...connection, type: "default" }, current));
+    },
+    [setEdges]
+  );
+
+  const stableNodeTypes = useMemo(() => nodeTypes, []);
+  const stableEdgeTypes = useMemo(() => edgeTypes, []);
+
+  return (
+    <div style={{ width: "100%", height: "100%" }}>
+      <ReactFlow<AppNode, AppEdge>
+        nodes={nodes}
+        edges={edges}
+        nodeTypes={stableNodeTypes}
+        edgeTypes={stableEdgeTypes}
+        onNodesChange={onNodesChange}
+        onEdgesChange={onEdgesChange}
+        onConnect={onConnect}
+        fitView
+      >
+        <Background />
+        <MiniMap />
+        <Controls />
+      </ReactFlow>
+    </div>
+  );
+}

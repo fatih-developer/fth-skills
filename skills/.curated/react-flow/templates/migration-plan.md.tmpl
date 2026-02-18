@@ -1,0 +1,37 @@
+# React Flow Migration Plan
+
+## Scope
+
+- Source package/version:
+- Target package/version:
+- Affected modules:
+
+## Step 1: Dependency And Imports
+
+- Update package dependency.
+- Replace import paths.
+- Verify CSS imports.
+
+## Step 2: Types
+
+- Introduce shared node and edge types.
+- Remove loose `any`.
+- Update generic signatures.
+
+## Step 3: Runtime Wiring
+
+- Verify `onNodesChange`, `onEdgesChange`, `onConnect`.
+- Verify edge creation helpers.
+- Verify node and edge registries.
+
+## Step 4: Persistence Compatibility
+
+- Document payload schema.
+- Add migration transform if needed.
+- Validate old payload loading.
+
+## Step 5: Verification
+
+- Run checks.
+- Manual flow interactions.
+- Record residual risks and follow-up actions.
