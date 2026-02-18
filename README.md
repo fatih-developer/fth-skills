@@ -38,8 +38,9 @@ fth-skills/
 
 | Skill | Channel | Description |
 |---|---|---|
-| `react-flow` | `.curated` | Analyze, repair, and scaffold `@xyflow/react` projects with typed patterns and safe auto-fix workflow. |
-| `react-flow-migration` | `.curated` | Plan and execute safe migrations between legacy React Flow code and modern `@xyflow/react` patterns. |
+| `react-flow` | `.curated` | Analyze, repair, migrate, and scaffold `@xyflow/react` projects with typed patterns and safe auto-fix workflow. |
+
+Migration capabilities are bundled inside `react-flow` (no separate migration skill is required).
 
 ## Add a New Skill
 
@@ -91,9 +92,7 @@ Use this sequence after validation:
 git add README.md LICENSE scripts/validate_curated_skills.py
 git commit -m "chore: migrate repository to skills.sh format and add quality gate"
 git add skills/.curated/react-flow
-git commit -m "feat(skill): add react-flow curated skill"
-git add skills/.curated/react-flow-migration
-git commit -m "feat(skill): add react-flow-migration curated skill"
+git commit -m "feat(skill): add unified react-flow curated skill"
 git tag -a v0.1.0 -m "fth-skills initial curated release"
 git push origin main --tags
 ```

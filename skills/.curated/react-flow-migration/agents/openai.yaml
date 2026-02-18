@@ -1,7 +1,0 @@
-interface:
-  display_name: "React Flow Migration"
-  short_description: "Upgrade legacy flows to modern @xyflow/react safely."
-  default_prompt: "Use $react-flow-migration to upgrade this flow editor to @xyflow/react with minimal risk and a clear verification checklist."
-
-policy:
-  allow_implicit_invocation: true
