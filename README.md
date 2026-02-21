@@ -1,115 +1,163 @@
-# fth-skills
+<div align="center">
 
-Agent skills for coding workflows, packaged for the `skills.sh` ecosystem.
+# 🧠 fth-skills
 
-This repository uses `skills.sh` skill format (`SKILL.md` instruction packs), not Mycroft/OVOS runtime Python skills.
+**AI agent skills for smarter decision-making and coding workflows**
 
-## Install
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Skills: 5](https://img.shields.io/badge/skills-5-brightgreen.svg)](#available-skills)
+[![Platform: skills.sh](https://img.shields.io/badge/platform-skills.sh-black.svg)](https://skills.sh/)
 
-Install all skills from this repository:
+*Curated instruction packs for the [skills.sh](https://skills.sh/) ecosystem — works with Claude Code, Cursor, Copilot, Gemini CLI, and more.*
+
+</div>
+
+---
+
+## ⚡ Quick Install
 
 ```bash
-npx skills add <github-owner>/fth-skills
+# Install all skills
+npx skills add fatih-developer/fth-skills
+
+# Install a single skill
+npx skills add fatih-developer/fth-skills --skill multi-brain
 ```
 
-Install only one skill:
+---
 
-```bash
-npx skills add https://github.com/<github-owner>/fth-skills --skill react-flow
+## 🎯 What's Inside
+
+This repository contains two skill families:
+
+### 🧠 Multi-Brain Family — *Think before you act*
+
+A decision-making framework that evaluates requests from multiple independent perspectives before producing output.
+
+```mermaid
+graph TD
+    A["🧠 multi-brain<br/><i>Base Protocol</i>"] --> B["👥 multi-brain-experts<br/><i>Domain Specialists</i>"]
+    A --> C["⚔️ multi-brain-debate<br/><i>Adversarial Testing</i>"]
+    A --> D["📊 multi-brain-score<br/><i>Confidence Scoring</i>"]
+
+    style A fill:#2563eb,stroke:#1d4ed8,color:#fff
+    style B fill:#7c3aed,stroke:#6d28d9,color:#fff
+    style C fill:#dc2626,stroke:#b91c1c,color:#fff
+    style D fill:#059669,stroke:#047857,color:#fff
 ```
 
-## Structure
+### ⚛️ React Flow — *Build, fix, migrate*
 
-```text
-fth-skills/
-|- skills/
-|  |- .curated/
-|  |  |- multi-brain/
-|  |  |  |- SKILL.md
-|  |  |  |- references/
-|  |  |  |- templates/
-|  |  |  `- agents/
-|  |  |- react-flow/
-|  |     |- SKILL.md
-|  |     |- references/
-|  |     |- templates/
-|  |     `- agents/
-|  `- .experimental/
-|- README.md
-`- LICENSE
-```
+Production-grade tooling for `@xyflow/react` codebases.
+
+---
 
 ## Available Skills
 
-| Skill | Channel | Description |
-|---|---|---|
-| `multi-brain` | `.curated` | Evaluate complex requests from 3 independent perspectives (Creative, Pragmatic, Comprehensive), reach consensus, then produce complete outputs (reports, code, analysis). |
-| `react-flow` | `.curated` | Analyze, repair, migrate, and scaffold `@xyflow/react` projects with typed patterns and safe auto-fix workflow. |
-| `multi-brain-experts` | `.experimental` | Domain-specific expert perspectives. Dynamically selects 3 experts from a role pool (Security, Performance, UX, Cost, etc.) based on context. |
-| `multi-brain-debate` | `.experimental` | Two-round adversarial debate. Perspectives challenge each other before consensus for battle-tested decisions. |
-| `multi-brain-score` | `.experimental` | Confidence scoring overlay. Each perspective rates confidence (1-10), consensus uses scores as weights, flags uncertainty. |
+### Curated (Stable)
 
-Migration capabilities are bundled inside `react-flow` (no separate migration skill is required).
+| Skill | Install | What it does |
+|-------|---------|-------------|
+| **multi-brain** | `--skill multi-brain` | 3 perspectives (Creative, Pragmatic, Comprehensive) → consensus → complete output. The base protocol. |
+| **react-flow** | `--skill react-flow` | Audit, repair, migrate, and scaffold React Flow projects with typed patterns. |
 
-## Add a New Skill
+### Experimental (Preview)
 
-1. Create a folder under `skills/.curated/<skill-name>/` or `skills/.experimental/<skill-name>/`.
-2. Add a `SKILL.md` file with required YAML frontmatter:
+| Skill | Install | What it does |
+|-------|---------|-------------|
+| **multi-brain-experts** | `--skill multi-brain-experts` | Replaces fixed perspectives with **domain-specific experts** (Security, Performance, UX, Cost...) auto-selected per request. |
+| **multi-brain-debate** | `--skill multi-brain-debate` | **Two-round debate**: positions → challenges & rebuttals → verdict. For high-stakes decisions. |
+| **multi-brain-score** | `--skill multi-brain-score` | **Confidence scoring** (1-10) per perspective with weighted consensus and uncertainty flags. |
 
-```yaml
+> **Experimental skills** are fully functional but may evolve. They graduate to curated once stable.
+
 ---
-name: skill-name
-description: Explain what the skill does and exactly when it should trigger.
+
+## 🧠 How Multi-Brain Works
+
+```
+┌──────────────────────────────────────────────────────────────────┐
+│  REQUEST                                                         │
+│  "Which database should I use for my multi-tenant SaaS?"         │
+└────────────────────────┬─────────────────────────────────────────┘
+                         │
+          ┌──────────────┼──────────────┐
+          ▼              ▼              ▼
+   ┌─────────────┐ ┌─────────────┐ ┌─────────────┐
+   │  CREATIVE   │ │  PRAGMATIC  │ │COMPREHENSIVE│
+   │             │ │             │ │             │
+   │ Multi-cloud │ │ PostgreSQL  │ │ Evaluate    │
+   │ from day 1  │ │ + managed   │ │ TCO over    │
+   │ w/ Terraform│ │ hosting     │ │ 3 years     │
+   └──────┬──────┘ └──────┬──────┘ └──────┬──────┘
+          │               │               │
+          └───────────────┼───────────────┘
+                          ▼
+                 ┌─────────────────┐
+                 │   CONSENSUS     │
+                 │                 │
+                 │ PostgreSQL +    │
+                 │ cloud-agnostic  │
+                 │ abstractions    │
+                 └────────┬────────┘
+                          ▼
+                 ┌─────────────────┐
+                 │  FULL OUTPUT    │
+                 │                 │
+                 │ Report / Code / │
+                 │ Brief Answer    │
+                 └─────────────────┘
+```
+
+**The 3 perspectives and consensus are always shown in the output** — the user sees the full reasoning trail, not just the answer.
+
 ---
+
+## 📁 Repository Structure
+
+```
+fth-skills/
+├── skills/
+│   ├── .curated/           # Stable, production-ready skills
+│   │   ├── multi-brain/
+│   │   └── react-flow/
+│   └── .experimental/      # Preview skills, may evolve
+│       ├── multi-brain-experts/
+│       ├── multi-brain-debate/
+│       └── multi-brain-score/
+├── scripts/
+│   └── validate_curated_skills.py
+├── README.md
+└── LICENSE
 ```
 
-3. Add only needed optional folders: `references/`, `templates/`, `scripts/`, `assets/`, `agents/`.
-4. Keep the name in lowercase kebab-case and match folder name with `name`.
-5. Update this README table after adding the skill.
+Each skill folder contains:
+- `SKILL.md` — Main instruction file (required)
+- `references/` — Supporting docs, checklists, examples
+- `templates/` — Reusable output templates
+- `agents/` — Agent platform manifests (OpenAI, etc.)
 
-## Release Checklist
+---
 
-1. Ensure each skill has `SKILL.md` with valid `name` and `description` frontmatter.
-2. Run repository quality gate (all curated skills in one command):
+## 🤝 Contributing
 
-```bash
-python scripts/validate_curated_skills.py
-```
+1. Create a folder under `skills/.curated/<name>/` or `skills/.experimental/<name>/`
+2. Add `SKILL.md` with frontmatter:
+   ```yaml
+   ---
+   name: skill-name
+   description: What it does and when it should trigger.
+   ---
+   ```
+3. Add supporting folders as needed: `references/`, `templates/`, `agents/`
+4. Run validation:
+   ```bash
+   python scripts/validate_curated_skills.py
+   python scripts/validate_curated_skills.py --root skills/.experimental
+   ```
+5. Update this README and submit a PR
 
-3. (Optional) Run upstream per-skill validator:
-
-```bash
-python C:/Users/fatih/.codex/skills/.system/skill-creator/scripts/quick_validate.py skills/.curated/<skill-name>
-```
-
-4. Verify referenced files exist (`references/`, `templates/`, `agents/openai.yaml` when used).
-5. Smoke-test install commands with your repo path:
-
-```bash
-npx skills add <github-owner>/fth-skills
-npx skills add https://github.com/<github-owner>/fth-skills --skill <skill-name>
-```
-
-6. Commit and push to a public GitHub repository.
-7. After publish, run one real task per skill and refine weak instructions.
-
-## First Release Flow
-
-Use this sequence after validation:
-
-```bash
-git add README.md LICENSE scripts/validate_curated_skills.py
-git commit -m "chore: migrate repository to skills.sh format and add quality gate"
-git add skills/.curated/react-flow
-git commit -m "feat(skill): add unified react-flow curated skill"
-git tag -a v0.1.0 -m "fth-skills initial curated release"
-git push origin main --tags
-```
-
-Suggested next tags:
-- `v0.1.1` for docs/checklist updates only.
-- `v0.2.0` when adding a new curated skill.
-- `v1.0.0` when skill contracts stabilize and install docs are final.
+---
 
 ## License
 
