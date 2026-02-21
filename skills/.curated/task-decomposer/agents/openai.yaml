@@ -1,0 +1,7 @@
+interface:
+  display_name: "Task Decomposer"
+  short_description: "Break complex tasks into executable subtasks with dependency maps and progress tracking."
+  default_prompt: "Use $task-decomposer to analyze this task, break it into subtasks with dependencies, present a plan for approval, then execute step by step."
+
+policy:
+  allow_implicit_invocation: true

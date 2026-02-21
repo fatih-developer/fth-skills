@@ -33,8 +33,9 @@ npx skills add fatih-developer/fth-skills --skill <skill-name>
 | Skill | Install | Description |
 |-------|---------|-------------|
 | **checkpoint-guardian** | `--skill checkpoint-guardian` | Automatic risk assessment before critical actions. Classifies risk (LOW/MEDIUM/HIGH), requires confirmation, produces audit trail. |
-| **react-flow** | `--skill react-flow` | Audit, repair, migrate, and scaffold `@xyflow/react` projects with typed patterns and safe auto-fix workflow. Includes migration support. |
 | **multi-brain** | `--skill multi-brain` | Evaluate requests from 3 independent perspectives (Creative, Pragmatic, Comprehensive), reach consensus, then produce complete output. |
+| **react-flow** | `--skill react-flow` | Audit, repair, migrate, and scaffold `@xyflow/react` projects with typed patterns and safe auto-fix workflow. Includes migration support. |
+| **task-decomposer** | `--skill task-decomposer` | Break complex tasks into subtasks with dependency maps, execution order, and progress tracking. Plan first, then execute step by step. |
 
 ### Experimental (Preview)
 
@@ -58,6 +59,10 @@ graph LR
         CG["checkpoint-guardian<br/><i>Risk Assessment & Audit Trail</i>"]
     end
 
+    subgraph "📋 Task Decomposer"
+        TD["task-decomposer<br/><i>Plan, Execute, Track</i>"]
+    end
+
     subgraph "⚛️ React Flow"
         RF["react-flow<br/><i>Audit, Fix, Migrate, Scaffold</i>"]
     end
@@ -69,7 +74,11 @@ graph LR
         MB --> MBS["multi-brain-score<br/><i>Confidence Scoring</i>"]
     end
 
+    TD -.->|"uses during execution"| CG
+    TD -.->|"uses for complex subtasks"| MB
+
     style CG fill:#f59e0b,stroke:#d97706,color:#fff
+    style TD fill:#8b5cf6,stroke:#7c3aed,color:#fff
     style RF fill:#0ea5e9,stroke:#0284c7,color:#fff
     style MB fill:#2563eb,stroke:#1d4ed8,color:#fff
     style MBE fill:#7c3aed,stroke:#6d28d9,color:#fff
@@ -87,7 +96,8 @@ fth-skills/
 │   ├── .curated/           # Stable, production-ready
 │   │   ├── checkpoint-guardian/
 │   │   ├── multi-brain/
-│   │   └── react-flow/
+│   │   ├── react-flow/
+│   │   └── task-decomposer/
 │   └── .experimental/      # Preview, may evolve
 │       ├── multi-brain-experts/
 │       ├── multi-brain-debate/
