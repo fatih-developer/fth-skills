@@ -57,12 +57,12 @@ lock-in risks, recommendation with rationale, next steps]
 ## 🧠 Brainstorm
 
 **Instance A — Creative:**
-Use a sliding window with Redis sorted sets for distributed rate limiting.
+Use a sliding window with sorted sets for distributed rate limiting.
 Sub-millisecond lookups and natural decay without timer resets.
 
 **Instance B — Pragmatic:**
 Token bucket with in-memory dict — simple, no external dependencies,
-works for single-instance APIs. Add Redis later if you scale.
+works for single-instance APIs. Add a distributed store later if you scale.
 
 **Instance C — Comprehensive:**
 Fixed window is easiest to reason about and monitor, but has burst-edge
@@ -73,7 +73,7 @@ issues. Combine with a short cooldown to prevent boundary attacks.
 ## ⚖️ Consensus
 Token bucket (B) for the initial implementation — no dependencies, easy
 to test. Structure the code so the storage backend can be swapped to
-Redis (A) without changing the algorithm interface.
+a distributed store (A) without changing the algorithm interface.
 
 ---
 

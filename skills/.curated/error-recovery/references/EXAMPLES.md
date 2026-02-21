@@ -22,7 +22,7 @@ Step     : Process CSV with pandas
 Error    : ModuleNotFoundError: No module named 'pandas'
 Category : Configuration
 
-Attempt 1: pip install pandas -> Success
+Attempt 1: Install missing dependency -> Success
 Result   : Recovered
 ```
 

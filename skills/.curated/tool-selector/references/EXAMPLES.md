@@ -37,7 +37,7 @@ Selected: 3 tools | Total calls: 4 | Blocked: 3
 ## Tool Plan
 | Step | Tool | Purpose | Depends On | Cached? |
 |------|------|---------|------------|---------|
-| 1 | Memory | DB credentials + API key | — | Yes |
+| 1 | Memory | Connection config + endpoints | — | Yes |
 | 2 | DB query | Fetch users (single SELECT) | #1 | Yes |
 | 3 | Code execution | Transform + prepare batch | #2 | No |
 | 4 | API call | Send batch (single call) | #3 | No |

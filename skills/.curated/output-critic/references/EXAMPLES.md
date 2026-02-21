@@ -13,7 +13,7 @@ Score    : 6.8/10
 |-----------|-------|------|
 | Correctness | 8/10 | Core scenarios work, edge case missing |
 | Readability | 7/10 | Good names, no comments |
-| Security | 5/10 | Hardcoded API key at line 12 |
+| Security | 5/10 | Sensitive config value embedded in source at line 12 |
 | Performance | 7/10 | Acceptable |
 | Testability | 6/10 | Functions independent but no tests |
 | **Overall** | **6.8/10** | |
@@ -23,16 +23,16 @@ Score    : 6.8/10
 - Basic error handling present
 
 ## Weaknesses
-- API key hardcoded in source (line 12)
+- Configuration value embedded in source code (line 12)
 - IndexError on empty list input
 
 ## Improvement Suggestions
-1. Read API key from os.environ, remove from code
+1. Move configuration to environment variables, remove from code
 2. Add guard clause for empty list (before line 8)
 3. Write at least 3 unit tests
 
 ## Next Step
-Security issue (hardcoded key) is critical — fix that first.
+Security issue (embedded config) is critical — fix that first.
 ```
 
 ## Example 2 — Plan Review
