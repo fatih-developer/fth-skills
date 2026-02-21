@@ -1,0 +1,7 @@
+interface:
+  display_name: "Memory Ledger"
+  short_description: "Structured task memory — tracks decisions, bugs, status, and preferences throughout multi-step tasks."
+  default_prompt: "Use $memory-ledger to maintain a structured record of decisions, errors, and progress for this task."
+
+policy:
+  allow_implicit_invocation: true

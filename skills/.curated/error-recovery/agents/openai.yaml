@@ -1,0 +1,7 @@
+interface:
+  display_name: "Error Recovery"
+  short_description: "Classify errors and apply the right recovery strategy. No blind retries."
+  default_prompt: "Use $error-recovery to classify this error, determine the recovery strategy, and attempt recovery or escalate to the user."
+
+policy:
+  allow_implicit_invocation: true

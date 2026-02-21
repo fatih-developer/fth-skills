@@ -1,0 +1,7 @@
+interface:
+  display_name: "Parallel Planner"
+  short_description: "Identify parallelizable steps, build dependency graphs, and optimize execution order."
+  default_prompt: "Use $parallel-planner to analyze these steps, identify which can run in parallel, detect conflicts, and produce an optimized execution plan."
+
+policy:
+  allow_implicit_invocation: true

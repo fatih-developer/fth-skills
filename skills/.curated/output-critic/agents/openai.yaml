@@ -1,0 +1,7 @@
+interface:
+  display_name: "Output Critic"
+  short_description: "Score output quality by type-specific criteria, make accept/reject decisions, suggest improvements."
+  default_prompt: "Use $output-critic to evaluate this output against quality criteria, score it, and provide actionable improvement suggestions."
+
+policy:
+  allow_implicit_invocation: true

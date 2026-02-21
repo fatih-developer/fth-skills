@@ -1,0 +1,7 @@
+interface:
+  display_name: "Assumption Checker"
+  short_description: "Surface and verify agent assumptions before acting. Prevents building on wrong foundations."
+  default_prompt: "Use $assumption-checker to identify and verify assumptions before starting this task or taking critical steps."
+
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,7 @@
+interface:
+  display_name: "Tool Selector"
+  short_description: "Select optimal tools, plan execution order, and prevent unnecessary tool calls."
+  default_prompt: "Use $tool-selector to analyze which tools are needed, plan the most efficient sequence, and block unnecessary calls."
+
+policy:
+  allow_implicit_invocation: true

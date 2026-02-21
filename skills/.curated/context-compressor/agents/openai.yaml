@@ -1,0 +1,7 @@
+interface:
+  display_name: "Context Compressor"
+  short_description: "Compress context by 70% while preserving critical information. Decisions, errors, and data never lost."
+  default_prompt: "Use $context-compressor to reduce this content while preserving all critical information, decisions, and data points."
+
+policy:
+  allow_implicit_invocation: true

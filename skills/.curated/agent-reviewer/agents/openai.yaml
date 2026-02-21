@@ -1,0 +1,7 @@
+interface:
+  display_name: "Agent Reviewer"
+  short_description: "Post-task retrospective analysis. Scores performance across 6 dimensions and produces improvement recommendations."
+  default_prompt: "Use $agent-reviewer to perform a retrospective on the completed task — evaluate efficiency, decisions, errors, and produce actionable improvement items."
+
+policy:
+  allow_implicit_invocation: true
