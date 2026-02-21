@@ -24,6 +24,11 @@ npx skills add https://github.com/<github-owner>/fth-skills --skill react-flow
 fth-skills/
 |- skills/
 |  |- .curated/
+|  |  |- multi-brain/
+|  |  |  |- SKILL.md
+|  |  |  |- references/
+|  |  |  |- templates/
+|  |  |  `- agents/
 |  |  |- react-flow/
 |  |     |- SKILL.md
 |  |     |- references/
@@ -38,6 +43,7 @@ fth-skills/
 
 | Skill | Channel | Description |
 |---|---|---|
+| `multi-brain` | `.curated` | Evaluate complex requests from 3 independent perspectives (Creative, Pragmatic, Comprehensive), reach consensus, then produce complete outputs (reports, code, analysis). |
 | `react-flow` | `.curated` | Analyze, repair, migrate, and scaffold `@xyflow/react` projects with typed patterns and safe auto-fix workflow. |
 
 Migration capabilities are bundled inside `react-flow` (no separate migration skill is required).

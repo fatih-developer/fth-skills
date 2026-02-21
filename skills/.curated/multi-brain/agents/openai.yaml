@@ -1,0 +1,7 @@
+interface:
+  display_name: "Multi-Brain Consensus"
+  short_description: "Evaluate requests from 3 perspectives, reach consensus, and deliver complete outputs."
+  default_prompt: "Use $multi-brain to analyze this request from creative, pragmatic, and comprehensive perspectives, then synthesize a consensus and produce the full output."
+
+policy:
+  allow_implicit_invocation: true
