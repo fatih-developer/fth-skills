@@ -1,14 +1,14 @@
 <div align="center">
 
-# 🧠 fth-skills
+# 🛠️ fth-skills
 
-**AI agent skills for smarter decision-making and coding workflows**
+**Curated AI agent skills for coding workflows and decision-making**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Skills: 5](https://img.shields.io/badge/skills-5-brightgreen.svg)](#available-skills)
+[![Skills: 5](https://img.shields.io/badge/skills-5-brightgreen.svg)](#-available-skills)
 [![Platform: skills.sh](https://img.shields.io/badge/platform-skills.sh-black.svg)](https://skills.sh/)
 
-*Curated instruction packs for the [skills.sh](https://skills.sh/) ecosystem — works with Claude Code, Cursor, Copilot, Gemini CLI, and more.*
+*Reusable instruction packs for the [skills.sh](https://skills.sh/) ecosystem — works with Claude Code, Cursor, Copilot, Gemini CLI, and more.*
 
 </div>
 
@@ -21,95 +21,55 @@
 npx skills add fatih-developer/fth-skills
 
 # Install a single skill
-npx skills add fatih-developer/fth-skills --skill multi-brain
+npx skills add fatih-developer/fth-skills --skill <skill-name>
 ```
 
 ---
 
-## 🎯 What's Inside
-
-This repository contains two skill families:
-
-### 🧠 Multi-Brain Family — *Think before you act*
-
-A decision-making framework that evaluates requests from multiple independent perspectives before producing output.
-
-```mermaid
-graph TD
-    A["🧠 multi-brain<br/><i>Base Protocol</i>"] --> B["👥 multi-brain-experts<br/><i>Domain Specialists</i>"]
-    A --> C["⚔️ multi-brain-debate<br/><i>Adversarial Testing</i>"]
-    A --> D["📊 multi-brain-score<br/><i>Confidence Scoring</i>"]
-
-    style A fill:#2563eb,stroke:#1d4ed8,color:#fff
-    style B fill:#7c3aed,stroke:#6d28d9,color:#fff
-    style C fill:#dc2626,stroke:#b91c1c,color:#fff
-    style D fill:#059669,stroke:#047857,color:#fff
-```
-
-### ⚛️ React Flow — *Build, fix, migrate*
-
-Production-grade tooling for `@xyflow/react` codebases.
-
----
-
-## Available Skills
+## 🎯 Available Skills
 
 ### Curated (Stable)
 
-| Skill | Install | What it does |
+| Skill | Install | Description |
 |-------|---------|-------------|
-| **multi-brain** | `--skill multi-brain` | 3 perspectives (Creative, Pragmatic, Comprehensive) → consensus → complete output. The base protocol. |
-| **react-flow** | `--skill react-flow` | Audit, repair, migrate, and scaffold React Flow projects with typed patterns. |
+| **react-flow** | `--skill react-flow` | Audit, repair, migrate, and scaffold `@xyflow/react` projects with typed patterns and safe auto-fix workflow. Includes migration support. |
+| **multi-brain** | `--skill multi-brain` | Evaluate requests from 3 independent perspectives (Creative, Pragmatic, Comprehensive), reach consensus, then produce complete output. |
 
 ### Experimental (Preview)
 
-| Skill | Install | What it does |
+| Skill | Install | Description |
 |-------|---------|-------------|
-| **multi-brain-experts** | `--skill multi-brain-experts` | Replaces fixed perspectives with **domain-specific experts** (Security, Performance, UX, Cost...) auto-selected per request. |
-| **multi-brain-debate** | `--skill multi-brain-debate` | **Two-round debate**: positions → challenges & rebuttals → verdict. For high-stakes decisions. |
-| **multi-brain-score** | `--skill multi-brain-score` | **Confidence scoring** (1-10) per perspective with weighted consensus and uncertainty flags. |
+| **multi-brain-experts** | `--skill multi-brain-experts` | Replaces fixed perspectives with domain-specific experts (Security, Performance, UX, Cost...) auto-selected per request. |
+| **multi-brain-debate** | `--skill multi-brain-debate` | Two-round adversarial debate: positions → challenges & rebuttals → verdict. For high-stakes decisions. |
+| **multi-brain-score** | `--skill multi-brain-score` | Confidence scoring (1-10) per perspective with weighted consensus and uncertainty flags. |
 
 > **Experimental skills** are fully functional but may evolve. They graduate to curated once stable.
 
 ---
 
-## 🧠 How Multi-Brain Works
+## 🧩 Skill Families
 
-```
-┌──────────────────────────────────────────────────────────────────┐
-│  REQUEST                                                         │
-│  "Which database should I use for my multi-tenant SaaS?"         │
-└────────────────────────┬─────────────────────────────────────────┘
-                         │
-          ┌──────────────┼──────────────┐
-          ▼              ▼              ▼
-   ┌─────────────┐ ┌─────────────┐ ┌─────────────┐
-   │  CREATIVE   │ │  PRAGMATIC  │ │COMPREHENSIVE│
-   │             │ │             │ │             │
-   │ Multi-cloud │ │ PostgreSQL  │ │ Evaluate    │
-   │ from day 1  │ │ + managed   │ │ TCO over    │
-   │ w/ Terraform│ │ hosting     │ │ 3 years     │
-   └──────┬──────┘ └──────┬──────┘ └──────┬──────┘
-          │               │               │
-          └───────────────┼───────────────┘
-                          ▼
-                 ┌─────────────────┐
-                 │   CONSENSUS     │
-                 │                 │
-                 │ PostgreSQL +    │
-                 │ cloud-agnostic  │
-                 │ abstractions    │
-                 └────────┬────────┘
-                          ▼
-                 ┌─────────────────┐
-                 │  FULL OUTPUT    │
-                 │                 │
-                 │ Report / Code / │
-                 │ Brief Answer    │
-                 └─────────────────┘
-```
+Skills are organized into families — related skills that share a common foundation.
 
-**The 3 perspectives and consensus are always shown in the output** — the user sees the full reasoning trail, not just the answer.
+```mermaid
+graph LR
+    subgraph "⚛️ React Flow"
+        RF["react-flow<br/><i>Audit, Fix, Migrate, Scaffold</i>"]
+    end
+
+    subgraph "🧠 Multi-Brain"
+        MB["multi-brain<br/><i>Base Protocol</i>"]
+        MB --> MBE["multi-brain-experts<br/><i>Domain Specialists</i>"]
+        MB --> MBD["multi-brain-debate<br/><i>Adversarial Testing</i>"]
+        MB --> MBS["multi-brain-score<br/><i>Confidence Scoring</i>"]
+    end
+
+    style RF fill:#0ea5e9,stroke:#0284c7,color:#fff
+    style MB fill:#2563eb,stroke:#1d4ed8,color:#fff
+    style MBE fill:#7c3aed,stroke:#6d28d9,color:#fff
+    style MBD fill:#dc2626,stroke:#b91c1c,color:#fff
+    style MBS fill:#059669,stroke:#047857,color:#fff
+```
 
 ---
 
@@ -118,10 +78,10 @@ Production-grade tooling for `@xyflow/react` codebases.
 ```
 fth-skills/
 ├── skills/
-│   ├── .curated/           # Stable, production-ready skills
+│   ├── .curated/           # Stable, production-ready
 │   │   ├── multi-brain/
 │   │   └── react-flow/
-│   └── .experimental/      # Preview skills, may evolve
+│   └── .experimental/      # Preview, may evolve
 │       ├── multi-brain-experts/
 │       ├── multi-brain-debate/
 │       └── multi-brain-score/
