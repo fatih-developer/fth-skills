@@ -1,0 +1,7 @@
+interface:
+  display_name: "Checkpoint Guardian"
+  short_description: "Risk assessment and confirmation gates for critical agent actions."
+  default_prompt: "Use $checkpoint-guardian to evaluate risk before any destructive or irreversible action, require confirmation for medium and high risk operations, and produce an audit trail."
+
+policy:
+  allow_implicit_invocation: true
