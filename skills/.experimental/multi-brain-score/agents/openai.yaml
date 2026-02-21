@@ -1,0 +1,7 @@
+interface:
+  display_name: "Multi-Brain Score"
+  short_description: "Confidence-scored multi-perspective decisions with uncertainty flags."
+  default_prompt: "Use $multi-brain-score to evaluate this request with scored confidence levels and weighted consensus."
+
+policy:
+  allow_implicit_invocation: true

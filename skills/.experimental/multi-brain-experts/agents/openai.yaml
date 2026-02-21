@@ -1,0 +1,7 @@
+interface:
+  display_name: "Multi-Brain Experts"
+  short_description: "Domain-specific expert perspectives for technical decisions."
+  default_prompt: "Use $multi-brain-experts to select relevant domain experts and analyze this request from their specialized perspectives."
+
+policy:
+  allow_implicit_invocation: true

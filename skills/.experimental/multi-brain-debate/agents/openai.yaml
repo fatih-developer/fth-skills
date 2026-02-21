@@ -1,0 +1,7 @@
+interface:
+  display_name: "Multi-Brain Debate"
+  short_description: "Two-round adversarial debate for high-stakes decisions."
+  default_prompt: "Use $multi-brain-debate to run a structured debate with challenges and rebuttals before reaching a verdict."
+
+policy:
+  allow_implicit_invocation: true

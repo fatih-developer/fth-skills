@@ -45,6 +45,9 @@ fth-skills/
 |---|---|---|
 | `multi-brain` | `.curated` | Evaluate complex requests from 3 independent perspectives (Creative, Pragmatic, Comprehensive), reach consensus, then produce complete outputs (reports, code, analysis). |
 | `react-flow` | `.curated` | Analyze, repair, migrate, and scaffold `@xyflow/react` projects with typed patterns and safe auto-fix workflow. |
+| `multi-brain-experts` | `.experimental` | Domain-specific expert perspectives. Dynamically selects 3 experts from a role pool (Security, Performance, UX, Cost, etc.) based on context. |
+| `multi-brain-debate` | `.experimental` | Two-round adversarial debate. Perspectives challenge each other before consensus for battle-tested decisions. |
+| `multi-brain-score` | `.experimental` | Confidence scoring overlay. Each perspective rates confidence (1-10), consensus uses scores as weights, flags uncertainty. |
 
 Migration capabilities are bundled inside `react-flow` (no separate migration skill is required).
 
