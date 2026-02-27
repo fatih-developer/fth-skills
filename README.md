@@ -5,7 +5,7 @@
 **Curated AI agent skills for coding workflows, decision-making, and agentic task safety**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Skills: 15](https://img.shields.io/badge/skills-15-brightgreen.svg)](#-available-skills)
+[![Skills: 42](https://img.shields.io/badge/skills-15%20Active%20%2B%2030%20Coming%20Soon-brightgreen.svg)](#-available-skills)
 [![Platform: skills.sh](https://img.shields.io/badge/platform-skills.sh-black.svg)](https://skills.sh/)
 
 *Reusable instruction packs for the [skills.sh](https://skills.sh/) ecosystem — works with Claude Code, Cursor, Copilot, Gemini CLI, and more.*
@@ -26,31 +26,65 @@ npx skills add fatih-developer/fth-skills --skill <skill-name>
 
 ---
 
-## 🎯 Available Skills
+## 🎯 Available Skills (15 Curated + 30 Coming Soon)
 
-### Agentic Ecosystem (10 skills)
+The repository is structured into a **Layered Monorepo Architecture**. Skills are organized into Domain-Specific capabilities and Core Agentic Orchestration.
 
-End-to-end decision and execution ecosystem for agentic tasks. Each skill covers a phase of the task lifecycle:
+### 💼 Domain Ecosystems (Coming Soon)
 
-| Skill | Phase | Install | Description |
-|-------|-------|---------|-------------|
-| **assumption-checker** | Planning | `--skill assumption-checker` | Surface and verify agent assumptions (technical, data, logic, intent) before acting. |
-| **task-decomposer** | Planning | `--skill task-decomposer` | Break complex tasks into subtasks with dependency maps, execution order, and progress tracking. |
-| **parallel-planner** | Planning | `--skill parallel-planner` | Identify parallelizable steps, build dependency graphs, detect conflicts, optimize execution order. |
-| **tool-selector** | Planning | `--skill tool-selector` | Select optimal tools, plan call sequence, prevent unnecessary tool invocations. |
-| **checkpoint-guardian** | Execution | `--skill checkpoint-guardian` | Risk assessment before critical actions. Classifies risk (LOW/MEDIUM/HIGH), requires confirmation, produces audit trail. |
-| **memory-ledger** | Execution | `--skill memory-ledger` | Structured task memory — tracks decisions, bugs, status, and preferences throughout multi-step tasks. |
-| **error-recovery** | Execution | `--skill error-recovery` | Classify errors (transient/config/logic/permanent), apply recovery strategies, escalate when exhausted. |
-| **context-compressor** | Execution | `--skill context-compressor` | Compress context by 70% while preserving decisions, errors, and critical data. |
-| **output-critic** | Verification | `--skill output-critic` | Score output quality by type-specific criteria (code, report, plan, data), accept/reject gate. |
-| **agent-reviewer** | Retrospective | `--skill agent-reviewer` | Post-task retrospective across 6 dimensions with skill performance evaluation. |
+Domain skills work together natively using the **Hybrid Handoff Pattern**. Each domain has an `ECOSYSTEM.md` map that orchestrators read to understand the exact sequence of skills required for a workflow (e.g., Pre-Launch Audit, Database Migration).
 
-### Specialized Skills
-
+#### 📱 Mobile App Domain (`domains/mobile`) - *[COMING SOON]*
 | Skill | Install | Description |
 |-------|---------|-------------|
-| **multi-brain** | `--skill multi-brain` | Evaluate requests from 3 independent perspectives (Creative, Pragmatic, Comprehensive), reach consensus, produce complete output. |
-| **react-flow** | `--skill react-flow` | Audit, repair, migrate, and scaffold `@xyflow/react` projects with typed patterns and safe auto-fix workflow. |
+| **accessibility-enforcer** | `--skill accessibility-enforcer` | Audits UI for VoiceOver/TalkBack & WCAG contrast compliance. |
+| **mobile-perf-auditor** | `--skill mobile-perf-auditor` | Evaluates bundle size, memory leaks, battery drain, and frame drops. |
+| **mobile-security-auditor** | `--skill mobile-security-auditor` | Discovers insecure local storage, exposed API keys, and reverse-engineering risks. |
+| **release-orchestrator** | `--skill release-orchestrator` | Manages semantic versioning, staged rollouts, and changelog generation. |
+| **crash-analyst** | `--skill crash-analyst` | Analyzes stack traces and symbolication to pinpoint crash root causes. |
+| *(+5 more)* | | `deep-link-architect`, `offline-sync-designer`, `onboarding-designer`, `push-notification-planner`, `app-store-reviewer` |
+
+#### 🌐 API Domain (`domains/api`) - *[COMING SOON]*
+| Skill | Install | Description |
+|-------|---------|-------------|
+| **contract-first-designer** | `--skill contract-first-designer` | Designs OpenAPI/AsyncAPI specifications before writing any code. |
+| **api-mock-designer** | `--skill api-mock-designer` | Scaffolds mock servers and JSON response payloads based on the contract. |
+| **protocol-selector** | `--skill protocol-selector` | Evaluates REST vs GraphQL vs gRPC based on usage requirements. |
+| **breaking-change-detector** | `--skill breaking-change-detector` | Flags backward-incompatible payload or endpoint changes. |
+| *(+6 more)* | | `auth-flow-designer`, `rate-limit-strategist`, `sdk-scaffolder`, `changelog-generator`, `webhook-architect`, `api-observability-planner` |
+
+#### 🗄️ Database Domain (`domains/database`) - *[COMING SOON]*
+| Skill | Install | Description |
+|-------|---------|-------------|
+| **schema-architect** | `--skill schema-architect` | Normalizes DB schema (BCNF/3NF), generates DDL, prevents God Tables. |
+| **index-advisor** | `--skill index-advisor` | Recommends covering and composite indexes for slow queries. |
+| **migration-strategist** | `--skill migration-strategist` | Designs zero-downtime up/down migration scripts and backfill jobs. |
+| **access-policy-designer** | `--skill access-policy-designer` | Designs Row-Level Security (RLS) constraints and access roles. |
+| *(+6 more)* | | `query-explainer`, `query-budget-enforcer`, `schema-diff-analyzer`, `data-masker`, `data-lineage-tracer`, `seed-data-generator` |
+
+#### ⚛️ Frameworks (`domains/react-flow`)
+| Skill | Install | Description |
+|-------|---------|-------------|
+| **react-flow** | `--skill react-flow` | Audit, repair, migrate, and scaffold `@xyflow/react` projects. |
+
+---
+
+### 🧠 Core Agentic Ecosystem (9 skills)
+
+These foundational skills provide decision-making, safety, and orchestration. They sit in the `core/`, `planning/`, and `execution/` layers.
+
+| Skill | Layer | Install | Description |
+|-------|-------|---------|-------------|
+| **task-decomposer** | Planning | `--skill task-decomposer` | Break complex tasks into subtasks with dependency maps. Consults `ECOSYSTEM.md` guides automatically. |
+| **parallel-planner** | Planning | `--skill parallel-planner` | Identify parallelizable steps, build dependency graphs, detect conflicts. |
+| **tool-selector** | Planning | `--skill tool-selector` | Select optimal tools, plan call sequence, prevent unnecessary tool invocations. |
+| **checkpoint-guardian** | Execution | `--skill checkpoint-guardian` | Risk assessment before critical actions. Requires user confirmation for high-risk operations. |
+| **memory-ledger** | Execution | `--skill memory-ledger` | Structured task memory — tracks decisions, bugs, status throughout multi-step tasks. |
+| **error-recovery** | Execution | `--skill error-recovery` | Classify errors (transient/config/logic/permanent) and apply recovery strategies. |
+| **context-compressor** | Execution | `--skill context-compressor` | Compress context by 70% while preserving decisions, errors, and critical data. |
+| **output-critic** | Core | `--skill output-critic` | Score output quality by type-specific criteria, accept/reject gate. |
+| **assumption-checker** | Core | `--skill assumption-checker` | Surface and verify agent assumptions before acting. |
+| **agent-reviewer** | Core | `--skill agent-reviewer` | Post-task retrospective across 6 dimensions. |
 
 ### Experimental (Preview)
 
@@ -64,10 +98,15 @@ End-to-end decision and execution ecosystem for agentic tasks. Each skill covers
 
 ---
 
-## 🧩 Ecosystem Architecture
+## 🧩 Ecosystem Architecture & Handoffs
 
-The 10 agentic skills work together across 5 phases of a task lifecycle:
+The `fth-skills` repository uses a **Hybrid Handoff Pattern** allowing individual skills to act as a cohesive team.
 
+1. **Domain Ecosystem Guides:** `domains/*/ECOSYSTEM.md` files dictate standard workflows (e.g., *The Pre-Release Audit Flow*).
+2. **Planner Awareness:** Central orchestrator agents (like `task-decomposer`) automatically ingest these guides when planning domain-specific tasks.
+3. **Skill-to-Skill Handoffs:** Individual skills (`SKILL.md`) specify `🔗 Next Steps` logic. For example: `schema-architect` automatically hands execution context to `access-policy-designer` when it finishes generating DDL.
+
+### Core Lifecycle Graph
 ```mermaid
 graph TD
     subgraph "📐 Planning"
@@ -76,7 +115,7 @@ graph TD
         TD --> TS["tool-selector"]
     end
 
-    subgraph "⚡ Execution"
+    subgraph "⚡ Execution (Handoff Domain)"
         CG["checkpoint-guardian"]
         ML["memory-ledger"]
         ER["error-recovery"]
@@ -110,7 +149,7 @@ graph TD
     style AR fill:#3b82f6,stroke:#2563eb,color:#fff
 ```
 
-Each skill can also be used independently — the ecosystem is not all-or-nothing.
+*Existing environments utilizing the flat structure (e.g., `npx skills add --skill tool-selector`) are completely supported via **100% backward-compatible root symlinks** within `.curated/`.*
 
 ---
 
@@ -119,19 +158,16 @@ Each skill can also be used independently — the ecosystem is not all-or-nothin
 ```
 fth-skills/
 ├── skills/
-│   ├── .curated/           # Stable, production-ready
-│   │   ├── agent-reviewer/
-│   │   ├── assumption-checker/
-│   │   ├── checkpoint-guardian/
-│   │   ├── context-compressor/
-│   │   ├── error-recovery/
-│   │   ├── memory-ledger/
-│   │   ├── multi-brain/
-│   │   ├── output-critic/
-│   │   ├── parallel-planner/
-│   │   ├── react-flow/
-│   │   ├── task-decomposer/
-│   │   └── tool-selector/
+│   ├── .curated/           # Layered Monorepo Architecture
+│   │   │                     # (Symlinks reside here for backward compatibility)
+│   │   ├── core/           # Foundational agents (multi-brain, etc)
+│   │   ├── execution/      # Runtime safety (checkpoint-guardian...)
+│   │   ├── planning/       # Orchestrators (task-decomposer...)
+│   │   ├── domains/        
+│   │   │   ├── api/        # 10 skills + ECOSYSTEM.md
+│   │   │   ├── database/   # 10 skills + ECOSYSTEM.md
+│   │   │   ├── mobile/     # 10 skills + ECOSYSTEM.md
+│   │   │   └── react-flow/ # UI Framework skills
 │   └── .experimental/      # Preview, may evolve
 │       ├── multi-brain-experts/
 │       ├── multi-brain-debate/
@@ -152,7 +188,7 @@ Each skill folder contains:
 
 ## 🤝 Contributing
 
-1. Create a folder under `skills/.curated/<name>/` or `skills/.experimental/<name>/`
+1. Create a folder under `skills/.curated/<domain>/<name>/` or `skills/.experimental/<name>/`
 2. Add `SKILL.md` with frontmatter:
    ```yaml
    ---
