@@ -1,0 +1,7 @@
+interface:
+  display_name: "Project Analyzer"
+  short_description: "Systematically scan the project, perform a deep analysis, and generate comprehensive reports."
+  default_prompt: "Use $project-analyzer to scan the project directory, analyze architecture, code quality, security, and performance, and generate reports in docs/analyze/."
+
+policy:
+  allow_implicit_invocation: true

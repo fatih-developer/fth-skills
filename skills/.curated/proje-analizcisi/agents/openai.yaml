@@ -1,0 +1,7 @@
+interface:
+  display_name: "Proje Analizcisi"
+  short_description: "Projeyi sistematik olarak tara, derin analiz yap ve kapsamlı raporlar üret."
+  default_prompt: "Use $proje-analizcisi to scan the project directory, analyze architecture, code quality, security, and performance, and generate reports in docs/analyze/."
+
+policy:
+  allow_implicit_invocation: true
