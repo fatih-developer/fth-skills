@@ -1,0 +1,7 @@
+interface:
+  display_name: "SDK Scaffolder"
+  short_description: "OpenAPI spec dosyasından Python, TypeScript, Go veya Kotlin için idiomatic SDK iskeleti üretir. Auto-generated..."
+  default_prompt: "Use $sdk-scaffolder to help with this task."
+
+policy:
+  allow_implicit_invocation: true

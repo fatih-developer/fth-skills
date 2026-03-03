@@ -1,0 +1,7 @@
+interface:
+  display_name: "Migration Strategist"
+  short_description: "Sıfırdan migration değil — büyük şema değişikliklerini zero-downtime ile yönetir. Expand-contract pattern,..."
+  default_prompt: "Use $migration-strategist to help with this task."
+
+policy:
+  allow_implicit_invocation: true

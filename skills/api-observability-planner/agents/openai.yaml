@@ -1,0 +1,7 @@
+interface:
+  display_name: "API Observability Planner"
+  short_description: "Hangi metriklerin toplanacağı, logların nasıl yazılacağı ve trace'lerin nasıl alınacağını kurgular. RED (Rate,..."
+  default_prompt: "Use $api-observability-planner to help with this task."
+
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,7 @@
+interface:
+  display_name: "Index Advisor"
+  short_description: "Mevcut sorguları (queries) ve şemayı analiz eder. Eksik indexleri tespit eder, composite (bileşik) index..."
+  default_prompt: "Use $index-advisor to help with this task."
+
+policy:
+  allow_implicit_invocation: true

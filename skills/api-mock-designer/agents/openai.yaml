@@ -1,0 +1,7 @@
+interface:
+  display_name: "API Mock Designer"
+  short_description: "Gerçekçi API mock server tasarımı yapar. Sadece happy path değil; stateful mock (siparişi oluştur → siparişi getir..."
+  default_prompt: "Use $api-mock-designer to help with this task."
+
+policy:
+  allow_implicit_invocation: true

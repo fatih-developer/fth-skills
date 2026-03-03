@@ -1,0 +1,7 @@
+interface:
+  display_name: "Accessibility Enforcer"
+  short_description: "Ensure mobile app UI complies with iOS VoiceOver, Android TalkBack, and WCAG mobile criteria. Detect missing labels,..."
+  default_prompt: "Use $accessibility-enforcer to help with this task."
+
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,7 @@
+interface:
+  display_name: "Query Budget Enforcer"
+  short_description: "Sorguların kaynak limitlerini belirler ve denetler. Hangi sorgular çok fazla satır tarıyor, memory şişiriyor veya..."
+  default_prompt: "Use $query-budget-enforcer to help with this task."
+
+policy:
+  allow_implicit_invocation: true

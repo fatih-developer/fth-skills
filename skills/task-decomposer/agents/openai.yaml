@@ -1,0 +1,7 @@
+interface:
+  display_name: "Task Decomposer"
+  short_description: "Break down large, complex, or ambiguous tasks into independent subtasks with dependency maps, execution order, and..."
+  default_prompt: "Use $task-decomposer to help with this task."
+
+policy:
+  allow_implicit_invocation: true

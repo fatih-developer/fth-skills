@@ -1,0 +1,7 @@
+interface:
+  display_name: "Onboarding Designer"
+  short_description: "Design the first-run experience (FRE) for mobile apps. Sequence permission requests, define feature discovery flows,..."
+  default_prompt: "Use $onboarding-designer to help with this task."
+
+policy:
+  allow_implicit_invocation: true

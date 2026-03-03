@@ -1,0 +1,7 @@
+interface:
+  display_name: "Claw Integration Design"
+  short_description: "Design secure APIs and tool manifests for integrating external bots and agents (OpenClaw, LangChain, OpenAI) with web applications."
+  default_prompt: "Use $claw-integration-design to design an API for external agents and bots to securely interact with this application."
+
+policy:
+  allow_implicit_invocation: true

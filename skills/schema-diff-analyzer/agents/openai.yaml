@@ -1,0 +1,7 @@
+interface:
+  display_name: "Schema Diff Analyzer"
+  short_description: "İki ortam arasındaki şema farklarını tespit eder (dev vs staging vs prod). Sadece fark listesi çıkarmaz, hangi..."
+  default_prompt: "Use $schema-diff-analyzer to help with this task."
+
+policy:
+  allow_implicit_invocation: true

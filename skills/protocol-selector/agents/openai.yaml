@@ -1,0 +1,7 @@
+interface:
+  display_name: "Protocol Selector"
+  short_description: "Projenin gereksinimlerine göre (latency, real-time beklentisi, payload boyutu) en uygun API protokolünü (REST,..."
+  default_prompt: "Use $protocol-selector to help with this task."
+
+policy:
+  allow_implicit_invocation: true

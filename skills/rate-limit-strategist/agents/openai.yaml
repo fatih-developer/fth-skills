@@ -1,0 +1,7 @@
+interface:
+  display_name: "Rate Limit Strategist"
+  short_description: "Sliding window, token bucket veya leaky bucket stratejilerinden en uygun olanını seçer. Per-user, per-IP,..."
+  default_prompt: "Use $rate-limit-strategist to help with this task."
+
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,7 @@
+interface:
+  display_name: "Schema Architect"
+  short_description: "Veri modelini (Database Schema) iş gereksinimlerinden türetir. Normalizasyon seviyesi (1NF→3NF→BCNF) seçer,..."
+  default_prompt: "Use $schema-architect to help with this task."
+
+policy:
+  allow_implicit_invocation: true

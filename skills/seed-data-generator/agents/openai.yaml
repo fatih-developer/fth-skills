@@ -1,0 +1,7 @@
+interface:
+  display_name: "Seed Data Generator"
+  short_description: "Gerçekçi, ilişkisel bütünlüğü (Referential Integrity) koruyan test verisi üretir. Şemayı okur, foreign key..."
+  default_prompt: "Use $seed-data-generator to help with this task."
+
+policy:
+  allow_implicit_invocation: true

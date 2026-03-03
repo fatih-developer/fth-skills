@@ -1,0 +1,7 @@
+interface:
+  display_name: "Data Masker"
+  short_description: "Test ve geliştirme ortamları için üretim verisini maskeler (Data Masking). PII tespitini yapar (e-posta, TC kimlik,..."
+  default_prompt: "Use $data-masker to help with this task."
+
+policy:
+  allow_implicit_invocation: true

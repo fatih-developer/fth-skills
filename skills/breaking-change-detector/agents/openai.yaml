@@ -1,0 +1,7 @@
+interface:
+  display_name: "Breaking Change Detector"
+  short_description: "İki OpenAPI/API spesifikasyon versiyonunu (V1 vs V2) karşılaştırır. Breaking change'leri (geriye dönük uyumluluğu..."
+  default_prompt: "Use $breaking-change-detector to help with this task."
+
+policy:
+  allow_implicit_invocation: true

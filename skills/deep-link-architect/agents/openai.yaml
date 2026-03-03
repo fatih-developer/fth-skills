@@ -1,0 +1,7 @@
+interface:
+  display_name: "Deep Link Architect"
+  short_description: "Design and implement Universal Links (iOS) and App Links (Android) architectures. Plan URL schemas,..."
+  default_prompt: "Use $deep-link-architect to help with this task."
+
+policy:
+  allow_implicit_invocation: true

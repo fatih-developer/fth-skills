@@ -1,0 +1,7 @@
+interface:
+  display_name: "Push Notification Planner"
+  short_description: "Plan end-to-end push notification strategies using APNs and FCM. Design payloads, define permission request timing,..."
+  default_prompt: "Use $push-notification-planner to help with this task."
+
+policy:
+  allow_implicit_invocation: true
