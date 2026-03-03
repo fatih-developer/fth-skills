@@ -29,6 +29,7 @@ Before decomposing, answer these questions:
 - **What is the scope?** What is included, what is excluded?
 - **Are there constraints?** Technology, time, dependencies?
 - **Is anything unclear?** If so, ask **one** clarifying question — never multiple.
+- **Domain Awareness Check**: If the user's request clearly aligns with a known domain (e.g., Mobile apps, DB Design, API Architecture), you **MUST** read the `skills/.curated/domains/<domain>/ECOSYSTEM.md` file (if it exists) to understand the pre-defined workflows and available skills *before* creating your Dependency Map. Do not hallucinate the workflow.
 
 Do not generate subtasks until the task is clearly understood.
 
