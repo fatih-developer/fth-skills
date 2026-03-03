@@ -1,0 +1,113 @@
+{
+  "name": "your-app-tools",
+  "version": "1.0.0",
+  "base_url": "https://<your-domain>/v1",
+  "auth": {
+    "type": "bearer",
+    "header": "Authorization"
+  },
+  "tools": [
+    {
+      "name": "create_capture",
+      "method": "POST",
+      "path": "/captures",
+      "description": "Drops raw text into the Inbox (safe default for bots). A human reviews and converts it.",
+      "input_schema": {
+        "type": "object",
+        "required": ["tenant_id", "text"],
+        "properties": {
+          "tenant_id": { "type": "string", "description": "The organization or workspace ID." },
+          "text": { "type": "string", "description": "Raw text the bot wants to save." },
+          "suggested_type": {
+            "type": "string",
+            "enum": ["task", "note", "idea", "ticket"],
+            "description": "Hint for the human reviewer on what kind of record this might become."
+          },
+          "metadata": {
+            "type": "object",
+            "description": "Optional: agent_name, trace_id, confidence score."
+          }
+        }
+      }
+    },
+    {
+      "name": "search_items",
+      "method": "GET",
+      "path": "/search",
+      "description": "Searches records by keyword. Use this before creating to avoid duplicates.",
+      "input_schema": {
+        "type": "object",
+        "required": ["tenant_id", "q"],
+        "properties": {
+          "tenant_id": { "type": "string" },
+          "q": { "type": "string", "description": "Search query." },
+          "types": {
+            "type": "array",
+            "items": { "type": "string", "enum": ["task", "note", "ticket", "project"] },
+            "description": "Filter by resource type(s)."
+          },
+          "limit": { "type": "integer", "default": 10, "maximum": 50 }
+        }
+      }
+    },
+    {
+      "name": "create_item",
+      "method": "POST",
+      "path": "/items",
+      "description": "Creates a new resource record directly. Requires write:items scope.",
+      "input_schema": {
+        "type": "object",
+        "required": ["tenant_id", "type", "title"],
+        "properties": {
+          "tenant_id": { "type": "string" },
+          "type": { "type": "string", "enum": ["task", "note", "ticket", "project"] },
+          "title": { "type": "string" },
+          "content": { "type": "string" },
+          "status": { "type": "string", "enum": ["open", "in_progress", "done"] },
+          "priority": { "type": "string", "enum": ["low", "medium", "high", "critical"] },
+          "due_at": { "type": "string", "format": "date-time" },
+          "tags": { "type": "array", "items": { "type": "string" } },
+          "metadata": { "type": "object", "description": "agent_name, trace_id, etc." }
+        }
+      }
+    },
+    {
+      "name": "update_item",
+      "method": "PATCH",
+      "path": "/items/{id}",
+      "description": "Updates specific fields on an existing record. Requires write:items scope.",
+      "input_schema": {
+        "type": "object",
+        "required": ["tenant_id", "id", "patch"],
+        "properties": {
+          "tenant_id": { "type": "string" },
+          "id": { "type": "string", "description": "The ID of the record to update." },
+          "patch": {
+            "type": "object",
+            "description": "Partial update fields (e.g. { status: 'done', tags: ['urgent'] })"
+          }
+        }
+      }
+    },
+    {
+      "name": "create_link",
+      "method": "POST",
+      "path": "/links",
+      "description": "Links two records together with a named relation. Requires write:links scope.",
+      "input_schema": {
+        "type": "object",
+        "required": ["tenant_id", "from_id", "to_id", "relation"],
+        "properties": {
+          "tenant_id": { "type": "string" },
+          "from_id": { "type": "string" },
+          "to_id": { "type": "string" },
+          "relation": {
+            "type": "string",
+            "enum": ["belongs_to", "blocks", "related_to", "duplicates"],
+            "description": "The type of relationship between the two records."
+          }
+        }
+      }
+    }
+  ]
+}

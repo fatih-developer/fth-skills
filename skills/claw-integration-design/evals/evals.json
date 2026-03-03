@@ -1,0 +1,118 @@
+{
+  "skill_name": "claw-integration-design",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "I'm developing a new Next.js SaaS application. Can you set up the necessary API configuration so that OpenClaw-based agents can enter the system and create tickets?",
+      "expected_output": "API endpoints, authentication, scopes and tools.json manifest specifically for creating tickets.",
+      "files": [],
+      "assertions": [
+        {
+          "name": "includes_write_items_scope",
+          "description": "Response must mention the 'write:items' scope for ticket creation"
+        },
+        {
+          "name": "includes_idempotency_key",
+          "description": "Response must recommend an Idempotency-Key header to prevent duplicate tickets"
+        },
+        {
+          "name": "includes_tenant_id",
+          "description": "Response must require a tenant_id (or org_id / workspace_id) for multi-tenant scoping"
+        },
+        {
+          "name": "includes_tools_json_manifest",
+          "description": "Response must include or describe a tools.json agent manifest for the endpoint"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "We have an internal dashboard. Could you design a tools.json manifest and a '/search' endpoint so that bots can search the system and retrieve results using OpenAI tool-calling?",
+      "expected_output": "Search endpoint definition with semantic/FT search considerations, rate limiting, and the tools.json manifest search block.",
+      "files": [],
+      "assertions": [
+        {
+          "name": "includes_search_endpoint",
+          "description": "Response must define the GET /v1/search endpoint with tenant_id and q parameters"
+        },
+        {
+          "name": "mentions_rate_limiting",
+          "description": "Response must recommend rate limiting for the search endpoint"
+        },
+        {
+          "name": "mentions_sql_fts_and_semantic",
+          "description": "Response should cover both SQL FTS (MVP) and semantic/embedding search (V2)"
+        },
+        {
+          "name": "includes_tools_manifest_for_search",
+          "description": "Response must include an OpenAI tool definition block for search_items"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "I want to add a structure to our existing task management application where external bots can securely add content. How should I design the API structure using the Inbox/Capture approach?",
+      "expected_output": "Endpoints for '/v1/captures' along with the required authentication and minimum sufficient scopes.",
+      "files": [],
+      "assertions": [
+        {
+          "name": "includes_captures_endpoint",
+          "description": "Response must define POST /v1/captures as the safe bot entry point"
+        },
+        {
+          "name": "uses_write_captures_scope",
+          "description": "Response must recommend the 'write:captures' scope (not 'write:items') for bot credentials"
+        },
+        {
+          "name": "explains_human_review_step",
+          "description": "Response must explain the human review / convert-to-task step in the inbox workflow"
+        },
+        {
+          "name": "includes_source_agent_field",
+          "description": "Response must include source, agent_name, or trace_id for traceability"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "A bot is calling our API without a tenant_id. What error should we return and how should the response be structured?",
+      "expected_output": "Standard error format with code 'validation_error' and a descriptive message.",
+      "files": [],
+      "assertions": [
+        {
+          "name": "uses_standard_error_format",
+          "description": "Response must show the standard error envelope: { error: { code, message, details } }"
+        },
+        {
+          "name": "uses_validation_error_code",
+          "description": "Response must use the 'validation_error' error code for a missing required field"
+        },
+        {
+          "name": "suggests_api_consistency",
+          "description": "Response should recommend consistent error formatting across all endpoints"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "Our bot's API key got leaked. What scope model and API design decisions would have limited the damage?",
+      "expected_output": "Scope isolation, principle of least privilege, delete/bulk scopes disabled by default, audit logging.",
+      "files": [],
+      "assertions": [
+        {
+          "name": "mentions_least_privilege_scopes",
+          "description": "Response must emphasize granting only required scopes (e.g. write:captures, not write:items)"
+        },
+        {
+          "name": "mentions_delete_scope_isolation",
+          "description": "Response must recommend that write:items:delete is off by default for bots"
+        },
+        {
+          "name": "mentions_audit_logging",
+          "description": "Response must recommend audit logs with actor/action/trace_id for breach detection"
+        }
+      ]
+    }
+  ]
+}
+
