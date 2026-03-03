@@ -134,8 +134,8 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Validate all curated skills in this repository.")
     parser.add_argument(
         "--root",
-        default="skills/.curated",
-        help="Skill root directory to validate (default: skills/.curated)",
+        default="skills",
+        help="Skill root directory to validate (default: skills)",
     )
     args = parser.parse_args()
 
