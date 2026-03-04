@@ -3,17 +3,17 @@
   "evals": [
     {
       "id": 1,
-      "prompt": "I'm developing a new Next.js SaaS application. Can you set up the necessary API configuration so that OpenClaw-based agents can enter the system and create tickets?",
-      "expected_output": "API endpoints, authentication, scopes and tools.json manifest specifically for creating tickets.",
+      "prompt": "I'm developing a new Next.js SaaS application. Can you set up the necessary API configuration so that OpenClaw-based agents can enter the system and create objects?",
+      "expected_output": "API endpoints, authentication, scopes and tools.json manifest specifically for the domain objects.",
       "files": [],
       "assertions": [
         {
-          "name": "includes_write_items_scope",
-          "description": "Response must mention the 'write:items' scope for ticket creation"
+          "name": "includes_discovery_phase",
+          "description": "Response must explicitly ask or mention the need to scan/discover the existing domain entities first"
         },
         {
           "name": "includes_idempotency_key",
-          "description": "Response must recommend an Idempotency-Key header to prevent duplicate tickets"
+          "description": "Response must recommend an Idempotency-Key header to prevent duplicate records"
         },
         {
           "name": "includes_tenant_id",
@@ -21,14 +21,14 @@
         },
         {
           "name": "includes_tools_json_manifest",
-          "description": "Response must include or describe a tools.json agent manifest for the endpoint"
+          "description": "Response must include or describe a tools.json agent manifest based on the abstract resource"
         }
       ]
     },
     {
       "id": 2,
-      "prompt": "We have an internal dashboard. Could you design a tools.json manifest and a '/search' endpoint so that bots can search the system and retrieve results using OpenAI tool-calling?",
-      "expected_output": "Search endpoint definition with semantic/FT search considerations, rate limiting, and the tools.json manifest search block.",
+      "prompt": "We have an internal E-Commerce dashboard. Could you design a tools.json manifest and a '/search' endpoint so that bots can search the system and retrieve results using OpenAI tool-calling?",
+      "expected_output": "Search endpoint definition with semantic/FT search considerations, rate limiting, and the tools.json manifest search block tailored to E-Commerce.",
       "files": [],
       "assertions": [
         {
@@ -45,27 +45,27 @@
         },
         {
           "name": "includes_tools_manifest_for_search",
-          "description": "Response must include an OpenAI tool definition block for search_items"
+          "description": "Response must include an OpenAI tool definition block for searching the specific domain resources"
         }
       ]
     },
     {
       "id": 3,
-      "prompt": "I want to add a structure to our existing task management application where external bots can securely add content. How should I design the API structure using the Inbox/Capture approach?",
+      "prompt": "I want to add a structure to our existing HR application where external AI bots can securely drop inputs. How should I design the API structure using the Inbox/Capture approach?",
       "expected_output": "Endpoints for '/v1/captures' along with the required authentication and minimum sufficient scopes.",
       "files": [],
       "assertions": [
         {
           "name": "includes_captures_endpoint",
-          "description": "Response must define POST /v1/captures as the safe bot entry point"
+          "description": "Response must define POST /v1/captures (or drafts) as the safe bot entry point"
         },
         {
           "name": "uses_write_captures_scope",
-          "description": "Response must recommend the 'write:captures' scope (not 'write:items') for bot credentials"
+          "description": "Response must recommend the 'write:captures' scope (not direct write access) for bot credentials"
         },
         {
           "name": "explains_human_review_step",
-          "description": "Response must explain the human review / convert-to-task step in the inbox workflow"
+          "description": "Response must explain the human review / convert-to-resource step in the inbox workflow"
         },
         {
           "name": "includes_source_agent_field",
@@ -101,11 +101,11 @@
       "assertions": [
         {
           "name": "mentions_least_privilege_scopes",
-          "description": "Response must emphasize granting only required scopes (e.g. write:captures, not write:items)"
+          "description": "Response must emphasize granting only required scopes (e.g. write:captures, not write:[resource])"
         },
         {
           "name": "mentions_delete_scope_isolation",
-          "description": "Response must recommend that write:items:delete is off by default for bots"
+          "description": "Response must recommend that write:[resource]:delete is explicitly isolated and off by default for bots"
         },
         {
           "name": "mentions_audit_logging",

@@ -11,17 +11,16 @@
       "name": "create_capture",
       "method": "POST",
       "path": "/captures",
-      "description": "Drops raw text into the Inbox (safe default for bots). A human reviews and converts it.",
+      "description": "Drops raw text/JSON into the Inbox (safe default for bots). A human reviews and converts it.",
       "input_schema": {
         "type": "object",
         "required": ["tenant_id", "text"],
         "properties": {
-          "tenant_id": { "type": "string", "description": "The organization or workspace ID." },
-          "text": { "type": "string", "description": "Raw text the bot wants to save." },
+          "tenant_id": { "type": "string", "description": "The organization or workspace ID (if multi-tenant)." },
+          "text": { "type": "string", "description": "Raw text or JSON payload the bot wants to save." },
           "suggested_type": {
             "type": "string",
-            "enum": ["task", "note", "idea", "ticket"],
-            "description": "Hint for the human reviewer on what kind of record this might become."
+            "description": "Hint for the human reviewer on what kind of domain record this might become (e.g. 'invoice', 'lead')."
           },
           "metadata": {
             "type": "object",
@@ -31,10 +30,10 @@
       }
     },
     {
-      "name": "search_items",
+      "name": "search_[RESOURCE_NAME]s",
       "method": "GET",
       "path": "/search",
-      "description": "Searches records by keyword. Use this before creating to avoid duplicates.",
+      "description": "Searches domain records by keyword. Use this before creating to avoid duplicates.",
       "input_schema": {
         "type": "object",
         "required": ["tenant_id", "q"],
@@ -43,39 +42,34 @@
           "q": { "type": "string", "description": "Search query." },
           "types": {
             "type": "array",
-            "items": { "type": "string", "enum": ["task", "note", "ticket", "project"] },
-            "description": "Filter by resource type(s)."
+            "items": { "type": "string" },
+            "description": "Filter by specific resource types (e.g. ['invoice', 'customer'])."
           },
           "limit": { "type": "integer", "default": 10, "maximum": 50 }
         }
       }
     },
     {
-      "name": "create_item",
+      "name": "create_[RESOURCE_NAME]",
       "method": "POST",
-      "path": "/items",
-      "description": "Creates a new resource record directly. Requires write:items scope.",
+      "path": "/[RESOURCE_NAME]s",
+      "description": "Creates a new domain record directly. Requires write:[RESOURCE_NAME]s scope.",
       "input_schema": {
         "type": "object",
-        "required": ["tenant_id", "type", "title"],
+        "required": ["tenant_id", "[REQUIRED_FIELD_1]", "[REQUIRED_FIELD_2]"],
         "properties": {
           "tenant_id": { "type": "string" },
-          "type": { "type": "string", "enum": ["task", "note", "ticket", "project"] },
-          "title": { "type": "string" },
-          "content": { "type": "string" },
-          "status": { "type": "string", "enum": ["open", "in_progress", "done"] },
-          "priority": { "type": "string", "enum": ["low", "medium", "high", "critical"] },
-          "due_at": { "type": "string", "format": "date-time" },
-          "tags": { "type": "array", "items": { "type": "string" } },
-          "metadata": { "type": "object", "description": "agent_name, trace_id, etc." }
+          "[REQUIRED_FIELD_1]": { "type": "string", "description": "Derived from Phase 1 specific discovery." },
+          "[OPTIONAL_FIELD]": { "type": "string", "description": "Derived from Phase 1 specific discovery." },
+          "metadata": { "type": "object", "description": "agent_name, trace_id for audit logs." }
         }
       }
     },
     {
-      "name": "update_item",
+      "name": "update_[RESOURCE_NAME]",
       "method": "PATCH",
-      "path": "/items/{id}",
-      "description": "Updates specific fields on an existing record. Requires write:items scope.",
+      "path": "/[RESOURCE_NAME]s/{id}",
+      "description": "Updates specific fields on an existing record. Requires write:[RESOURCE_NAME]s scope.",
       "input_schema": {
         "type": "object",
         "required": ["tenant_id", "id", "patch"],
@@ -84,7 +78,7 @@
           "id": { "type": "string", "description": "The ID of the record to update." },
           "patch": {
             "type": "object",
-            "description": "Partial update fields (e.g. { status: 'done', tags: ['urgent'] })"
+            "description": "Partial update fields matching the discovered schema constraint."
           }
         }
       }
@@ -93,7 +87,7 @@
       "name": "create_link",
       "method": "POST",
       "path": "/links",
-      "description": "Links two records together with a named relation. Requires write:links scope.",
+      "description": "Links two domain records together with a named relation (if applicable to the domain). Requires write:links scope.",
       "input_schema": {
         "type": "object",
         "required": ["tenant_id", "from_id", "to_id", "relation"],
@@ -103,8 +97,7 @@
           "to_id": { "type": "string" },
           "relation": {
             "type": "string",
-            "enum": ["belongs_to", "blocks", "related_to", "duplicates"],
-            "description": "The type of relationship between the two records."
+            "description": "The discovered relationship between the two records (e.g., 'billed_to')."
           }
         }
       }

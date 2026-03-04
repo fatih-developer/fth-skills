@@ -7,9 +7,17 @@ description: Design and implement secure APIs and integration points for externa
 
 This skill provides guidelines and patterns for integrating web applications (SaaS/internal tools/products) with external bots and agent systems (e.g., OpenAI tool-calling, LangChain, OpenClaw). The goal is to allow agents to securely connect, read, and write data without turning the application itself into a bot.
 
+## Phase 1: Pre-Integration Discovery (MANDATORY)
+
+Before designing any API endpoints or tool manifests, you **MUST** scan the host application to understand its specific domain model. Do not assume the app uses "tasks", "notes", or generic "items".
+
+1. **Scan the Database / API:** Look at `schema.prisma`, `models/`, OpenAPI specs, or route definitions.
+2. **Identify Core Entities:** What are the central resources? (e.g., in e-commerce: `orders`, `products`; in CRM: `leads`, `customers`).
+3. **Select Exposure Targets:** Decide which specific entities the agent _actually needs_ access to. Do not expose the entire database.
+
 ## Core Architectural Concepts
 
-When building agent integrations, you MUST implement these foundational concepts:
+When building agent integrations based on your discovery, implement these foundational concepts:
 
 ### 1. Multi-Tenant Context
 
@@ -17,20 +25,20 @@ All read/write operations MUST be scoped to a specific tenant/workspace:
 
 - **Rule:** Always require `tenant_id`, `org_id`, or `workspace_id` in requests (via header, path, or body).
 
-### 2. Resource Model
+### 2. Domain-Specific Resource Model
 
-Define a clear resource model for the application:
+Design endpoints that match the discovered entities exactly:
 
-- Use a generic `/items` endpoint with a `type` parameter (e.g., `task`, `note`, `project`, `issue`, `idea`, `ticket`).
-- Alternatively, use specific endpoints (`/tasks`, `/notes`, etc.) if the domain requires strict separation.
+- **Do NOT** use a generic `/items` endpoint unless the application itself is a generic CMS.
+- **Do:** Use specific, pluralized endpoints based on the domain (e.g., `/v1/invoices`, `/v1/leads`, `/v1/candidates`).
 
 ### 3. "Capture/Inbox" Model (Safe Default)
 
 For the safest interaction, implementations SHOULD provide an Inbox/Capture model:
 
-- The bot leaves raw text input in a generic "capture" area.
+- The bot leaves raw text/JSON input in a generic "capture" area (e.g., `/v1/captures` or `/v1/drafts`).
 - The human user reviews, approves, or converts this input within the application UI.
-- This minimizes the risk of incorrect or harmful writes by the agent.
+- This minimizes the risk of incorrect or harmful writes by the agent directly into production tables.
 
 ## Authentication and Authorization
 
@@ -41,21 +49,20 @@ For the safest interaction, implementations SHOULD provide an Inbox/Capture mode
 
 ### Scope / Permission Model (CRITICAL)
 
-You MUST enforce a granular scope model. Do not give agents root access.
+You MUST enforce a granular scope model based on the discovered resources using the `{action}:{resource}` pattern. Do not give agents root access.
 
-**Standard Scopes:**
+**Standard Scopes (Generic Examples):**
 
-- `read:items`: Read access to resources.
-- `write:captures`: Access to drop items into the inbox.
-- `write:items`: Access to create/update resources.
-- `write:links`: Access to link resources together.
+- `read:{resource}`: Read access to a specific resource (e.g., `read:invoices`).
+- `write:captures`: Access to drop draft items into the inbox.
+- `write:{resource}`: Access to create/update resources (e.g., `write:leads`).
 - `admin:audit`: Access to read audit logs.
 
 **High-Risk Scopes:**
 
 - **Rule:** Isolate riskier operations behind specific scopes, default off.
-- `write:items:delete`: Permission to delete items.
-- `write:items:bulk`: Permission for bulk modifications.
+- `write:{resource}:delete`: Permission to delete items (e.g., `write:invoices:delete`).
+- `write:{resource}:bulk`: Permission for bulk modifications.
 
 ## Standard HTTP Guidelines
 
@@ -69,7 +76,7 @@ Enforce these standards on all agent-facing endpoints:
 
 ## Standard API Endpoints
 
-When setting up the API, implement these minimal required endpoints.
+When setting up the API, implement these minimal required endpoints dynamically based on Phase 1 discovery.
 
 ### 1. Health and Meta
 
@@ -78,21 +85,23 @@ When setting up the API, implement these minimal required endpoints.
 
 ### 2. Captures (Inbox Drop)
 
-- **Endpoint:** `POST /v1/captures`
+- **Endpoint:** `POST /v1/captures` (or `/drafts`)
 - **Scope:** `write:captures`
-- **Payload:** Needs `tenant_id`, `text`, `suggested_type`, `source: "agent"`, and `metadata` (agent_name, trace_id, confidence).
+- **Payload:** Needs `tenant_id`, `text`, `suggested_type` (e.g., "lead", "invoice"), `source: "agent"`, and `metadata` (agent_name, trace_id, confidence).
 
-### 3. Items (Resource CRUD)
+### 3. Exposed Resources (CRUD)
 
-- **List:** `GET /v1/items?tenant_id=...&type=task&status=open` (Scope: `read:items`)
-- **Read:** `GET /v1/items/{id}` (Scope: `read:items`)
-- **Create:** `POST /v1/items` (Scope: `write:items`, require `Idempotency-Key`)
-- **Update:** `PATCH /v1/items/{id}` (Scope: `write:items`)
-- **Delete:** `DELETE /v1/items/{id}` (Requires specialized scope `write:items:delete`)
+For every entity you decided to expose in Phase 1 (e.g., `invoices`):
+
+- **List:** `GET /v1/{resource}?tenant_id=...&status=open` (Scope: `read:{resource}`)
+- **Read:** `GET /v1/{resource}/{id}` (Scope: `read:{resource}`)
+- **Create:** `POST /v1/{resource}` (Scope: `write:{resource}`, require `Idempotency-Key`)
+- **Update:** `PATCH /v1/{resource}/{id}` (Scope: `write:{resource}`)
+- **Delete:** `DELETE /v1/{resource}/{id}` (Requires specialized scope `write:{resource}:delete`)
 
 ### 4. Search (Crucial for Agents)
 
-- **Endpoint:** `GET /v1/search?tenant_id=...&q=...&types=task,note`
+- **Endpoint:** `GET /v1/search?tenant_id=...&q=...&types={resource1},{resource2}`
 - **MVP:** SQL Full-Text Search (PostgreSQL `tsvector`, SQLite FTS5).
 - **V2 — Semantic Search:** Use embedding models (e.g., `text-embedding-3-small` from OpenAI, or `nomic-embed-text` locally) to generate vectors, stored in a vector DB:
   - **Managed:** Pinecone, Weaviate, Qdrant Cloud
@@ -104,6 +113,8 @@ When setting up the API, implement these minimal required endpoints.
 
 ### 5. Links (Relationships)
 
+If the domain model is highly relational (e.g., an invoice belongs to a customer):
+
 - **Endpoint:** `POST /v1/links`
 - **Scope:** `write:links`
 - **Payload:** `tenant_id`, `from_id`, `to_id`, `relation` (e.g., `belongs_to`).
@@ -112,7 +123,7 @@ When setting up the API, implement these minimal required endpoints.
 
 - **Endpoint:** `GET /v1/audit`
 - **Scope:** `admin:audit`
-- Keep a detailed log of actor (`agent_name`), action (`create_item`), target, and `trace_id`.
+- Keep a detailed log of actor (`agent_name`), action (e.g., `create_invoice`), target, and `trace_id`.
 
 ## Standard Error Formatting
 
@@ -122,8 +133,8 @@ Always return errors in this consistent format for predictability:
 {
   "error": {
     "code": "insufficient_scope",
-    "message": "write:items scope required",
-    "details": { "required": ["write:items"] }
+    "message": "write:invoices scope required",
+    "details": { "required": ["write:invoices"] }
   }
 }
 ```
