@@ -51,30 +51,6 @@
     },
     {
       "id": 3,
-      "prompt": "I want to add a structure to our existing HR application where external AI bots can securely drop inputs. How should I design the API structure using the Inbox/Capture approach?",
-      "expected_output": "Endpoints for '/v1/captures' along with the required authentication and minimum sufficient scopes.",
-      "files": [],
-      "assertions": [
-        {
-          "name": "includes_captures_endpoint",
-          "description": "Response must define POST /v1/captures (or drafts) as the safe bot entry point"
-        },
-        {
-          "name": "uses_write_captures_scope",
-          "description": "Response must recommend the 'write:captures' scope (not direct write access) for bot credentials"
-        },
-        {
-          "name": "explains_human_review_step",
-          "description": "Response must explain the human review / convert-to-resource step in the inbox workflow"
-        },
-        {
-          "name": "includes_source_agent_field",
-          "description": "Response must include source, agent_name, or trace_id for traceability"
-        }
-      ]
-    },
-    {
-      "id": 4,
       "prompt": "A bot is calling our API without a tenant_id. What error should we return and how should the response be structured?",
       "expected_output": "Standard error format with code 'validation_error' and a descriptive message.",
       "files": [],
@@ -94,14 +70,14 @@
       ]
     },
     {
-      "id": 5,
+      "id": 4,
       "prompt": "Our bot's API key got leaked. What scope model and API design decisions would have limited the damage?",
       "expected_output": "Scope isolation, principle of least privilege, delete/bulk scopes disabled by default, audit logging.",
       "files": [],
       "assertions": [
         {
           "name": "mentions_least_privilege_scopes",
-          "description": "Response must emphasize granting only required scopes (e.g. write:captures, not write:[resource])"
+          "description": "Response must emphasize granting only required scopes"
         },
         {
           "name": "mentions_delete_scope_isolation",

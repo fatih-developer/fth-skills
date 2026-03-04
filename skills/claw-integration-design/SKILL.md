@@ -1,19 +1,18 @@
 ---
 name: claw-integration-design
-description: Design and implement secure APIs and integration points for external AI bots and agents (OpenAI tool-calling, LangChain, OpenClaw). Use this skill whenever the user mentions agent integrations, tool manifests, bot API access, capture/inbox models, OAuth2 scopes for bots, webhook integrations, or designing endpoints for agentic workflows — even if they don't use the exact terms "OpenClaw" or "tool manifest". Also trigger when users ask about giving bots access to their app, securing bot writes, or designing APIs for AI-powered automation.
+description: Design and implement secure APIs and integration points for external AI bots and agents (OpenAI tool-calling, LangChain, OpenClaw). Use this skill whenever the user mentions agent integrations, tool manifests, bot API access, OAuth2 scopes for bots, webhook integrations, or designing endpoints for agentic workflows. Also trigger when users ask about securing bot writes or designing APIs for AI-powered automation.
 ---
 
 # Bot/Agent Integration Design (Claw)
 
 This skill provides guidelines and patterns for integrating web applications (SaaS/internal tools/products) with external bots and agent systems (e.g., OpenAI tool-calling, LangChain, OpenClaw). The goal is to allow agents to securely connect, read, and write data without turning the application itself into a bot.
 
-## Phase 1: Pre-Integration Discovery (MANDATORY)
+## Phase 1: Host Application Analysis
 
-Before designing any API endpoints or tool manifests, you **MUST** scan the host application to understand its specific domain model. Do not assume the app uses "tasks", "notes", or generic "items".
+Adapt the integration to the project's existing domain model.
 
-1. **Scan the Database / API:** Look at `schema.prisma`, `models/`, OpenAPI specs, or route definitions.
-2. **Identify Core Entities:** What are the central resources? (e.g., in e-commerce: `orders`, `products`; in CRM: `leads`, `customers`).
-3. **Select Exposure Targets:** Decide which specific entities the agent _actually needs_ access to. Do not expose the entire database.
+1. **Analyze the Application:** Review `schema.prisma`, `models/`, OpenAPI specs, or route definitions to understand the core resources (e.g., `orders`, `products`, `leads`).
+2. **Select Exposure Targets:** Decide which specific entities the agent actually needs access to for the task at hand.
 
 ## Core Architectural Concepts
 
@@ -27,18 +26,10 @@ All read/write operations MUST be scoped to a specific tenant/workspace:
 
 ### 2. Domain-Specific Resource Model
 
-Design endpoints that match the discovered entities exactly:
+Design endpoints that match the discovered entities exactly. Agents should write data directly to where it belongs:
 
 - **Do NOT** use a generic `/items` endpoint unless the application itself is a generic CMS.
 - **Do:** Use specific, pluralized endpoints based on the domain (e.g., `/v1/invoices`, `/v1/leads`, `/v1/candidates`).
-
-### 3. "Capture/Inbox" Model (Safe Default)
-
-For the safest interaction, implementations SHOULD provide an Inbox/Capture model:
-
-- The bot leaves raw text/JSON input in a generic "capture" area (e.g., `/v1/captures` or `/v1/drafts`).
-- The human user reviews, approves, or converts this input within the application UI.
-- This minimizes the risk of incorrect or harmful writes by the agent directly into production tables.
 
 ## Authentication and Authorization
 
@@ -54,7 +45,6 @@ You MUST enforce a granular scope model based on the discovered resources using 
 **Standard Scopes (Generic Examples):**
 
 - `read:{resource}`: Read access to a specific resource (e.g., `read:invoices`).
-- `write:captures`: Access to drop draft items into the inbox.
 - `write:{resource}`: Access to create/update resources (e.g., `write:leads`).
 - `admin:audit`: Access to read audit logs.
 
@@ -83,13 +73,7 @@ When setting up the API, implement these minimal required endpoints dynamically 
 - `GET /v1/health`: Returns `{ "status": "ok", "version": "0.1.0" }`.
 - `GET /v1/openapi.json`: Serve the OpenAPI spec so agents can auto-generate tools.
 
-### 2. Captures (Inbox Drop)
-
-- **Endpoint:** `POST /v1/captures` (or `/drafts`)
-- **Scope:** `write:captures`
-- **Payload:** Needs `tenant_id`, `text`, `suggested_type` (e.g., "lead", "invoice"), `source: "agent"`, and `metadata` (agent_name, trace_id, confidence).
-
-### 3. Exposed Resources (CRUD)
+### 2. Exposed Resources (CRUD)
 
 For every entity you decided to expose in Phase 1 (e.g., `invoices`):
 
@@ -99,7 +83,7 @@ For every entity you decided to expose in Phase 1 (e.g., `invoices`):
 - **Update:** `PATCH /v1/{resource}/{id}` (Scope: `write:{resource}`)
 - **Delete:** `DELETE /v1/{resource}/{id}` (Requires specialized scope `write:{resource}:delete`)
 
-### 4. Search (Crucial for Agents)
+### 3. Search (Crucial for Agents)
 
 - **Endpoint:** `GET /v1/search?tenant_id=...&q=...&types={resource1},{resource2}`
 - **MVP:** SQL Full-Text Search (PostgreSQL `tsvector`, SQLite FTS5).
@@ -111,7 +95,7 @@ For every entity you decided to expose in Phase 1 (e.g., `invoices`):
 
 > See `references/oauth2-flow.md` for auth setup and `assets/tools-manifest-template.json` for a ready-to-use manifest.
 
-### 5. Links (Relationships)
+### 4. Links (Relationships)
 
 If the domain model is highly relational (e.g., an invoice belongs to a customer):
 
@@ -119,7 +103,7 @@ If the domain model is highly relational (e.g., an invoice belongs to a customer
 - **Scope:** `write:links`
 - **Payload:** `tenant_id`, `from_id`, `to_id`, `relation` (e.g., `belongs_to`).
 
-### 6. Audit Logging
+### 5. Audit Logging
 
 - **Endpoint:** `GET /v1/audit`
 - **Scope:** `admin:audit`
@@ -147,7 +131,7 @@ When requested to build a tool manifest for an agent framework, use the ready-to
 
 > **`assets/tools-manifest-template.json`**
 
-The template includes definitions for `create_capture`, `search_items`, `create_item`, `update_item`, and `create_link`. Replace `<your-domain>` with the actual API base URL.
+The template includes definitions for `search_[RESOURCE_NAME]s`, `create_[RESOURCE_NAME]`, `update_[RESOURCE_NAME]`, and `create_link`. Replace `<your-domain>` with the actual API base URL.
 
 Key manifest conventions:
 

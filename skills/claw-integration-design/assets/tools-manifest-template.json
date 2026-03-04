@@ -8,28 +8,6 @@
   },
   "tools": [
     {
-      "name": "create_capture",
-      "method": "POST",
-      "path": "/captures",
-      "description": "Drops raw text/JSON into the Inbox (safe default for bots). A human reviews and converts it.",
-      "input_schema": {
-        "type": "object",
-        "required": ["tenant_id", "text"],
-        "properties": {
-          "tenant_id": { "type": "string", "description": "The organization or workspace ID (if multi-tenant)." },
-          "text": { "type": "string", "description": "Raw text or JSON payload the bot wants to save." },
-          "suggested_type": {
-            "type": "string",
-            "description": "Hint for the human reviewer on what kind of domain record this might become (e.g. 'invoice', 'lead')."
-          },
-          "metadata": {
-            "type": "object",
-            "description": "Optional: agent_name, trace_id, confidence score."
-          }
-        }
-      }
-    },
-    {
       "name": "search_[RESOURCE_NAME]s",
       "method": "GET",
       "path": "/search",

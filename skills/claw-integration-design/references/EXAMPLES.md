@@ -54,41 +54,9 @@ X-Agent-Name: openclaw
 
 ---
 
-## Example 2 — Safe Inbox Drop (HR Application)
-
-### Scenario
-
-> A LangChain agent reads an email and wants to add a candidate. Instead of giving it `write:candidates` (which might trigger automated emails to the person), it uses the safer Inbox/Capture API.
-
-### Request (Agent → API)
-
-```http
-POST /v1/captures
-Authorization: Bearer sk_...
-Idempotency-Key: uuid-456
-
-{
-  "tenant_id": "org_2",
-  "text": "Found a great senior backend engineer profile: John Doe. 10 years experience with Go and AWS.",
-  "suggested_type": "candidate",
-  "source": "agent",
-  "metadata": { "agent_name": "hr-assistant", "confidence": 0.95 }
-}
-```
-
-### Response
-
-```json
-{ "id": "cap_77", "status": "inbox", "created_at": "2026-03-03T10:00:00Z" }
-```
-
-### Human Review
-
-The capture appears in the HR Manager's UI Inbox. The HR Manager reviews the parsed text and clicks "Convert to Candidate" to create the real resource safely.
-
 ---
 
-## Example 3 — Cross-Domain Search (OpenAI Tool-Calling)
+## Example 2 — Cross-Domain Search (OpenAI Tool-Calling)
 
 ### Request (Agent → API)
 
