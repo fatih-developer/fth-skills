@@ -1,6 +1,6 @@
 interface:
   display_name: "Migration Strategist"
-  short_description: "Sıfırdan migration değil — büyük şema değişikliklerini zero-downtime ile yönetir. Expand-contract pattern,..."
+  short_description: "Manages major schema changes with zero-downtime using the expand-contract pattern, rather than writing unstable..."
   default_prompt: "Use $migration-strategist to help with this task."
 
 policy:

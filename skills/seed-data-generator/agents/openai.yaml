@@ -1,6 +1,6 @@
 interface:
   display_name: "Seed Data Generator"
-  short_description: "Gerçekçi, ilişkisel bütünlüğü (Referential Integrity) koruyan test verisi üretir. Şemayı okur, foreign key..."
+  short_description: "Generates realistic test data preserving referential integrity. Reads schemas, foreign keys, and builds relationships."
   default_prompt: "Use $seed-data-generator to help with this task."
 
 policy:

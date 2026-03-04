@@ -1,6 +1,6 @@
 ---
 name: breaking-change-detector
-description: İki OpenAPI/API spesifikasyon versiyonunu (V1 vs V2) karşılaştırır. Breaking change'leri (geriye dönük uyumluluğu bozan değişiklikleri) otomatik tespit eder, semver bump (major, minor, patch) önerisi yapar ve tüketici (consumer) migration rehberi üretir.
+description: Compares two OpenAPI/API specification versions (V1 vs V2) to detect breaking changes and backward compatibility issues.
 ---
 
 # Breaking Change Detector Protocol

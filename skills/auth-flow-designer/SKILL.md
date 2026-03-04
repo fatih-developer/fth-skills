@@ -1,6 +1,6 @@
 ---
 name: auth-flow-designer
-description: API key, JWT, OAuth2, mTLS — hangisinin ne zaman kullanılacağına karar verir. Token yaşam döngüsü (lifespan), refresh stratejisi, scope tasarımı (RBAC/ABAC) ve API gateway entegrasyonu kurgular. Sadece kod değil, tüm yetkilendirme mimarisini tasarlar.
+description: Determines whether to use API keys, JWT, OAuth2, or mTLS. Designs token lifespans, refresh token strategies, and secure session management.
 ---
 
 # Auth Flow Designer Protocol

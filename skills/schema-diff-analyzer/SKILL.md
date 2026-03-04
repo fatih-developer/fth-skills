@@ -1,6 +1,6 @@
 ---
 name: schema-diff-analyzer
-description: İki ortam arasındaki şema farklarını tespit eder (dev vs staging vs prod). Sadece fark listesi çıkarmaz, hangi farkın tehlikeli (downtime riskli) olduğunu söyler ve senkronizasyon için güvenli adımları planlar.
+description: Detects schema differences between environments (dev vs staging vs prod). Generates actionable migration paths instead of just diff lists.
 ---
 
 # Schema Diff Analyzer Protocol

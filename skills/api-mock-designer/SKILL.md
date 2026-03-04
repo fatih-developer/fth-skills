@@ -1,6 +1,6 @@
 ---
 name: api-mock-designer
-description: Gerçekçi API mock server tasarımı yapar. Sadece happy path değil; stateful mock (siparişi oluştur → siparişi getir uyumu), rate limit hataları (429), partial response'lar ve latency simülasyonları kurgulayarak sağlam bir consumer-driven test ortamı kurar.
+description: Designs realistic API mock servers. Goes beyond happy paths by designing stateful mocks (create order -> get order) for complex integrations.
 ---
 
 # API Mock Designer Protocol

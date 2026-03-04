@@ -1,6 +1,6 @@
 ---
 name: schema-architect
-description: Veri modelini (Database Schema) iş gereksinimlerinden türetir. Normalizasyon seviyesi (1NF→3NF→BCNF) seçer, ilişkileri (One-to-Many vb.) tasarlar, anti-pattern'ları işaretler ve platforma özel (PostgreSQL, MySQL vb.) DDL üretir. Tasarım kararlarının gerekçesini belgeler.
+description: Derives the database schema from business requirements. Selects optimal normalization levels (1NF->3NF->BCNF) and prevents God tables.
 ---
 
 # Schema Architect Protocol

@@ -1,6 +1,6 @@
 interface:
   display_name: "Changelog Generator"
-  short_description: "Commit geçmişini, PR açıklamalarını ve spec değişikliklerini analiz ederek otomatik (fakat developer-friendly) API..."
+  short_description: "Analyzes commit history, PR descriptions, and spec changes to automatically generate developer-friendly API changelogs."
   default_prompt: "Use $changelog-generator to help with this task."
 
 policy:

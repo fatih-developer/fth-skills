@@ -1,6 +1,6 @@
 interface:
   display_name: "Contract-First Designer"
-  short_description: "Kod yazmadan önce OpenAPI/AsyncAPI spesifikasyonunu (spec) yazar. Provider-consumer kontratını belirler, endpoint..."
+  short_description: "Writes OpenAPI/AsyncAPI specifications before writing any code. Determines provider-consumer contracts and endpoint..."
   default_prompt: "Use $contract-first-designer to help with this task."
 
 policy:

@@ -1,6 +1,6 @@
 interface:
   display_name: "Schema Diff Analyzer"
-  short_description: "İki ortam arasındaki şema farklarını tespit eder (dev vs staging vs prod). Sadece fark listesi çıkarmaz, hangi..."
+  short_description: "Detects schema differences between environments (dev vs staging vs prod). Generates actionable migration paths..."
   default_prompt: "Use $schema-diff-analyzer to help with this task."
 
 policy:

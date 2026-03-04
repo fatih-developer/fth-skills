@@ -1,6 +1,6 @@
 interface:
   display_name: "Auth Flow Designer"
-  short_description: "API key, JWT, OAuth2, mTLS — hangisinin ne zaman kullanılacağına karar verir. Token yaşam döngüsü (lifespan),..."
+  short_description: "Determines whether to use API keys, JWT, OAuth2, or mTLS. Designs token lifespans, refresh token strategies, and..."
   default_prompt: "Use $auth-flow-designer to help with this task."
 
 policy:

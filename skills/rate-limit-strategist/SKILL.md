@@ -1,6 +1,6 @@
 ---
 name: rate-limit-strategist
-description: Sliding window, token bucket veya leaky bucket stratejilerinden en uygun olanını seçer. Per-user, per-IP, per-endpoint limitleri kurgular. 429 yanıt formatı (Retry-After header dahil) tasarlayarak API'nin DDoS veya abuse ataklarından çökmesini engeller.
+description: Selects the optimal rate limiting strategy (sliding window, token bucket, leaky bucket) for per-user, per-IP, or global levels.
 ---
 
 # Rate Limit Strategist Protocol

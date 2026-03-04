@@ -1,6 +1,6 @@
 ---
 name: migration-strategist
-description: Sıfırdan migration değil — büyük şema değişikliklerini zero-downtime ile yönetir. Expand-contract pattern, backward-compatible geçiş, feature flag ile kademeli rollout, ve rollback planı oluşturur. Production durmadan tablo/kolon yapılandırma stratejileri sunar.
+description: Manages major schema changes with zero-downtime using the expand-contract pattern, rather than writing unstable from-scratch migrations.
 ---
 
 # Migration Strategist Protocol

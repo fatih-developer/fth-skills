@@ -1,6 +1,6 @@
 ---
 name: mobile-security-auditor
-description: Evaluate mobile application security against OWASP Mobile Top 10. Implement certificate pinning, secure Keychain/Keystore usage, jailbreak/root detection, and prevent reverse engineering vulnerabilities.
+description: Evaluates mobile app security against the OWASP Mobile Top 10. Implements certificate pinning, secure storage, and reverse-engineering protections.
 ---
 
 # Mobile Security Auditor Protocol

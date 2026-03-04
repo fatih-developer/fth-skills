@@ -1,6 +1,6 @@
 ---
 name: seed-data-generator
-description: Gerçekçi, ilişkisel bütünlüğü (Referential Integrity) koruyan test verisi üretir. Şemayı okur, foreign key zincirlerini çözer, doğru insert sırasını bulur ve sütun adına göre Faker pattern'larını otomatik uygular (email kolonu → fake email).
+description: Generates realistic test data preserving referential integrity. Reads schemas, foreign keys, and builds relationships.
 ---
 
 # Seed Data Generator Protocol

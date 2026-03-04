@@ -1,6 +1,6 @@
 ---
 name: query-budget-enforcer
-description: Sorguların kaynak limitlerini belirler ve denetler. Hangi sorgular çok fazla satır tarıyor, memory şişiriyor veya kilit tutuyor tespit eder. Maliyet tahmini yapar (Snowflake kredisi, BigQuery byte'ı vb.) ve limiti aşanlar için uyarı/alternatif üretir.
+description: Defines and enforces query resource limits. Detects which queries scan too many rows, inflate memory usage, or exceed execution budgets.
 ---
 
 # Query Budget Enforcer Protocol

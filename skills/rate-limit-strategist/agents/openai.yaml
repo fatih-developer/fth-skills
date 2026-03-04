@@ -1,6 +1,6 @@
 interface:
   display_name: "Rate Limit Strategist"
-  short_description: "Sliding window, token bucket veya leaky bucket stratejilerinden en uygun olanını seçer. Per-user, per-IP,..."
+  short_description: "Selects the optimal rate limiting strategy (sliding window, token bucket, leaky bucket) for per-user, per-IP, or..."
   default_prompt: "Use $rate-limit-strategist to help with this task."
 
 policy:

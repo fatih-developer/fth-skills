@@ -1,6 +1,6 @@
 interface:
   display_name: "Query Explainer"
-  short_description: 'Execution plan''i (EXPLAIN ANALYZE) insanın anlayacağı dile çevirir. "Seq Scan" neden kötü, "Hash Join" ne zaman iyi...'
+  short_description: "Translates execution plans (EXPLAIN ANALYZE) into human-readable language. Explains why Seq Scan is bad and when..."
   default_prompt: "Use $query-explainer to help with this task."
 
 policy:

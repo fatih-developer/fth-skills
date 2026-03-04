@@ -1,6 +1,6 @@
 interface:
   display_name: "Query Budget Enforcer"
-  short_description: "Sorguların kaynak limitlerini belirler ve denetler. Hangi sorgular çok fazla satır tarıyor, memory şişiriyor veya..."
+  short_description: "Defines and enforces query resource limits. Detects which queries scan too many rows, inflate memory usage, or..."
   default_prompt: "Use $query-budget-enforcer to help with this task."
 
 policy:

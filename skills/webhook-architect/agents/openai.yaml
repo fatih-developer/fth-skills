@@ -1,6 +1,6 @@
 interface:
   display_name: "Webhook Architect"
-  short_description: "Webhook altyapısının gönderici (provider) tarafını tasarlar. Sadece veri yollamakla kalmaz; event şema tasarımı,..."
+  short_description: "Architects the provider side of the webhook infrastructure. Not only sends data but designs event schemas and robust..."
   default_prompt: "Use $webhook-architect to help with this task."
 
 policy:

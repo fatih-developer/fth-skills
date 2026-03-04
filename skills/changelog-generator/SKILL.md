@@ -1,6 +1,6 @@
 ---
 name: changelog-generator
-description: Commit geçmişini, PR açıklamalarını ve spec değişikliklerini analiz ederek otomatik (fakat developer-friendly) API changelog üretir. Breaking change'leri vurgular, migration örneği ekler ve yeni özellikler için net release notları yazar.
+description: Analyzes commit history, PR descriptions, and spec changes to automatically generate developer-friendly API changelogs.
 ---
 
 # Changelog Generator Protocol

@@ -1,6 +1,6 @@
 ---
 name: index-advisor
-description: Mevcut sorguları (queries) ve şemayı analiz eder. Eksik indexleri tespit eder, composite (bileşik) index sıralamasını optimize eder ve gereksiz/çakışan indexleri bulup kaldırır. Query execution plan (EXPLAIN) okuyarak somut CREATE/DROP INDEX önerileri üretir.
+description: Analyzes existing queries and schema to detect missing indexes. Suggests covering and composite indexes to optimize slow queries.
 ---
 
 # Index Advisor Protocol

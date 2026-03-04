@@ -1,6 +1,6 @@
 ---
 name: api-observability-planner
-description: Hangi metriklerin toplanacağı, logların nasıl yazılacağı ve trace'lerin nasıl alınacağını kurgular. RED (Rate, Errors, Duration) metodolojisi, distributed tracing kurulumu, ve anomali tespiti için alert kuralları tasarlar. API'nin "sağlık" (health) tanımını yapar.
+description: Architects which metrics to collect, how logs should be formatted, and how distributed tracing should be implemented across boundaries.
 ---
 
 # API Observability Planner Protocol

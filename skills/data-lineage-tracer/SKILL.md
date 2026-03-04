@@ -1,6 +1,6 @@
 ---
 name: data-lineage-tracer
-description: Bir sütunun veya tablonun veri kaynağını (Data Lineage) bulur. View, trigger, stored procedure ve ETL pipeline zincirlerini izleyerek köke kadar iner. Bağımlılık haritası (Dependency Map) çıkarır. "Bu tabloyu değiştirirsem ne kırılır?" sorusunu yanıtlar.
+description: Traces the data source (Data Lineage) of any column or table. Identifies views, triggers, stored procedures, and ETL pipelines involved.
 ---
 
 # Data Lineage Tracer Protocol

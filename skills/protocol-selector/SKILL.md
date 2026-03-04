@@ -1,6 +1,6 @@
 ---
 name: protocol-selector
-description: Projenin gereksinimlerine göre (latency, real-time beklentisi, payload boyutu) en uygun API protokolünü (REST, GraphQL, gRPC, WebSocket, SSE) seçer. Tradeoff analizleri yapar ve duruma göre hibrit mimari önerileri geliştirir.
+description: Selects the most suitable API protocol (REST, GraphQL, gRPC) based on project requirements like latency, payload size, and real-time needs.
 ---
 
 # Protocol Selector Protocol

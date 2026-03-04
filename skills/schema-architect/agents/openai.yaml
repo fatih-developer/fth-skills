@@ -1,6 +1,6 @@
 interface:
   display_name: "Schema Architect"
-  short_description: "Veri modelini (Database Schema) iş gereksinimlerinden türetir. Normalizasyon seviyesi (1NF→3NF→BCNF) seçer,..."
+  short_description: "Derives the database schema from business requirements. Selects optimal normalization levels (1NF->3NF->BCNF) and..."
   default_prompt: "Use $schema-architect to help with this task."
 
 policy:

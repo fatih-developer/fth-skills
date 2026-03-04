@@ -1,6 +1,6 @@
 interface:
   display_name: "Access Policy Designer"
-  short_description: "Row-level security (RLS), column-level masking ve role bazlı erişim politikalarını (RBAC/ABAC) tasarlar ve uygular...."
+  short_description: "Designs and implements row-level security (RLS), column-level masking, and role-based access control policies..."
   default_prompt: "Use $access-policy-designer to help with this task."
 
 policy:

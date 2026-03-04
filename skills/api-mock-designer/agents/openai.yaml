@@ -1,6 +1,6 @@
 interface:
   display_name: "API Mock Designer"
-  short_description: "Gerçekçi API mock server tasarımı yapar. Sadece happy path değil; stateful mock (siparişi oluştur → siparişi getir..."
+  short_description: "Designs realistic API mock servers. Goes beyond happy paths by designing stateful mocks (create order -> get order)..."
   default_prompt: "Use $api-mock-designer to help with this task."
 
 policy:

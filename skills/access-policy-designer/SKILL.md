@@ -1,6 +1,6 @@
 ---
 name: access-policy-designer
-description: Row-level security (RLS), column-level masking ve role bazlı erişim politikalarını (RBAC/ABAC) tasarlar ve uygular. "Muhasebe sadece kendi departmanının verilerini görebilmeli" gibi iş kurallarını PostgreSQL RLS, MySQL view veya Snowflake politikalarına dönüştürür.
+description: Designs and implements row-level security (RLS), column-level masking, and role-based access control policies (RBAC/ABAC).
 ---
 
 # Access Policy Designer Protocol

@@ -1,6 +1,6 @@
 ---
 name: query-explainer
-description: Execution plan'i (EXPLAIN ANALYZE) insanın anlayacağı dile çevirir. "Seq Scan" neden kötü, "Hash Join" ne zaman iyi açıklığa kavuşturur. Sadece EXPLAIN çıktısını okumakla kalmaz, darboğazları tespit edip query veya index bazlı somut çözüm adımları sunar.
+description: Translates execution plans (EXPLAIN ANALYZE) into human-readable language. Explains why Seq Scan is bad and when Hash Join is optimal.
 ---
 
 # Query Explainer Protocol

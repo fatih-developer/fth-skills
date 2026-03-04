@@ -1,6 +1,6 @@
 ---
 name: contract-first-designer
-description: Kod yazmadan önce OpenAPI/AsyncAPI spesifikasyonunu (spec) yazar. Provider-consumer kontratını belirler, endpoint şemalarını tasarlar ve bağımsız test edilebilirlik için Pact contract testing senaryoları üretir. "Önce spec, sonra kod" felsefesini zorunlu kılar.
+description: Writes OpenAPI/AsyncAPI specifications before writing any code. Determines provider-consumer contracts and endpoint definitions early.
 ---
 
 # Contract-First Designer Protocol

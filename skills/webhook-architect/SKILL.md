@@ -1,6 +1,6 @@
 ---
 name: webhook-architect
-description: Webhook altyapısının gönderici (provider) tarafını tasarlar. Sadece veri yollamakla kalmaz; event şema tasarımı, idempotency key stratejisi, retry politikası (exponential backoff), dead letter queue (DLQ) kurgusu, signature doğrulama ve consumer onboarding rehberi sunar.
+description: Architects the provider side of the webhook infrastructure. Not only sends data but designs event schemas and robust delivery mechanisms.
 ---
 
 # Webhook Architect Protocol

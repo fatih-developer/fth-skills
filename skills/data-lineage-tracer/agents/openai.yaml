@@ -1,6 +1,6 @@
 interface:
   display_name: "Data Lineage Tracer"
-  short_description: "Bir sütunun veya tablonun veri kaynağını (Data Lineage) bulur. View, trigger, stored procedure ve ETL pipeline..."
+  short_description: "Traces the data source (Data Lineage) of any column or table. Identifies views, triggers, stored procedures, and ETL..."
   default_prompt: "Use $data-lineage-tracer to help with this task."
 
 policy:

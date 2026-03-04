@@ -1,6 +1,6 @@
 interface:
   display_name: "API Observability Planner"
-  short_description: "Hangi metriklerin toplanacağı, logların nasıl yazılacağı ve trace'lerin nasıl alınacağını kurgular. RED (Rate,..."
+  short_description: "Architects which metrics to collect, how logs should be formatted, and how distributed tracing should be implemented..."
   default_prompt: "Use $api-observability-planner to help with this task."
 
 policy:

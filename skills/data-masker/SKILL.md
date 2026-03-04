@@ -1,6 +1,6 @@
 ---
 name: data-masker
-description: Test ve geliştirme ortamları için üretim verisini maskeler (Data Masking). PII tespitini yapar (e-posta, TC kimlik, kart numarası), maskeleme stratejisi seçer (fake data, hash, redact, partial) ve platforma özel SQL üretir. GDPR/KVKK uyumlu test verisi hazırlar.
+description: Masks production data for test and development environments (Data Masking). Detects PII (email, SSN, credit cards) and obfuscates them safely.
 ---
 
 # Data Masker Protocol
