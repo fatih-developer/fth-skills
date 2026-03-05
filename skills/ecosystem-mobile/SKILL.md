@@ -59,12 +59,10 @@ Mobile development is constrained by app store guidelines, device resources (bat
 
 As an AI Agent reading this ecosystem file, you must **actively guide** the user to install the missing skills for the selected workflow.
 
-If the user wants to execute the **Pre-Release Audit Flow**, you must execute or instruct the user to execute the following terminal commands:
+To install **all skills** within this ecosystem at once, you must execute or instruct the user to execute the provided installation script:
 
 ```bash
-skills install accessibility-enforcer
-skills install mobile-perf-auditor
-skills install mobile-security-auditor
+python skills/ecosystem-mobile/scripts/install_all.py
 ```
 
 **Execution Rule:**

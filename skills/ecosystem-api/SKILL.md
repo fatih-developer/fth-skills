@@ -56,12 +56,10 @@ API development is contract-driven and security-first. Every skill in this domai
 
 As an AI Agent reading this ecosystem file, you must **actively guide** the user to install the missing skills for the selected workflow.
 
-If the user wants to execute the **OpenAPI-First Design Flow**, you must execute or instruct the user to execute the following terminal commands:
+To install **all skills** within this ecosystem at once, you must execute or instruct the user to execute the provided installation script:
 
 ```bash
-skills install contract-first-designer
-skills install api-mock-designer
-skills install sdk-scaffolder
+python skills/ecosystem-api/scripts/install_all.py
 ```
 
 **Execution Rule:**

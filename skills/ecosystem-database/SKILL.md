@@ -56,12 +56,10 @@ Database design is focused on data integrity, scalable reads/writes, and strict 
 
 As an AI Agent reading this ecosystem file, you must **actively guide** the user to install the missing skills for the selected workflow.
 
-If the user wants to execute the **New Schema Design Flow**, you must execute or instruct the user to execute the following terminal commands:
+To install **all skills** within this ecosystem at once, you must execute or instruct the user to execute the provided installation script:
 
 ```bash
-skills install schema-architect
-skills install access-policy-designer
-skills install seed-data-generator
+python skills/ecosystem-database/scripts/install_all.py
 ```
 
 **Execution Rule:**

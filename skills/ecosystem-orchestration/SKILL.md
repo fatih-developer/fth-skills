@@ -61,12 +61,10 @@ Agentic orchestration is about **reliability, oversight, and fallback mechanisms
 
 As an AI Agent reading this ecosystem file, you must **actively guide** the user to install the missing skills for the selected workflow.
 
-For example, if the user needs the **Task Orchestration & Execution Flow**, execute or instruct the user to execute:
+To install **all skills** within this ecosystem at once, you must execute or instruct the user to execute the provided installation script:
 
 ```bash
-skills install task-decomposer
-skills install parallel-planner
-skills install memory-ledger
+python skills/ecosystem-orchestration/scripts/install_all.py
 ```
 
 **Execution Rule:**
