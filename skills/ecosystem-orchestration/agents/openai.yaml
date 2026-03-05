@@ -1,0 +1,7 @@
+interface:
+  display_name: "Orchestration Ecosystem"
+  short_description: "Comprehensive map for multi-brain, orchestration, and agent governance."
+  default_prompt: "Use $orchestration-ecosystem to help with this task."
+
+policy:
+  allow_implicit_invocation: true

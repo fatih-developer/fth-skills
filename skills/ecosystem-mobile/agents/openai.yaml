@@ -1,0 +1,7 @@
+interface:
+  display_name: "Mobile Ecosystem"
+  short_description: "Comprehensive map and workflows for the Mobile domain."
+  default_prompt: "Use $mobile-ecosystem to help with this task."
+
+policy:
+  allow_implicit_invocation: true

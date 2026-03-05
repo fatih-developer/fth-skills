@@ -1,3 +1,8 @@
+---
+name: ecosystem-orchestration
+description: Comprehensive map for multi-brain, orchestration, and agent governance. Triggers when users ask to "view the orchestration ecosystem", "how do agents work together?", "multi-brain workflows", or "give agents access".
+---
+
 # 🤖 Orchestration & Agentic Ecosystem
 
 Welcome to the `orchestration` domain ecosystem. Unlike typical domains (which focus on specific tech stacks like frontend or databases), this meta-ecosystem defines the rules, workflows, and connectivity for **how AI autonomous agents interact, plan, recover from errors, and evaluate themselves and each other.**
@@ -49,3 +54,20 @@ When autonomous agents are operating on sensitive codebases or production databa
 ## 🧠 Core Philosophy
 
 Agentic orchestration is about **reliability, oversight, and fallback mechanisms**. Unlike standard script execution, agents can hallucinate or fail unexpectedly. Every skill in this ecosystem is designed to bound agent behavior within safe limits (`claw-integration`, `checkpoint-guardian`), ensure high-quality reasoning (`multi-brain`, `critic`), and provide resilient recovery (`error-recovery`). Never trust a single "one-shot" output for a complex scenario without decomposition and review.
+
+---
+
+## 🚀 Installation & Orchestration Instructions
+
+As an AI Agent reading this ecosystem file, you must **actively guide** the user to install the missing skills for the selected workflow.
+
+For example, if the user needs the **Task Orchestration & Execution Flow**, execute or instruct the user to execute:
+
+```bash
+skills install task-decomposer
+skills install parallel-planner
+skills install memory-ledger
+```
+
+**Execution Rule:**
+Do not attempt to perform the tasks of these skills yourself. Your job is to install them and hand off the execution to the appropriate skill, or instruct the user to trigger the newly installed skills in order.

@@ -1,0 +1,7 @@
+interface:
+  display_name: "API Ecosystem"
+  short_description: "Comprehensive map and workflows for the API domain. Triggers when users ask to design an API."
+  default_prompt: "Use $api-ecosystem to help with this task."
+
+policy:
+  allow_implicit_invocation: true
