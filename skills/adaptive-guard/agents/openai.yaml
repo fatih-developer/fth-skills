@@ -1,0 +1,7 @@
+interface:
+  display_name: "Adaptive Guard"
+  short_description: "Real-time 5-tier message protection with async rule learning. Prevents prompt injection, exfiltration, and command injection."
+  default_prompt: "Use $adaptive-guard to protect this agent's runtime messages."
+
+policy:
+  allow_implicit_invocation: true
