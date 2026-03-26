@@ -1,6 +1,6 @@
 # Command Blacklist
 
-This file lists shell commands that adaptive-guard and skill-security will **always reject**. Any skill containing or executing these commands will be flagged with STRICT REJECT.
+This file lists shell commands that adaptive-guard and security-auditor will **always reject**. Any skill containing or executing these commands will be flagged with STRICT REJECT.
 
 ## Tier 1 — STRICT REJECT (Instant Block, No Override)
 

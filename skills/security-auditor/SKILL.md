@@ -1,5 +1,5 @@
 ---
-name: skill-security
+name: security-auditor
 description: Audits skills or the entire ecosystem for security vulnerabilities, enforces runtime guard rules, and assigns trust scores. Three modes: Audit (static analysis), Guard (runtime protection), Trust (permission mapping). Trigger on "skill security", "audit skill", "is this skill safe", "skill trust score", or "ecosystem security scan".
 ---
 
@@ -246,7 +246,7 @@ Are robust data handling rules enforced when intaking user data?
 **Skill:** [name]
 **Version:** [version]
 **Date:** [date]
-**Auditor:** skill-security v1.0
+**Auditor:** security-auditor v1.0
 
 ## Overall Assessment
 

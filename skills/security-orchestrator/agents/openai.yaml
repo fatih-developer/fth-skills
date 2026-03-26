@@ -1,6 +1,6 @@
 interface:
   display_name: "Security Orchestrator"
-  short_description: "Coordinates skill-security and adaptive-guard for full-lifecycle security management."
+  short_description: "Coordinates security-auditor and adaptive-guard for full-lifecycle security management."
   default_prompt: "Use $security-orchestrator to manage security for this task."
 
 policy:

@@ -1,6 +1,6 @@
 # PII Pattern Library
 
-This file provides detection patterns for Personally Identifiable Information (PII) used by skill-security audits.
+This file provides detection patterns for Personally Identifiable Information (PII) used by security-auditor audits.
 
 ## High-Risk PII Patterns
 

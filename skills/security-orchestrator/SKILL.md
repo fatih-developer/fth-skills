@@ -1,6 +1,6 @@
 ---
 name: security-orchestrator
-description: Orchestrates the Security Ecosystem by running skill-security and adaptive-guard in the correct order. Manages audit phases, trust scoring, guard activation, incident response, and calibration. Trigger on "security orchestrator", "run security", "audit and guard", or "security workflow".
+description: Orchestrates the Security Ecosystem by running security-auditor and adaptive-guard in the correct order. Manages audit phases, trust scoring, guard activation, incident response, and calibration. Trigger on "security orchestrator", "run security", "audit and guard", or "security workflow".
 ---
 
 # Security Ecosystem Orchestrator
@@ -60,11 +60,11 @@ GENERAL CHECK?     → Fast flow (PHASES 1-3)
 
 ---
 
-## PHASE 2 — Run skill-security
+## PHASE 2 — Run security-auditor
 
 ### Step 2.1 — Audit
 
-**skill-security MODE 1 (Audit):**
+**security-auditor MODE 1 (Audit):**
 ```text
 For the target skill(s):
 1. Load SKILL.md
@@ -92,7 +92,7 @@ For the target skill(s):
 
 ### Step 2.2 — Trust Scoring
 
-**skill-security MODE 3 (Trust):**
+**security-auditor MODE 3 (Trust):**
 ```text
 1. Fetch Audit results
 2. Calculate Trust score (0-100)
@@ -117,7 +117,7 @@ trust_context = {
 
 ## PHASE 3 — Generate Guard Rules
 
-**skill-security MODE 2 (Guard):**
+**security-auditor MODE 2 (Guard):**
 
 Construct the guard rule profile based on the Trust score:
 ```text
@@ -194,7 +194,7 @@ STEP 1 — Isolate immediately
   → Temporarily disable the associated skill
 
 STEP 2 — Analyze
-  skill-security → Re-audit the impacted skill
+  security-auditor → Re-audit the impacted skill
   adaptive-guard → Extract incident-report.md details
 
 STEP 3 — Rule update
@@ -254,7 +254,7 @@ K3 traffic > 5%         → Fine-tune the K2 model
 
 ## Ecosystem Health: 🟢 / 🟡 / 🔴
 
-### skill-security
+### security-auditor
 Last Audit      : [date]
 Scanned         : N skills
 Critical finding: N
@@ -284,7 +284,7 @@ Average latency : Xms
 1. adaptive-guard is never fully turned off
    → Only sensitivities (K1/K2/K3) can be manually bypassed
 
-2. If skill-security audit FAILED
+2. If security-auditor audit FAILED
    → Skill cannot go to production
    → Enforced strictly by Orchestrator
 

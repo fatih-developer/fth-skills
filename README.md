@@ -112,7 +112,7 @@ These foundational skills provide decision-making, safety, orchestration, and an
 | Skill                     | Install                         | Description                                                                                                              |
 | ------------------------- | ------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
 | **ecosystem-security**    | `--skill ecosystem-security`    | Three-layer security architecture overview: audit, runtime guard, and adaptive learning. The entry point to the ecosystem. |
-| **skill-security**        | `--skill skill-security`        | Audits skills for security flaws (7 threat categories), calculates Trust Scores (0-100), and generates runtime guard rules. |
+| **security-auditor**        | `--skill security-auditor`        | Audits skills for security flaws (7 threat categories), calculates Trust Scores (0-100), and generates runtime guard rules. |
 | **adaptive-guard**        | `--skill adaptive-guard`        | Real-time 5-tier message filter (hash cache → rule engine → ML → LLM judge → human approval) with async rule learning.  |
 | **security-orchestrator** | `--skill security-orchestrator` | Runs the full 7-phase security lifecycle: Discovery → Audit → Trust → Guard → Incident Response → Calibration → Report.  |
 
@@ -231,7 +231,7 @@ fth-skills/
 │   │   ├── ecosystem-security/          # Ecosystem overview & orchestration map
 │   │   │   ├── SKILL.md
 │   │   │   └── agents/openai.yaml
-│   │   ├── skill-security/              # Static audit + trust scorer + guard rules
+│   │   ├── security-auditor/              # Static audit + trust scorer + guard rules
 │   │   │   ├── SKILL.md
 │   │   │   └── references/
 │   │   │       ├── command-blacklist.md

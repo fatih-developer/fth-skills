@@ -1,7 +1,7 @@
 interface:
-  display_name: "Skill Security"
+  display_name: "Security Auditor"
   short_description: "Audits skills for vulnerabilities, calculates Trust Scores (0-100), and generates runtime guard rules."
-  default_prompt: "Use $skill-security to audit this skill for security issues."
+  default_prompt: "Use $security-auditor to audit this skill for security issues."
 
 policy:
   allow_implicit_invocation: true

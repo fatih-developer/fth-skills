@@ -109,7 +109,7 @@ PROMPT INJECTION SIGNALS:
   "remove prior restrictions"
 
 COMMAND INJECTION:
-  Blacklisted bash commands (skill-security/references/command-blacklist.md)
+  Blacklisted bash commands (security-auditor/references/command-blacklist.md)
   eval( + variable
   exec( + variable
 
