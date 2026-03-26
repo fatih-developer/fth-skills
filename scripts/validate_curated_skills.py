@@ -4,8 +4,10 @@
 from __future__ import annotations
 
 import argparse
+import io
 import re
 import sys
+from collections.abc import Sequence
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -28,7 +30,7 @@ class SkillWarning:
 
 def parse_frontmatter(skill_md_path: Path) -> dict[str, str]:
     text = skill_md_path.read_text(encoding="utf-8")
-    lines = text.splitlines()
+    lines: Sequence[str] = text.splitlines()
 
     if not lines or lines[0].strip() != "---":
         raise ValueError("SKILL.md must start with YAML frontmatter delimiter '---'.")
@@ -174,13 +176,13 @@ def main() -> int:
     if all_warnings:
         print(f"Warnings ({len(all_warnings)}):\n")
         for w in all_warnings:
-            print(f"  ⚠ [{w.skill}] {w.message}")
+            print(f"  [WARN] [{w.skill}] {w.message}")
         print()
 
     if all_issues:
         print(f"Errors ({len(all_issues)}):\n")
         for issue in all_issues:
-            print(f"  ✗ [{issue.skill}] {issue.message}")
+            print(f"  [FAIL] [{issue.skill}] {issue.message}")
         print(f"\nValidation FAILED — {len(all_issues)} error(s), {len(all_warnings)} warning(s).")
         return 1
 
@@ -191,4 +193,5 @@ def main() -> int:
 
 
 if __name__ == "__main__":
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
     sys.exit(main())
