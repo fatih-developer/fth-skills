@@ -5,7 +5,7 @@
 **Curated AI agent skills for coding workflows, decision-making, and agentic task safety**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Skills: 56](https://img.shields.io/badge/skills-56%20Curated-brightgreen.svg)](#-available-skills)
+[![Skills: 57](https://img.shields.io/badge/skills-57%20Curated-brightgreen.svg)](#-available-skills)
 [![Platform: skills.sh](https://img.shields.io/badge/platform-skills.sh-black.svg)](https://skills.sh/)
 
 _Reusable instruction packs for the [skills.sh](https://skills.sh/) ecosystem — works with Claude Code, Cursor, Copilot, Gemini CLI, and more._
@@ -26,7 +26,7 @@ npx skills add fatih-developer/fth-skills --skill <skill-name>
 
 ---
 
-## 🎯 Available Skills (45 Curated)
+## 🎯 Available Skills (57 Curated)
 
 The repository is structured into a **Layered Monorepo Architecture**, highly optimized for the **Ecosystem Handoff Pattern**. Skills are not just isolated commands; they are orchestrated capabilities acting together.
 
@@ -34,7 +34,9 @@ The repository is structured into a **Layered Monorepo Architecture**, highly op
 
 Every domain folder (`mobile`, `api`, `database`) contains an `ECOSYSTEM.md` map. Orchestrator agents (like `task-decomposer` and `parallel-planner`) read these maps dynamically to understand the **exact sequence of skills required for complex workflows** (e.g., OpenAPI-First Design Flow, Pre-Launch Release Handoffs).
 
-#### 📱 Mobile App Domain (`domains/mobile`)
+<details>
+<summary><b>📱 Mobile App Domain</b> (10 Skills)</summary>
+<br>
 
 | Skill                         | Install                             | Description                                                                        |
 | ----------------------------- | ----------------------------------- | ---------------------------------------------------------------------------------- |
@@ -48,8 +50,11 @@ Every domain folder (`mobile`, `api`, `database`) contains an `ECOSYSTEM.md` map
 | **onboarding-designer**       | `--skill onboarding-designer`       | Optimizes the first-time user experience and permission funnel.                    |
 | **push-notification-planner** | `--skill push-notification-planner` | Architects APNs/FCM payloads, deep-linking, and badge management.                  |
 | **release-orchestrator**      | `--skill release-orchestrator`      | Manages semantic versioning, staged rollouts, and changelog generation.            |
+</details>
 
-#### 🌐 API Domain (`domains/api`)
+<details>
+<summary><b>🌐 API Domain</b> (10 Skills)</summary>
+<br>
 
 | Skill                         | Install                             | Description                                                                      |
 | ----------------------------- | ----------------------------------- | -------------------------------------------------------------------------------- |
@@ -63,8 +68,11 @@ Every domain folder (`mobile`, `api`, `database`) contains an `ECOSYSTEM.md` map
 | **rate-limit-strategist**     | `--skill rate-limit-strategist`     | Prevents abuse by designing throttling, rate-limiting, and quota rules.          |
 | **sdk-scaffolder**            | `--skill sdk-scaffolder`            | Scaffolds client SDKs and typed interfaces (e.g., TypeScript) from the contract. |
 | **webhook-architect**         | `--skill webhook-architect`         | Architects event-driven webhook dispatches and retry mechanisms.                 |
+</details>
 
-#### 🗄️ Database Domain (`domains/database`)
+<details>
+<summary><b>🗄️ Database Domain</b> (11 Skills)</summary>
+<br>
 
 | Skill                      | Install                          | Description                                                            |
 | -------------------------- | -------------------------------- | ---------------------------------------------------------------------- |
@@ -73,11 +81,13 @@ Every domain folder (`mobile`, `api`, `database`) contains an `ECOSYSTEM.md` map
 | **data-masker**            | `--skill data-masker`            | Manages PII redaction and obfuscation for non-production environments. |
 | **index-advisor**          | `--skill index-advisor`          | Recommends covering and composite indexes for slow queries.            |
 | **migration-strategist**   | `--skill migration-strategist`   | Designs zero-downtime up/down migration scripts and backfill jobs.     |
+| **pgbouncer-architect**    | `--skill pgbouncer-architect`    | Optimizes database connections, configures PgBouncer pooling models.   |
 | **query-budget-enforcer**  | `--skill query-budget-enforcer`  | Sets N+1 detection rules and maximum execution thresholds.             |
 | **query-explainer**        | `--skill query-explainer`        | Analyzes execution plans (EXPLAIN ANALYZE) to identify bottlenecks.    |
 | **schema-architect**       | `--skill schema-architect`       | Normalizes DB schema (BCNF/3NF), generates DDL, prevents God Tables.   |
 | **schema-diff-analyzer**   | `--skill schema-diff-analyzer`   | Detects drift between environments or declarative definitions.         |
 | **seed-data-generator**    | `--skill seed-data-generator`    | Creates deterministic, referentially-intact relationships for testing. |
+</details>
 
 #### ⚛️ Frameworks (`domains/react-flow`)
 
