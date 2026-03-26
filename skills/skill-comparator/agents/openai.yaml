@@ -1,0 +1,7 @@
+interface:
+  display_name: "Skill Comparator"
+  short_description: "Analyzes and compares existing skills across 10 dimensions to recommend adopt, adapt, or build configurations."
+  default_prompt: "Use $skill-comparator to help with this task."
+
+policy:
+  allow_implicit_invocation: true

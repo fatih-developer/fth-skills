@@ -5,7 +5,7 @@
 **Curated AI agent skills for coding workflows, decision-making, and agentic task safety**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Skills: 57](https://img.shields.io/badge/skills-57%20Curated-brightgreen.svg)](#-available-skills)
+[![Skills: 58](https://img.shields.io/badge/skills-58%20Curated-brightgreen.svg)](#-available-skills)
 [![Platform: skills.sh](https://img.shields.io/badge/platform-skills.sh-black.svg)](https://skills.sh/)
 
 _Reusable instruction packs for the [skills.sh](https://skills.sh/) ecosystem — works with Claude Code, Cursor, Copilot, Gemini CLI, and more._
@@ -26,7 +26,7 @@ npx skills add fatih-developer/fth-skills --skill <skill-name>
 
 ---
 
-## 🎯 Available Skills (57 Curated)
+## 🎯 Available Skills (58 Curated)
 
 The repository is structured into a **Layered Monorepo Architecture**, highly optimized for the **Ecosystem Handoff Pattern**. Skills are not just isolated commands; they are orchestrated capabilities acting together.
 
@@ -116,6 +116,7 @@ These foundational skills provide decision-making, safety, orchestration, and an
 | **agent-reviewer**      | Core      | `--skill agent-reviewer`      | Post-task retrospective across 6 dimensions.                                                          |
 | **project-analyzer**    | Analysis  | `--skill project-analyzer`    | Deep codebase and architectural analysis reporting tool.                                              |
 | **proje-analizcisi**    | Analysis  | `--skill proje-analizcisi`    | Turkish version of the project-analyzer tool.                                                         |
+| **skill-comparator**    | Analysis  | `--skill skill-comparator`    | Analyzes external skills across 10 dimensions to recommend adopt, adapt, or build from scratch.       |
 
 ### 🔒 Security Ecosystem
 
