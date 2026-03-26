@@ -1,7 +1,6 @@
 ---
 name: security-orchestrator
-ecosystem: ecosystem-security
-version: 1.0.0
+description: Orchestrates the Security Ecosystem by running skill-security and adaptive-guard in the correct order. Manages audit phases, trust scoring, guard activation, incident response, and calibration. Trigger on "security orchestrator", "run security", "audit and guard", or "security workflow".
 ---
 
 # Security Ecosystem Orchestrator

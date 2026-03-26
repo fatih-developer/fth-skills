@@ -1,17 +1,8 @@
 ---
 name: skill-security
-version: 1.0.0
-description: >
-  Audits a specific skill or the entire ecosystem for security vulnerabilities, enforces runtime guard rules, and assigns trust scores. Operates in three modes:
-  (1) Audit — Statically analyzes SKILL.md files and reports vulnerabilities;
-  (2) Guard — Prevents malicious commands, sensitive data leaks, and over-privileged execution at runtime;
-  (3) Trust — Determines granted authorities and evaluates inter-skill chain security.
-  Trigger on phrases like "skill security", "audit skill", "is this skill safe", "skill permission check", "skill trust score", "ecosystem security scan". Must be run when a new skill is authored or before deploying a skill to production.
-outputs:
-  - security-report.md        # Audit mode result
-  - trust-score.md            # Trust mode result
-  - runtime-violations.md     # Guard mode exceptions (if any)
+description: Audits skills or the entire ecosystem for security vulnerabilities, enforces runtime guard rules, and assigns trust scores. Three modes: Audit (static analysis), Guard (runtime protection), Trust (permission mapping). Trigger on "skill security", "audit skill", "is this skill safe", "skill trust score", or "ecosystem security scan".
 ---
+
 
 # Skill Security — Meta-Skill
 

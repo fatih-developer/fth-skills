@@ -1,16 +1,8 @@
 ---
 name: adaptive-guard
-version: 1.0.0
-description: >
-  Protects LLM agent systems in real-time with a tiered filter architecture and an asynchronous learning engine. Beyond static rules, it synthesizes generalized new rules from every detected attack, adding less than 50ms latency to the main workflow.
-  Five-layer defense: hash cache, rule engine, ML classifier, LLM judge, human approval. Trigger on phrases like "add security layer", "prevent prompt injection", "adaptive guard", "learn from attack", "runtime protection", "agent security".
-  Works inside ecosystem-security alongside skill-security.
-outputs:
-  - guard-decision.json       # Decision log for each message
-  - learned-rules.md          # Synthesized rule set
-  - guard-metrics.md          # Performance report
-  - incident-report.md        # Detected attack report (if any)
+description: Protects LLM agent systems in real-time with a 5-tier filter (hash cache, rule engine, ML classifier, LLM judge, human approval) and an async learning engine. Synthesizes new rules from every detected attack, adding less than 50ms latency. Trigger on "add security layer", "prevent prompt injection", "adaptive guard", "runtime protection", or "agent security".
 ---
+
 
 # Adaptive Guard Skill
 

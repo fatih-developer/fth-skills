@@ -1,8 +1,6 @@
 ---
 name: ecosystem-security
-version: 1.0.0
-domain: Skill and platform security — static audit, runtime protection, adaptive learning
-orchestrator: ORCHESTRATOR.md
+description: Three-layer security ecosystem for Agent Platforms covering pre-deployment skill auditing, real-time message protection (adaptive-guard), and continuous adaptive defense. Coordinates skill-security and adaptive-guard. Trigger on "security ecosystem", "agent security", "skill protection", or "runtime defense".
 ---
 
 # Security Ecosystem
