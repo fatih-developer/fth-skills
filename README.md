@@ -5,7 +5,7 @@
 **Curated AI agent skills for coding workflows, decision-making, and agentic task safety**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Skills: 45](https://img.shields.io/badge/skills-45%20Curated-brightgreen.svg)](#-available-skills)
+[![Skills: 56](https://img.shields.io/badge/skills-56%20Curated-brightgreen.svg)](#-available-skills)
 [![Platform: skills.sh](https://img.shields.io/badge/platform-skills.sh-black.svg)](https://skills.sh/)
 
 _Reusable instruction packs for the [skills.sh](https://skills.sh/) ecosystem — works with Claude Code, Cursor, Copilot, Gemini CLI, and more._
@@ -107,6 +107,15 @@ These foundational skills provide decision-making, safety, orchestration, and an
 | **project-analyzer**    | Analysis  | `--skill project-analyzer`    | Deep codebase and architectural analysis reporting tool.                                              |
 | **proje-analizcisi**    | Analysis  | `--skill proje-analizcisi`    | Turkish version of the project-analyzer tool.                                                         |
 
+### 🔒 Security Ecosystem
+
+| Skill                     | Install                         | Description                                                                                                              |
+| ------------------------- | ------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| **ecosystem-security**    | `--skill ecosystem-security`    | Three-layer security architecture overview: audit, runtime guard, and adaptive learning. The entry point to the ecosystem. |
+| **skill-security**        | `--skill skill-security`        | Audits skills for security flaws (7 threat categories), calculates Trust Scores (0-100), and generates runtime guard rules. |
+| **adaptive-guard**        | `--skill adaptive-guard`        | Real-time 5-tier message filter (hash cache → rule engine → ML → LLM judge → human approval) with async rule learning.  |
+| **security-orchestrator** | `--skill security-orchestrator` | Runs the full 7-phase security lifecycle: Discovery → Audit → Trust → Guard → Incident Response → Calibration → Report.  |
+
 ### Experimental (Preview)
 
 | Skill                   | Install                       | Description                                                                                                         |
@@ -116,6 +125,7 @@ These foundational skills provide decision-making, safety, orchestration, and an
 | **multi-brain-score**   | `--skill multi-brain-score`   | Confidence scoring (1-10) per perspective with weighted consensus and uncertainty flags.                            |
 
 > **Experimental skills** are fully functional but may evolve. They graduate to curated once stable.
+
 
 ---
 
@@ -180,34 +190,108 @@ _Existing environments utilizing the flat structure (e.g., `npx skills add --ski
 ```
 fth-skills/
 ├── skills/
-│   ├── .curated/           # Layered Monorepo Architecture
-│   │   │                     # (Symlinks reside here for backward compatibility)
-│   │   ├── core/           # Foundational agents (multi-brain, etc)
-│   │   ├── execution/      # Runtime safety (checkpoint-guardian...)
-│   │   ├── planning/       # Orchestrators (task-decomposer...)
-│   │   ├── domains/
-│   │   │   ├── api/        # 10 skills + ECOSYSTEM.md workflows
-│   │   │   ├── database/   # 10 skills + ECOSYSTEM.md workflows
-│   │   │   ├── mobile/     # 10 skills + ECOSYSTEM.md workflows
-│   │   │   └── react-flow/ # UI Framework skills
-│   │   ├── proje-analizcisi/
-│   │   └── project-analyzer/
-│   └── .experimental/      # Preview, may evolve
-│       ├── multi-brain-experts/
-│       ├── multi-brain-debate/
-│       └── multi-brain-score/
+│   │
+│   ├── 🌐 API Domain (10 skills)
+│   │   ├── api-mock-designer/
+│   │   ├── api-observability-planner/
+│   │   ├── auth-flow-designer/
+│   │   ├── breaking-change-detector/
+│   │   ├── changelog-generator/
+│   │   ├── contract-first-designer/
+│   │   ├── protocol-selector/
+│   │   ├── rate-limit-strategist/
+│   │   ├── sdk-scaffolder/
+│   │   └── webhook-architect/
+│   │
+│   ├── 🗄️ Database Domain (10 skills)
+│   │   ├── access-policy-designer/
+│   │   ├── data-lineage-tracer/
+│   │   ├── data-masker/
+│   │   ├── index-advisor/
+│   │   ├── migration-strategist/
+│   │   ├── query-budget-enforcer/
+│   │   ├── query-explainer/
+│   │   ├── schema-architect/
+│   │   ├── schema-diff-analyzer/
+│   │   └── seed-data-generator/
+│   │
+│   ├── 📱 Mobile Domain (10 skills)
+│   │   ├── accessibility-enforcer/
+│   │   ├── app-store-reviewer/
+│   │   ├── crash-analyst/
+│   │   ├── deep-link-architect/
+│   │   ├── mobile-perf-auditor/
+│   │   ├── mobile-security-auditor/
+│   │   ├── offline-sync-designer/
+│   │   ├── onboarding-designer/
+│   │   ├── push-notification-planner/
+│   │   └── release-orchestrator/
+│   │
+│   ├── 🔒 Security Ecosystem (4 skills)
+│   │   ├── ecosystem-security/          # Ecosystem overview & orchestration map
+│   │   │   ├── SKILL.md
+│   │   │   └── agents/openai.yaml
+│   │   ├── skill-security/              # Static audit + trust scorer + guard rules
+│   │   │   ├── SKILL.md
+│   │   │   └── references/
+│   │   │       ├── command-blacklist.md
+│   │   │       ├── pii-patterns.md
+│   │   │       ├── api-whitelist.md
+│   │   │       └── trust-matrix.md
+│   │   ├── adaptive-guard/              # Runtime 5-tier message protection
+│   │   │   ├── SKILL.md
+│   │   │   └── references/
+│   │   │       ├── static-rules.md
+│   │   │       ├── attack-taxonomy.md
+│   │   │       ├── command-blacklist.md
+│   │   │       └── learning-examples.md
+│   │   └── security-orchestrator/       # 7-phase workflow coordinator
+│   │       ├── SKILL.md
+│   │       └── agents/openai.yaml
+│   │
+│   ├── 🧩 Ecosystem Orchestrators (4 skills)
+│   │   ├── ecosystem-api/
+│   │   ├── ecosystem-database/
+│   │   ├── ecosystem-mobile/
+│   │   └── ecosystem-orchestration/
+│   │
+│   ├── ⚛️ Framework (1 skill)
+│   │   └── react-flow/
+│   │
+│   ├── 🧠 Core Agentic (14 skills)
+│   │   ├── agent-reviewer/
+│   │   ├── assumption-checker/
+│   │   ├── checkpoint-guardian/
+│   │   ├── claw-integration-design/
+│   │   ├── context-compressor/
+│   │   ├── error-recovery/
+│   │   ├── memory-ledger/
+│   │   ├── multi-brain/
+│   │   ├── multi-brain-debate/
+│   │   ├── multi-brain-experts/
+│   │   ├── multi-brain-score/
+│   │   ├── output-critic/
+│   │   ├── parallel-planner/
+│   │   └── task-decomposer/
+│   │
+│   └── 🔍 Analysis & Planning (7 skills)
+│       ├── proje-analizcisi/
+│       ├── project-analyzer/
+│       ├── tool-selector/
+│       └── ... (4 more)
+│
 ├── scripts/
-│   └── validate_curated_skills.py
+│   └── validate_curated_skills.py       # Frontmatter & file reference validator
 ├── README.md
 └── LICENSE
 ```
 
 Each skill folder contains:
 
-- `SKILL.md` — Main instruction file (required)
-- `references/` — Supporting docs, checklists, examples
-- `templates/` — Reusable output templates
-- `agents/` — Agent platform manifests (OpenAI, etc.)
+- `SKILL.md` — Main instruction file with `name` + `description` frontmatter (required)
+- `references/` — Supporting docs, checklists, examples (optional)
+- `agents/` — Agent platform manifests e.g. `openai.yaml` (optional)
+
 
 ---
 
