@@ -35,7 +35,7 @@ F) Skill name only    → Search skills.sh first, then GitHub
 2. Extract SKILL.md content from the page
 3. Also extract metadata:
    - Weekly installs
-   - Security audit results (Gen Agent Trust Hub / Socket / Snyk)
+   - Security audit results (Trust Hub / Socket / Audit)
    - First seen date
    - Supported platforms (claude-code, copilot, etc.)
    - Repository link
@@ -90,13 +90,13 @@ Extract and note:
 
 **Red flags to note immediately:**
 ```
-⚠️  Hardcoded passwords, API keys, project names
+⚠️  Embedded plaintext credentials, auth tokens, project names
 ⚠️  Written in a language you don't understand
 ⚠️  "latest" image tags instead of pinned versions
 ⚠️  No error handling
 ⚠️  Scope too narrow (one project only)
 ⚠️  Last updated > 1 year ago
-⚠️  Security audit failures (Snyk FAIL, etc.)
+⚠️  Security audit failures (Scanner Flagged, etc.)
 ```
 
 ---
@@ -160,7 +160,7 @@ Evidence: List which ORMs/frameworks are mentioned
 
 ### DIMENSION 5 — Security Practices (weight: high)
 ```
-1-3:  Hardcoded secrets, no security considerations, Snyk FAIL
+1-3:  Embedded plaintext secrets, no security considerations, Scanner Flagged
 4-6:  Basic security (mentions env vars) but incomplete
 7-9:  Proper secret handling, CVE awareness, security checklist
 10:   Passes skill-security audit, no hardcoded values, CVE check included
@@ -241,7 +241,7 @@ Generate the structured comparison table.
 
 **Source:** [URL or file]
 **Language:** [language]
-**Security:** [Trust Hub: X | Socket: X | Snyk: X]
+**Security:** [Trust Hub: X | Socket: X | Audit: X]
 
 | Dimension | Score | Evidence |
 |-----------|-------|----------|
@@ -273,7 +273,7 @@ Generate the structured comparison table.
 | ORM compatibility | asyncpg only | Drizzle/Prisma/TypeORM/SQLAlchemy | Skill B |
 | CVE check | None | CVE-2025-12819 included | Skill B |
 | Capacity analysis | None | RAM/CPU/connection formula | Skill B |
-| Security | Snyk: FAIL ❌ | passes skill-security ✅ | Skill B |
+| Security | Audit: FAIL ❌ | passes skill-security ✅ | Skill B |
 | Weekly installs | 7 | — | Skill A (existing users) |
 | Config style | Static copy-paste | Dynamic, project-adaptive | Skill B |
 | **Score** | **N/100** | **N/100** | |
@@ -379,7 +379,7 @@ User: "Analyze https://skills.sh/davidcastagnetoa/skills/pgbouncer"
 → Fetch page
 → Extract SKILL.md content + security audit results
 → Score 10 dimensions
-→ Note: Spanish, single project, hardcoded values, Snyk FAIL
+→ Note: Spanish, single project, hardcoded values, Audit FAIL
 → Verdict: BUILD FROM SCRATCH
 → Gap list: mode selection, pool sizing formula, ORM matrix, CVE check
 ```
