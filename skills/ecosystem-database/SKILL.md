@@ -44,6 +44,12 @@ When the user asks about "data privacy", "GDPR", or "where does this data go":
 1. `@data-masker` -> Identifies PII (Personally Identifiable Information) and designs obfuscation/encryption strategies.
 2. `@data-lineage-tracer` -> Maps how data flows from ingestion to the data warehouse.
 
+### 5. Infrastructure & Scaling Flow
+
+When the user asks to "scale database connections", "setup pgbouncer", "fix too many connections", or "configure connection pool":
+
+1. `@pgbouncer-architect` -> Analyzes workload, calculates optimal pool sizes, selects pooling mode, and generates PgBouncer configurations.
+
 ---
 
 ## 🧠 Core Philosophy

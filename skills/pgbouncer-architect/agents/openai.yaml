@@ -1,0 +1,7 @@
+interface:
+  display_name: "PgBouncer Architect"
+  short_description: "Designs and configures PgBouncer connection pooling for PostgreSQL based on actual workload analysis."
+  default_prompt: "Use $pgbouncer-architect to help with this task."
+
+policy:
+  allow_implicit_invocation: true
