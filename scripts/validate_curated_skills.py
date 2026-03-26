@@ -35,16 +35,18 @@ def parse_frontmatter(skill_md_path: Path) -> dict[str, str]:
     if not lines or lines[0].strip() != "---":
         raise ValueError("SKILL.md must start with YAML frontmatter delimiter '---'.")
 
-    end_index = None
-    for idx, line in enumerate(lines[1:], start=1):
+    end_index: int = 0
+    for idx in range(1, len(lines)):
+        line = lines[idx]
         if line.strip() == "---":
             end_index = idx
             break
-    if end_index is None:
+    if end_index == 0:
         raise ValueError("SKILL.md frontmatter must end with delimiter '---'.")
 
     parsed: dict[str, str] = {}
-    for line in lines[1:end_index]:
+    for idx in range(1, end_index):
+        line = lines[idx]
         stripped = line.strip()
         if not stripped:
             continue
@@ -62,7 +64,7 @@ def parse_frontmatter(skill_md_path: Path) -> dict[str, str]:
         if (value.startswith('"') and value.endswith('"')) or (
             value.startswith("'") and value.endswith("'")
         ):
-            value = value[1:-1].strip()
+            value = value.strip("\"'").strip()
         parsed[key] = value
 
     return parsed
@@ -72,7 +74,8 @@ def extract_referenced_paths(skill_md_path: Path) -> set[str]:
     text = skill_md_path.read_text(encoding="utf-8")
     matches = set()
     for match in PATH_REF_RE.finditer(text):
-        raw = match.group(0).rstrip("`.,:;)]}\"'")
+        raw = match.group(0)
+        raw = raw.rstrip("`.,:;)]}\"'")
         matches.add(raw)
     return matches
 

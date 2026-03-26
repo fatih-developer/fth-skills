@@ -4,7 +4,7 @@ description: 'Audits skills or the entire ecosystem for security vulnerabilities
 ---
 
 
-# Skill Security — Meta-Skill
+# Security Auditor — Meta-Skill
 
 The foundational security layer of the Skill ecosystem. It operates across three independent but interlocking modes. Decide which mode to run based on the context—or adhere to the user's explicit instructions.
 
@@ -241,7 +241,7 @@ Are robust data handling rules enforced when intaking user data?
 ### Audit Report Artifact → `security-report.md`
 
 ```markdown
-# Skill Security Audit Report
+# Security Auditor Audit Report
 
 **Skill:** [name]
 **Version:** [version]
