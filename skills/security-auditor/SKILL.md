@@ -1,6 +1,6 @@
 ---
 name: security-auditor
-description: Audits skills or the entire ecosystem for security vulnerabilities, enforces runtime guard rules, and assigns trust scores. Three modes: Audit (static analysis), Guard (runtime protection), Trust (permission mapping). Trigger on "skill security", "audit skill", "is this skill safe", "skill trust score", or "ecosystem security scan".
+description: 'Audits skills or the entire ecosystem for security vulnerabilities, enforces runtime guard rules, and assigns trust scores. Three modes: Audit (static analysis), Guard (runtime protection), Trust (permission mapping). Trigger on skill security, audit skill, is this skill safe, skill trust score, or ecosystem security scan.'
 ---
 
 
