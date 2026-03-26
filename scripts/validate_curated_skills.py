@@ -20,6 +20,12 @@ class SkillIssue:
     message: str
 
 
+@dataclass
+class SkillWarning:
+    skill: str
+    message: str
+
+
 def parse_frontmatter(skill_md_path: Path) -> dict[str, str]:
     text = skill_md_path.read_text(encoding="utf-8")
     lines = text.splitlines()
@@ -69,20 +75,21 @@ def extract_referenced_paths(skill_md_path: Path) -> set[str]:
     return matches
 
 
-def validate_skill_dir(skill_dir: Path) -> list[SkillIssue]:
+def validate_skill_dir(skill_dir: Path) -> tuple[list[SkillIssue], list[SkillWarning]]:
     issues: list[SkillIssue] = []
+    warnings: list[SkillWarning] = []
     skill_name = skill_dir.name
     skill_md = skill_dir / "SKILL.md"
 
     if not skill_md.exists():
         issues.append(SkillIssue(skill_name, "Missing SKILL.md"))
-        return issues
+        return issues, warnings
 
     try:
         frontmatter = parse_frontmatter(skill_md)
     except ValueError as err:
         issues.append(SkillIssue(skill_name, str(err)))
-        return issues
+        return issues, warnings
 
     missing = REQUIRED_FRONTMATTER_KEYS - set(frontmatter.keys())
     if missing:
@@ -104,15 +111,25 @@ def validate_skill_dir(skill_dir: Path) -> list[SkillIssue]:
     if not frontmatter.get("description", "").strip():
         issues.append(SkillIssue(skill_name, "Frontmatter 'description' must be non-empty"))
 
-    agents_dir = skill_dir / "agents"
-    if agents_dir.exists() and not (agents_dir / "openai.yaml").exists():
-        issues.append(SkillIssue(skill_name, "agents/ exists but agents/openai.yaml is missing"))
+    # agents/openai.yaml is REQUIRED for skills.sh CLI discovery
+    agents_yaml = skill_dir / "agents" / "openai.yaml"
+    if not agents_yaml.exists():
+        issues.append(SkillIssue(skill_name, "Missing agents/openai.yaml (required for skills.sh CLI discovery)"))
+
+    # Description with unquoted double-quotes may break the skills.sh YAML parser
+    desc = frontmatter.get("description", "")
+    if '"' in desc:
+        warnings.append(SkillWarning(
+            skill_name,
+            "Description contains unquoted double-quotes which may break skills.sh CLI. "
+            "Consider wrapping the value in single quotes or removing the double-quotes.",
+        ))
 
     for rel_path in sorted(extract_referenced_paths(skill_md)):
         if not (skill_dir / rel_path).exists():
             issues.append(SkillIssue(skill_name, f"Referenced path not found: {rel_path}"))
 
-    return issues
+    return issues, warnings
 
 
 def list_skill_dirs(root: Path) -> list[Path]:
@@ -148,17 +165,28 @@ def main() -> int:
         return 1
 
     all_issues: list[SkillIssue] = []
+    all_warnings: list[SkillWarning] = []
     for skill_dir in skill_dirs:
-        all_issues.extend(validate_skill_dir(skill_dir))
+        issues, warnings = validate_skill_dir(skill_dir)
+        all_issues.extend(issues)
+        all_warnings.extend(warnings)
+
+    if all_warnings:
+        print(f"Warnings ({len(all_warnings)}):\n")
+        for w in all_warnings:
+            print(f"  ⚠ [{w.skill}] {w.message}")
+        print()
 
     if all_issues:
-        print("Validation failed:\n")
+        print(f"Errors ({len(all_issues)}):\n")
         for issue in all_issues:
-            print(f"- [{issue.skill}] {issue.message}")
-        print(f"\nTotal issues: {len(all_issues)}")
+            print(f"  ✗ [{issue.skill}] {issue.message}")
+        print(f"\nValidation FAILED — {len(all_issues)} error(s), {len(all_warnings)} warning(s).")
         return 1
 
-    print(f"Validation passed for {len(skill_dirs)} skill(s) under {root}.")
+    print(f"Validation PASSED for {len(skill_dirs)} skill(s) under {root}.")
+    if all_warnings:
+        print(f"  ({len(all_warnings)} warning(s) — see above)")
     return 0
 
 
