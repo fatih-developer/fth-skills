@@ -1,2 +1,6 @@
 # Working directory — drafts, uploads, experiments (never committed)
 _workspace/
+
+# EachLabs Kling Skill (Kişisel/Lokal Kullanım - Commit Edilmeyecek)
+skills/eachlabs-kling-generator/
+skills/eachlabs-kling-generator.zip

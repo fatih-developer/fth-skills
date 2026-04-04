@@ -1,0 +1,7 @@
+interface:
+  display_name: "SQLite Omni"
+  short_description: "SQLite schema design, PRAGMA tuning, migrations (Drizzle/raw), performance optimization, WAL mode, FTS5, sqlite-vec, and cloud SQLite (Turso/D1)."
+  default_prompt: "Use $sqlite to analyze this SQLite-related request and provide driver-specific guidance with correct PRAGMA settings and best practices."
+
+policy:
+  allow_implicit_invocation: true
