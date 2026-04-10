@@ -1,0 +1,7 @@
+interface:
+  display_name: "Skill Security"
+  short_description: "Analyzes and enforces security protocols on the skill ecosystem. Operates via Audit, Guard, and Trust modes."
+  default_prompt: "Use $skill-security to help with this task."
+
+policy:
+  allow_implicit_invocation: true
