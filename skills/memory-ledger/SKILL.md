@@ -114,3 +114,27 @@ Bugs resolved : N
 - **Never let the ledger grow stale** — if 3+ steps pass without an update, force one.
 - **Keep entries concise** — one line per decision, one line per bug. No paragraphs.
 - **Cross-skill**: integrates with `task-decomposer` (tracks subtask progress), `error-recovery` (logs errors and fixes), and `agent-reviewer` (provides retrospective data).
+
+---
+
+## Session Handoff Integration
+
+After **3+ significant updates** to the ledger (each completion of a subtask), evaluate whether a **session handoff** should be suggested.
+
+**Suggest handoff when:**
+- Task involves **5+ file edits** since session started
+- Multiple **architecture decisions** were made
+- Task is becoming long-running (context filling up)
+- User explicitly mentions context concern
+
+**Suggestion prompt:**
+> "We've made substantial progress on this task. A session handoff document would preserve this context for future sessions, especially if we need to resume later or if context gets full. Say **'create handoff'** when ready to save state."
+
+**What to include when creating handoff from memory-ledger:**
+- Decisions Made table → Decisions Made section
+- Current Status → Current State Summary + Pending Work
+- Bugs & Fixes → Potential Gotchas
+- User Preferences → Assumptions Made
+- Next Step → Immediate Next Steps (first item)
+
+**For long tasks, chain handoffs: invoke `session-transfer` skill with `--continues-from` to link related handoffs.**

@@ -40,6 +40,16 @@ python scripts/validate_curated_skills.py --root skills/.experimental  # experim
 
 All errors must be resolved before committing.
 
+## Key Skills by Purpose
+
+| Purpose | Skills |
+|---------|--------|
+| Session continuity | `memory-ledger` (incremental), `session-transfer` (full handoff for long tasks) |
+| Task orchestration | `task-decomposer`, `parallel-planner`, `checkpoint-guardian` |
+| Security | `skill-security`, `adaptive-guard`, `security-orchestrator` |
+
+`memory-ledger` and `session-transfer` work together — the former tracks incremental progress, the latter preserves full context for session switching. Both are optional and independently installable.
+
 ## Key Scripts
 
 | Script | Purpose |
