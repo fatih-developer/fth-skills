@@ -1,6 +1,6 @@
 ---
 name: ecosystem-security
-description: Three-layer security ecosystem for Agent Platforms covering pre-deployment skill auditing, real-time message protection (adaptive-guard), and continuous adaptive defense. Coordinates security-auditor and adaptive-guard. Trigger on "security ecosystem", "agent security", "skill protection", or "runtime defense".
+description: Three-layer security ecosystem for Agent Platforms covering pre-deployment skill auditing, real-time message protection (adaptive-guard), and continuous adaptive defense. Coordinates security-auditor and adaptive-guard. Trigger on 'security ecosystem', 'agent security', 'skill protection', or 'runtime defense'.
 ---
 
 # Security Ecosystem

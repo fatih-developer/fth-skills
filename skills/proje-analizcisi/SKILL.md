@@ -1,6 +1,6 @@
 ---
 name: proje-analizcisi
-description: "Mevcut bir yazılım projesini derinlemesine analiz eder ve docs/analyze/ klasörüne 3-4 adet kapsamlı rapor üretir. 'Projeyi analiz et', 'kod analizi yap', 'proje inceleme', 'mimari rapor', 'teknik borç', 'proje değerlendirme', 'codebase analiz' gibi ifadeler geçtiğinde tetikle. Proje dizini veya repo URL'i verildiğinde çalışır. API endpoint'leri tespit edilirse otomatik olarak 4. raporu da üretir."
+description: 'Mevcut bir yazılım projesini derinlemesine analiz eder ve docs/analyze/ klasörüne 3-4 adet kapsamlı rapor üretir. 'Projeyi analiz et', 'kod analizi yap', 'proje inceleme', 'mimari rapor', 'teknik borç', 'proje değerlendirme', 'codebase analiz' gibi ifadeler geçtiğinde tetikle. Proje dizini veya repo URL'i verildiğinde çalışır. API endpoint'leri tespit edilirse otomatik olarak 4. raporu da üretir.'
 ---
 
 # Proje Analizcisi Skill

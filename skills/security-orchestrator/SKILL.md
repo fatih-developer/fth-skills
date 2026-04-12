@@ -1,6 +1,6 @@
 ---
 name: security-orchestrator
-description: Orchestrates the Security Ecosystem by running security-auditor and adaptive-guard in the correct order. Manages audit phases, trust scoring, guard activation, incident response, and calibration. Trigger on "security orchestrator", "run security", "audit and guard", or "security workflow".
+description: Orchestrates the Security Ecosystem by running security-auditor and adaptive-guard in the correct order. Manages audit phases, trust scoring, guard activation, incident response, and calibration. Trigger on 'security orchestrator', 'run security', 'audit and guard', or 'security workflow'.
 ---
 
 # Security Ecosystem Orchestrator

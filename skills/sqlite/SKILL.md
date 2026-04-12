@@ -1,14 +1,6 @@
 ---
-name: sqlite-omni
-description: >
-  Expert SQLite guidance for modern full-stack and AI projects. Use this skill whenever the user
-  mentions sqlite, sqlite3, bun:sqlite, better-sqlite3, aiosqlite, libsql, Turso, Cloudflare D1,
-  WAL mode, FTS5, sqlite-vec, or asks about local/embedded databases. Also triggers for schema
-  design, SQLite migrations with Drizzle or raw SQL, performance tuning, backup/restore, and
-  building stateful CLI + SQLite System Skills. Works across TypeScript (Bun, Node), Python
-  (FastAPI, asyncio), and CLI contexts. Always use this skill when SQLite is involved — even
-  indirectly — because correct PRAGMA, WAL, and driver-specific patterns matter a lot.
-compatibility: "Bun 1.x+, Node 18+, Python 3.8+, Drizzle ORM, sqlite-vec, libsql/Turso"
+name: sqlite
+description: 'Expert SQLite guidance for modern full-stack and AI projects. Use when user mentions sqlite, sqlite3, bun:sqlite, better-sqlite3, aiosqlite, libsql, Turso, Cloudflare D1, WAL mode, FTS5, sqlite-vec, or asks about local/embedded databases, schema design, SQLite migrations with Drizzle or raw SQL, performance tuning, backup/restore, and building stateful CLI with SQLite.'
 ---
 
 # SQLite Expert Skill

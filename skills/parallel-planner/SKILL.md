@@ -1,6 +1,6 @@
 ---
 name: parallel-planner
-description: Analyze multi-step tasks to identify which steps can run in parallel, build dependency graphs, detect conflicts (write-write, read-write, resource contention), and produce optimized execution plans. Triggers on 3+ independent steps, "speed up", "run simultaneously", "parallelize", "optimize" or any task where sequential execution wastes time.
+description: Analyze multi-step tasks to identify which steps can run in parallel, build dependency graphs, detect conflicts (write-write, read-write, resource contention), and produce optimized execution plans. Triggers on 3+ independent steps, 'speed up', 'run simultaneously', 'parallelize', 'optimize' or any task where sequential execution wastes time.
 ---
 
 # Parallel Planner Protocol

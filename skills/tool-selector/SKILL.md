@@ -1,6 +1,6 @@
 ---
 name: tool-selector
-description: Before executing a task, analyze the available tool set (web search, code execution, file read/write, API calls, database queries, memory tools), select the optimal tools, plan execution order, and prevent unnecessary tool calls. Triggers on multi-step tasks, "which tool should I use", "plan the tools", or whenever multiple tools could apply.
+description: Before executing a task, analyze the available tool set (web search, code execution, file read/write, API calls, database queries, memory tools), select the optimal tools, plan execution order, and prevent unnecessary tool calls. Triggers on multi-step tasks, 'which tool should I use', 'plan the tools', or whenever multiple tools could apply.
 ---
 
 # Tool Selector Protocol

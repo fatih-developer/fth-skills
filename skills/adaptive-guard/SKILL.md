@@ -1,6 +1,6 @@
 ---
 name: adaptive-guard
-description: Protects LLM agent systems in real-time with a 5-tier filter (hash cache, rule engine, ML classifier, LLM judge, human approval) and an async learning engine. Synthesizes new rules from every detected attack, adding less than 50ms latency. Trigger on "add security layer", "prevent prompt injection", "adaptive guard", "runtime protection", or "agent security".
+description: Protects LLM agent systems in real-time with a 5-tier filter (hash cache, rule engine, ML classifier, LLM judge, human approval) and an async learning engine. Synthesizes new rules from every detected attack, adding less than 50ms latency. Trigger on 'add security layer', 'prevent prompt injection', 'adaptive guard', 'runtime protection', or 'agent security'.
 ---
 
 

@@ -1,6 +1,6 @@
 ---
 name: task-decomposer
-description: Break down large, complex, or ambiguous tasks into independent subtasks with dependency maps, execution order, and success criteria. Plan first, then execute step by step. Triggers on "how should I do this", "where do I start", "plan the project", "break it down", "implement" or whenever a task involves multiple phases.
+description: Break down large, complex, or ambiguous tasks into independent subtasks with dependency maps, execution order, and success criteria. Plan first, then execute step by step. Triggers on 'how should I do this', 'where do I start', 'plan the project', 'break it down', 'implement' or whenever a task involves multiple phases.
 ---
 
 # Task Decomposer Protocol

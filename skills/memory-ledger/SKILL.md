@@ -1,6 +1,6 @@
 ---
 name: memory-ledger
-description: Maintain a structured ledger of decisions, discovered bugs and fixes, user preferences, constraints, current status, and failed approaches throughout multi-step agentic tasks. Auto-update after every significant step. Triggers on "where were we", "continue", "summarize status", "remember", or when a new agent instance takes over a task.
+description: Maintain a structured ledger of decisions, discovered bugs and fixes, user preferences, constraints, current status, and failed approaches throughout multi-step agentic tasks. Auto-update after every significant step. Triggers on 'where were we', 'continue', 'summarize status', 'remember', or when a new agent instance takes over a task.
 ---
 
 # Memory Ledger Protocol

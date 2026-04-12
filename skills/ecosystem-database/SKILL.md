@@ -1,6 +1,6 @@
 ---
 name: ecosystem-database
-description: Comprehensive map and workflows for the Database domain. Triggers when users ask to "design a database", "optimize query", "schema architecture", "database ecosystem", or migrate data.
+description: Comprehensive map and workflows for the Database domain. Triggers when users ask to 'design a database', 'optimize query', 'schema architecture', 'database ecosystem', or migrate data.
 ---
 
 # 🗄️ Database Domain Ecosystem

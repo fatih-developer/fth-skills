@@ -1,6 +1,6 @@
 ---
 name: ecosystem-api
-description: Comprehensive map and workflows for the API domain. Triggers when users ask to "design an API", "secure the APIs", "update endpoints", "view the API ecosystem", or want to see all available API orchestration skills.
+description: Comprehensive map and workflows for the API domain. Triggers when users ask to 'design an API', 'secure the APIs', 'update endpoints', 'view the API ecosystem', or want to see all available API orchestration skills.
 ---
 
 # 🌐 API Domain Ecosystem

@@ -1,6 +1,6 @@
 ---
 name: ecosystem-orchestration
-description: Comprehensive map for multi-brain, orchestration, and agent governance. Triggers when users ask to "view the orchestration ecosystem", "how do agents work together?", "multi-brain workflows", or "give agents access".
+description: Comprehensive map for multi-brain, orchestration, and agent governance. Triggers when users ask to 'view the orchestration ecosystem', 'how do agents work together?', 'multi-brain workflows', or 'give agents access'.
 ---
 
 # 🤖 Orchestration & Agentic Ecosystem

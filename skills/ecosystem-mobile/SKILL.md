@@ -1,6 +1,6 @@
 ---
 name: ecosystem-mobile
-description: Comprehensive map and workflows for the Mobile domain. Triggers when users ask to "design a mobile app", "mobile architecture", "audit the app before launch", "prepare for release", or "view the mobile ecosystem".
+description: Comprehensive map and workflows for the Mobile domain. Triggers when users ask to 'design a mobile app', 'mobile architecture', 'audit the app before launch', 'prepare for release', or 'view the mobile ecosystem'.
 ---
 
 # 📱 Mobile Domain Ecosystem

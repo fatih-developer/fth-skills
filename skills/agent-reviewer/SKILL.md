@@ -1,6 +1,6 @@
 ---
 name: agent-reviewer
-description: After an agentic task completes, perform a retrospective analysis across 6 dimensions (goal alignment, efficiency, decision quality, error handling, communication, reusability). Score performance, identify inefficiency patterns, evaluate skill usage, and produce actionable improvement recommendations. Triggers on "how did it go", "retrospective", "review performance", "what could be better", or after any long agentic task completes.
+description: After an agentic task completes, perform a retrospective analysis across 6 dimensions (goal alignment, efficiency, decision quality, error handling, communication, reusability). Score performance, identify inefficiency patterns, evaluate skill usage, and produce actionable improvement recommendations. Triggers on 'how did it go', 'retrospective', 'review performance', 'what could be better', or after any long agentic task completes.
 ---
 
 # Agent Reviewer Protocol

@@ -1,6 +1,6 @@
 ---
 name: output-critic
-description: Evaluate every produced output (code, report, plan, data, API response) against type-specific quality criteria, score 1-10, make accept/reject decisions, and provide actionable improvement suggestions. Triggers on "evaluate", "check", "review", "quality control", "is this good enough", "score it", or before passing output to the next step in an agentic workflow.
+description: Evaluate every produced output (code, report, plan, data, API response) against type-specific quality criteria, score 1-10, make accept/reject decisions, and provide actionable improvement suggestions. Triggers on 'evaluate', 'check', 'review', 'quality control', 'is this good enough', 'score it', or before passing output to the next step in an agentic workflow.
 ---
 
 # Output Critic Protocol
