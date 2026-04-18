@@ -1,0 +1,7 @@
+interface:
+  display_name: "Coolify Orchestrator"
+  short_description: "Expert Coolify management skill for self-hosted infrastructure. Deploy, manage, and debug services."
+  default_prompt: "Use $coolify-orchestrator to help with this task."
+
+policy:
+  allow_implicit_invocation: true
