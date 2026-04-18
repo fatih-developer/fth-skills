@@ -1,0 +1,7 @@
+interface:
+  display_name: "Mastermind Logger"
+  short_description: "Automatically extracts key decisions and learnings from the current session and appends them to a knowledge base."
+  default_prompt: "Use $mastermind-logger to save our current session insights."
+
+policy:
+  allow_implicit_invocation: true
