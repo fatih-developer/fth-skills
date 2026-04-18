@@ -1,26 +1,26 @@
-# PII Tespit Kalıpları
+# PII Detection Patterns
 
-## Kişisel Tanımlayıcı Bilgiler (PII)
+## Personally Identifiable Information (PII)
 
-Bir skill bu veri türlerini işliyorsa KVKK/GDPR kuralları geçerlidir.
+If a skill processes these data types, KVKK/GDPR rules apply.
 
 ---
 
-## Türkiye'ye Özel PII
+## Country-Specific PII (Turkey)
 
-### TC Kimlik Numarası
+### TR Identity Number (TCKN)
 ```regex
 \b[1-9][0-9]{10}\b
 ```
-**Risk:** Kimlik hırsızlığı, dolandırıcılık
-**Gereksinim:** Şifreli sakla, log'a yazma, 3. tarafa gönderme
+**Risk:** Identity theft, fraud
+**Requirement:** Encrypt, do not write to log, do not send to 3rd party
 
-### Vergi Numarası
+### Tax Number
 ```regex
-\b[0-9]{10}\b   # şirket vergi no
+\b[0-9]{10}\b   # corporate tax number
 ```
 
-### Türk Telefon Numarası
+### TR Phone Number
 ```regex
 (\+90|0090|090)?[-.\s]?[0-9]{3}[-.\s]?[0-9]{3}[-.\s]?[0-9]{4}
 \b05[0-9]{9}\b
@@ -28,29 +28,29 @@ Bir skill bu veri türlerini işliyorsa KVKK/GDPR kuralları geçerlidir.
 
 ---
 
-## Evrensel PII
+## Universal PII
 
-### E-posta Adresi
+### Email Address
 ```regex
 [a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}
 ```
-**Risk:** Spam, phishing, hesap ele geçirme
+**Risk:** Spam, phishing, account takeover
 
-### IP Adresi
+### IP Address
 ```regex
 # IPv4
 \b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b
 # IPv6
 ([0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}
 ```
-**Not:** Kullanıcı IP'si PII sayılır (GDPR)
+**Note:** User IP is considered PII (GDPR)
 
-### Kredi Kartı Numarası
+### Credit Card Number
 ```regex
 \b(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|3[47][0-9]{13})\b
 ```
-**Risk:** Finansal dolandırıcılık
-**Zorunlu:** PCI-DSS uyumu, asla log'a yazma
+**Risk:** Financial fraud
+**Mandatory:** PCI-DSS compliance, never write to log
 
 ### IBAN
 ```regex
@@ -58,18 +58,18 @@ TR[0-9]{2}[0-9]{5}[0-9]{17}
 [A-Z]{2}[0-9]{2}[A-Z0-9]{1,30}
 ```
 
-### Pasaport / Kimlik Numarası
+### Passport / Identity Document Number
 ```regex
-[A-Z]{1,2}[0-9]{6,9}   # genel pasaport
+[A-Z]{1,2}[0-9]{6,9}   # general passport
 ```
 
 ---
 
-## Teknik Gizli Veriler (Hassas ama PII değil)
+## Technical Sensitive Data (Sensitive but not PII)
 
-### API Key Kalıpları
+### API Key Patterns
 ```regex
-# Genel API key kalıbı
+# General API key pattern
 (?i)(api[_-]?key|apikey|api[_-]?secret)\s*[=:]\s*['"]?([a-zA-Z0-9\-_]{20,})
 # Claude/Anthropic
 sk-ant-[a-zA-Z0-9\-_]{40,}
@@ -87,72 +87,72 @@ AKIA[0-9A-Z]{16}
 ```regex
 eyJ[a-zA-Z0-9\-_]+\.eyJ[a-zA-Z0-9\-_]+\.[a-zA-Z0-9\-_]+
 ```
-**Risk:** Oturum ele geçirme
+**Risk:** Session hijacking
 
-### Private Key / Sertifika
+### Private Key / Certificate
 ```
 -----BEGIN (RSA |EC |DSA |OPENSSH )?PRIVATE KEY-----
 -----BEGIN CERTIFICATE-----
 ```
 
-### Şifre Kalıpları
+### Password Patterns
 ```regex
 (?i)(password|passwd|pwd|secret|token)\s*[=:]\s*['"]?([^\s'"]{6,})
 ```
 
 ---
 
-## Sızıntı Riski Değerlendirmesi
+## Leakage Risk Assessment
 
-| Veri Türü | Sızarsa Risk | Önlem |
+| Data Type | Risk on Leak | Mitigation |
 |-----------|-------------|-------|
-| TC Kimlik | Kimlik hırsızlığı | Şifrele, log'a yazma |
-| Kredi kartı | Finansal dolandırıcılık | PCI-DSS, asla saklama |
-| E-posta | Spam, phishing | Minimum toplama |
-| API Key | Servis ele geçirme | Vault kullan, rotate et |
-| JWT | Oturum ele geçirme | Kısa TTL, revoke mekanizması |
-| Şifre (hash) | Brute force | bcrypt/argon2, tuzlama |
-| IP Adresi | Takip, profilleme | Anonim hale getir |
-| Private Key | Tam sistem ele geçirme | KESİN YASAK — log'a yazma |
+| Identity No | Identity theft | Encrypt, do not log |
+| Credit Card | Financial fraud | PCI-DSS, never store |
+| Email | Spam, phishing | Minimum collection |
+| API Key | Service compromise | Use Vault, rotate |
+| JWT | Session hijacking | Short TTL, revoke mechanism |
+| Password | Brute force | bcrypt/argon2, salting |
+| IP Address | Tracking, profiling | Anonymize |
+| Private Key | Full system compromise | STRICTLY FORBIDDEN - never log |
 
 ---
 
-## Skill'de PII Kuralları
+## PII Rules in Skills
 
-Bir skill PII işliyorsa şu kontroller zorunlu:
+If a skill processes PII, the following checks are mandatory:
 
 ```
-□ Minimum toplama: sadece gereken kadar veri al
-□ Amaç sınırlaması: toplandığı amaç dışında kullanma
-□ Şifreleme: transit ve depolama şifrelemesi
-□ Log maskeleme: logda PII görünmemeli
-  email: "fat***@gm***.com" formatında maskele
-  telefon: "+90 5** *** **89" formatında maskele
-  TC: "***********" göster
-□ Silme hakkı: kullanıcı talep ederse sil
-□ Veri saklama süresi: tanımla ve uygula
-□ 3. taraf paylaşım: açık onay olmadan paylaşma
+- Minimum collection: collect only required data
+- Purpose limitation: don't use outside intent bounds
+- Encryption: in-transit and at-rest encryption
+- Log masking: PII must not appear in logs
+  email: mask to "fat***@gm***.com"
+  phone: mask to "+90 5** *** **89"
+  SSN/ID: show "***********"
+- Right to erasure: delete when requested
+- Data retention period: define and enforce
+- 3rd party sharing: do not share without explicit consent
 ```
 
 ---
 
-## Log Maskeleme Örnekleri
+## Log Masking Examples
 
 ```python
-# E-posta maskele
+# Email masking
 def mask_email(email):
     user, domain = email.split('@')
     return f"{user[:3]}***@{domain[:2]}***.{domain.split('.')[-1]}"
 
-# Telefon maskele
+# Phone masking
 def mask_phone(phone):
     return phone[:3] + "*** ***" + phone[-2:]
 
-# Kart numarası maskele
+# Card number masking
 def mask_card(card):
     return "**** **** **** " + card[-4:]
 
-# API key maskele
+# API key masking
 def mask_key(key):
     return key[:8] + "..." + key[-4:]
 ```

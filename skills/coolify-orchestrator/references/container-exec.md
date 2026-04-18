@@ -1,80 +1,80 @@
 # Container Exec / SSH Fallback
 
-## Ne Zaman Kullan
+## When To Use
 
-Coolify API'nin yetersiz kaldığı durumlar:
-- Container içindeki bir dosyayı düzenlemek (config, .env, cert)
-- Uygulama loglarını dosya olarak okumak (stdout değil disk logu)
-- Bun/node_modules cache temizliği
-- Database migration'ı manuel çalıştırmak
-- Container içi process debug
+Situations where Coolify API is insufficient:
+- Editing a file inside a container (config, .env, cert)
+- Reading application logs as files (disk log, not stdout)
+- Clearing Bun/node_modules cache
+- Running database migration manually
+- In-container process debugging
 
-## Erişim Stratejisi (Sırayla Dene)
+## Access Strategy (Try in order)
 
-### Strateji 1: Coolify Web Terminal (MCP'siz, en kolay)
+### Strategy 1: Coolify Web Terminal (Without MCP, easiest)
 
-Coolify Dashboard → Application/Service → "Terminal" sekmesi → container seç → komut gir.
+Coolify Dashboard → Application/Service → "Terminal" tab → select container → enter command.
 
-Bu yeterli değilse veya otomasyona ihtiyaç varsa Strateji 2'ye geç.
+If this is insufficient or automation is needed, proceed to Strategy 2.
 
-### Strateji 2: SSH + Docker Exec
+### Strategy 2: SSH + Docker Exec
 
 ```bash
-# 1. Sunucuya bağlan
+# 1. Connect to server
 ssh -i ~/.ssh/coolify_key user@coolify-server-ip
 
-# 2. Çalışan container'ları listele
+# 2. List running containers
 docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
 
-# 3. İlgili container'ı bul (servis adına göre)
-docker ps | grep <servis-adı>
+# 3. Find the relevant container (by service name)
+docker ps | grep <service-name>
 
-# 4. Container'a gir
+# 4. Enter container
 docker exec -it <container-name> sh
-# Bash varsa:
+# If bash exists:
 docker exec -it <container-name> bash
-# Bun container'ı için:
+# For Bun container:
 docker exec -it <container-name> /bin/sh
 ```
 
-### Container adı nasıl bulunur?
+### How to find container name?
 
-Coolify, container adlarını genellikle şöyle üretir:
-- `<proje-adı>-<servis-adı>-1`
-- `coolify-<uuid>-<servis>-1`
+Coolify generally generates container names like this:
+- `<project-name>-<service-name>-1`
+- `coolify-<uuid>-<service>-1`
 
 ```bash
-# UUID ile ara
+# Search by UUID
 docker ps | grep <coolify-app-uuid>
 
-# Servis adıyla ara
+# Search by service name
 docker ps | grep -i "acme-api"
 ```
 
 ---
 
-## Yaygın Container İçi İşlemler
+## Common In-Container Operations
 
-### Dosya Görüntüleme ve Düzenleme
+### File Viewing and Editing
 
 ```bash
-# Config dosyasını oku
+# Read config file
 docker exec <container> cat /app/.env
 
-# Dosyayı düzenle (vi ile)
+# Edit file (with vi)
 docker exec -it <container> vi /app/config.json
 
-# Sed ile satır değiştir (interaktif session gerektirmez)
+# Replace line with sed (doesn't require interactive session)
 docker exec <container> \
   sed -i 's/OLD_VALUE/NEW_VALUE/g' /app/config.json
 ```
 
-### Bun Cache Temizliği
+### Clearing Bun Cache
 
 ```bash
 docker exec <container> bun pm cache rm
 
-# node_modules'ü sil ve yeniden yükle
+# Delete node_modules and reinstall
 docker exec <container> sh -c "rm -rf node_modules && bun install"
 ```
 
@@ -84,111 +84,111 @@ docker exec <container> sh -c "rm -rf node_modules && bun install"
 # Drizzle migration
 docker exec <container> bunx drizzle-kit push
 
-# Veya migration scripti
+# Or migration script
 docker exec <container> bun run db:migrate
 ```
 
-### Log Dosyası Okuma
+### Reading Log File
 
 ```bash
 # Container log (stdout/stderr)
 docker logs <container> --tail 200 -f
 
-# Disk üzerindeki log dosyası
+# Log file on disk
 docker exec <container> tail -f /var/log/app/error.log
 ```
 
-### Process ve Kaynak Kontrolü
+### Process and Resource Checking
 
 ```bash
-# CPU/Memory kullanımı
+# CPU/Memory usage
 docker stats <container> --no-stream
 
-# Container içi process'ler
+# In-container processes
 docker exec <container> ps aux
 
-# Port dinleme kontrolü
+# Check listening ports
 docker exec <container> ss -tlnp
 ```
 
 ---
 
-## Coolify Bun/Node Uygulaması: Dosya Yolları
+## Coolify Bun/Node Application: File Paths
 
-| İçerik | Yol |
+| Content | Path |
 |--------|-----|
-| Uygulama kodu | `/app/` |
+| Application code | `/app/` |
 | node_modules | `/app/node_modules/` |
-| .env dosyası | `/app/.env` (varsa) |
+| .env file | `/app/.env` (if exists) |
 | Bun binary | `/usr/local/bin/bun` |
 | Build output | `/app/dist/` |
 
-## Coolify Next.js: Dosya Yolları
+## Coolify Next.js: File Paths
 
-| İçerik | Yol |
+| Content | Path |
 |--------|-----|
-| Uygulama | `/app/` |
+| Application | `/app/` |
 | .next build | `/app/.next/` |
-| Static dosyalar | `/app/public/` |
+| Static files | `/app/public/` |
 
 ---
 
-## Container Dışından Dosya Kopyalama
+## Copying Files from Outside the Container
 
 ```bash
-# Container'dan sunucuya kopyala
+# Copy from container to server
 docker cp <container>:/app/config.json /tmp/config.json
 
-# Düzenle
+# Edit
 nano /tmp/config.json
 
-# Geri kopyala
+# Copy back
 docker cp /tmp/config.json <container>:/app/config.json
 
-# Restart gerekli değilse uygulama reload yapabilir
-# Gerekirse:
+# Application can reload if restart is not required
+# If needed:
 docker restart <container>
-# veya Coolify API üzerinden:
+# or via Coolify API:
 curl -X POST -H "Authorization: Bearer $COOLIFY_ACCESS_TOKEN" \
   "$COOLIFY_BASE_URL/api/v1/applications/$APP_UUID/restart"
 ```
 
 ---
 
-## Sunucuya SSH Erişimi Yoksa
+## If No SSH Access to Server Available
 
-Coolify'ın API'si üzerinden bazı işlemler yapılabilir:
+Some operations can be performed via Coolify's API:
 
 ```bash
-# Uygulama logları (stdout)
+# Application logs (stdout)
 curl -s \
   -H "Authorization: Bearer $COOLIFY_ACCESS_TOKEN" \
   "$COOLIFY_BASE_URL/api/v1/applications/$APP_UUID/logs?lines=500"
 
-# Servis restart
+# Service restart
 curl -s -X POST \
   -H "Authorization: Bearer $COOLIFY_ACCESS_TOKEN" \
   "$COOLIFY_BASE_URL/api/v1/applications/$APP_UUID/restart"
 ```
 
-Dosya düzenleme için SSH şart. SSH erişimi yoksa:
-1. Kullanıcıya Coolify web terminal'ini kullanmasını söyle
-2. Veya env var üzerinden config geç (dosya yerine environment-based config)
+SSH is required for file editing. If there is no SSH access:
+1. Tell the user to use the Coolify web terminal
+2. Or pass config via env var (environment-based config instead of file)
 
 ---
 
-## İşlem Sonrası
+## Post-Operation
 
-Container içi değişiklikten sonra kontrol listesi:
+Checklist after an in-container change:
 
 ```
-[ ] Değişiklik doğru uygulandı (cat ile verify et)
-[ ] Servis restart edildi (gerekiyorsa)
-[ ] Health check geçti
-[ ] Log'da hata yok
+[ ] Change applied correctly (verify with cat)
+[ ] Service restarted (if needed)
+[ ] Health check passed
+[ ] No errors in log
 ```
 
-Eğer restart gerektirmeden reload yapılabiliyorsa (örn. Hono reload signal):
+If it can be reloaded without requiring a restart (e.g., Hono reload signal):
 ```bash
-docker exec <container> kill -HUP 1  # SIGHUP ile graceful reload
+docker exec <container> kill -HUP 1  # Graceful reload with SIGHUP
 ```

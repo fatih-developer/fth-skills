@@ -1,6 +1,6 @@
-# Deploy → Verify Döngüsü
+# Deploy → Verify Loop
 
-## Tam Akış
+## Full Flow
 
 ```
 trigger_deploy()
@@ -11,15 +11,15 @@ trigger_deploy()
                     → [healthy]   → ✓ Done
 ```
 
-## Deploy Tetikleme
+## Triggering Deploy
 
-### MCP Mod
+### MCP Mode
 ```
 deploy(uuid: "app-uuid", force_rebuild: false)
-# force_rebuild: true → Docker layer cache'i temizle
+# force_rebuild: true → Clears Docker layer cache
 ```
 
-### API Mod
+### API Mode
 ```bash
 # Normal deploy
 curl -s -X POST \
@@ -33,16 +33,16 @@ curl -s -X POST \
   -d '{"force":true}' \
   "$COOLIFY_BASE_URL/api/v1/applications/$APP_UUID/deploy"
 
-# Deploy UUID'yi response'dan al
+# Fetch Deploy UUID from response
 DEPLOY_UUID=$(curl ... | jq -r '.deployment_uuid')
 ```
 
-## Deployment Status İzleme
+## Monitoring Deployment Status
 
-### Poll Döngüsü (bash)
+### Poll Loop (bash)
 ```bash
 DEPLOY_UUID="..."
-MAX_WAIT=180  # 3 dakika
+MAX_WAIT=180  # 3 minutes
 INTERVAL=10
 elapsed=0
 
@@ -55,9 +55,9 @@ while [ $elapsed -lt $MAX_WAIT ]; do
   echo "[${elapsed}s] Status: $STATUS"
   
   case $STATUS in
-    "finished") echo "✓ Deploy başarılı"; break ;;
-    "failed")   echo "✗ Deploy başarısız"; exit 1 ;;
-    "cancelled") echo "! Deploy iptal edildi"; exit 1 ;;
+    "finished") echo "✓ Deploy successful"; break ;;
+    "failed")   echo "✗ Deploy failed"; exit 1 ;;
+    "cancelled") echo "! Deploy cancelled"; exit 1 ;;
   esac
   
   sleep $INTERVAL
@@ -65,9 +65,9 @@ while [ $elapsed -lt $MAX_WAIT ]; do
 done
 ```
 
-### Deployment Log Analizi (Hata Durumunda)
+### Deployment Log Analysis (On Error)
 ```bash
-# Son 200 satır — genellikle yeterli
+# Last 200 lines — usually sufficient
 curl -s \
   -H "Authorization: Bearer $COOLIFY_ACCESS_TOKEN" \
   "$COOLIFY_BASE_URL/api/v1/deployments/$DEPLOY_UUID/logs" \
@@ -76,7 +76,7 @@ curl -s \
 
 ## Health Check Probe
 
-### Stack'e Göre Endpoint
+### Endpoint by Stack
 
 | Stack | Primary | Fallback |
 |-------|---------|----------|
@@ -90,7 +90,7 @@ curl -s \
 DOMAIN="https://myapp.example.com"
 HEALTH_PATH="/health"
 
-# Coolify'ın container'ı başlatması için kısa bekle
+# Wait briefly for Coolify to start the container
 sleep 5
 
 for attempt in 1 2 3; do
@@ -99,16 +99,16 @@ for attempt in 1 2 3; do
     "$DOMAIN$HEALTH_PATH")
   
   if [ "$HTTP_STATUS" -ge 200 ] && [ "$HTTP_STATUS" -lt 400 ]; then
-    echo "✓ Health check başarılı (HTTP $HTTP_STATUS)"
+    echo "✓ Health check successful (HTTP $HTTP_STATUS)"
     break
   else
-    echo "Deneme $attempt: HTTP $HTTP_STATUS — 5s bekliyor..."
+    echo "Attempt $attempt: HTTP $HTTP_STATUS — waiting 5s..."
     sleep 5
   fi
 done
 ```
 
-### Hono.js Health Endpoint Şablonu
+### Hono.js Health Endpoint Template
 ```typescript
 // src/routes/health.ts
 import { Hono } from 'hono'
@@ -140,37 +140,37 @@ export async function GET() {
 }
 ```
 
-## Yaygın Deploy Hataları ve Teşhis
+## Common Deploy Errors and Diagnosis
 
 ### "Port already in use"
 ```bash
-# Container içi kontrol
+# In-container check
 docker exec -it <container> ss -tlnp | grep <port>
-# Çözüm: Coolify'dan force restart
+# Solution: Force restart from Coolify
 ```
 
-### "OOMKilled" — Memory yetersiz
-Log'da arama: `OOMKilled` veya `Killed`
+### "OOMKilled" — Insufficient Memory
+Regex search in log for: `OOMKilled` or `Killed`
 ```bash
-# Container memory limitini kontrol et
+# Check container memory limit
 docker inspect <container> | jq '.[0].HostConfig.Memory'
-# Coolify → Application → Resources → Memory Limit'i artır
+# Increase Memory Limit via Coolify → Application → Resources
 ```
 
-### "Health check failing" — Container çalışıyor ama unhealthy
-Coolify'ın kendi health check ayarlarını kontrol et:
+### "Health check failing" — Container is running but unhealthy
+Check Coolify's own health check settings:
 - Application → Health Checks → Path, Interval, Retries
-- Path `/health` yoksa `/` veya gerçek endpoint'i gir
+- If path `/health` doesn't exist, enter `/` or the actual endpoint
 
-### Database bağlantı hatası ilk deploy'da
-İlk provisioning'de DB çalışmaya başlaması zaman alır:
+### Database connection error on initial deploy
+During initial provisioning, the DB takes time to start:
 ```bash
-# Provision sırasında DB'yi bekle
+# Wait for DB during provision
 for i in $(seq 1 12); do
   DB_STATUS=$(curl -s -H "Authorization: Bearer $COOLIFY_ACCESS_TOKEN" \
     "$COOLIFY_BASE_URL/api/v1/databases/$DB_UUID" | jq -r '.status')
   [ "$DB_STATUS" = "running" ] && break
-  echo "DB bekliyor: $DB_STATUS ($i/12)"
+  echo "Waiting for DB: $DB_STATUS ($i/12)"
   sleep 10
 done
 ```

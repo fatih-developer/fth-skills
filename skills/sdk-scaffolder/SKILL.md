@@ -1,6 +1,6 @@
 ---
 name: sdk-scaffolder
-description: OpenAPI spec dosyasından Python, TypeScript, Go veya Kotlin için idiomatic SDK iskeleti üretir. Auto-generated makine kodundan ziyade, retry/timeout/pagination gibi built-in özelliklere sahip, gerçek bir geliştiricinin yazacağı kalitede istemci kodu tasarlar.
+description: Generates an idiomatic SDK skeleton for Python, TypeScript, Go, or Kotlin from an OpenAPI spec file. Rather than auto-generated machine code, it designs client code with built-in features like retry/timeout/pagination, at the quality level a real developer would write.
 ---
 
 # SDK Scaffolder Protocol

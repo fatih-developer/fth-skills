@@ -1,135 +1,135 @@
-# Coolify REST API Referansı
+# Coolify REST API Reference
 
-MCP kurulu olmadığında doğrudan API kullanımı için.
+For direct API use when MCP is not installed.
 
 Base URL: `$COOLIFY_BASE_URL/api/v1`
 Auth: `Authorization: Bearer $COOLIFY_ACCESS_TOKEN`
 
-## Hızlı Referans
+## Quick Reference
 
-### Genel
+### General
 
-| İşlem | Method | Endpoint |
+| Operation | Method | Endpoint |
 |-------|--------|----------|
 | API version | GET | `/version` |
-| Sağlık kontrolü | GET | `/healthcheck` |
+| Health check | GET | `/healthcheck` |
 
-### Sunucular
+### Servers
 
-| İşlem | Method | Endpoint |
+| Operation | Method | Endpoint |
 |-------|--------|----------|
-| Listele | GET | `/servers` |
-| Detay | GET | `/servers/{uuid}` |
-| Kaynaklar | GET | `/servers/{uuid}/resources` |
-| Domainsler | GET | `/servers/{uuid}/domains` |
+| List | GET | `/servers` |
+| Detail | GET | `/servers/{uuid}` |
+| Resources | GET | `/servers/{uuid}/resources` |
+| Domains | GET | `/servers/{uuid}/domains` |
 | Validate | POST | `/servers/{uuid}/validate` |
 
-### Projeler
+### Projects
 
-| İşlem | Method | Endpoint |
+| Operation | Method | Endpoint |
 |-------|--------|----------|
-| Listele | GET | `/projects` |
-| Detay | GET | `/projects/{uuid}` |
-| Oluştur | POST | `/projects` |
-| Güncelle | PATCH | `/projects/{uuid}` |
-| Sil | DELETE | `/projects/{uuid}` |
+| List | GET | `/projects` |
+| Detail | GET | `/projects/{uuid}` |
+| Create | POST | `/projects` |
+| Update | PATCH | `/projects/{uuid}` |
+| Delete | DELETE | `/projects/{uuid}` |
 
-### Environmentlar
+### Environments
 
-| İşlem | Method | Endpoint |
+| Operation | Method | Endpoint |
 |-------|--------|----------|
-| Listele | GET | `/projects/{uuid}/environments` |
-| Detay | GET | `/projects/{uuid}/environments/{name}` |
-| Oluştur | POST | `/environments` |
-| Sil | DELETE | `/environments/{uuid}` |
+| List | GET | `/projects/{uuid}/environments` |
+| Detail | GET | `/projects/{uuid}/environments/{name}` |
+| Create | POST | `/environments` |
+| Delete | DELETE | `/environments/{uuid}` |
 
-### Uygulamalar
+### Applications
 
-| İşlem | Method | Endpoint |
+| Operation | Method | Endpoint |
 |-------|--------|----------|
-| Listele | GET | `/applications` |
-| Detay | GET | `/applications/{uuid}` |
-| Oluştur | POST | `/applications` |
-| Güncelle | PATCH | `/applications/{uuid}` |
-| Sil | DELETE | `/applications/{uuid}` |
-| Loglar | GET | `/applications/{uuid}/logs` |
+| List | GET | `/applications` |
+| Detail | GET | `/applications/{uuid}` |
+| Create | POST | `/applications` |
+| Update | PATCH | `/applications/{uuid}` |
+| Delete | DELETE | `/applications/{uuid}` |
+| Logs | GET | `/applications/{uuid}/logs` |
 | Start | POST | `/applications/{uuid}/start` |
 | Stop | POST | `/applications/{uuid}/stop` |
 | Restart | POST | `/applications/{uuid}/restart` |
 | Deploy | POST | `/applications/{uuid}/deploy` |
 
-### Env Var'lar (Uygulama)
+### Env Vars (Application)
 
-| İşlem | Method | Endpoint |
+| Operation | Method | Endpoint |
 |-------|--------|----------|
-| Listele | GET | `/applications/{uuid}/envs` |
-| Ekle | POST | `/applications/{uuid}/envs` |
-| Güncelle | PATCH | `/applications/{uuid}/envs/{env_uuid}` |
-| Sil | DELETE | `/applications/{uuid}/envs/{env_uuid}` |
-| Toplu güncelle | PUT | `/applications/{uuid}/envs/bulk` |
+| List | GET | `/applications/{uuid}/envs` |
+| Add | POST | `/applications/{uuid}/envs` |
+| Update | PATCH | `/applications/{uuid}/envs/{env_uuid}` |
+| Delete | DELETE | `/applications/{uuid}/envs/{env_uuid}` |
+| Bulk update | PUT | `/applications/{uuid}/envs/bulk` |
 
-### Database'ler
+### Databases
 
-| İşlem | Method | Endpoint |
+| Operation | Method | Endpoint |
 |-------|--------|----------|
-| Listele | GET | `/databases` |
-| Detay | GET | `/databases/{uuid}` |
-| Oluştur | POST | `/databases` |
-| Sil | DELETE | `/databases/{uuid}` |
+| List | GET | `/databases` |
+| Detail | GET | `/databases/{uuid}` |
+| Create | POST | `/databases` |
+| Delete | DELETE | `/databases/{uuid}` |
 | Start | POST | `/databases/{uuid}/start` |
 | Stop | POST | `/databases/{uuid}/stop` |
 | Restart | POST | `/databases/{uuid}/restart` |
 
-Database type değerleri: `standalone-postgresql`, `standalone-mysql`, `standalone-mariadb`,
+Database type values: `standalone-postgresql`, `standalone-mysql`, `standalone-mariadb`,
 `standalone-mongodb`, `standalone-redis`, `standalone-keydb`, `standalone-clickhouse`,
 `standalone-dragonfly`
 
-### Servisler
+### Services
 
-| İşlem | Method | Endpoint |
+| Operation | Method | Endpoint |
 |-------|--------|----------|
-| Listele | GET | `/services` |
-| Detay | GET | `/services/{uuid}` |
-| Oluştur | POST | `/services` |
-| Sil | DELETE | `/services/{uuid}` |
+| List | GET | `/services` |
+| Detail | GET | `/services/{uuid}` |
+| Create | POST | `/services` |
+| Delete | DELETE | `/services/{uuid}` |
 | Start | POST | `/services/{uuid}/start` |
 | Stop | POST | `/services/{uuid}/stop` |
 | Restart | POST | `/services/{uuid}/restart` |
 
-### Deployment'lar
+### Deployments
 
-| İşlem | Method | Endpoint |
+| Operation | Method | Endpoint |
 |-------|--------|----------|
-| Listele | GET | `/deployments` |
-| Detay | GET | `/deployments/{uuid}` |
-| Loglar | GET | `/deployments/{uuid}/logs` |
-| İptal | POST | `/deployments/{uuid}/cancel` |
-| Uygulama için listele | GET | `/applications/{uuid}/deployments` |
+| List | GET | `/deployments` |
+| Detail | GET | `/deployments/{uuid}` |
+| Logs | GET | `/deployments/{uuid}/logs` |
+| Cancel | POST | `/deployments/{uuid}/cancel` |
+| List for application | GET | `/applications/{uuid}/deployments` |
 
 ### Private Keys
 
-| İşlem | Method | Endpoint |
+| Operation | Method | Endpoint |
 |-------|--------|----------|
-| Listele | GET | `/security/keys` |
-| Detay | GET | `/security/keys/{uuid}` |
-| Oluştur | POST | `/security/keys` |
-| Güncelle | PATCH | `/security/keys/{uuid}` |
-| Sil | DELETE | `/security/keys/{uuid}` |
+| List | GET | `/security/keys` |
+| Detail | GET | `/security/keys/{uuid}` |
+| Create | POST | `/security/keys` |
+| Update | PATCH | `/security/keys/{uuid}` |
+| Delete | DELETE | `/security/keys/{uuid}` |
 
-### Takımlar
+### Teams
 
-| İşlem | Method | Endpoint |
+| Operation | Method | Endpoint |
 |-------|--------|----------|
-| Listele | GET | `/teams` |
-| Detay | GET | `/teams/{id}` |
-| Üyeler | GET | `/teams/{id}/members` |
-| Mevcut takım | GET | `/teams/current` |
+| List | GET | `/teams` |
+| Detail | GET | `/teams/{id}` |
+| Members | GET | `/teams/{id}/members` |
+| Current team | GET | `/teams/current` |
 
 ---
 
-## Temel curl Wrapper
+## Basic curl Wrapper
 
-Tekrar yazmamak için shell fonksiyonu:
+Shell function to avoid repetitive typing:
 
 ```bash
 coolify() {
@@ -146,34 +146,34 @@ coolify() {
   curl "${ARGS[@]}" "$COOLIFY_BASE_URL/api/v1$ENDPOINT"
 }
 
-# Kullanım:
+# Usage:
 coolify GET /applications | jq '.[] | {uuid, name, status}'
 coolify POST "/applications/$APP_UUID/restart"
 coolify POST /projects '{"name":"my-project"}'
 ```
 
-## Hata Kodları
+## Error Codes
 
-| Kod | Anlam | Çözüm |
+| Code | Meaning | Solution |
 |-----|-------|-------|
-| 401 | Token geçersiz | Token'ı kontrol et, yeniden üret |
-| 403 | Yetersiz yetki | Token'ın yetki seviyesini kontrol et |
-| 404 | Kaynak bulunamadı | UUID'yi doğrula |
-| 422 | Validasyon hatası | Request body'yi kontrol et |
-| 500 | Coolify server hatası | Coolify loglarını kontrol et |
+| 401 | Invalid token | Check token, regenerate |
+| 403 | Insufficient permission | Check token permission level |
+| 404 | Resource not found | Verify UUID |
+| 422 | Validation error | Check request body |
+| 500 | Coolify server error | Check Coolify logs |
 
-## Faydalı jq Filtreleri
+## Useful jq Filters
 
 ```bash
-# Tüm uygulamaları listele (uuid + name + status)
+# List all applications (uuid + name + status)
 curl ... /applications | jq '.[] | {uuid, name, status: .status}'
 
-# Unhealthy uygulamaları bul
+# Find unhealthy applications
 curl ... /applications | jq '.[] | select(.status | contains("unhealthy"))'
 
-# Belirli isimli uygulamayı bul
+# Find application with a specific name
 curl ... /applications | jq '.[] | select(.name == "my-app")'
 
-# DB bağlantı URL'sini al
+# Get DB connection URL
 curl ... /databases/$DB_UUID | jq '{internal: .internal_db_url, external: .external_db_url}'
 ```

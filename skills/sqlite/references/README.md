@@ -1,38 +1,38 @@
 # SQLite Omni Skill References
 
-Bu klasör, SQLite Omni skill için detaylı rehberler içerir. **İhtiyacınıza göre sadece ilgili dosyayı okuyun** — tüm referansları aynı anda yüklemeyin.
+This folder contains detailed guides for the SQLite Omni skill. **Only read the relevant file according to your needs** — do not load all references at the same time.
 
-## Hızlı Karar Ağacı
+## Quick Decision Tree
 
 ```
-Ne ihtiyacınız var?
-├── TypeScript + Bun projesi?              → TYPESCRIPT_DRIZZLE.md
-├── Python / FastAPI projesi?                → PYTHON.md
-├── Performans, WAL, PRAGMA ayarı?          → PERFORMANCE.md
-├── Full-text arama (FTS5)?                 → FTS5_VECTOR.md  §FTS5
-├── AI vektör embeddings?                  → FTS5_VECTOR.md  §sqlite-vec
+What do you need?
+├── TypeScript + Bun project?              → TYPESCRIPT_DRIZZLE.md
+├── Python / FastAPI project?                → PYTHON.md
+├── Performance, WAL, PRAGMA tuning?          → PERFORMANCE.md
+├── Full-text search (FTS5)?                 → FTS5_VECTOR.md  §FTS5
+├── AI vector embeddings?                  → FTS5_VECTOR.md  §sqlite-vec
 ├── Cloud SQLite (Turso / D1)?               → CLOUD.md
-├── CLI + SQLite stateful Skill mi yazıyorsunuz? → CLI_SKILL_PATTERN.md
-└── Şema tasarımı ve normalizasyon?        → Ana SKILL.md  §Schema Design
+├── Writing a CLI + SQLite stateful Skill? → CLI_SKILL_PATTERN.md
+└── Schema design and normalization?        → Main SKILL.md  §Schema Design
 ```
 
-## Referans Dosyaları
+## Reference Files
 
-| Dosya | Konu | Kullanım Senaryosu |
+| File | Topic | Use Case |
 |-------|------|-------------------|
-| `TYPESCRIPT_DRIZZLE.md` | Bun + Drizzle ORM | TypeScript projelerinde type-safe SQLite, migrations, relations |
+| `TYPESCRIPT_DRIZZLE.md` | Bun + Drizzle ORM | Type-safe SQLite, migrations, relations for TypeScript projects |
 | `PYTHON.md` | Python sqlite3/asyncio | FastAPI, asyncio, connection pooling, raw SQL migrations |
-| `PERFORMANCE.md` | PRAGMA tuning, profiling | Yavaş sorgular, WAL mode optimizasyonu, benchmark |
-| `FTS5_VECTOR.md` | FTS5 + sqlite-vec | Full-text search, AI embeddings, vektör similarity search |
+| `PERFORMANCE.md` | PRAGMA tuning, profiling | Slow queries, WAL mode optimization, benchmarking |
+| `FTS5_VECTOR.md` | FTS5 + sqlite-vec | Full-text search, AI embeddings, vector similarity search |
 | `CLOUD.md` | Turso, Cloudflare D1 | Edge deployment, multi-region, serverless SQLite |
-| `CLI_SKILL_PATTERN.md` | CLI Skill pattern | Stateful CLI araçları, System Skill geliştirme |
+| `CLI_SKILL_PATTERN.md` | CLI Skill pattern | Stateful CLI tools, System Skill development |
 
-## Skill Kullanım Tetikleyicileri
+## Skill Use Triggers
 
-Bu skill otomatik olarak şu anahtar kelimeler için çalışır:
+This skill automatically triggers for these keywords:
 - `sqlite`, `sqlite3`, `bun:sqlite`, `better-sqlite3`
 - `aiosqlite`, `libsql`, `Turso`, `Cloudflare D1`
 - `WAL mode`, `FTS5`, `sqlite-vec`
 - Schema design, migrations, PRAGMA, backup/restore
 
-> **Not:** PRAGMA ayarları ve driver-specific pattern'ler çok önemli — her zaman bu skill'i kullanın.
+> **Note:** PRAGMA settings and driver-specific patterns are very important — always use this skill.

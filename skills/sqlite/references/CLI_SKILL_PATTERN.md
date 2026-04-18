@@ -1,82 +1,81 @@
 # System Skill Pattern: CLI + SQLite + SKILL.md
 
-Bu pattern ile Claude, bir CLI aracı + SQLite veritabanı + SKILL.md üçlüsünü kullanarak
-**kalıcı durum tutan** akıllı araçlar oluşturabilir.
+With this pattern, Claude can create **stateful** smart tools using a CLI tool + SQLite database + SKILL.md triad.
 
-## Temel Konsept
+## Basic Concept
 
 ```
-[Kullanıcı] → [Claude] → [CLI Binary] → [SQLite DB]
+[User] → [Claude] → [CLI Binary] → [SQLite DB]
                  ↑              ↓
             SKILL.md      JSON/Table output
 ```
 
-**Bileşenler:**
-1. **CLI Binary** — Claude'un çalıştırdığı komut satırı aracı
-2. **SKILL.md** — Claude'a sistemin nasıl kullanılacağını öğreten kılavuz
-3. **SQLite DB** — Kalıcı durum deposu
+**Components:**
+1. **CLI Binary** — Command line tool run by Claude
+2. **SKILL.md** — The guide that teaches Claude how to use the system
+3. **SQLite DB** — Persistent state store
 
 ---
 
-## Neden Bu Pattern?
+## Why This Pattern?
 
-- **Stateful**: Konuşmalar arası hafıza — Claude her oturumda geçmişi sorgulayabilir
-- **Şeffaf**: Veriler SQLite'ta, dilediğinde `sqlite3 cli` ile inceleyebilirsin
-- **Bağımsız**: Tek binary + tek dosya = taşıma, yedekleme kolaylığı
-- **Genişletilebilir**: Claude, CLI'ın yapmadığı şeyleri doğrudan SQL ile yapabilir
+- **Stateful**: Memory between conversations — Claude can query history in any session
+- **Transparent**: Data is in SQLite, you can inspect it anytime with `sqlite3 cli`
+- **Independent**: Single binary + single file = easy portability and backups
+- **Extensible**: Claude can do things directly with SQL that the CLI doesn't natively do
 
 ---
 
-## CLI Tasarım İlkeleri
+## CLI Design Principles
 
-### Zorunlular
+### Mandatory
 
 ```bash
-# Her CLI şunlara sahip olmalı:
-./arac --help              # Kapsamlı yardım çıktısı
-./arac --version           # Versiyon bilgisi
-./arac --json              # Makine-okunur JSON çıktı modu
+# Every CLI must have these:
+./tool --help              # Comprehensive help output
+./tool --version           # Version information
+./tool --json              # Machine-readable JSON output mode
 
-# Claude'un okuyabileceği yapılandırılmış çıktı
-./arac list --json
+# Structured output Claude can read
+./tool list --json
 # → [{"id": 1, "task": "...", "status": "done"}]
 ```
 
-### Komut Yapısı
+### Command Structure
 
 ```bash
-# İyi CLI komut tasarımı:
-./arac <kaynak> <eylem> [seçenekler]
+# Good CLI command design:
+./tool <resource> <action> [options]
 
-# Örnekler:
-./arac task create --title "API entegrasyonu" --priority high
-./arac task list --status pending --limit 20
-./arac task done 42
-./arac task delete 42
-./arac stats --period week
-./arac export --format csv --output tasks.csv
+# Examples:
+./tool task create --title "API integration" --priority high
+./tool task list --status pending --limit 20
+./tool task done 42
+./tool task delete 42
+./tool stats --period week
+./tool export --format csv --output tasks.csv
 ```
 
-### Karar Ağacı (SKILL.md için)
+### Decision Tree (for SKILL.md)
 
 ```markdown
 ## Quick Decision Tree
 
-Kullanıcı isteği → Hangi komut?
-├─ Yeni görev → task create --title "..." [--priority high|med|low]
-├─ Görevleri listele → task list [--status pending|done] [--limit N]
-├─ Görevi tamamla → task done <id>
-├─ İstatistik → stats [--period day|week|month]
-├─ Geçmiş → history [--days N]
-└─ Analiz → Claude doğrudan SQLite'ı sorgular
+User request → Which command?
+├─ New task → task create --title "..." [--priority high|med|low]
+├─ List tasks → task list [--status pending|done] [--limit N]
+├─ Complete task → task done <id>
+├─ Statistics → stats [--period day|week|month]
+├─ History → history [--days N]
+└─ Analysis → Claude queries SQLite directly
 ```
 
 ---
 
-## TypeScript/Bun ile CLI Oluşturma
+## Creating a CLI with TypeScript/Bun
 
 ```typescript
-// cli.ts — Bun ile derlenir, zero-dependency binary olur
+// cli.ts — Compiled with Bun, becomes a zero-dependency binary
 import { Database } from "bun:sqlite";
 import { parseArgs } from "util";
 import { join } from "path";
@@ -187,21 +186,21 @@ Options:
 }
 ```
 
-### Derleme
+### Build
 
 ```bash
-# Bun ile tek binary olarak derle (dependency yok)
+# Compile as a single binary with Bun (no dependencies)
 bun build cli.ts --compile --outfile tasks
 
-# Test et
-./tasks task create --title "SQLite skill yaz" --priority high
+# Test
+./tasks task create --title "Write SQLite skill" --priority high
 ./tasks task list --json
 ./tasks stats --days 7
 ```
 
 ---
 
-## Python CLI Alternatifi
+## Python CLI Alternative
 
 ```python
 #!/usr/bin/env python3
@@ -298,62 +297,62 @@ db.close()
 
 ---
 
-## SKILL.md Şablonu (System Skill için)
+## SKILL.md Template (For System Skill)
 
 ```markdown
 ---
 name: tasks
 description: >
-  Görev takip sistemi. Kullanıcı görev eklemek, listelemek, tamamlamak veya
-  istatistik görmek istediğinde kullan. Triggers: "görev ekle", "yapılacaklar",
-  "task", "ne yaptım", "haftalık özet", "istatistik".
+  Task tracking system. Use when the user wants to add, list, complete tasks or
+  view statistics. Triggers: "add task", "todo",
+  "task", "what did I do", "weekly summary", "statistics".
 ---
 
 # Tasks System Skill
 
-Görev takip sistemini yönet. CLI binary ve SQLite veritabanı ile çalışır.
+Manage the task tracking system. Works with a CLI binary and SQLite database.
 
-## Kurulum
+## Setup
 
-Skill dizini: `~/.claude/skills/tasks/`
+Skill directory: `~/.claude/skills/tasks/`
 CLI: `./tasks`
 DB: `./data.db`
 
 ## Quick Decision Tree
 
-Kullanıcı isteği → Komut
-├─ Yeni görev → `./tasks task create --title "..." [--priority high]`
-├─ Görevleri gör → `./tasks task list [--status pending]`
-├─ Tamamla → `./tasks task done <id>`
-├─ İstatistik → `./tasks stats [--days 7]`
-└─ Analiz (CLI yok) → Claude doğrudan SQLite'a bak
+User request → Command
+├─ New task → `./tasks task create --title "..." [--priority high]`
+├─ View tasks → `./tasks task list [--status pending]`
+├─ Complete → `./tasks task done <id>`
+├─ Statistics → `./tasks stats [--days 7]`
+└─ Analysis (No CLI) → Claude looks directly at SQLite
 
-## Doğrudan SQL (Gelişmiş Analiz)
+## Direct SQL (Advanced Analysis)
 
-Claude, CLI'ın karşılamadığı sorguları doğrudan çalıştırabilir:
+Claude can directly run queries not covered by the CLI:
 
 ```bash
 sqlite3 data.db "SELECT priority, COUNT(*) FROM tasks GROUP BY priority"
 ```
 
-## Önemli Notlar
+## Important Notes
 
-- Her komut çağrısından önce `./tasks task list --json` ile durumu kontrol et
-- JSON çıktısını parse ederek karar ver (`--json` flag'i kullan)
-- Büyük veri analizlerinde doğrudan SQL tercih et
+- Check status before every command invocation with `./tasks task list --json`
+- Decide by parsing the JSON output (use the `--json` flag)
+- Prefer direct SQL for large data analysis
 ```
 
 ---
 
-## Sistem Fikirleri
+## System Ideas
 
-Aşağıdaki sistemler bu pattern ile mükemmel çalışır:
+The following systems work perfectly with this pattern:
 
-| Sistem | CLI Komutları | SQLite Tabloları |
+| System | CLI Commands | SQLite Tables |
 |---|---|---|
 | Pomodoro timer | start, stop, stats, history | sessions |
-| Harcama takibi | tx add, tx list, budget | transactions, categories |
-| Okuma listesi | book add, book done, stats | books, sessions |
-| API key yönetimi | key add, key list, key rotate | api_keys, usage_logs |
-| Proje zaman takibi | log start, log stop, report | time_entries, projects |
-| Agent log analizi | log ingest, log search, stats | agent_logs, sessions |
+| Expense tracking | tx add, tx list, budget | transactions, categories |
+| Reading list | book add, book done, stats | books, sessions |
+| API key management | key add, key list, key rotate | api_keys, usage_logs |
+| Project time tracking | log start, log stop, report | time_entries, projects |
+| Agent log analysis | log ingest, log search, stats | agent_logs, sessions |

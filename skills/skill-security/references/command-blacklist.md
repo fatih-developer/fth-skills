@@ -1,8 +1,8 @@
-# Zararlı Komut Kara Listesi
+# Harmful Command Blacklist
 
-## KESİN RED — Çalıştırma, Derhal Durdur
+## ABSOLUTE DECLINE — Do Not Execute, Stop Immediately
 
-### Sistem Yıkımı
+### System Destruction
 ```bash
 rm -rf /
 rm -rf /*
@@ -16,7 +16,7 @@ shred /dev/sda
 wipefs /dev/sda
 ```
 
-### Fork Bomb / Kaynak Tükenmesi
+### Fork Bomb / Resource Exhaustion
 ```bash
 :(){ :|:& };:
 fork_bomb() { fork_bomb | fork_bomb & }
@@ -24,7 +24,7 @@ while true; do ./ & done
 python3 -c "import os; [os.fork() for _ in iter(int,1)]"
 ```
 
-### Uzak Kod Çalıştırma (RCE)
+### Remote Code Execution (RCE)
 ```bash
 curl http://... | bash
 curl http://... | sh
@@ -43,7 +43,7 @@ bash -i >& /dev/tcp/
 python3 -c "import socket..."  # reverse shell pattern
 ```
 
-### Yetki Yükseltme
+### Privilege Escalation
 ```bash
 sudo su -
 sudo bash
@@ -52,7 +52,7 @@ chmod 4755 /bin/bash  # SUID bash
 chown root:root /tmp/x && chmod +s /tmp/x
 ```
 
-### Toplu Veri Silme
+### Mass Data Deletion
 ```bash
 find / -delete
 find / -exec rm {} \;
@@ -62,44 +62,44 @@ truncate -s 0 $(find / -type f)
 
 ---
 
-## YÜKSEK RİSK — Onay Gerektirir
+## HIGH RISK — Requires Approval
 
-### Geniş Sistem Erişimi
+### Broad System Access
 ```bash
-find / -type f               # tüm dosya sistemi tarama
-ls -laR /                    # recursive root listesi
-cat /etc/shadow              # şifre hash'leri
-cat /etc/passwd              # kullanıcı listesi
-cat ~/.ssh/id_rsa            # özel SSH key
-env                          # tüm environment (secret'lar olabilir)
-printenv                     # tüm environment
-set                          # tüm shell değişkenleri
+find / -type f               # Full filesystem scan
+ls -laR /                    # Recursive root list
+cat /etc/shadow              # Password hashes
+cat /etc/passwd              # User list
+cat ~/.ssh/id_rsa            # Private SSH key
+env                          # Full environment (may contain secrets)
+printenv                     # Full environment
+set                          # All shell variables
 ```
 
-### Process Yönetimi
+### Process Management
 ```bash
-kill -9 -1                   # tüm processleri öldür
-killall -9                   # tüm processleri öldür
-pkill -9 -u root             # root processlerini öldür
+kill -9 -1                   # Kill all processes
+killall -9                   # Kill all processes
+pkill -9 -u root             # Kill root processes
 ```
 
-### Ağ Güvenliği
+### Network Security
 ```bash
-iptables -F                  # firewall kurallarını temizle
-ufw disable                  # firewall kapat
-nmap -sS                     # port tarama (stealth scan)
-tcpdump                      # ağ trafiği dinleme
-wireshark                    # ağ trafiği yakalama
+iptables -F                  # Flush firewall rules
+ufw disable                  # Disable firewall
+nmap -sS                     # Stealth scan
+tcpdump                      # Listen to network traffic
+wireshark                    # Capture network traffic
 ```
 
-### Kritik Sistem Dosyaları
+### Critical System Files
 ```bash
 cat /etc/sudoers
 cat /etc/crontab
-crontab -r                   # tüm cron işlerini sil
+crontab -r                   # Delete all cron jobs
 ```
 
-### Potansiyel Veri Kaybı
+### Potential Data Loss
 ```bash
 mv /* /dev/null
 cp /dev/null important_file
@@ -108,9 +108,9 @@ truncate -s 0 *.db
 
 ---
 
-## ORTA RİSK — İzleme Altında
+## MEDIUM RISK — Under Surveillance
 
-### Dinamik Kod Çalıştırma (Input'a Bağlı)
+### Dynamic Code Execution (Input Dependent)
 ```bash
 eval "$user_input"
 bash -c "$user_input"
@@ -119,44 +119,44 @@ python3 -c "$user_code"
 node -e "$user_script"
 ```
 
-### Büyük Kaynak Kullanımı
+### High Resource Usage
 ```bash
-yes > /dev/null              # CPU tükenmesi
-cat /dev/urandom > file      # disk doldurma
-stress --cpu 8               # CPU stresi
+yes > /dev/null              # CPU exhaustion
+cat /dev/urandom > file      # Fill disk
+stress --cpu 8               # CPU stress
 ```
 
-### Servis Yönetimi
+### Service Management
 ```bash
-systemctl stop              # servis durdurma
-service stop                # servis durdurma
-reboot                      # sistem yeniden başlatma
-halt                        # sistem durdurma
-shutdown                    # sistem kapatma
+systemctl stop              # Stop service
+service stop                # Stop service
+reboot                      # Reboot system
+halt                        # Halt system
+shutdown                    # Shutdown system
 ```
 
 ---
 
-## GÜVENLİ — Onaysız Çalıştırılabilir
+## SAFE — No Approval Required
 
 ```bash
-# Okuma
-ls, cat, head, tail, grep, find (sınırlı dizin), wc
-# Metin işleme
+# Read operations
+ls, cat, head, tail, grep, find (limited directory), wc
+# Text processing
 awk, sed, cut, tr, sort, uniq
-# Bilgi toplama
-pwd, whoami, date, uname (bilgi toplama için)
-# Geliştirme
-git status, git log, git diff (yazma değil)
-# Dosya oluşturma (belirli dizinlerde)
-mkdir, touch, cp (temp dizine)
+# Information gathering
+pwd, whoami, date, uname
+# Development
+git status, git log, git diff (read-only)
+# File creation (in specific directories)
+mkdir, touch, cp (to tmp directory)
 ```
 
 ---
 
-## Dinamik Komut Tespiti
+## Dynamic Command Detection
 
-Aşağıdaki kalıplar varsa komut içeriğine bakılmaksızın onay gerektirir:
+If the following patterns exist, approval is required regardless of command contents:
 
 ```python
 # Python
@@ -172,6 +172,6 @@ new Function(variable)
 child_process.exec(variable)
 
 # Shell
-$()  # komut substitution + değişken
-``   # backtick + değişken
+$()  # command substitution + variable
+``   # backtick + variable
 ```

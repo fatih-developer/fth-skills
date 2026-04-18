@@ -1,23 +1,23 @@
-# Multi-Tenant Env Var Yönetimi
+# Multi-Tenant Env Var Management
 
-## İzolasyon Prensibi
+## Isolation Principle
 
-Her tenant'ın uygulaması tamamen ayrı env var setine sahip olmalı.
-Hiçbir zaman tenant A'nın `DATABASE_URL`'si tenant B'ye gitmemeli.
+Each tenant's application must have a completely separate env var set.
+Tenant A's `DATABASE_URL` should never go to tenant B.
 
-## Mevcut Env Var'ları Listele
+## List Existing Env Vars
 
 ```bash
 curl -s \
   -H "Authorization: Bearer $COOLIFY_ACCESS_TOKEN" \
   "$COOLIFY_BASE_URL/api/v1/applications/$APP_UUID/envs" \
   | jq '.[] | {key: .key, value: .value}' \
-  | sed 's/"value": "[^"]*"/"value": "***"/'  # secret maskeleme
+  | sed 's/"value": "[^"]*"/"value": "***"/'  # secret masking
 ```
 
-## Tek Uygulama: CRUD
+## Single Application: CRUD
 
-### Ekle
+### Add
 ```bash
 curl -s -X POST \
   -H "Authorization: Bearer $COOLIFY_ACCESS_TOKEN" \
@@ -26,15 +26,15 @@ curl -s -X POST \
   "$COOLIFY_BASE_URL/api/v1/applications/$APP_UUID/envs"
 ```
 
-### Güncelle
+### Update
 ```bash
-# Önce env var UUID'sini bul
+# First find the env var UUID
 ENV_ID=$(curl -s \
   -H "Authorization: Bearer $COOLIFY_ACCESS_TOKEN" \
   "$COOLIFY_BASE_URL/api/v1/applications/$APP_UUID/envs" \
   | jq -r '.[] | select(.key=="MY_KEY") | .uuid')
 
-# Sonra güncelle
+# Then update
 curl -s -X PATCH \
   -H "Authorization: Bearer $COOLIFY_ACCESS_TOKEN" \
   -H "Content-Type: application/json" \
@@ -42,14 +42,14 @@ curl -s -X PATCH \
   "$COOLIFY_BASE_URL/api/v1/applications/$APP_UUID/envs/$ENV_ID"
 ```
 
-### Sil
+### Delete
 ```bash
 curl -s -X DELETE \
   -H "Authorization: Bearer $COOLIFY_ACCESS_TOKEN" \
   "$COOLIFY_BASE_URL/api/v1/applications/$APP_UUID/envs/$ENV_ID"
 ```
 
-### Değişikliği Uygula (Restart)
+### Apply Change (Restart)
 ```bash
 curl -s -X POST \
   -H "Authorization: Bearer $COOLIFY_ACCESS_TOKEN" \
@@ -60,12 +60,12 @@ curl -s -X POST \
 
 ## Bulk Update Script {#bulk-script}
 
-Birden fazla uygulamaya aynı env var'ı yaz (MCP yoksa):
+Write the same env var to multiple applications (if no MCP):
 
 ```bash
 #!/usr/bin/env bash
 # bulk_env_update.sh
-# Kullanım: ./bulk_env_update.sh KEY VALUE app1-uuid app2-uuid app3-uuid
+# Usage: ./bulk_env_update.sh KEY VALUE app1-uuid app2-uuid app3-uuid
 
 KEY=$1
 VALUE=$2
@@ -73,63 +73,63 @@ shift 2
 APP_UUIDS=("$@")
 
 for APP_UUID in "${APP_UUIDS[@]}"; do
-  echo "→ $APP_UUID için $KEY ayarlanıyor..."
+  echo "→ Setting $KEY for $APP_UUID..."
   
-  # Mevcut var mı kontrol et
+  # Check if exists
   EXISTING_ID=$(curl -s \
     -H "Authorization: Bearer $COOLIFY_ACCESS_TOKEN" \
     "$COOLIFY_BASE_URL/api/v1/applications/$APP_UUID/envs" \
     | jq -r --arg key "$KEY" '.[] | select(.key==$key) | .uuid')
   
   if [ -n "$EXISTING_ID" ]; then
-    # Güncelle
+    # Update
     curl -s -X PATCH \
       -H "Authorization: Bearer $COOLIFY_ACCESS_TOKEN" \
       -H "Content-Type: application/json" \
       -d "{\"value\":\"$VALUE\"}" \
       "$COOLIFY_BASE_URL/api/v1/applications/$APP_UUID/envs/$EXISTING_ID" > /dev/null
-    echo "  ✓ Güncellendi"
+    echo "  ✓ Updated"
   else
-    # Yeni ekle
+    # Add new
     curl -s -X POST \
       -H "Authorization: Bearer $COOLIFY_ACCESS_TOKEN" \
       -H "Content-Type: application/json" \
       -d "{\"key\":\"$KEY\",\"value\":\"$VALUE\",\"is_multiline\":false}" \
       "$COOLIFY_BASE_URL/api/v1/applications/$APP_UUID/envs" > /dev/null
-    echo "  ✓ Eklendi"
+    echo "  ✓ Added"
   fi
 done
 
 echo ""
-echo "Restart gerekli mi? (e/h)"
+echo "Is restart required? (y/n)"
 read -r RESTART
-if [ "$RESTART" = "e" ]; then
+if [ "$RESTART" = "y" ]; then
   for APP_UUID in "${APP_UUIDS[@]}"; do
     curl -s -X POST \
       -H "Authorization: Bearer $COOLIFY_ACCESS_TOKEN" \
       "$COOLIFY_BASE_URL/api/v1/applications/$APP_UUID/restart" > /dev/null
-    echo "↻ $APP_UUID restart edildi"
+    echo "↻ $APP_UUID restarted"
   done
 fi
 ```
 
-MCP modunda aynı işlem tek satır:
+In MCP mode, the same operation is a single line:
 ```
 bulk_env_update(app_uuids: ["uuid1","uuid2"], key: "MY_KEY", value: "my_value")
 ```
 
 ---
 
-## İzolasyon Verification
+## Isolation Verification
 
-Tüm tenant uygulamalarının `DATABASE_URL`'lerinin farklı olduğunu doğrula:
+Verify that all tenant applications' `DATABASE_URL`s are different:
 
 ```bash
 #!/usr/bin/env bash
 # isolation_check.sh
-TENANT_UUIDS=("uuid1" "uuid2" "uuid3")  # tenant app UUID'leri
+TENANT_UUIDS=("uuid1" "uuid2" "uuid3")  # tenant app UUIDs
 
-echo "=== DATABASE_URL İzolasyon Kontrolü ==="
+echo "=== DATABASE_URL Isolation Check ==="
 declare -A seen_urls
 
 for APP_UUID in "${TENANT_UUIDS[@]}"; do
@@ -142,12 +142,12 @@ for APP_UUID in "${TENANT_UUIDS[@]}"; do
     "$COOLIFY_BASE_URL/api/v1/applications/$APP_UUID/envs" \
     | jq -r '.[] | select(.key=="DATABASE_URL") | .value')
   
-  # URL'den sadece host/dbname kısmını al (password maskeleme)
+  # Get only host/dbname part from URL (password masking)
   DB_HOST=$(echo $DB_URL | sed 's|postgres://[^@]*@||' | cut -d'/' -f1)
   DB_NAME=$(echo $DB_URL | sed 's|.*/||')
   
   if [ -n "${seen_urls[$DB_URL]}" ]; then
-    echo "⚠️  ÇAKIŞMA: $APP_NAME → $DB_HOST/$DB_NAME (${seen_urls[$DB_URL]} ile aynı!)"
+    echo "⚠️  CONFLICT: $APP_NAME → $DB_HOST/$DB_NAME (Same as ${seen_urls[$DB_URL]}!)"
   else
     seen_urls[$DB_URL]=$APP_NAME
     echo "✓ $APP_NAME → $DB_HOST/$DB_NAME"
@@ -157,7 +157,7 @@ done
 
 ---
 
-## Multiline Değerler (PEM keys, JSON, vs.)
+## Multiline Values (PEM keys, JSON, etc.)
 
 ```bash
 # Multiline: is_multiline: true
@@ -172,14 +172,14 @@ curl -s -X POST \
   "$COOLIFY_BASE_URL/api/v1/applications/$APP_UUID/envs"
 ```
 
-## Env Var Değişikliği Sonrası Doğrulama
+## Post-Change Verification for Env Vars
 
-Restart sonrası env var'ın uygulamaya ulaştığını doğrula:
+Verify that the env var reached the application after restart:
 
 ```bash
-# Uygulama başladıktan sonra (health check geçince)
-# Uygulamanın /debug/env gibi bir endpoint'i varsa kullan
-# Yoksa, log'larda "Connected to database" gibi satırları ara
+# After application starts (when health check passes)
+# Use an endpoint like /debug/env if the application has it
+# If not, search logs for lines like "Connected to database"
 
 curl -s \
   -H "Authorization: Bearer $COOLIFY_ACCESS_TOKEN" \

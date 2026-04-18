@@ -1,6 +1,6 @@
 interface:
   display_name: "SDK Scaffolder"
-  short_description: "OpenAPI spec dosyasından Python, TypeScript, Go veya Kotlin için idiomatic SDK iskeleti üretir. Auto-generated..."
+  short_description: "Generates an idiomatic SDK skeleton for Python, TypeScript, Go, or Kotlin from an OpenAPI spec file. Rather than auto-generated..."
   default_prompt: "Use $sdk-scaffolder to help with this task."
 
 policy:

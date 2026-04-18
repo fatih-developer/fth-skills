@@ -1,20 +1,20 @@
-# Yeni Servis Provisioning
+# New Service Provisioning
 
-Coolify'da sıfırdan tenant/proje oluşturma rehberi.
+Guide to creating a tenant/project from scratch in Coolify.
 
-## Zorunlu Sıra
+## Mandatory Sequence
 
-Sıra önemlidir — atlamayın:
+The sequence is important — do not skip:
 
 ```
-1. Proje → 2. Environment → 3. Database → 4. Uygulama → 5. Env Vars → 6. Deploy → 7. Verify
+1. Project → 2. Environment → 3. Database → 4. Application → 5. Env Vars → 6. Deploy → 7. Verify
 ```
 
-Database bağlantı URL'si app oluşturulmadan önce bilinmeli çünkü env var olarak verilecek.
+The database connection URL must be known before the app is created because it will be provided as an env var.
 
 ---
 
-## Adım 1: Proje Oluştur
+## Step 1: Create Project
 
 ### MCP
 ```
@@ -33,7 +33,7 @@ PROJECT_UUID=$(echo $PROJECT | jq -r '.uuid')
 echo "Project UUID: $PROJECT_UUID"
 ```
 
-## Adım 2: Environment Oluştur
+## Step 2: Create Environment
 
 ```bash
 ENV=$(curl -s -X POST \
@@ -45,11 +45,11 @@ ENV=$(curl -s -X POST \
 ENV_UUID=$(echo $ENV | jq -r '.uuid')
 ```
 
-## Adım 3: Database Oluştur
+## Step 3: Create Database
 
-### PostgreSQL (en yaygın)
+### PostgreSQL (most common)
 ```bash
-# Server UUID'yi bul
+# Find Server UUID
 SERVER_UUID=$(curl -s \
   -H "Authorization: Bearer $COOLIFY_ACCESS_TOKEN" \
   "$COOLIFY_BASE_URL/api/v1/servers" | jq -r '.[0].uuid')
@@ -70,11 +70,11 @@ DB=$(curl -s -X POST \
 
 DB_UUID=$(echo $DB | jq -r '.uuid')
 DB_INTERNAL_URL=$(echo $DB | jq -r '.internal_db_url')
-# internal_db_url = aynı server içi bağlantı (daha hızlı)
-# external_db_url = dışarıdan bağlantı
+# internal_db_url = connection within the same server (faster)
+# external_db_url = external connection
 ```
 
-### Redis (cache/session için)
+### Redis (for cache/session)
 ```bash
 curl -s -X POST \
   -H "Authorization: Bearer $COOLIFY_ACCESS_TOKEN" \
@@ -88,9 +88,9 @@ curl -s -X POST \
   "$COOLIFY_BASE_URL/api/v1/databases"
 ```
 
-## Adım 4: Uygulama Oluştur
+## Step 4: Create Application
 
-### Docker Image'dan
+### From Docker Image
 ```bash
 APP=$(curl -s -X POST \
   -H "Authorization: Bearer $COOLIFY_ACCESS_TOKEN" \
@@ -110,9 +110,9 @@ APP=$(curl -s -X POST \
 APP_UUID=$(echo $APP | jq -r '.uuid')
 ```
 
-### GitHub Repo'dan
+### From GitHub Repo
 ```bash
-# Önce GitHub App UUID'ni bul
+# First find GitHub App UUID
 GITHUB_APP_UUID=$(curl -s \
   -H "Authorization: Bearer $COOLIFY_ACCESS_TOKEN" \
   "$COOLIFY_BASE_URL/api/v1/security/github-apps" | jq -r '.[0].uuid')
@@ -136,10 +136,10 @@ APP=$(curl -s -X POST \
   "$COOLIFY_BASE_URL/api/v1/applications")
 ```
 
-## Adım 5: Env Var'ları Set Et
+## Step 5: Set Env Vars
 
 ```bash
-# Tüm env var'ları tek seferde set et
+# Set all env vars at once
 set_env() {
   local KEY=$1
   local VALUE=$2
@@ -160,17 +160,17 @@ set_env "TENANT_ID" "acme"
 set_env "TENANT_NAME" "Acme Corp"
 ```
 
-## Adım 6-7: Deploy + Verify
+## Step 6-7: Deploy + Verify
 
-SKILL.md'deki [DEPLOY-VERIFY] akışını çalıştır.
+Run the [DEPLOY-VERIFY] flow from SKILL.md.
 
 ---
 
-## Stack Template'leri
+## Stack Templates
 
 ### Bun + Hono + PostgreSQL {#bun-hono-pg}
 
-Minimum env var seti:
+Minimum env var set:
 ```
 DATABASE_URL=postgres://user:pass@host:5432/dbname
 PORT=3000
@@ -195,21 +195,21 @@ NODE_ENV=production
 Health check path: `/api/health`
 Port: `3000`
 
-### Sadece PostgreSQL {#db-only}
+### PostgreSQL only {#db-only}
 
-Adım 4'ü atla. DB oluşturduktan sonra connection string'i kullanıcıya ver.
+Skip Step 4. After creating DB, provide the connection string to the user.
 
 ---
 
 ## Provisioning Checklist
 
-- [ ] Proje UUID alındı
-- [ ] Environment UUID alındı  
-- [ ] Database oluşturuldu ve `running` durumda
-- [ ] App oluşturuldu ve UUID alındı
-- [ ] `DATABASE_URL` env var'ı iç URL ile set edildi
-- [ ] Diğer env var'lar set edildi
-- [ ] Domain/FQDN doğru ayarlandı
-- [ ] Deploy tetiklendi
-- [ ] Deploy `finished` durumuna geldi
-- [ ] Health endpoint `200 OK` döndü
+- [ ] Project UUID obtained
+- [ ] Environment UUID obtained  
+- [ ] Database created and in `running` state
+- [ ] App created and UUID obtained
+- [ ] `DATABASE_URL` env var set with internal URL
+- [ ] Other env vars set
+- [ ] Domain/FQDN correctly configured
+- [ ] Deploy triggered
+- [ ] Deploy reached `finished` state
+- [ ] Health endpoint returned `200 OK`

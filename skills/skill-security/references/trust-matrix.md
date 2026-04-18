@@ -1,46 +1,46 @@
-# Trust Matrix — Yetki × Güven Seviyesi
+# Trust Matrix — Authorization & Confidence Levels
 
-## Tam Yetki Haritası
+## Complete Authorization Map
 
-Her güven seviyesi için hangi işlemlere izin var, hangisi checkpoint gerektirir, hangisi yasak.
+Defines which operations are allowed, which require checkpoints, and which are forbidden for each confidence tier.
 
 ---
 
-## GÜVENİLİR (80-100)
+## TRUSTED (80-100)
 
 ```
-DOSYA SİSTEMİ
-  ✅ Okuma         : tanımlanan scope içinde serbest
-  ✅ Yazma         : tanımlanan scope içinde serbest
-  ✅ Silme         : checkpoint (geri alınamaz)
-  ✅ Çalıştırma    : whitelist'teki komutlar
-  ❌ Sistem dizini : /etc /sys /proc — yasak
+FILESYSTEM
+  ✓  Read          : free within defined scope
+  ✓  Write         : free within defined scope
+  ⚠️  Delete        : checkpoint (irreversible)
+  ✓  Execute       : whitelisted commands only
+  🚫 System dirs   : /etc /sys /proc — forbidden
 
-AĞ
-  ✅ HTTPS GET     : whitelist domain'ler
-  ✅ HTTPS POST    : whitelist domain'ler
-  ✅ WebSocket     : whitelist domain'ler
-  ⚠️ Yeni domain  : ilk kullanımda onay
-  ❌ HTTP (şifresiz): yasak
-  ❌ Raw socket    : yasak
+NETWORK
+  ✓  HTTPS GET     : whitelisted domains
+  ✓  HTTPS POST    : whitelisted domains
+  ✓  WebSocket     : whitelisted domains
+  ⚠️  New domain    : approval on first use
+  🚫 HTTP (clear)  : forbidden
+  🚫 Raw socket    : forbidden
 
 EXECUTION
-  ✅ Bash (whitelist): güvenli komutlar
-  ✅ Python/Node  : sandbox içinde
-  ⚠️ Yeni process: checkpoint
-  ❌ eval/exec    : yasak
-  ❌ Sistem servis: yasak
+  ✓  Bash (allowed): safe commands only
+  ✓  Python/Node   : inside sandbox
+  ⚠️  New process   : checkpoint
+  🚫 eval/exec     : forbidden
+  🚫 System service: forbidden
 
-SKILL ZİNCİRİ
-  ✅ 60+ trust skill tetikleyebilir
-  ⚠️ 40-59 trust : checkpoint
-  ❌ 0-39 trust  : tetikleyemez
+SKILL CHAIN
+  ✓  Can trigger 60+ trust skills
+  ⚠️  40-59 trust   : checkpoint
+  🚫 0-39 trust    : cannot trigger
 
-VERİ
-  ✅ Kullanıcı verisi okuma
-  ✅ Çıktıya yazma
-  ⚠️ PII işleme  : maskeleme zorunlu
-  ❌ 3. taraf PII paylaşımı: yasak
+DATA
+  ✓  Read user data
+  ✓  Write to output
+  ⚠️  Process PII   : masking mandatory
+  🚫 3rd party PII : forbidden (no sharing)
 ```
 
 ---
@@ -48,129 +48,37 @@ VERİ
 ## NORMAL (60-79)
 
 ```
-DOSYA SİSTEMİ
-  ✅ Okuma         : çalışma dizini + temp
-  ⚠️ Yazma         : sadece /tmp ve proje çıktı dizini
-  ⚠️ Silme         : checkpoint + geri alma planı
-  ❌ Sistem dizini : yasak
-  ❌ Home dizin    : yasak (~/ dışında çalışma dizini)
+FILESYSTEM
+  ✓  Read          : working directory + tmp
+  ⚠️  Write         : /tmp and project output dir only
+  ⚠️  Delete        : checkpoint + rollback plan needed
+  🚫 Execute       : strictly forbidden
 
-AĞ
-  ✅ HTTPS GET     : whitelist domain'ler
-  ⚠️ HTTPS POST    : checkpoint (veri gönderiyor)
-  ❌ HTTP          : yasak
-  ❌ WebSocket     : yasak (uzun süreli bağlantı riski)
-
-EXECUTION
-  ✅ Bash (dar whitelist): ls, cat, grep, wc, find (temp)
-  ⚠️ Python/Node  : salt okunur çıktı üretenler
-  ❌ Shell script çalıştırma: yasak
-  ❌ eval/exec    : yasak
-
-SKILL ZİNCİRİ
-  ✅ 70+ trust skill tetikleyebilir
-  ❌ Daha düşük trust tetikleyemez
-
-VERİ
-  ✅ Kullanıcı verisi okuma (PII hariç)
-  ⚠️ PII: özel onay gerektirir
-  ❌ PII yazma    : yasak
-```
-
----
-
-## KISITLI (40-59)
-
-```
-DOSYA SİSTEMİ
-  ✅ Okuma         : sadece proje dizini, okuma
-  ❌ Yazma         : yasak
-  ❌ Silme         : yasak
-
-AĞ
-  ⚠️ HTTPS GET     : sınırlı whitelist, checkpoint
-  ❌ POST          : yasak
-  ❌ Diğer         : yasak
+NETWORK
+  ✓  HTTPS GET     : safe domains only
+  ⚠️  HTTPS POST    : checkpoint on payload logic
+  🚫 WebSocket     : forbidden
+  🚫 HTTP (clear)  : forbidden
+  🚫 Raw socket    : forbidden
 
 EXECUTION
-  ⚠️ Bash          : sadece ls, cat, grep — her çalıştırmada onay
-  ❌ Script        : yasak
-  ❌ eval/exec     : yasak
+  ✓  Python/Node   : strictly inside sandbox, no network
+  🚫 Bash          : forbidden
+  🚫 eval/exec     : forbidden
 
-SKILL ZİNCİRİ
-  ❌ Başka skill tetikleyemez
+SKILL CHAIN
+  ✓  Can trigger 80+ trust skills
+  ⚠️  60-79 trust   : checkpoint
+  🚫 0-59 trust    : cannot trigger
 
-VERİ
-  ✅ Anonim veri okuma
-  ❌ PII           : yasak
-  ❌ Yazma         : yasak
+DATA
+  ✓  Read non-sensitive data
+  ⚠️  Write         : draft outputs only
+  🚫 PII           : forbidden to read or touch
 ```
 
 ---
 
-## KARANTİNA (0-39)
+## SUSPICIOUS (0-59)
 
-```
-DOSYA SİSTEMİ   : TAMAMEN YASAK
-AĞ              : TAMAMEN YASAK
-EXECUTION       : TAMAMEN YASAK
-SKILL ZİNCİRİ   : TAMAMEN YASAK
-VERİ            : TAMAMEN YASAK
-
-→ Manuel inceleme gerekli
-→ Üretimde kullanılamaz
-→ Sadece sandbox'ta izleme altında test
-```
-
----
-
-## Zincir Güvenliği Kuralları
-
-### İzin Verilen Zincirler
-```
-GÜVENİLİR → GÜVENİLİR     ✅ serbest
-GÜVENİLİR → NORMAL        ✅ serbest
-GÜVENİLİR → KISITLI       ⚠️ checkpoint
-NORMAL    → NORMAL         ✅ serbest
-NORMAL    → KISITLI        ⚠️ checkpoint
-KISITLI   → herhangi      ❌ yasak
-```
-
-### Privilege Escalation Kuralı
-Düşük güven skorlu skill, yüksek güven skorlu skill'i tetikleyemez:
-```
-KISITLI (45) → GÜVENİLİR (85)   ❌ YASAK
-NORMAL (65)  → GÜVENİLİR (85)   ⚠️ checkpoint + log
-```
-
-### Maksimum Zincir Derinliği
-```
-1-2 seviye  : serbest
-3 seviye    : uyarı ver, logla
-4 seviye    : checkpoint
-5+ seviye   : yasak (sadece manuel onay ile)
-```
-
----
-
-## Özel Durumlar
-
-### Ecosystem Skill'leri (Dahili, Bilinen Yazar)
-Ecosystem'e dahil skill'ler başlangıç skoru +10 alır:
-```
-Temel skor: 50 + 10 (ecosystem) = 60
-→ NORMAL seviyeden başlar
-```
-
-### Production-Onaylı Skill'ler
-Manuel review geçmiş skill'ler +15 alır:
-```
-→ Audit + Trust + Manuel onay = +25 bonus
-```
-
-### Deneysel / Yeni Skill'ler
-İlk 7 gün içinde yazılmış skill'ler -10 alır:
-```
-→ KISITLI modda izleme altında çalışır
-→ 7 gün sorunsuz geçerse normal skora döner
-```
+All operations are forbidden except requesting review from the user via the orchestrator.
