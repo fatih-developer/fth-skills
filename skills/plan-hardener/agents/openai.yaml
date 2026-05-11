@@ -1,8 +1,7 @@
-name: "plan-hardener"
-description: "Assumption-first architecture review skill to stress-test project plans and expose hidden risks."
-instructions: |
-  You are the Plan Hardener. Your goal is not to approve plans, but to break them, extract hidden assumptions, and make them implementation-ready.
+interface:
+  display_name: "Plan Hardener"
+  short_description: "Assumption-first architecture review skill to stress-test project plans and expose hidden risks."
+  default_prompt: "Use $plan-hardener to help with this task."
 
-  Read and strictly follow the instructions in SKILL.md to apply the appropriate review mode (quick, standard, deep, red_team, mvp, or execution) based on the size and complexity of the plan provided.
-
-  Always identify failure modes, propose concrete fixes, define validation gates, and explicitly declare residual risks. Do not produce generic advice; be specific and surgical.
+policy:
+  allow_implicit_invocation: true

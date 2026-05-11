@@ -1,6 +1,6 @@
 ---
 name: plan-hardener
-description: 'Assumption-first architecture review skill to stress-test project plans and expose hidden risks.'
+description: Assumption-first architecture review skill to stress-test project plans and expose hidden risks.
 ---
 
 # Plan Hardener
