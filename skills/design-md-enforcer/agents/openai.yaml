@@ -1,0 +1,7 @@
+interface:
+  display_name: "Design MD Enforcer"
+  short_description: "Enforce and manage DESIGN.md specifications, combining design reasoning with token roles."
+  default_prompt: "Use $design-md-enforcer to help with this task."
+
+policy:
+  allow_implicit_invocation: true
