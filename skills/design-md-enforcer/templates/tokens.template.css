@@ -1,0 +1,42 @@
+:root {
+  --bg: {{color_bg}};
+  --bg-elevated: {{color_bg_elevated}};
+  --surface: {{color_surface}};
+  --surface-2: {{color_surface_2}};
+  --border: {{color_border}};
+
+  --text: {{color_text}};
+  --text-muted: {{color_text_muted}};
+
+  --primary: {{color_primary}};
+  --primary-hover: {{color_primary_hover}};
+  --primary-soft: {{color_primary_soft}};
+  --accent: {{color_accent}};
+
+  --success: {{color_success}};
+  --warning: {{color_warning}};
+  --danger: {{color_danger}};
+  --info: {{color_info}};
+
+  --radius-sm: {{radius_sm}};
+  --radius-md: {{radius_md}};
+  --radius-lg: {{radius_lg}};
+  --radius-xl: {{radius_xl}};
+
+  --shadow-sm: {{shadow_sm}};
+  --shadow-md: {{shadow_md}};
+  --shadow-lg: {{shadow_lg}};
+
+  --container: {{container_width}};
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+}

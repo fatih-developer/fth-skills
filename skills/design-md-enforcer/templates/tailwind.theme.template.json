@@ -1,0 +1,49 @@
+{
+  "theme": {
+    "extend": {
+      "colors": {
+        "bg": "var(--bg)",
+        "bgElevated": "var(--bg-elevated)",
+        "surface": "var(--surface)",
+        "surface2": "var(--surface-2)",
+        "border": "var(--border)",
+        "text": "var(--text)",
+        "textMuted": "var(--text-muted)",
+        "primary": "var(--primary)",
+        "primaryHover": "var(--primary-hover)",
+        "primarySoft": "var(--primary-soft)",
+        "accent": "var(--accent)",
+        "success": "var(--success)",
+        "warning": "var(--warning)",
+        "danger": "var(--danger)",
+        "info": "var(--info)"
+      },
+      "borderRadius": {
+        "sm": "var(--radius-sm)",
+        "md": "var(--radius-md)",
+        "lg": "var(--radius-lg)",
+        "xl": "var(--radius-xl)"
+      },
+      "boxShadow": {
+        "sm": "var(--shadow-sm)",
+        "md": "var(--shadow-md)",
+        "lg": "var(--shadow-lg)"
+      },
+      "maxWidth": {
+        "container": "var(--container)"
+      },
+      "spacing": {
+        "1": "4px",
+        "2": "8px",
+        "3": "12px",
+        "4": "16px",
+        "5": "20px",
+        "6": "24px",
+        "8": "32px",
+        "10": "40px",
+        "12": "48px",
+        "16": "64px"
+      }
+    }
+  }
+}

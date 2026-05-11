@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="tr" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{{brand_name}} Design Preview</title>
+  <style>
+    :root {
+      --bg: {{color_bg}};
+      --bg-elevated: {{color_bg_elevated}};
+      --surface: {{color_surface}};
+      --surface-2: {{color_surface_2}};
+      --border: {{color_border}};
+      --text: {{color_text}};
+      --text-muted: {{color_text_muted}};
+      --primary: {{color_primary}};
+      --primary-hover: {{color_primary_hover}};
+      --primary-soft: {{color_primary_soft}};
+      --accent: {{color_accent}};
+      --success: {{color_success}};
+      --warning: {{color_warning}};
+      --danger: {{color_danger}};
+      --info: {{color_info}};
+      --radius-sm: {{radius_sm}};
+      --radius-md: {{radius_md}};
+      --radius-lg: {{radius_lg}};
+      --radius-xl: {{radius_xl}};
+      --shadow-sm: {{shadow_sm}};
+      --shadow-md: {{shadow_md}};
+      --shadow-lg: {{shadow_lg}};
+      --container: {{container_width}};
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: {{font_family}};
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    .container {
+      width: min(100% - 32px, var(--container));
+      margin: 0 auto;
+    }
+
+    .nav {
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .brand {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .mark {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-md);
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+    }
+
+    .hero {
+      padding: 72px 0 56px;
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    h1 {
+      margin: 0 0 20px;
+      font-size: clamp(42px, 6vw, 72px);
+      line-height: 0.96;
+      letter-spacing: -0.07em;
+    }
+
+    h2 {
+      margin: 0 0 14px;
+      font-size: clamp(28px, 4vw, 42px);
+      line-height: 1.05;
+      letter-spacing: -0.05em;
+    }
+
+    p { color: var(--text-muted); }
+
+    .lead {
+      font-size: 19px;
+      max-width: 650px;
+    }
+
+    .actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 32px;
+    }
+
+    .btn {
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--radius-md);
+      padding: 12px 18px;
+      font-weight: 800;
+      border: 1px solid transparent;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn-secondary {
+      background: var(--surface);
+      color: var(--text);
+      border-color: var(--border);
+    }
+
+    .panel, .card, .swatch {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-md);
+    }
+
+    .panel { padding: 24px; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .card { padding: 24px; }
+
+    .icon {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border-radius: var(--radius-md);
+      background: var(--primary-soft);
+      color: var(--primary);
+      font-weight: 900;
+      margin-bottom: 16px;
+    }
+
+    .section { padding: 56px 0; }
+
+    .swatches {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .swatch { overflow: hidden; }
+    .swatch-color { height: 88px; background: var(--swatch); }
+    .swatch-info { padding: 14px; font-size: 13px; }
+    .swatch-info strong { display: block; color: var(--text); }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--text-muted);
+    }
+
+    input, select, textarea {
+      width: 100%;
+      min-height: 44px;
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--bg-elevated);
+      color: var(--text);
+      font: inherit;
+      outline: none;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px color-mix(in srgb, var(--primary) 14%, transparent);
+    }
+
+    .field { margin-bottom: 16px; }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: var(--primary-soft);
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    @media (max-width: 900px) {
+      .hero, .form-grid { grid-template-columns: 1fr; }
+      .grid, .swatches { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 560px) {
+      .grid, .swatches { grid-template-columns: 1fr; }
+      .hero { padding-top: 44px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="container nav">
+    <div class="brand"><span class="mark"></span>{{brand_name}}</div>
+    <span class="badge">Design Preview</span>
+  </header>
+
+  <main>
+    <section class="container hero">
+      <div>
+        <h1>{{hero_title}}</h1>
+        <p class="lead">{{hero_description}}</p>
+        <div class="actions">
+          <button class="btn btn-primary">Primary Action</button>
+          <button class="btn btn-secondary">Secondary Action</button>
+        </div>
+      </div>
+      <div class="panel">
+        <h2>Preview Panel</h2>
+        <p>This isolated HTML file validates the extracted design language before implementation.</p>
+        <div class="grid">
+          <div class="card"><strong>AA+</strong><p>Contrast</p></div>
+          <div class="card"><strong>{{radius_lg}}</strong><p>Radius</p></div>
+          <div class="card"><strong>{{container_width}}</strong><p>Container</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="container section">
+      <h2>Color Tokens</h2>
+      <div class="swatches">
+        <div class="swatch"><div class="swatch-color" style="--swatch: var(--primary)"></div><div class="swatch-info"><strong>Primary</strong>--primary</div></div>
+        <div class="swatch"><div class="swatch-color" style="--swatch: var(--accent)"></div><div class="swatch-info"><strong>Accent</strong>--accent</div></div>
+        <div class="swatch"><div class="swatch-color" style="--swatch: var(--surface)"></div><div class="swatch-info"><strong>Surface</strong>--surface</div></div>
+        <div class="swatch"><div class="swatch-color" style="--swatch: var(--text)"></div><div class="swatch-info"><strong>Text</strong>--text</div></div>
+      </div>
+    </section>
+
+    <section class="container section">
+      <h2>Components</h2>
+      <div class="form-grid">
+        <div class="card">
+          <div class="icon">01</div>
+          <h3>Cards</h3>
+          <p>Use cards for grouped information with consistent radius, border and padding.</p>
+        </div>
+        <div class="card">
+          <div class="field">
+            <label>Example Input</label>
+            <input value="Design system preview" />
+          </div>
+          <div class="field">
+            <label>Example Select</label>
+            <select><option>DESIGN.md</option><option>tokens.css</option></select>
+          </div>
+          <button class="btn btn-primary">Validate</button>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

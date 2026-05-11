@@ -1,0 +1,18 @@
+url: "https://example.com"
+brand_name: "Example Brand"
+project_type: "SaaS marketing website"
+preferred_stack: "React + Tailwind"
+preview_required: true
+avoid_clone: true
+screenshots:
+  desktop: true
+  tablet: true
+  mobile: true
+outputs:
+  - DESIGN.md
+  - UI_RULES.md
+  - components.md
+  - tokens.css
+  - tailwind.theme.json
+  - preview.html
+  - review-checklist.md

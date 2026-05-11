@@ -1,0 +1,70 @@
+{
+  "source_url": "https://example.com",
+  "brand_name": "Example Brand",
+  "analysis_date": "YYYY-MM-DD",
+  "observed": {
+    "screens_reviewed": ["desktop", "mobile"],
+    "visible_sections": ["navbar", "hero", "feature cards", "footer"],
+    "css_sources": ["computed styles", "linked stylesheets"],
+    "fonts": ["Inter", "system-ui"]
+  },
+  "inferred": {
+    "style_direction": "clean SaaS interface with soft cards and strong CTA hierarchy",
+    "visual_density": "medium-low",
+    "brand_feel": "modern, trustworthy, product-led",
+    "motion_style": "subtle hover transitions"
+  },
+  "tokens": {
+    "colors": {
+      "bg": "#F4F7FB",
+      "bgElevated": "#FFFFFF",
+      "surface": "#FFFFFF",
+      "surface2": "#EEF3FA",
+      "border": "#D5DFEE",
+      "text": "#162033",
+      "textMuted": "#5F7394",
+      "primary": "#315EED",
+      "primaryHover": "#264FD4",
+      "primarySoft": "#E8EFFF",
+      "accent": "#0EA5C6",
+      "success": "#16A34A",
+      "warning": "#D97706",
+      "danger": "#DC2626",
+      "info": "#0284C7"
+    },
+    "typography": {
+      "fontFamily": "Inter, ui-sans-serif, system-ui, sans-serif",
+      "display": { "size": "72px", "lineHeight": "0.96", "weight": "800", "letterSpacing": "-0.07em" },
+      "h1": { "size": "56px", "lineHeight": "1", "weight": "800", "letterSpacing": "-0.06em" },
+      "h2": { "size": "40px", "lineHeight": "1.08", "weight": "800", "letterSpacing": "-0.05em" },
+      "h3": { "size": "20px", "lineHeight": "1.25", "weight": "700", "letterSpacing": "-0.02em" },
+      "body": { "size": "16px", "lineHeight": "1.5", "weight": "400", "letterSpacing": "0" },
+      "small": { "size": "13px", "lineHeight": "1.4", "weight": "600", "letterSpacing": "0" }
+    },
+    "spacing": {
+      "1": "4px", "2": "8px", "3": "12px", "4": "16px", "5": "20px", "6": "24px", "8": "32px", "10": "40px", "12": "48px", "16": "64px"
+    },
+    "radius": {
+      "sm": "8px", "md": "12px", "lg": "18px", "xl": "24px"
+    },
+    "shadow": {
+      "sm": "0 1px 2px rgba(16, 24, 40, 0.06)",
+      "md": "0 12px 30px rgba(22, 32, 51, 0.08)",
+      "lg": "0 24px 60px rgba(22, 32, 51, 0.12)"
+    },
+    "layout": {
+      "container": "1180px",
+      "pagePadding": "32px",
+      "grid": "responsive 12-column / auto-fit cards",
+      "breakpoints": { "sm": "560px", "md": "900px", "lg": "1180px" }
+    }
+  },
+  "components": [
+    { "name": "Button", "observed": true, "rules": ["Use primary for main CTA", "Minimum height 44px", "Radius 12px"] },
+    { "name": "Card", "observed": true, "rules": ["White surface", "Soft border", "Large radius", "Subtle shadow"] }
+  ],
+  "limitations": [
+    "Internal Figma token names are not visible from public URL.",
+    "Hover and motion behavior may be partially inferred."
+  ]
+}
