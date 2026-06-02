@@ -1,0 +1,173 @@
+{
+  "skill_name": "prompt-crafter",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Create a system prompt for a repo-aware coding agent that should inspect a TypeScript codebase, make minimal edits, ask for approval before destructive changes, run targeted validation, and summarize risks at the end.",
+      "expected_output": "A structured system prompt package with role, behavior rules, constraints, output contract, and a final system prompt tuned for coding-agent behavior.",
+      "files": [],
+      "assertions": [
+        {
+          "name": "detects_system_prompt_type",
+          "description": "Response should clearly behave like a system-prompt design task rather than a generic advice answer."
+        },
+        {
+          "name": "includes_behavior_rules",
+          "description": "Response must include explicit behavior rules for code inspection, minimal edits, and validation."
+        },
+        {
+          "name": "includes_approval_boundary",
+          "description": "Response must require approval before destructive or risky actions."
+        },
+        {
+          "name": "includes_final_system_prompt",
+          "description": "Response must include a final system prompt that is ready to use."
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Improve this Claude Code prompt without changing its intent: 'fix my broken auth flow and make it production ready'. I want a version that pushes the agent to inspect first, limit scope, and validate before claiming success.",
+      "expected_output": "A prompt-optimization response that diagnoses weaknesses, preserves intent, and returns a stronger coding prompt plus rationale.",
+      "files": [],
+      "assertions": [
+        {
+          "name": "runs_in_optimization_mode",
+          "description": "Response should critique the original prompt and provide an improved version rather than answering the task directly."
+        },
+        {
+          "name": "preserves_original_goal",
+          "description": "Response should keep the original goal of fixing the auth flow while strengthening execution guidance."
+        },
+        {
+          "name": "adds_validation_expectations",
+          "description": "Response must include validation or success-check expectations for the coding agent."
+        },
+        {
+          "name": "explains_why_changes_help",
+          "description": "Response should include rationale for the structural improvements."
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Design an agent prompt for a customer support bot that can answer shipping and billing questions, use internal knowledge tools, avoid making refund decisions on its own, and escalate account-security issues to a human.",
+      "expected_output": "An agent specification with role, inputs, tools, memory policy, decision rules, escalation rules, output contract, and final agent prompt.",
+      "files": [],
+      "assertions": [
+        {
+          "name": "detects_agent_prompt_type",
+          "description": "Response should produce an agent spec rather than only a single paragraph prompt."
+        },
+        {
+          "name": "includes_tool_and_memory_policy",
+          "description": "Response must explicitly define tool usage and memory policy."
+        },
+        {
+          "name": "includes_escalation_rules",
+          "description": "Response must define escalation rules for account security and refund decisions."
+        },
+        {
+          "name": "includes_final_agent_prompt",
+          "description": "Response must include a final agent prompt that can be used directly."
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "I need a workflow prompt for a market research assistant that should gather competitor pages, compare positioning, draft a summary, review for unsupported claims, and then refine the final answer. Keep it reusable across ChatGPT and Claude.",
+      "expected_output": "A workflow-oriented prompt with stages, stage instructions, quality gates, and a reusable final workflow prompt.",
+      "files": [],
+      "assertions": [
+        {
+          "name": "detects_workflow_prompt_type",
+          "description": "Response should identify this as a workflow design request."
+        },
+        {
+          "name": "includes_ordered_stages",
+          "description": "Response must include explicit stages in a logical order."
+        },
+        {
+          "name": "includes_quality_gates",
+          "description": "Response must include review or quality gates before final delivery."
+        },
+        {
+          "name": "keeps_model_portability",
+          "description": "Response should avoid overfitting the workflow to a single model when the user asked for portability."
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "Create an MCP-style prompt package for an internal research assistant that can search company docs, summarize findings, and draft emails, but it must ask for human approval before sending anything externally or accessing sensitive finance folders.",
+      "expected_output": "An MCP-oriented package with system prompt guidance, tool description guidance, approval policy, workflow rules, evaluation checks, and a config scaffold.",
+      "files": [],
+      "assertions": [
+        {
+          "name": "detects_mcp_package_type",
+          "description": "Response should treat this as an MCP-oriented prompt-package request."
+        },
+        {
+          "name": "includes_tool_description_guidance",
+          "description": "Response must include tool usage guidance rather than only a narrative prompt."
+        },
+        {
+          "name": "includes_high_risk_approval_rules",
+          "description": "Response must require approval for external sending and sensitive data access."
+        },
+        {
+          "name": "avoids_runtime_overclaiming",
+          "description": "Response should frame the config as a scaffold or template rather than claiming guaranteed runtime correctness."
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "Evaluate this prompt and rewrite it if needed: 'Be a helpful analyst and review our quarterly report.' I want a strict review rubric that scores clarity, completeness, evidence use, and actionability.",
+      "expected_output": "An evaluation-oriented response that defines criteria, scoring logic, failure conditions, and provides a stronger evaluation prompt.",
+      "files": [],
+      "assertions": [
+        {
+          "name": "detects_evaluation_prompt_type",
+          "description": "Response should route to evaluation mode instead of only writing a better general prompt."
+        },
+        {
+          "name": "includes_scoring_logic",
+          "description": "Response must specify criteria and scoring logic."
+        },
+        {
+          "name": "includes_failure_conditions",
+          "description": "Response must specify what would count as a weak or failed review output."
+        },
+        {
+          "name": "provides_revised_prompt",
+          "description": "Response should provide a stronger final evaluation prompt."
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "prompt": "Write a Flux prompt for a cinematic product shot of a matte black mechanical keyboard on a walnut desk at dusk, with shallow depth of field, subtle dust in the light beam, and no hands or extra devices in frame.",
+      "expected_output": "An image-prompt response with subject, composition, style, negative constraints, and a final model-tuned prompt.",
+      "files": [],
+      "assertions": [
+        {
+          "name": "detects_image_prompt_type",
+          "description": "Response should identify this as an image-prompt task."
+        },
+        {
+          "name": "includes_negative_constraints",
+          "description": "Response must include excluded elements such as no hands or extra devices."
+        },
+        {
+          "name": "calibrates_for_flux",
+          "description": "Response should reflect Flux-oriented image prompt calibration."
+        },
+        {
+          "name": "includes_final_image_prompt",
+          "description": "Response must include a final image prompt ready to use."
+        }
+      ]
+    }
+  ]
+}

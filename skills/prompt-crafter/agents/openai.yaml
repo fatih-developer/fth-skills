@@ -1,0 +1,7 @@
+interface:
+  display_name: "Prompt Crafter"
+  short_description: "Creates, improves, critiques, and structures prompts, agents, workflows, and MCP-oriented prompt packages."
+  default_prompt: "Use $prompt-crafter to design or improve prompts, system prompts, agent specs, workflow prompts, and MCP-oriented prompt packages."
+
+policy:
+  allow_implicit_invocation: true

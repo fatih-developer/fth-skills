@@ -1,0 +1,82 @@
+[
+  {
+    "query": "i need a better system prompt for a claude code agent that keeps touching unrelated files. it should inspect first, make minimal edits, and explain validation before it says done",
+    "should_trigger": true
+  },
+  {
+    "query": "Take this weak prompt and optimize it for ChatGPT: 'write me a go to market plan for my app'. I want clearer assumptions, an output structure, and a version that asks follow-up questions only if truly needed.",
+    "should_trigger": true
+  },
+  {
+    "query": "Design an agent prompt for an internal support assistant that can read product docs and Jira tickets, but must escalate billing disputes and never promise refunds automatically.",
+    "should_trigger": true
+  },
+  {
+    "query": "Can you build a reusable workflow prompt for competitor research? I want it to gather sources, compare claims, draft a summary, review unsupported statements, and then refine the final answer.",
+    "should_trigger": true
+  },
+  {
+    "query": "I want an MCP-style prompt package for a research bot that can search our handbook, summarize findings, and draft emails, but has to ask approval before sending anything out.",
+    "should_trigger": true
+  },
+  {
+    "query": "Critique this prompt like a prompt engineer, score it for clarity and robustness, then rewrite it so a coding agent stops overreaching: 'fix all my backend issues quickly'",
+    "should_trigger": true
+  },
+  {
+    "query": "Give me a Midjourney prompt for a brutalist bookstore interior with rain reflections, soft tungsten practicals, and no people in frame. I want the prompt to be visually dense, not generic.",
+    "should_trigger": true
+  },
+  {
+    "query": "Help me write an evaluation prompt that grades investor updates on clarity, evidence, and actionability, then outputs a strict pass/fail plus improvement notes.",
+    "should_trigger": true
+  },
+  {
+    "query": "I have a rough prompt for Gemini to summarize long legal docs. Can you restructure it so it uses retrieved context carefully, flags uncertainty, and returns a fixed JSON shape?",
+    "should_trigger": true
+  },
+  {
+    "query": "Create a prompt architecture for a multi-agent setup where one agent researches, one synthesizes, and one critiques before anything goes to the client.",
+    "should_trigger": true
+  },
+  {
+    "query": "Write a blog post about remote work trends in 2026 and make it sound professional but not too stiff.",
+    "should_trigger": false
+  },
+  {
+    "query": "Please fix the TypeScript errors in my Next.js app. The build is failing after I renamed a component.",
+    "should_trigger": false
+  },
+  {
+    "query": "Can you design a PostgreSQL schema for subscriptions, invoices, and coupon redemptions for a SaaS app?",
+    "should_trigger": false
+  },
+  {
+    "query": "Summarize this meeting transcript into bullet points and highlight the decisions.",
+    "should_trigger": false
+  },
+  {
+    "query": "Review my landing page copy and make it more persuasive for small business owners.",
+    "should_trigger": false
+  },
+  {
+    "query": "I need help choosing between LangGraph and Temporal for a long-running workflow service.",
+    "should_trigger": false
+  },
+  {
+    "query": "Open this repo and refactor the auth middleware so it is easier to test.",
+    "should_trigger": false
+  },
+  {
+    "query": "Can you create an API contract for an orders service with REST endpoints, pagination, and webhook retries?",
+    "should_trigger": false
+  },
+  {
+    "query": "Make this email warmer and less robotic: 'Your request has been received and is being processed.'",
+    "should_trigger": false
+  },
+  {
+    "query": "Compare three CRM tools for a 20-person sales team and recommend one.",
+    "should_trigger": false
+  }
+]
