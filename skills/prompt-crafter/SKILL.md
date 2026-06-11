@@ -1,6 +1,6 @@
 ---
 name: prompt-crafter
-description: Create, optimize, critique, and structure prompts for AI systems. Use this skill whenever the user is designing or improving a prompt, system prompt, coding prompt, image prompt, evaluation rubric, agent prompt, workflow prompt, or MCP-oriented prompt package. Also use it when the user asks to turn vague AI behavior into a precise instruction set, tool policy, agent spec, or prompt architecture.
+description: Create, optimize, critique, and programmatically structure prompts for AI systems. Use this skill whenever the user is designing or improving a static prompt, system prompt, coding prompt, agent prompt, workflow prompt, MCP-oriented prompt package, or an algorithmic prompt optimization pipeline. Also use it when the user asks to turn vague AI behavior into a precise instruction set, tool policy, agent spec, evaluation metric, or prompt architecture.
 ---
 
 # Prompt Crafter
@@ -33,6 +33,7 @@ Detect the closest match before producing anything:
 - `image_prompt`: prompt for image generation systems
 - `evaluation_prompt`: rubric, grading prompt, or critique harness
 - `mcp_prompt_package`: prompt package for MCP-style tool usage, tool descriptions, config scaffolds, and approval rules
+- `programmatic_prompt`: algorithmic prompt pipeline design (Task Signature, Evaluation Metric, Dataset Blueprint, Optimizer Strategy)
 
 If the user request spans multiple types, choose the primary one and mention the secondary ones in the output.
 
@@ -165,15 +166,25 @@ Return:
 For V1, this package is documentation and scaffolding only.
 Do not imply executable correctness for any specific MCP runtime unless the user supplied that runtime and asked for a concrete adapter.
 
+### `programmatic_prompt`
+
+Return:
+
+1. `Task Signature`: High-level description of the task, input fields, and output fields.
+2. `Evaluation Metric`: Scoring logic or 'LLM-as-a-judge' criteria for programmatic evaluation.
+3. `Dataset Blueprint`: Structure of the examples needed to optimize the prompt (train/dev/test splits).
+4. `Optimizer Strategy`: Recommended algorithmic optimization approach (e.g., automated few-shot selection, iterative prompt tuning) based on the task.
+
 ## Optimization Mode
 
 When the user asks to improve an existing prompt, follow this sequence:
 
 1. Identify the request type.
-2. Diagnose the current weakness.
-3. Keep what already works.
-4. Improve structure, specificity, and tool alignment.
-5. Return the revised artifact plus the rationale.
+2. Diagnose the current weakness (e.g., manual eye-balling vs programmatic scoring).
+3. If the user is building a production LLM application, explicitly recommend transitioning to a `programmatic_prompt` approach (defining metrics and datasets for algorithmic optimization) rather than manually tweaking static words.
+4. Keep what already works.
+5. Improve structure, specificity, and tool alignment.
+6. Return the revised artifact plus the rationale.
 
 Common improvements:
 
@@ -232,6 +243,7 @@ This skill should trigger for:
 - agent design
 - workflow design
 - MCP-oriented prompt and tool-policy design
+- algorithmic prompt optimization (evaluation metrics, dataset blueprints, automated tuning)
 
 This skill should not trigger for:
 

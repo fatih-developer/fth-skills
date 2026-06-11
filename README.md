@@ -5,7 +5,7 @@
 **Curated AI agent skills for coding workflows, decision-making, and agentic task safety**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Skills: 58](https://img.shields.io/badge/skills-58%20Curated-brightgreen.svg)](#-available-skills)
+[![Skills: 69](https://img.shields.io/badge/skills-69%20Public-brightgreen.svg)](#-available-skills)
 [![Platform: skills.sh](https://img.shields.io/badge/platform-skills.sh-black.svg)](https://skills.sh/)
 
 _Reusable instruction packs for the [skills.sh](https://skills.sh/) ecosystem — works with Claude Code, Cursor, Copilot, Gemini CLI, and more._
@@ -16,6 +16,8 @@ _Reusable instruction packs for the [skills.sh](https://skills.sh/) ecosystem �
 
 ## ⚡ Quick Install
 
+### skills.sh
+
 ```bash
 # Install all skills
 npx skills add fatih-developer/fth-skills
@@ -24,9 +26,52 @@ npx skills add fatih-developer/fth-skills
 npx skills add fatih-developer/fth-skills --skill <skill-name>
 ```
 
+### Hermes Agent
+
+```bash
+# Add this repository as a reusable skill tap
+hermes skills tap add fatih-developer/fth-skills
+
+# Search the tap from Hermes
+hermes skills search <query>
+
+# Install a single skill from the tap
+hermes skills install fatih-developer/fth-skills/<skill-name>
+
+# Example
+hermes skills install fatih-developer/fth-skills/proje-analizcisi
+```
+
+### ClawHub
+
+```bash
+# Install and authenticate the ClawHub CLI
+npm i -g clawhub
+clawhub login
+clawhub whoami
+
+# Validate the public ClawHub publish list
+python scripts/publish_clawhub.py --check-only
+
+# Dry-run all public skills listed in skills.sh.json
+python scripts/publish_clawhub.py
+
+# Dry-run one skill
+python scripts/publish_clawhub.py --skill proje-analizcisi
+
+# Publish one skill after reviewing the dry-run output
+python scripts/publish_clawhub.py --skill proje-analizcisi --execute
+
+# Publish all public skills after a successful single-skill smoke test
+python scripts/publish_clawhub.py --execute
+
+# Inspect scanner results and published files
+npx clawhub inspect <skill-slug> --files
+```
+
 ---
 
-## 🎯 Available Skills (58 Curated)
+## 🎯 Available Skills (69 Public)
 
 The repository is structured into a **Layered Monorepo Architecture**, highly optimized for the **Ecosystem Handoff Pattern**. Skills are not just isolated commands; they are orchestrated capabilities acting together.
 

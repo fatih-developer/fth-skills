@@ -1,0 +1,124 @@
+{
+  "$schema": "https://skills.sh/schemas/skills.sh.schema.json",
+  "groupings": [
+    {
+      "title": "Mobile App Domain",
+      "skills": [
+        "accessibility-enforcer",
+        "app-store-reviewer",
+        "crash-analyst",
+        "deep-link-architect",
+        "mobile-perf-auditor",
+        "mobile-security-auditor",
+        "offline-sync-designer",
+        "onboarding-designer",
+        "push-notification-planner",
+        "release-orchestrator"
+      ]
+    },
+    {
+      "title": "API Domain",
+      "skills": [
+        "api-mock-designer",
+        "api-observability-planner",
+        "auth-flow-designer",
+        "breaking-change-detector",
+        "changelog-generator",
+        "contract-first-designer",
+        "protocol-selector",
+        "rate-limit-strategist",
+        "sdk-scaffolder",
+        "webhook-architect"
+      ]
+    },
+    {
+      "title": "Database Domain",
+      "skills": [
+        "access-policy-designer",
+        "data-lineage-tracer",
+        "data-masker",
+        "index-advisor",
+        "migration-strategist",
+        "pgbouncer-architect",
+        "query-budget-enforcer",
+        "query-explainer",
+        "schema-architect",
+        "schema-diff-analyzer",
+        "seed-data-generator",
+        "sqlite"
+      ]
+    },
+    {
+      "title": "Security",
+      "skills": [
+        "adaptive-guard",
+        "security-auditor",
+        "security-orchestrator",
+        "skill-security"
+      ]
+    },
+    {
+      "title": "Ecosystem Orchestrators",
+      "skills": [
+        "ecosystem-api",
+        "ecosystem-database",
+        "ecosystem-mobile",
+        "ecosystem-orchestration",
+        "ecosystem-security"
+      ]
+    },
+    {
+      "title": "Agent Orchestration",
+      "skills": [
+        "agent-reviewer",
+        "assumption-checker",
+        "checkpoint-guardian",
+        "context-compressor",
+        "error-recovery",
+        "memory-ledger",
+        "output-critic",
+        "parallel-planner",
+        "session-transfer",
+        "task-decomposer",
+        "tool-selector"
+      ]
+    },
+    {
+      "title": "Reasoning and Prompting",
+      "skills": [
+        "ask-first-act-later",
+        "claude-style-coding",
+        "multi-brain",
+        "multi-brain-debate",
+        "multi-brain-experts",
+        "multi-brain-score",
+        "plan-hardener",
+        "prompt-crafter"
+      ]
+    },
+    {
+      "title": "Skill Operations",
+      "skills": [
+        "claw-integration-design",
+        "mastermind-logger",
+        "skill-comparator"
+      ]
+    },
+    {
+      "title": "Design and Frontend",
+      "skills": [
+        "design-intelligence",
+        "design-md-enforcer",
+        "react-flow"
+      ]
+    },
+    {
+      "title": "Platform and Analysis",
+      "skills": [
+        "coolify-orchestrator",
+        "project-analyzer",
+        "proje-analizcisi"
+      ]
+    }
+  ]
+}
