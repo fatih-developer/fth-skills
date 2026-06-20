@@ -1,0 +1,177 @@
+{
+  "skill_name": "ugc-crafter",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Create a UGC video prompt for a new vitamin C serum. The target audience is women in their late 20s on TikTok. I want it to look like a real person filmed it on their phone.",
+      "expected_output": "A single_scene or multi_scene UGC prompt set with an auto-selected archetype (likely Problem→Solution or Testimonial), an Identity Card for the character, image prompt with negative constraints, video prompt with specific actions and handheld camera motion, and self-evaluation scores.",
+      "files": [],
+      "assertions": [
+        {
+          "name": "selects_archetype",
+          "description": "Response must explicitly select and state a UGC archetype before writing prompts."
+        },
+        {
+          "name": "includes_identity_card",
+          "description": "Response must include a character Identity Card with face, skin, hair, outfit, and accessories."
+        },
+        {
+          "name": "includes_negative_prompt",
+          "description": "Image prompt must include negative constraints blocking text, logos, studio lighting, and beauty filters."
+        },
+        {
+          "name": "enforces_ugc_aesthetic",
+          "description": "Prompts must use smartphone/handheld language and avoid cinematic or studio descriptors."
+        },
+        {
+          "name": "includes_self_evaluation",
+          "description": "Response must include evaluation scores across the 5 rubric dimensions."
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "I need a full 5-scene UGC campaign for a portable blender. The character is a mid-20s athletic male. Use the Problem→Solution archetype. Generate prompts for Kling 2.6.",
+      "expected_output": "A multi_scene output with 5 scenes (HOOK, PROBLEM, SOLUTION, PROOF, CTA), consistent Identity Card across all scenes, platform-calibrated prompts for Kling 2.6, and evaluation.",
+      "files": [],
+      "assertions": [
+        {
+          "name": "generates_5_scenes",
+          "description": "Response must include exactly 5 scenes matching the HOOK/PROBLEM/SOLUTION/PROOF/CTA structure."
+        },
+        {
+          "name": "identity_consistent_across_scenes",
+          "description": "The same character description must appear in every scene prompt without abbreviation."
+        },
+        {
+          "name": "calibrated_for_kling",
+          "description": "Prompts must reflect Kling-specific guidance: concise action-focused prompts, 5-10s duration, subtle handheld shake."
+        },
+        {
+          "name": "follows_problem_solution_arc",
+          "description": "Scene emotional arc must follow frustration → curiosity → relief → satisfaction."
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Generate 3 A/B variant UGC prompts for a premium leather wallet. I want to test different hook approaches for Instagram Reels.",
+      "expected_output": "A variant_set with 3 distinct prompt variants, each using a different hook pattern, with diff_notes explaining the strategic rationale for each variant.",
+      "files": [],
+      "assertions": [
+        {
+          "name": "generates_3_variants",
+          "description": "Response must include exactly 3 prompt variants."
+        },
+        {
+          "name": "different_hook_patterns",
+          "description": "Each variant must use a meaningfully different hook approach, not just word swaps."
+        },
+        {
+          "name": "includes_diff_notes",
+          "description": "Each variant must include diff_notes explaining what changed and the A/B testing rationale."
+        },
+        {
+          "name": "shared_identity_card",
+          "description": "All variants must use the same Identity Card for character consistency."
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Evaluate this UGC prompt and improve it: 'A beautiful woman holding a skincare product and smiling at the camera in a bright studio with perfect lighting. High quality, 4K, professional photography.'",
+      "expected_output": "An evaluation scoring the prompt across 5 dimensions, identifying specific failures (studio lighting, 4K, professional photography violate UGC aesthetic), and providing a revised version with proper UGC authenticity.",
+      "files": [],
+      "assertions": [
+        {
+          "name": "identifies_anti_ugc_patterns",
+          "description": "Response must flag studio, 4K, professional, and perfect lighting as anti-UGC patterns."
+        },
+        {
+          "name": "scores_authenticity_low",
+          "description": "Authenticity score must be 4 or below due to studio/professional language."
+        },
+        {
+          "name": "provides_revised_version",
+          "description": "Response must include a corrected version with proper UGC aesthetic language."
+        },
+        {
+          "name": "explains_why_changes_help",
+          "description": "Response must explain why each change improves UGC authenticity."
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "Create a character card for a UGC creator: late 30s woman, Mediterranean look, casual earth-tone style. I'll use this across multiple campaigns.",
+      "expected_output": "A complete Identity Card with all fields filled (face, skin, hair, build, outfit, accessories, distinguishing features) plus 3 sample prompts showing the character in different settings/angles.",
+      "files": [],
+      "assertions": [
+        {
+          "name": "complete_identity_card",
+          "description": "Response must fill all Identity Card fields including jaw, forehead, nose, eyes, brows, lips, distinctive marks."
+        },
+        {
+          "name": "includes_sample_prompts",
+          "description": "Response must include at least 3 sample prompts demonstrating the character."
+        },
+        {
+          "name": "earth_tone_outfit_consistency",
+          "description": "Outfit descriptions must use earth-tone colors as specified by the user."
+        },
+        {
+          "name": "mediterranean_features",
+          "description": "Facial features and skin tone must align with Mediterranean descriptors."
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "Bir cilt bakım serumu için GRWM tarzında UGC video promptu oluştur. Hedef kitle Türkiye'deki 25-35 yaş arası kadınlar. Karakter modern bir banyoda hazırlanıyor olsun.",
+      "expected_output": "Response in Turkish (user's language) with explanatory text, but all image/video model prompts in English. GRWM archetype selected. Identity Card included. Bathroom setting with natural morning lighting.",
+      "files": [],
+      "assertions": [
+        {
+          "name": "responds_in_turkish",
+          "description": "Explanatory text, metadata labels, and evaluation notes must be in Turkish."
+        },
+        {
+          "name": "prompts_in_english",
+          "description": "All positive_prompt, negative_prompt, and video_prompt values must be in English."
+        },
+        {
+          "name": "selects_grwm_archetype",
+          "description": "Response must select the GRWM archetype as specified by the user."
+        },
+        {
+          "name": "bathroom_setting",
+          "description": "Setting must describe a modern bathroom with appropriate UGC lighting (natural, not studio)."
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "prompt": "I have an existing UGC prompt that works OK but needs optimization. Here it is: 'Smartphone video of a guy in his kitchen talking about a meal prep container. He's holding it and showing the compartments. Handheld feel.' Make it better without changing the core concept.",
+      "expected_output": "An optimization response that preserves the core concept (kitchen, meal prep container, demonstration) while adding specificity: Identity Card, precise facial expressions, specific hand positions, camera motion details, negative constraints, and evaluation.",
+      "files": [],
+      "assertions": [
+        {
+          "name": "preserves_core_concept",
+          "description": "Optimized prompt must keep: kitchen setting, meal prep container, demonstration action, handheld feel."
+        },
+        {
+          "name": "adds_identity_specificity",
+          "description": "Response must add a complete character description where the original had only 'a guy'."
+        },
+        {
+          "name": "adds_action_specificity",
+          "description": "Response must replace 'holding it and showing' with specific hand positions and gestures."
+        },
+        {
+          "name": "adds_missing_technical_elements",
+          "description": "Response must add negative prompt, aspect ratio, and duration that were missing from the original."
+        }
+      ]
+    }
+  ]
+}
