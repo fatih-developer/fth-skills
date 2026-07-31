@@ -1,0 +1,14 @@
+interface:
+  display_name: Planla, Uygula, Doğrula, Kurtar
+  short_description: Kod değişikliklerini risk bazlı yönetir
+  default_prompt: Use $plan-implement-verify-recover to plan, implement, and verify this
+    repository change at the appropriate risk level.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

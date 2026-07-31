@@ -151,6 +151,18 @@ Return JSON:
       "duration_seconds": 5,
       "camera_motion": "",
       "notes": ""
+    },
+    "style_prompt": {
+      "aesthetic": "",
+      "lighting": "",
+      "color_grading": "",
+      "texture_and_feel": ""
+    },
+    "environment_prompt": {
+      "setting": "",
+      "background_elements": "",
+      "atmosphere": "",
+      "time_of_day": ""
     }
   },
   "evaluation": {
@@ -180,7 +192,9 @@ Return JSON with a `scenes` array. Each scene follows the single_scene prompt st
         "audio_cue": "ambient room tone"
       },
       "first_frame_image_prompt": { "..." : "..." },
-      "video_prompt": { "..." : "..." }
+      "video_prompt": { "..." : "..." },
+      "style_prompt": { "..." : "..." },
+      "environment_prompt": { "..." : "..." }
     }
   ],
   "evaluation": { "..." : "..." },
@@ -230,6 +244,20 @@ Return rubric-based scoring. Load `references/evaluation-rubric.md` for criteria
 6. **Duration:** Specify in seconds
 7. **Continuity:** "No sudden cuts, continuous single take"
 8. **Environment audio:** Suggest ambient sound cues for context
+
+### Style Prompts
+
+1. **Aesthetic Focus:** Define the overall visual tone. For UGC, this should be "Authentic, unpolished, relatable."
+2. **Lighting:** Describe the lighting explicitly. Examples: "Soft morning sunlight through a window," "Harsh fluorescent bathroom lighting," "Ring light reflection in eyes."
+3. **Color Grading:** Maintain natural colors. Avoid cinematic LUTs. "Natural white balance, slightly warm tones, realistic saturation."
+4. **Texture and Feel:** Add details that make it feel real. "Slightly grainy smartphone camera sensor, minor motion blur, raw footage."
+
+### Environment Prompts
+
+1. **Specific Setting:** The location must feel lived-in. "Cluttered modern kitchen counter," "messy unmade bed in a dorm room," "passenger seat of a parked car."
+2. **Background Elements:** Place objects that provide context. "Half-empty coffee mug, charging cable, houseplant."
+3. **Atmosphere:** Describe the mood of the room. "Cozy and quiet," "busy street noise outside," "echoey empty room."
+4. **Time of Day:** Ground the scene in a specific time. "Early morning," "late afternoon golden hour," "midnight."
 
 ## Dual-Language Output
 

@@ -26,6 +26,10 @@
         {
           "name": "includes_self_evaluation",
           "description": "Response must include evaluation scores across the 5 rubric dimensions."
+        },
+        {
+          "name": "includes_style_and_environment",
+          "description": "Response must include style_prompt and environment_prompt in the output."
         }
       ]
     },
