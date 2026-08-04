@@ -1,0 +1,7 @@
+interface:
+  display_name: "Project Focus First"
+  short_description: "Force establishing and preserving the primary focus category before discussing any new project."
+  default_prompt: "Use $project-focus-first to help with this task."
+
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,14 @@
+interface:
+  display_name: Turkish Prompt Compiler
+  short_description: Türkçe promptları ölçerek güvenle sıkıştırır
+  default_prompt: Use $turkish-prompt-compiler to optimize this Turkish prompt for
+    the target model without losing requirements.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true
