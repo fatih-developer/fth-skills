@@ -1,0 +1,14 @@
+interface:
+  display_name: AI GEO Auditor
+  short_description: Codeless GEO and SEO audits on live sites
+  default_prompt: Use $geo-auditor to audit this public website for SEO, GEO, answer
+    readiness, citations, and measurable AI visibility without changing it.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

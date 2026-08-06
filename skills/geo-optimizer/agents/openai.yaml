@@ -1,0 +1,14 @@
+interface:
+  display_name: AI GEO Optimizer
+  short_description: Improves visibility in AI and classic searches
+  default_prompt: Use $geo-optimizer to implement and verify SEO, GEO, answer-readiness,
+    citation, and measurable AI-visibility improvements for this web project.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true
