@@ -1,0 +1,7 @@
+interface:
+  display_name: "B2B Founder Roadmap"
+  short_description: "Orchestrate a B2B founder from market uncertainty to validated demand, first paying customers, repeatable revenue..."
+  default_prompt: "Use $b2b-founder-roadmap to help with this task."
+
+policy:
+  allow_implicit_invocation: true
