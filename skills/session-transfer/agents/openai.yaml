@@ -1,6 +1,6 @@
 interface:
   display_name: "Session Transfer"
-  short_description: "Create and resume indexed, agent-aware session handoffs across Codex, Claude Code, OpenCode, and unknown runtimes."
+  short_description: "Create and resume agent-aware session handoffs across Codex, Claude Code, OpenCode, and unknown runtimes. Triggers on save state, create handoff, resume latest session, context pressure, /goal completion, or continue where we left off. Persists indexed, immutable handoffs so a new session can continue without chat or terminal history."
   default_prompt: "Use $session-transfer to create a handoff, resume the latest session, persist /goal work, or continue unfinished topic work when context is getting full."
 
 policy:
