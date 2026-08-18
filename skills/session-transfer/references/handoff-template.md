@@ -1,122 +1,91 @@
 # Handoff Template
 
-Use this template structure when creating handoff documents. The smart scaffold script pre-fills metadata sections; complete the remaining sections based on session context.
+CREATE writes an immutable `YYYY-MM-DD-HHmm.md` (or `-N` on collision). Fill sections from verified session state. Omit metadata fields you cannot verify. Do not paste secrets.
 
----
+```markdown
+# Session Handoff
 
-# Handoff: [TASK_TITLE]
+## Metadata
 
-## Session Metadata
+```yaml
+session_id: 2026-08-18-1940
+created: 2026-08-18T19:40:00+03:00
+source_agent: codex
+source_model: gpt-5.6
+trigger: goal-completion
+status: completed
+goal_status: completed
+topic: billing-system
+working_directory: ...
+branch: feat/billing
+commit: ...
+previous_session: 2026-08-18-1704
+resumed_from: .claude/handoffs/2026-08-18-1830.md
+```
 
-- Created: [TIMESTAMP]
-- Project: [PROJECT_PATH]
-- Branch: [GIT_BRANCH]
-- Session duration: [APPROX_DURATION]
+## Objective
 
-## Current State Summary
+What this session was trying to accomplish.
 
-[One paragraph: What was being worked on, current status, and where things left off]
+## Current State
 
-## Codebase Understanding
-
-### Architecture Overview
-
-[Key architectural insights discovered during this session — how the system is structured, main components, data flow]
-
-### Critical Files
-
-| File | Purpose | Relevance |
-|------|---------|-----------|
-| path/to/file | What this file does | Why it matters for this task |
-
-### Key Patterns Discovered
-
-[Important patterns, conventions, or idioms found in this codebase that the next agent should follow]
+The actual repository/project state at handoff time.
 
 ## Work Completed
 
-### Tasks Finished
+Meaningful completed work.
 
-- [x] Task 1 — brief description of what was done
-- [x] Task 2 — brief description
+## Files Changed
 
-### Files Modified
+Created, modified, deleted, or otherwise important files.
 
-| File | Changes | Rationale |
-|------|---------|-----------|
-| path/to/file | Description of changes | Why this change was made |
+## Architecture & Decisions
 
-### Decisions Made
+Important technical/product decisions and why they were made.
 
-| Decision | Options Considered | Rationale |
-|----------|-------------------|-----------|
-| Chose X over Y | X, Y, Z | Why X was chosen |
+## Database Changes
 
-## Pending Work
+Schema, migrations, seed, queries, persistence changes, if relevant.
 
-### Immediate Next Steps
+## API Changes
 
-1. [Most critical next action — what to do first]
-2. [Second priority]
-3. [Third priority]
+Endpoints, contracts, validation, auth behavior, if relevant.
 
-### Blockers/Open Questions
+## Frontend Changes
 
-- [ ] Blocker: [description] — Needs: [what's required to unblock]
-- [ ] Question: [unclear aspect] — Suggested: [potential resolution]
+Pages, components, state, UI behavior, if relevant.
 
-### Deferred Items
+## Commands Executed
 
-- Item 1 (deferred because: [reason])
+Only commands useful to continue or verify the work.
 
-## Context for Resuming Agent
+## Verification
 
-### Important Context
+Build, lint, typecheck, tests, manual verification, deployment checks.
 
-[Critical information the next agent MUST know to continue effectively — this is the most important section for handoff]
+Clearly distinguish: passed / failed / not run.
 
-### Assumptions Made
+## Issues / Risks
 
-- Assumption 1: [what was assumed to be true]
-- Assumption 2: [another assumption]
+Known defects, blockers, uncertainty, or risky assumptions.
 
-### Potential Gotchas
+## Remaining Work
 
-- [Things that might trip up a new agent — edge cases, quirks, non-obvious behavior]
+Concrete unfinished work.
 
-## Environment State
+## Next Recommended Action
 
-### Tools/Services Used
+The single best next action for the next agent/session.
 
-- [Tool/Service]: [relevant configuration or state]
+## Resume Instructions
 
-### Active Processes
+Only special instructions required to continue safely.
+```
 
-- [Any background processes, dev servers, watchers that may be running]
+When filling:
 
-### Environment Variables
-
-- [Key env vars that matter for this work — DO NOT include secrets/values, just names]
-
-## Related Resources
-
-- [Link to relevant documentation]
-- [Related file paths]
-- [External resources consulted]
-
-## Handoff Chain
-
-- Continues from: [previous handoff file if any]
-- Supersedes: [older handoff file if this replaces it]
-
----
-
-## Template Usage Notes
-
-When filling this template:
-
-1. **Be specific and concrete** — vague descriptions don't help the next agent
-2. **Include file paths with line numbers** where relevant (e.g., `src/auth.ts:142`)
-3. **Prioritize "Important Context" and "Immediate Next Steps"** sections
-4. **Don't include sensitive data** (API keys, passwords, tokens)
-5. **Focus on WHAT and WHY** — rationale is crucial for handoffs
+1. Be specific — paths and line numbers beat narrative.
+2. Prioritize Current State, Next Recommended Action, and Resume Instructions.
+3. Record lineage after a cross-agent resume (`source_agent`, `resumed_from`, `previous_session`).
+4. Never invent branch, commit, or agent fields.
+5. Leave irrelevant optional sections as `Not recorded.` rather than guessing.

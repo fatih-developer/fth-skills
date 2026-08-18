@@ -1,7 +1,7 @@
 interface:
   display_name: "Session Transfer"
-  short_description: "Create and resume from session handoff documents for seamless AI agent session transfers. Preserves complete context across sessions to solve context exhaustion."
-  default_prompt: "Use $session-transfer to save current state, create a handoff document, or resume from an existing handoff when context is getting full."
+  short_description: "Create and resume indexed, agent-aware session handoffs across Codex, Claude Code, OpenCode, and unknown runtimes."
+  default_prompt: "Use $session-transfer to create a handoff, resume the latest session, persist /goal work, or continue unfinished topic work when context is getting full."
 
 policy:
   allow_implicit_invocation: true
