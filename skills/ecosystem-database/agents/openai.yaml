@@ -1,7 +1,7 @@
 interface:
   display_name: "Database Ecosystem"
-  short_description: "Comprehensive map and workflows for the Database domain."
-  default_prompt: "Use $database-ecosystem to help with this task."
+  short_description: "Database workflows: schema design, performance, evolution, compliance, and connection scaling."
+  default_prompt: "Use $ecosystem-database to pick the right workflow for this task, check which skills are installed, and run the steps in order with handoffs."
 
 policy:
   allow_implicit_invocation: true

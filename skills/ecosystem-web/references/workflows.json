@@ -1,0 +1,155 @@
+{
+  "schema_version": 1,
+  "ecosystem": "ecosystem-web",
+  "title": "Web, Design & Delivery",
+  "domain": "web",
+  "summary": "Design product-grade web interfaces, keep design systems consistent, make sites visible to search and AI answer engines, and deploy them.",
+  "philosophy": "Start from the user journey, keep design tokens as the single source of visual truth, measure discoverability instead of guessing, and verify every deploy.",
+  "report_dir": "docs/",
+  "members": {
+    "claude-style-coding": {
+      "role": "Product-minded implementation: user journey, UX states, and visual quality first."
+    },
+    "design-intelligence": {
+      "role": "Generates or reviews web pages with a 12-category rubric."
+    },
+    "design-md-enforcer": {
+      "role": "Extracts and enforces DESIGN.md design-token specifications."
+    },
+    "react-flow": {
+      "role": "Audits, repairs, migrates, and scaffolds @xyflow/react projects."
+    },
+    "geo-auditor": {
+      "role": "Read-only SEO/GEO/AEO audit of public websites."
+    },
+    "geo-optimizer": {
+      "role": "Implements and verifies SEO/GEO/AEO changes in a web codebase."
+    },
+    "coolify-orchestrator": {
+      "role": "Deploys, provisions, and debugs services on self-hosted Coolify."
+    }
+  },
+  "workflows": [
+    {
+      "id": "web-build-page",
+      "title": "Product Page Build Flow",
+      "when": [
+        "build a landing page",
+        "design a dashboard",
+        "create a new web screen"
+      ],
+      "steps": [
+        {
+          "skill": "design-md-enforcer",
+          "do": "Load or create DESIGN.md tokens before styling.",
+          "done_when": "Tokens exist for color, type, spacing, and components.",
+          "optional": true,
+          "condition": "Project has or needs a design system"
+        },
+        {
+          "skill": "design-intelligence",
+          "do": "Plan sections and UX rules (GENERATE mode).",
+          "done_when": "Page strategy and section architecture are approved."
+        },
+        {
+          "skill": "claude-style-coding",
+          "do": "Implement the slice with every UX state handled.",
+          "done_when": "Loading, empty, error, and success states work."
+        },
+        {
+          "skill": "geo-optimizer",
+          "do": "Add metadata, structured data, and crawlable content.",
+          "done_when": "Page passes the local SEO/GEO checks.",
+          "optional": true,
+          "condition": "Page is public"
+        }
+      ]
+    },
+    {
+      "id": "web-visibility",
+      "title": "Search & AI Visibility Flow",
+      "when": [
+        "audit our site for SEO",
+        "why doesn't ChatGPT cite us",
+        "improve AI search visibility"
+      ],
+      "steps": [
+        {
+          "skill": "geo-auditor",
+          "do": "Audit the public site and set a visibility baseline.",
+          "done_when": "Prioritized findings with evidence."
+        },
+        {
+          "skill": "geo-optimizer",
+          "do": "Implement the prioritized fixes in the codebase.",
+          "done_when": "Fixes verified locally and live when possible.",
+          "optional": true,
+          "condition": "Repository access is available"
+        }
+      ]
+    },
+    {
+      "id": "web-review",
+      "title": "UI Review Flow",
+      "when": [
+        "review my site",
+        "audit this page",
+        "check design consistency"
+      ],
+      "steps": [
+        {
+          "skill": "design-intelligence",
+          "do": "Score the page on 12 categories (REVIEW mode).",
+          "done_when": "Issues are classified by severity.",
+          "parallel_group": "review"
+        },
+        {
+          "skill": "design-md-enforcer",
+          "do": "Lint the implementation against DESIGN.md tokens.",
+          "done_when": "Token drift is listed with fixes.",
+          "parallel_group": "review",
+          "optional": true
+        }
+      ]
+    },
+    {
+      "id": "web-deploy",
+      "title": "Deploy & Verify Flow",
+      "when": [
+        "deploy to Coolify",
+        "the deploy failed",
+        "service is down"
+      ],
+      "steps": [
+        {
+          "skill": "checkpoint-guardian",
+          "do": "Confirm production restarts, env changes, or deletions.",
+          "done_when": "User approved each production-impacting action."
+        },
+        {
+          "skill": "coolify-orchestrator",
+          "do": "Deploy, read logs, and verify health.",
+          "done_when": "Service is healthy after deploy."
+        },
+        {
+          "skill": "geo-auditor",
+          "do": "Re-check crawlability of the live site after a public release.",
+          "done_when": "No new blocking crawl issue.",
+          "optional": true
+        }
+      ]
+    }
+  ],
+  "handoffs": [
+    {
+      "from": "react-flow",
+      "to": "claude-style-coding",
+      "when": "The flow editor needs product-level UX polish"
+    },
+    {
+      "from": "claude-style-coding",
+      "to": "accessibility-enforcer",
+      "when": "The UI ships inside a mobile app"
+    }
+  ]
+}

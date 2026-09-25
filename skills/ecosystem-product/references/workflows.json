@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "ecosystem": "ecosystem-product",
+  "title": "Product & Growth",
+  "domain": "product",
+  "summary": "Take a product from focus to market: B2B go-to-market, naming, creative content, and discoverability.",
+  "philosophy": "Evidence before scale. Validate demand before building more, name and position only after the problem is clear, and measure every channel.",
+  "report_dir": "docs/",
+  "members": {
+    "b2b-founder-roadmap": {
+      "role": "Stage-gated B2B go-to-market from validation to repeatable revenue."
+    },
+    "brand-name-lab": {
+      "role": "Generates, screens, and selects brand and product names."
+    },
+    "ugc-crafter": {
+      "role": "Writes prompts for authentic UGC-style image and video content."
+    }
+  },
+  "workflows": [
+    {
+      "id": "product-launch",
+      "title": "Product Launch Flow",
+      "when": [
+        "launch a new product",
+        "take this idea to market",
+        "go-to-market plan"
+      ],
+      "steps": [
+        {
+          "skill": "project-focus-first",
+          "do": "Fix the primary focus before planning.",
+          "done_when": "User chose one primary focus.",
+          "optional": true,
+          "condition": "No focus stated yet"
+        },
+        {
+          "skill": "b2b-founder-roadmap",
+          "do": "Diagnose the stage and run the current stage's work.",
+          "done_when": "Stage deliverable meets its definition of done.",
+          "condition": "B2B product"
+        },
+        {
+          "skill": "brand-name-lab",
+          "do": "Create and screen names once positioning is clear.",
+          "done_when": "One name selected with domain and trademark notes.",
+          "optional": true,
+          "condition": "Product needs a name"
+        },
+        {
+          "skill": "geo-auditor",
+          "do": "Baseline search and AI visibility of the launch site.",
+          "done_when": "Visibility baseline recorded.",
+          "parallel_group": "launch-assets",
+          "optional": true
+        },
+        {
+          "skill": "ugc-crafter",
+          "do": "Produce UGC-style creative prompts for launch campaigns.",
+          "done_when": "Prompt set covers each target platform.",
+          "parallel_group": "launch-assets",
+          "optional": true
+        }
+      ]
+    },
+    {
+      "id": "product-naming",
+      "title": "Naming & Positioning Flow",
+      "when": [
+        "name our product",
+        "rebrand",
+        "check this name"
+      ],
+      "steps": [
+        {
+          "skill": "brand-name-lab",
+          "do": "Run the naming playbook through screening and selection.",
+          "done_when": "Shortlist scored; one name locked."
+        },
+        {
+          "skill": "multi-brain-debate",
+          "do": "Stress-test the final two names.",
+          "done_when": "Verdict addresses every rebuttal.",
+          "optional": true
+        }
+      ]
+    },
+    {
+      "id": "product-content",
+      "title": "Creative Content Flow",
+      "when": [
+        "UGC ad creatives",
+        "influencer-style product video",
+        "testimonial video prompts"
+      ],
+      "steps": [
+        {
+          "skill": "ugc-crafter",
+          "do": "Build archetypes, identity locks, and scene prompts.",
+          "done_when": "Prompts pass the UGC evaluation checklist."
+        },
+        {
+          "skill": "prompt-crafter",
+          "do": "Evaluate or optimize prompts for a specific model.",
+          "done_when": "Prompt meets the output contract.",
+          "optional": true
+        }
+      ]
+    }
+  ],
+  "handoffs": [
+    {
+      "from": "b2b-founder-roadmap",
+      "to": "geo-auditor",
+      "when": "Inbound discovery is the current bottleneck"
+    },
+    {
+      "from": "b2b-founder-roadmap",
+      "to": "design-intelligence",
+      "when": "A landing page is needed for validation"
+    }
+  ]
+}

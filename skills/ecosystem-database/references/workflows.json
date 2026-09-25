@@ -1,0 +1,207 @@
+{
+  "schema_version": 1,
+  "ecosystem": "ecosystem-database",
+  "title": "Database Domain",
+  "domain": "database",
+  "summary": "Model, secure, optimize, migrate, and operate SQL databases (PostgreSQL, MySQL, SQLite) with data integrity first.",
+  "philosophy": "Data integrity and safe change beat feature speed. Every destructive or locking operation on a shared database needs a reviewed plan and an explicit confirmation.",
+  "report_dir": "docs/database-report/",
+  "members": {
+    "schema-architect": {
+      "role": "Derives normalized schemas and DDL from business requirements.",
+      "artifact": "docs/database-report/schema-architect-output.json"
+    },
+    "access-policy-designer": {
+      "role": "Designs RLS, column-level security, and RBAC/ABAC policies.",
+      "artifact": "docs/database-report/access-policy-output.json"
+    },
+    "seed-data-generator": {
+      "role": "Generates referentially intact seed and test data.",
+      "artifact": "docs/database-report/seed-data-output.json"
+    },
+    "query-explainer": {
+      "role": "Explains EXPLAIN/EXPLAIN ANALYZE plans in plain language.",
+      "artifact": "docs/database-report/query-explainer-output.json"
+    },
+    "index-advisor": {
+      "role": "Recommends missing, composite, covering, or removable indexes.",
+      "artifact": "docs/database-report/index-advisor-output.json"
+    },
+    "query-budget-enforcer": {
+      "role": "Sets query cost budgets and N+1 detection rules.",
+      "artifact": "docs/database-report/query-budget-output.json"
+    },
+    "schema-diff-analyzer": {
+      "role": "Detects schema drift between environments and plans safe syncs.",
+      "artifact": "docs/database-report/schema-diff-output.json"
+    },
+    "migration-strategist": {
+      "role": "Plans zero-downtime expand/contract migrations and backfills.",
+      "artifact": "docs/database-report/migration-strategist-output.json"
+    },
+    "data-masker": {
+      "role": "Detects PII and masks production data for non-production use.",
+      "artifact": "docs/database-report/data-masking-output.json"
+    },
+    "data-lineage-tracer": {
+      "role": "Traces upstream and downstream lineage of tables and columns.",
+      "artifact": "docs/database-report/data-lineage-output.json"
+    },
+    "pgbouncer-architect": {
+      "role": "Sizes and configures PgBouncer connection pooling for PostgreSQL."
+    },
+    "sqlite": {
+      "role": "Expert guidance for SQLite, libSQL/Turso, D1, WAL, FTS5, and sqlite-vec."
+    }
+  },
+  "workflows": [
+    {
+      "id": "db-new-schema",
+      "title": "New Schema Design Flow",
+      "when": [
+        "design a database",
+        "create tables",
+        "model the data"
+      ],
+      "steps": [
+        {
+          "skill": "sqlite",
+          "do": "Apply SQLite-specific type, PRAGMA, and migration rules.",
+          "done_when": "SQLite constraints are reflected in the design.",
+          "optional": true,
+          "condition": "Target engine is SQLite, libSQL, Turso, or D1"
+        },
+        {
+          "skill": "schema-architect",
+          "do": "Normalize the model and produce dialect-specific DDL.",
+          "done_when": "Every table has a primary key, constraints, and justified normalization level."
+        },
+        {
+          "skill": "access-policy-designer",
+          "do": "Add RLS, column security, and role policies to the new tables.",
+          "done_when": "Each table with tenant or user data has an explicit policy."
+        },
+        {
+          "skill": "seed-data-generator",
+          "do": "Generate seed data in dependency order.",
+          "done_when": "Seed script loads without foreign-key errors."
+        }
+      ]
+    },
+    {
+      "id": "db-performance",
+      "title": "Performance Optimization Flow",
+      "when": [
+        "fix a slow query",
+        "optimize the database",
+        "why is the database slow"
+      ],
+      "steps": [
+        {
+          "skill": "query-explainer",
+          "do": "Read the execution plan and name the bottleneck node.",
+          "done_when": "Bottleneck identified with row estimates vs actuals."
+        },
+        {
+          "skill": "index-advisor",
+          "do": "Recommend indexes that remove the bottleneck; flag unused indexes.",
+          "done_when": "Each recommendation cites the query it fixes and its write cost."
+        },
+        {
+          "skill": "query-budget-enforcer",
+          "do": "Set budgets and N+1 detection so the regression cannot return.",
+          "done_when": "Budgets and alert thresholds are defined.",
+          "optional": true
+        }
+      ]
+    },
+    {
+      "id": "db-evolution",
+      "title": "Database Evolution Flow",
+      "when": [
+        "change a table",
+        "migrate the schema",
+        "sync environments"
+      ],
+      "steps": [
+        {
+          "skill": "schema-diff-analyzer",
+          "do": "Diff source and target schemas and rate each change's risk.",
+          "done_when": "Every change is rated safe, warning, or dangerous."
+        },
+        {
+          "skill": "migration-strategist",
+          "do": "Plan expand/contract migrations, backfills, and rollback.",
+          "done_when": "Plan has up, down, backfill, and verification steps."
+        },
+        {
+          "skill": "checkpoint-guardian",
+          "do": "Confirm before any migration runs against a shared or production database.",
+          "done_when": "User explicitly approved the HIGH RISK step."
+        }
+      ]
+    },
+    {
+      "id": "db-compliance",
+      "title": "Compliance & Lineage Flow",
+      "when": [
+        "GDPR or KVKK review",
+        "mask production data",
+        "where does this data go"
+      ],
+      "steps": [
+        {
+          "skill": "data-lineage-tracer",
+          "do": "Map where sensitive columns come from and flow to.",
+          "done_when": "Upstream and downstream dependencies are listed.",
+          "parallel_group": "compliance"
+        },
+        {
+          "skill": "data-masker",
+          "do": "Detect PII and choose masking strategies per column.",
+          "done_when": "Every PII column has a masking rule.",
+          "parallel_group": "compliance"
+        }
+      ]
+    },
+    {
+      "id": "db-scaling",
+      "title": "Connection Scaling Flow",
+      "when": [
+        "too many connections",
+        "set up PgBouncer",
+        "size the connection pool"
+      ],
+      "steps": [
+        {
+          "skill": "pgbouncer-architect",
+          "do": "Analyze workload, pick pool mode, size pools, and generate config.",
+          "done_when": "Pool sizes are derived from server capacity and ORM constraints."
+        },
+        {
+          "skill": "query-budget-enforcer",
+          "do": "Cap long-running queries that would starve the pool.",
+          "done_when": "Statement timeouts and budgets are set.",
+          "optional": true
+        }
+      ]
+    }
+  ],
+  "handoffs": [
+    {
+      "from": "index-advisor",
+      "to": "migration-strategist",
+      "when": "Index creation needs a non-locking rollout on a large table"
+    },
+    {
+      "from": "data-masker",
+      "to": "seed-data-generator",
+      "when": "Masked data should be replaced by synthetic fixtures"
+    },
+    {
+      "from": "migration-strategist",
+      "to": "breaking-change-detector",
+      "when": "The schema change alters a public API contract"
+    }
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "ecosystem": "ecosystem-security",
+  "title": "Security",
+  "domain": "security",
+  "summary": "Audit skills before deployment, guard agent runtimes against injection and exfiltration, and learn from incidents.",
+  "philosophy": "No skill or message is trusted by default. Audit before deploy, guard at runtime, and feed every incident back into the rules. Security verdicts come from deterministic rules and human review, not from a single model judgment.",
+  "report_dir": "docs/security/",
+  "members": {
+    "security-auditor": {
+      "role": "Audits skills statically, assigns trust scores, and generates guard rules."
+    },
+    "adaptive-guard": {
+      "role": "Filters runtime messages through a 5-layer guard and learns new rules from attacks."
+    },
+    "security-orchestrator": {
+      "role": "Runs the full security lifecycle in the correct order."
+    },
+    "skill-security": {
+      "role": "Deprecated alias of security-auditor."
+    }
+  },
+  "deprecated": {
+    "skill-security": "security-auditor"
+  },
+  "workflows": [
+    {
+      "id": "sec-skill-audit",
+      "title": "Skill Audit & Trust Flow",
+      "when": [
+        "is this skill safe",
+        "audit a new skill",
+        "skill trust score"
+      ],
+      "steps": [
+        {
+          "skill": "security-auditor",
+          "do": "Run AUDIT and TRUST modes on the skill.",
+          "done_when": "Report with PASS/CONDITIONAL/FAIL and a 0-100 trust score."
+        },
+        {
+          "skill": "checkpoint-guardian",
+          "do": "Require approval before enabling a skill scored below the trusted tier.",
+          "done_when": "User approved or the skill stays quarantined.",
+          "optional": true,
+          "condition": "Trust score below 80"
+        }
+      ]
+    },
+    {
+      "id": "sec-runtime-guard",
+      "title": "Runtime Protection Flow",
+      "when": [
+        "add a security layer",
+        "prevent prompt injection",
+        "protect the agent at runtime"
+      ],
+      "steps": [
+        {
+          "skill": "security-auditor",
+          "do": "Generate guard rules from the audit (GUARD mode).",
+          "done_when": "Guard rules exist for every flagged risk."
+        },
+        {
+          "skill": "adaptive-guard",
+          "do": "Activate the layered filter with the generated rules and a baseline.",
+          "done_when": "Guard decisions are logged and latency stays within budget."
+        }
+      ]
+    },
+    {
+      "id": "sec-full-lifecycle",
+      "title": "Full Security Lifecycle",
+      "when": [
+        "run the security workflow",
+        "security orchestrator",
+        "audit and guard everything"
+      ],
+      "steps": [
+        {
+          "skill": "security-orchestrator",
+          "do": "Run discovery, audit, trust, guard, incident response, calibration, and report.",
+          "done_when": "All seven phases report a status."
+        }
+      ]
+    }
+  ],
+  "handoffs": [
+    {
+      "from": "adaptive-guard",
+      "to": "security-auditor",
+      "when": "An incident requires re-auditing the affected skill"
+    },
+    {
+      "from": "security-auditor",
+      "to": "skill-comparator",
+      "when": "A failing skill should be replaced by a safer alternative"
+    }
+  ]
+}

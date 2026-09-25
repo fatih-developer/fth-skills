@@ -1,7 +1,7 @@
 interface:
-  display_name: "Proje Analizcisi"
-  short_description: "Projeyi sistematik olarak tara, derin analiz yap ve kapsamlı raporlar üret."
-  default_prompt: "Use $proje-analizcisi to scan the project directory, analyze architecture, code quality, security, and performance, and generate reports in docs/analyze/."
+  display_name: "Proje Analizcisi (Alias)"
+  short_description: "Deprecated Turkish alias that routes to project-analyzer, which writes Turkish reports on request."
+  default_prompt: "Use $proje-analizcisi to run project-analyzer on this project and write the reports in Turkish."
 
 policy:
-  allow_implicit_invocation: true
+  allow_implicit_invocation: false

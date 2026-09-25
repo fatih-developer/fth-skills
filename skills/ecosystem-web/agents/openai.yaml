@@ -1,0 +1,7 @@
+interface:
+  display_name: "Web Ecosystem"
+  short_description: "Web workflows: page build, search and AI visibility, UI review, and deploy with verification."
+  default_prompt: "Use $ecosystem-web to pick the right workflow for this task, check which skills are installed, and run the steps in order with handoffs."
+
+policy:
+  allow_implicit_invocation: true

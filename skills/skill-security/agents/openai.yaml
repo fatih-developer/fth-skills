@@ -1,7 +1,7 @@
 interface:
-  display_name: "Skill Security"
-  short_description: "Analyzes and enforces security protocols on the skill ecosystem. Operates via Audit, Guard, and Trust modes."
-  default_prompt: "Use $skill-security to help with this task."
+  display_name: "Skill Security (Alias)"
+  short_description: "Deprecated alias for security-auditor: skill audits, trust scores, and runtime guard rules."
+  default_prompt: "Use $skill-security to audit this skill with security-auditor and report the trust score and findings."
 
 policy:
-  allow_implicit_invocation: true
+  allow_implicit_invocation: false

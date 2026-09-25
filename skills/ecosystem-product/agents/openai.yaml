@@ -1,0 +1,7 @@
+interface:
+  display_name: "Product Ecosystem"
+  short_description: "Product workflows: launch, naming and positioning, and creative content."
+  default_prompt: "Use $ecosystem-product to pick the right workflow for this task, check which skills are installed, and run the steps in order with handoffs."
+
+policy:
+  allow_implicit_invocation: true

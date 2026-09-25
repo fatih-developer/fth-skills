@@ -1,0 +1,258 @@
+{
+  "schema_version": 1,
+  "ecosystem": "ecosystem-orchestration",
+  "title": "Agent Orchestration",
+  "domain": "orchestration",
+  "summary": "Plan, execute, recover, remember, and review multi-step agent work; connect external agents safely.",
+  "philosophy": "Agents fail in unexpected ways. Decompose before acting, gate irreversible steps, recover from errors deliberately, keep durable state, and review the outcome before calling work done.",
+  "report_dir": "docs/",
+  "hub": true,
+  "members": {
+    "task-decomposer": {
+      "role": "Breaks large goals into subtasks with a dependency map."
+    },
+    "parallel-planner": {
+      "role": "Finds steps that can run concurrently and detects conflicts."
+    },
+    "tool-selector": {
+      "role": "Chooses the minimal tool set and call order."
+    },
+    "plan-implement-verify-recover": {
+      "role": "Executes repository changes with risk-adaptive planning and verification."
+    },
+    "checkpoint-guardian": {
+      "role": "Gates destructive or irreversible actions behind confirmation."
+    },
+    "error-recovery": {
+      "role": "Classifies failures and applies bounded recovery strategies."
+    },
+    "context-compressor": {
+      "role": "Compresses long context while keeping decisions and errors."
+    },
+    "memory-ledger": {
+      "role": "Keeps an in-task ledger of decisions, status, and failed approaches."
+    },
+    "session-transfer": {
+      "role": "Writes and resumes cross-session, cross-agent handoffs."
+    },
+    "mastermind-logger": {
+      "role": "Maintains a cross-referenced project knowledge wiki."
+    },
+    "output-critic": {
+      "role": "Scores outputs against type-specific criteria before handoff."
+    },
+    "agent-reviewer": {
+      "role": "Runs a post-task retrospective across six dimensions."
+    },
+    "jev-orchestrator": {
+      "role": "Routes bounded semantic judgments to the TypeSafe Jev runtime."
+    },
+    "claw-integration-design": {
+      "role": "Designs secure APIs and tool manifests for external agents."
+    },
+    "project-analyzer": {
+      "role": "Produces evidence-based codebase analysis reports.",
+      "artifact": "docs/analyze/01-project-overview.md"
+    },
+    "proje-analizcisi": {
+      "role": "Deprecated Turkish alias of project-analyzer."
+    },
+    "skill-comparator": {
+      "role": "Compares skills and recommends adopt, adapt, or build.",
+      "artifact": "docs/skill-report/skill-analysis-report.md"
+    }
+  },
+  "deprecated": {
+    "proje-analizcisi": "project-analyzer"
+  },
+  "workflows": [
+    {
+      "id": "orch-complex-task",
+      "title": "Complex Task Execution Flow",
+      "when": [
+        "build this end to end",
+        "multi-phase task",
+        "plan and execute the project"
+      ],
+      "steps": [
+        {
+          "skill": "task-decomposer",
+          "do": "Break the goal into subtasks, consulting the matching domain ecosystem.",
+          "done_when": "Every subtask has an owner skill, dependency, and success criterion."
+        },
+        {
+          "skill": "parallel-planner",
+          "do": "Group independent subtasks and flag write conflicts.",
+          "done_when": "Execution plan with parallel groups and conflict warnings.",
+          "optional": true,
+          "condition": "Three or more independent subtasks"
+        },
+        {
+          "skill": "tool-selector",
+          "do": "Choose the minimal tool sequence per subtask.",
+          "done_when": "No redundant or blocked tool calls in the plan.",
+          "optional": true
+        },
+        {
+          "skill": "memory-ledger",
+          "do": "Record decisions, status, and failed approaches as work proceeds.",
+          "done_when": "Ledger reflects the latest completed step."
+        },
+        {
+          "skill": "output-critic",
+          "do": "Score each deliverable before it is handed to the next step.",
+          "done_when": "Deliverable meets the acceptance threshold.",
+          "optional": true
+        },
+        {
+          "skill": "agent-reviewer",
+          "do": "Run a retrospective once the task is complete.",
+          "done_when": "Action items for the next task are recorded.",
+          "optional": true
+        }
+      ]
+    },
+    {
+      "id": "orch-code-change",
+      "title": "Repository Change Flow",
+      "when": [
+        "fix this bug",
+        "implement the feature",
+        "refactor this module"
+      ],
+      "steps": [
+        {
+          "skill": "project-analyzer",
+          "do": "Map the codebase when it is unfamiliar.",
+          "done_when": "Architecture and risk hotspots are known.",
+          "optional": true,
+          "condition": "Unfamiliar or large codebase"
+        },
+        {
+          "skill": "plan-implement-verify-recover",
+          "do": "Plan, implement, verify, and recover within a bounded loop.",
+          "done_when": "Change is verified by tests or a reproducible check."
+        },
+        {
+          "skill": "checkpoint-guardian",
+          "do": "Confirm destructive steps (force push, data deletion, deploy).",
+          "done_when": "Every HIGH RISK action was approved.",
+          "optional": true,
+          "condition": "Change includes an irreversible action"
+        }
+      ]
+    },
+    {
+      "id": "orch-resilience",
+      "title": "Failure & Context Pressure Flow",
+      "when": [
+        "the step failed",
+        "context is getting full",
+        "continue in a new session"
+      ],
+      "steps": [
+        {
+          "skill": "error-recovery",
+          "do": "Classify the failure and apply the matching recovery strategy.",
+          "done_when": "Step succeeded or was escalated with evidence.",
+          "optional": true,
+          "condition": "A step failed"
+        },
+        {
+          "skill": "context-compressor",
+          "do": "Compress history before it crowds out the task.",
+          "done_when": "Critical decisions and errors survive compression.",
+          "optional": true,
+          "condition": "Context is near its limit"
+        },
+        {
+          "skill": "session-transfer",
+          "do": "Write an immutable handoff so a new session can resume.",
+          "done_when": "Handoff validates and is indexed.",
+          "optional": true,
+          "condition": "Work must continue in another session or agent"
+        }
+      ]
+    },
+    {
+      "id": "orch-agent-connectivity",
+      "title": "Agent Connectivity Flow",
+      "when": [
+        "let an external bot use our app",
+        "design a tool manifest",
+        "give an agent API access"
+      ],
+      "steps": [
+        {
+          "skill": "claw-integration-design",
+          "do": "Design agent-facing endpoints, scopes, and the tools manifest.",
+          "done_when": "Every tool has a scope, auth method, and rate limit."
+        },
+        {
+          "skill": "auth-flow-designer",
+          "do": "Harden token lifecycle and scopes for bot clients.",
+          "done_when": "Bot tokens are scoped and revocable.",
+          "optional": true
+        },
+        {
+          "skill": "security-auditor",
+          "do": "Audit the integration surface before exposure.",
+          "done_when": "No STRICT REJECT findings."
+        }
+      ]
+    },
+    {
+      "id": "orch-knowledge",
+      "title": "Knowledge Capture Flow",
+      "when": [
+        "save what we learned",
+        "update the project wiki",
+        "document this session"
+      ],
+      "steps": [
+        {
+          "skill": "memory-ledger",
+          "do": "Close the task ledger with final status.",
+          "done_when": "Ledger is closed."
+        },
+        {
+          "skill": "mastermind-logger",
+          "do": "Merge durable learnings into the project wiki.",
+          "done_when": "Index and log are updated."
+        }
+      ]
+    }
+  ],
+  "handoffs": [
+    {
+      "from": "jev-orchestrator",
+      "to": "checkpoint-guardian",
+      "when": "A Jev decision would trigger an irreversible side effect"
+    },
+    {
+      "from": "jev-orchestrator",
+      "to": "error-recovery",
+      "when": "Jev invocation fails and no project fallback exists"
+    },
+    {
+      "from": "jev-orchestrator",
+      "to": "output-critic",
+      "when": "An open-ended critique is needed beyond a bounded quality gate"
+    },
+    {
+      "from": "skill-comparator",
+      "to": "security-auditor",
+      "when": "A candidate skill will be adopted"
+    },
+    {
+      "from": "memory-ledger",
+      "to": "session-transfer",
+      "when": "The task will continue in a new session"
+    },
+    {
+      "from": "session-transfer",
+      "to": "memory-ledger",
+      "when": "A resumed session needs an in-task ledger again"
+    }
+  ]
+}

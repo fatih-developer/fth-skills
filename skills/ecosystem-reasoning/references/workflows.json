@@ -1,0 +1,195 @@
+{
+  "schema_version": 1,
+  "ecosystem": "ecosystem-reasoning",
+  "title": "Reasoning, Planning Gates & Prompting",
+  "domain": "reasoning",
+  "summary": "Clarify intent, stress-test plans, compare perspectives, and craft prompts, without stacking redundant question gates.",
+  "philosophy": "Ask only what changes the outcome. Run at most one clarification gate per request, in a fixed precedence, then act. Use multiple perspectives when trade-offs are real, not by default.",
+  "report_dir": "docs/",
+  "members": {
+    "project-focus-first": {
+      "role": "Hard gate: fixes one primary focus before a new project is discussed."
+    },
+    "ask-first-act-later": {
+      "role": "Consultant mode: asks targeted questions before any implementation."
+    },
+    "assumption-checker": {
+      "role": "Surfaces and verifies technical, data, business, and intent assumptions."
+    },
+    "plan-hardener": {
+      "role": "Stress-tests plans with assumption-first review modes."
+    },
+    "multi-brain": {
+      "role": "Synthesizes three perspectives into one consensus answer."
+    },
+    "multi-brain-experts": {
+      "role": "Selects three domain experts for the perspectives."
+    },
+    "multi-brain-debate": {
+      "role": "Runs a two-round adversarial debate before a verdict."
+    },
+    "multi-brain-score": {
+      "role": "Adds confidence scores and weighted consensus."
+    },
+    "prompt-crafter": {
+      "role": "Designs, optimizes, and evaluates prompts and agent specs."
+    },
+    "turkish-prompt-compiler": {
+      "role": "Measures and compresses long Turkish prompts without losing intent."
+    }
+  },
+  "gates": [
+    {
+      "skill": "project-focus-first",
+      "applies": "A brand-new project with no stated primary focus"
+    },
+    {
+      "skill": "ask-first-act-later",
+      "applies": "The user explicitly asked for questions before action"
+    },
+    {
+      "skill": "assumption-checker",
+      "applies": "A multi-step or ambiguous task is about to start"
+    },
+    {
+      "skill": "plan-hardener",
+      "applies": "A written plan exists and must be stress-tested"
+    }
+  ],
+  "workflows": [
+    {
+      "id": "reason-clarify",
+      "title": "Clarification Gate Flow",
+      "when": [
+        "new project idea",
+        "ambiguous request",
+        "ask me before you build"
+      ],
+      "steps": [
+        {
+          "skill": "project-focus-first",
+          "do": "Establish the primary focus for a brand-new project.",
+          "done_when": "User chose one primary focus.",
+          "optional": true,
+          "condition": "New project and no focus stated"
+        },
+        {
+          "skill": "ask-first-act-later",
+          "do": "Ask the few questions that change the outcome.",
+          "done_when": "Requirements are confirmed by the user.",
+          "optional": true,
+          "condition": "User explicitly asked to be consulted first"
+        },
+        {
+          "skill": "assumption-checker",
+          "do": "List remaining assumptions and verify the risky ones.",
+          "done_when": "No unverified high-risk assumption remains."
+        }
+      ]
+    },
+    {
+      "id": "reason-decision",
+      "title": "Decision Quality Flow",
+      "when": [
+        "which option is better",
+        "debate these approaches",
+        "give me a robust recommendation"
+      ],
+      "steps": [
+        {
+          "skill": "multi-brain",
+          "do": "Produce three perspectives and a consensus.",
+          "done_when": "Consensus names the chosen option and why."
+        },
+        {
+          "skill": "multi-brain-experts",
+          "do": "Swap generic perspectives for domain experts.",
+          "done_when": "Three relevant experts were selected.",
+          "optional": true,
+          "condition": "Domain expertise matters (security, cost, UX)"
+        },
+        {
+          "skill": "multi-brain-debate",
+          "do": "Stress the top two options through rebuttals.",
+          "done_when": "Verdict addresses every rebuttal.",
+          "optional": true,
+          "condition": "Two strong options clash"
+        },
+        {
+          "skill": "multi-brain-score",
+          "do": "Weight the consensus by stated confidence.",
+          "done_when": "Low-confidence areas are flagged.",
+          "optional": true
+        },
+        {
+          "skill": "output-critic",
+          "do": "Score the final recommendation before delivery.",
+          "done_when": "Recommendation meets the acceptance threshold.",
+          "optional": true
+        }
+      ]
+    },
+    {
+      "id": "reason-plan-review",
+      "title": "Plan Hardening Flow",
+      "when": [
+        "review my plan",
+        "find risks in this architecture",
+        "red-team this plan"
+      ],
+      "steps": [
+        {
+          "skill": "plan-hardener",
+          "do": "Pick the review mode by size and risk and run it.",
+          "done_when": "Every critical risk has a mitigation or an owner."
+        },
+        {
+          "skill": "task-decomposer",
+          "do": "Turn the hardened plan into executable subtasks.",
+          "done_when": "Subtasks carry the mitigations.",
+          "optional": true
+        }
+      ]
+    },
+    {
+      "id": "reason-prompting",
+      "title": "Prompt Engineering Flow",
+      "when": [
+        "write a system prompt",
+        "optimize this prompt",
+        "compress this Turkish prompt"
+      ],
+      "steps": [
+        {
+          "skill": "prompt-crafter",
+          "do": "Design or optimize the prompt with an explicit output contract.",
+          "done_when": "Prompt passes the final check list."
+        },
+        {
+          "skill": "turkish-prompt-compiler",
+          "do": "Measure and compress a long Turkish prompt.",
+          "done_when": "Savings reported with fidelity preserved.",
+          "optional": true,
+          "condition": "Prompt is long and in Turkish"
+        }
+      ]
+    }
+  ],
+  "handoffs": [
+    {
+      "from": "project-focus-first",
+      "to": "b2b-founder-roadmap",
+      "when": "The chosen focus is B2B go-to-market"
+    },
+    {
+      "from": "prompt-crafter",
+      "to": "ugc-crafter",
+      "when": "The prompt targets UGC-style image or video generation"
+    },
+    {
+      "from": "prompt-crafter",
+      "to": "jev-orchestrator",
+      "when": "The prompt only returns a small fixed label set"
+    }
+  ]
+}

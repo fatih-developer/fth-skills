@@ -2,18 +2,52 @@
   "$schema": "https://skills.sh/schemas/skills.sh.schema.json",
   "groupings": [
     {
-      "title": "Mobile App Domain",
+      "title": "Ecosystem Hubs",
       "skills": [
-        "accessibility-enforcer",
-        "app-store-reviewer",
-        "crash-analyst",
-        "deep-link-architect",
-        "mobile-perf-auditor",
-        "mobile-security-auditor",
-        "offline-sync-designer",
-        "onboarding-designer",
-        "push-notification-planner",
-        "release-orchestrator"
+        "ecosystem-orchestration",
+        "ecosystem-reasoning",
+        "ecosystem-api",
+        "ecosystem-database",
+        "ecosystem-mobile",
+        "ecosystem-web",
+        "ecosystem-product",
+        "ecosystem-security"
+      ]
+    },
+    {
+      "title": "Agent Orchestration",
+      "skills": [
+        "agent-reviewer",
+        "checkpoint-guardian",
+        "claw-integration-design",
+        "context-compressor",
+        "error-recovery",
+        "jev-orchestrator",
+        "mastermind-logger",
+        "memory-ledger",
+        "output-critic",
+        "parallel-planner",
+        "plan-implement-verify-recover",
+        "project-analyzer",
+        "session-transfer",
+        "skill-comparator",
+        "task-decomposer",
+        "tool-selector"
+      ]
+    },
+    {
+      "title": "Reasoning, Planning Gates & Prompting",
+      "skills": [
+        "ask-first-act-later",
+        "assumption-checker",
+        "multi-brain",
+        "multi-brain-debate",
+        "multi-brain-experts",
+        "multi-brain-score",
+        "plan-hardener",
+        "project-focus-first",
+        "prompt-crafter",
+        "turkish-prompt-compiler"
       ]
     },
     {
@@ -49,76 +83,53 @@
       ]
     },
     {
-      "title": "Security",
+      "title": "Mobile App Domain",
       "skills": [
-        "adaptive-guard",
-        "security-auditor",
-        "security-orchestrator",
-        "skill-security"
+        "accessibility-enforcer",
+        "app-store-reviewer",
+        "crash-analyst",
+        "deep-link-architect",
+        "mobile-perf-auditor",
+        "mobile-security-auditor",
+        "offline-sync-designer",
+        "onboarding-designer",
+        "push-notification-planner",
+        "release-orchestrator"
       ]
     },
     {
-      "title": "Ecosystem Orchestrators",
+      "title": "Web, Design & Delivery",
       "skills": [
-        "ecosystem-api",
-        "ecosystem-database",
-        "ecosystem-mobile",
-        "ecosystem-orchestration",
-        "ecosystem-security"
-      ]
-    },
-    {
-      "title": "Agent Orchestration",
-      "skills": [
-        "agent-reviewer",
-        "assumption-checker",
-        "checkpoint-guardian",
-        "context-compressor",
-        "error-recovery",
-        "jev-orchestrator",
-        "memory-ledger",
-        "output-critic",
-        "parallel-planner",
-        "session-transfer",
-        "task-decomposer",
-        "tool-selector"
-      ]
-    },
-    {
-      "title": "Reasoning and Prompting",
-      "skills": [
-        "ask-first-act-later",
         "claude-style-coding",
-        "multi-brain",
-        "multi-brain-debate",
-        "multi-brain-experts",
-        "multi-brain-score",
-        "plan-hardener",
-        "prompt-crafter"
-      ]
-    },
-    {
-      "title": "Skill Operations",
-      "skills": [
-        "claw-integration-design",
-        "mastermind-logger",
-        "skill-comparator"
-      ]
-    },
-    {
-      "title": "Design and Frontend",
-      "skills": [
+        "coolify-orchestrator",
         "design-intelligence",
         "design-md-enforcer",
+        "geo-auditor",
+        "geo-optimizer",
         "react-flow"
       ]
     },
     {
-      "title": "Platform and Analysis",
+      "title": "Product & Growth",
       "skills": [
-        "coolify-orchestrator",
-        "project-analyzer",
-        "proje-analizcisi"
+        "b2b-founder-roadmap",
+        "brand-name-lab",
+        "ugc-crafter"
+      ]
+    },
+    {
+      "title": "Security",
+      "skills": [
+        "adaptive-guard",
+        "security-auditor",
+        "security-orchestrator"
+      ]
+    },
+    {
+      "title": "Deprecated Aliases",
+      "skills": [
+        "proje-analizcisi",
+        "skill-security"
       ]
     }
   ]

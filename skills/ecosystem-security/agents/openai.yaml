@@ -1,7 +1,7 @@
 interface:
   display_name: "Security Ecosystem"
-  short_description: "Three-layer security ecosystem: pre-deploy audit, runtime guard, and adaptive learning."
-  default_prompt: "Use $ecosystem-security to manage the security of this agent system."
+  short_description: "Security workflows: skill audit and trust, runtime guard, and the full security lifecycle."
+  default_prompt: "Use $ecosystem-security to pick the right workflow for this task, check which skills are installed, and run the steps in order with handoffs."
 
 policy:
   allow_implicit_invocation: true

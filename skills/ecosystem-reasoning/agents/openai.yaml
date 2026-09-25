@@ -1,0 +1,7 @@
+interface:
+  display_name: "Reasoning Ecosystem"
+  short_description: "Reasoning workflows: one clarification gate, decision quality, plan hardening, and prompt engineering."
+  default_prompt: "Use $ecosystem-reasoning to pick the right workflow for this task, check which skills are installed, and run the steps in order with handoffs."
+
+policy:
+  allow_implicit_invocation: true

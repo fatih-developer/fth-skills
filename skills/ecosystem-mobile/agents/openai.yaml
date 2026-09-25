@@ -1,7 +1,7 @@
 interface:
   display_name: "Mobile Ecosystem"
-  short_description: "Comprehensive map and workflows for the Mobile domain."
-  default_prompt: "Use $mobile-ecosystem to help with this task."
+  short_description: "Mobile workflows: pre-release audit, store release, feature architecture, and post-launch monitoring."
+  default_prompt: "Use $ecosystem-mobile to pick the right workflow for this task, check which skills are installed, and run the steps in order with handoffs."
 
 policy:
   allow_implicit_invocation: true

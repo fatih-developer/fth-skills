@@ -4,3 +4,8 @@ _workspace/
 # EachLabs Kling Skill (Kişisel/Lokal Kullanım - Commit Edilmeyecek)
 skills/eachlabs-kling-generator/
 skills/eachlabs-kling-generator.zip
+
+# Python bytecode and caches
+__pycache__/
+*.pyc
+.pytest_cache/

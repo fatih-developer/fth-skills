@@ -1,7 +1,7 @@
 interface:
-  display_name: "Orchestration Ecosystem"
-  short_description: "Comprehensive map for multi-brain, orchestration, and agent governance."
-  default_prompt: "Use $orchestration-ecosystem to help with this task."
+  display_name: "Orchestration Hub"
+  short_description: "Cross-ecosystem index plus agent workflows: complex tasks, code changes, recovery, connectivity, knowledge capture."
+  default_prompt: "Use $ecosystem-orchestration to pick the right workflow for this task, check which skills are installed, and run the steps in order with handoffs."
 
 policy:
   allow_implicit_invocation: true

@@ -1,0 +1,180 @@
+{
+  "schema_version": 1,
+  "ecosystem": "ecosystem-api",
+  "title": "API Domain",
+  "domain": "api",
+  "summary": "Design, secure, scale, and evolve REST, GraphQL, gRPC, and event-driven APIs with a contract-first workflow.",
+  "philosophy": "API work is contract-driven and security-first. Protect consumers from breaking changes, design authentication before endpoints go public, and never trade backward compatibility for speed in a public API.",
+  "report_dir": "docs/api-report/",
+  "members": {
+    "protocol-selector": {
+      "role": "Chooses REST, GraphQL, gRPC, or event-driven based on latency, payload, and client needs.",
+      "artifact": "docs/api-report/protocol-selection-output.json"
+    },
+    "contract-first-designer": {
+      "role": "Writes the OpenAPI/AsyncAPI contract before code.",
+      "artifact": "docs/api-report/contract-designer-output.json"
+    },
+    "api-mock-designer": {
+      "role": "Builds stateful mock servers from the contract.",
+      "artifact": "docs/api-report/api-mock-output.json"
+    },
+    "sdk-scaffolder": {
+      "role": "Scaffolds idiomatic client SDKs from the contract.",
+      "artifact": "docs/api-report/sdk-scaffold-output.json"
+    },
+    "auth-flow-designer": {
+      "role": "Selects API keys, JWT, OAuth2, or mTLS and designs token lifecycles and scopes.",
+      "artifact": "docs/api-report/auth-flow-output.json"
+    },
+    "rate-limit-strategist": {
+      "role": "Designs throttling algorithms, quotas, and 429 responses.",
+      "artifact": "docs/api-report/rate-limit-output.json"
+    },
+    "breaking-change-detector": {
+      "role": "Diffs two contract versions and classifies breaking changes.",
+      "artifact": "docs/api-report/breaking-change-output.json"
+    },
+    "changelog-generator": {
+      "role": "Turns contract diffs and commits into consumer-facing changelogs.",
+      "artifact": "docs/api-report/api-changelog-output.json"
+    },
+    "webhook-architect": {
+      "role": "Designs outbound webhook payloads, signing, retries, and DLQ.",
+      "artifact": "docs/api-report/webhook-architect-output.json"
+    },
+    "api-observability-planner": {
+      "role": "Defines metrics, structured logs, tracing, and alerts for the API boundary.",
+      "artifact": "docs/api-report/api-observability-output.json"
+    }
+  },
+  "workflows": [
+    {
+      "id": "api-design",
+      "title": "OpenAPI-First Design Flow",
+      "when": [
+        "design a new API",
+        "create endpoints",
+        "build an API from scratch"
+      ],
+      "steps": [
+        {
+          "skill": "protocol-selector",
+          "do": "Decide the protocol when it is not already fixed.",
+          "done_when": "One protocol chosen with trade-offs recorded.",
+          "optional": true,
+          "condition": "Protocol not yet decided"
+        },
+        {
+          "skill": "contract-first-designer",
+          "do": "Write the OpenAPI/AsyncAPI contract: resources, schemas, errors, versioning.",
+          "done_when": "Contract passes a spec linter and covers every endpoint in scope."
+        },
+        {
+          "skill": "api-mock-designer",
+          "do": "Generate stateful mocks and example payloads from the contract.",
+          "done_when": "Consumers can exercise happy and error paths against the mock.",
+          "parallel_group": "consumers"
+        },
+        {
+          "skill": "sdk-scaffolder",
+          "do": "Scaffold typed client SDKs with retry, timeout, and pagination.",
+          "done_when": "SDK compiles and matches the contract.",
+          "parallel_group": "consumers",
+          "optional": true
+        }
+      ]
+    },
+    {
+      "id": "api-security-scale",
+      "title": "API Security & Scale Flow",
+      "when": [
+        "secure the API",
+        "add authentication",
+        "prepare the API for high traffic"
+      ],
+      "steps": [
+        {
+          "skill": "auth-flow-designer",
+          "do": "Design authentication, token lifecycle, and authorization scopes.",
+          "done_when": "Every endpoint has an auth requirement and scope."
+        },
+        {
+          "skill": "rate-limit-strategist",
+          "do": "Design rate limits and quotas per user, key, and IP.",
+          "done_when": "Limits, headers, and 429 behavior are specified."
+        },
+        {
+          "skill": "security-auditor",
+          "do": "Audit agent-facing or skill-facing surfaces when bots or agents call the API.",
+          "done_when": "No STRICT REJECT findings.",
+          "optional": true,
+          "condition": "Agents or external bots consume the API"
+        }
+      ]
+    },
+    {
+      "id": "api-evolution",
+      "title": "API Evolution Flow",
+      "when": [
+        "release v2",
+        "change endpoints",
+        "update the API contract"
+      ],
+      "steps": [
+        {
+          "skill": "breaking-change-detector",
+          "do": "Diff the old and new contracts and classify MAJOR/MINOR/PATCH changes.",
+          "done_when": "Every change is classified and breaking changes have a migration path."
+        },
+        {
+          "skill": "changelog-generator",
+          "do": "Publish a consumer-facing changelog and deprecation notices.",
+          "done_when": "Changelog lists features, fixes, and deprecations with dates."
+        }
+      ]
+    },
+    {
+      "id": "api-production-readiness",
+      "title": "Production Readiness Flow",
+      "when": [
+        "make the API production-ready",
+        "add webhooks",
+        "add monitoring to the API"
+      ],
+      "steps": [
+        {
+          "skill": "webhook-architect",
+          "do": "Design outbound webhooks: envelope, signing, retries, DLQ.",
+          "done_when": "Delivery is async, signed, idempotent, and retried.",
+          "parallel_group": "readiness",
+          "optional": true,
+          "condition": "The API emits events to consumers"
+        },
+        {
+          "skill": "api-observability-planner",
+          "do": "Define RED metrics, structured logs, tracing, and SLO alerts.",
+          "done_when": "Each critical endpoint has metrics, traces, and an alert.",
+          "parallel_group": "readiness"
+        }
+      ]
+    }
+  ],
+  "handoffs": [
+    {
+      "from": "contract-first-designer",
+      "to": "breaking-change-detector",
+      "when": "A previous contract version exists"
+    },
+    {
+      "from": "auth-flow-designer",
+      "to": "access-policy-designer",
+      "when": "Authorization must also be enforced in the database (RLS)"
+    },
+    {
+      "from": "webhook-architect",
+      "to": "rate-limit-strategist",
+      "when": "Consumers need delivery throttling"
+    }
+  ]
+}

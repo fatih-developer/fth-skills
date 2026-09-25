@@ -1,0 +1,189 @@
+{
+  "schema_version": 1,
+  "ecosystem": "ecosystem-mobile",
+  "title": "Mobile App Domain",
+  "domain": "mobile",
+  "summary": "Architect, audit, release, and monitor iOS, Android, React Native, and Flutter apps.",
+  "philosophy": "Mobile apps live under store guidelines, limited battery and memory, and unreliable networks. Never ship a feature that regresses performance, security, or accessibility.",
+  "report_dir": "docs/mobile-report/",
+  "members": {
+    "accessibility-enforcer": {
+      "role": "Audits VoiceOver/TalkBack support and WCAG mobile criteria."
+    },
+    "mobile-perf-auditor": {
+      "role": "Diagnoses cold start, frame drops, memory, battery, and bundle size."
+    },
+    "mobile-security-auditor": {
+      "role": "Audits against OWASP Mobile Top 10: storage, network, runtime defenses."
+    },
+    "app-store-reviewer": {
+      "role": "Checks App Store and Play Store guideline compliance and metadata."
+    },
+    "release-orchestrator": {
+      "role": "Plans versioning, changelogs, beta tracks, and staged rollouts."
+    },
+    "deep-link-architect": {
+      "role": "Designs Universal Links and App Links with fallbacks."
+    },
+    "push-notification-planner": {
+      "role": "Designs APNs/FCM payloads, permission timing, and routing."
+    },
+    "offline-sync-designer": {
+      "role": "Designs local-first storage, conflict resolution, and background sync."
+    },
+    "onboarding-designer": {
+      "role": "Designs first-run experience, permission sequencing, and empty states."
+    },
+    "crash-analyst": {
+      "role": "Symbolicates and analyzes crash reports to a root cause and fix."
+    }
+  },
+  "workflows": [
+    {
+      "id": "mobile-pre-release-audit",
+      "title": "Pre-Release Audit Flow",
+      "when": [
+        "audit the app before launch",
+        "is the app ready",
+        "review mobile app quality"
+      ],
+      "steps": [
+        {
+          "skill": "accessibility-enforcer",
+          "do": "Audit screen reader labels, touch targets, and contrast.",
+          "done_when": "No critical accessibility issue remains open.",
+          "parallel_group": "audit"
+        },
+        {
+          "skill": "mobile-perf-auditor",
+          "do": "Audit startup, rendering, memory, and bundle size.",
+          "done_when": "Key metrics are within the stated budgets.",
+          "parallel_group": "audit"
+        },
+        {
+          "skill": "mobile-security-auditor",
+          "do": "Audit storage, transport, secrets, and runtime defenses.",
+          "done_when": "No critical OWASP Mobile finding remains open.",
+          "parallel_group": "audit"
+        }
+      ]
+    },
+    {
+      "id": "mobile-release",
+      "title": "Production Release Flow",
+      "when": [
+        "ship to the stores",
+        "prepare the release",
+        "submit to App Store or Play Store"
+      ],
+      "steps": [
+        {
+          "skill": "app-store-reviewer",
+          "do": "Check guidelines, privacy disclosures, and store metadata.",
+          "done_when": "No rejection-risk item remains open.",
+          "condition": "Run the Pre-Release Audit Flow first"
+        },
+        {
+          "skill": "release-orchestrator",
+          "do": "Bump versions, write notes, and plan beta and staged rollout.",
+          "done_when": "Rollout stages, halt criteria, and notes are ready."
+        },
+        {
+          "skill": "checkpoint-guardian",
+          "do": "Confirm before submitting to the stores or widening a rollout.",
+          "done_when": "User explicitly approved the submission."
+        }
+      ]
+    },
+    {
+      "id": "mobile-feature-architecture",
+      "title": "Feature Architecture Flow",
+      "when": [
+        "build a mobile feature",
+        "add deep links",
+        "add push notifications",
+        "make the app work offline"
+      ],
+      "steps": [
+        {
+          "skill": "deep-link-architect",
+          "do": "Design URL schema, association files, and in-app routing.",
+          "done_when": "Links open the right screen on both platforms with a web fallback.",
+          "parallel_group": "feature",
+          "optional": true,
+          "condition": "Feature needs deep links"
+        },
+        {
+          "skill": "push-notification-planner",
+          "do": "Design payloads, permission timing, and tap routing.",
+          "done_when": "Payload, permission, and analytics plan exist.",
+          "parallel_group": "feature",
+          "optional": true,
+          "condition": "Feature needs push notifications"
+        },
+        {
+          "skill": "offline-sync-designer",
+          "do": "Design local storage, optimistic UI, and conflict resolution.",
+          "done_when": "Every entity has a sync and conflict policy.",
+          "parallel_group": "feature",
+          "optional": true,
+          "condition": "Feature must work offline"
+        },
+        {
+          "skill": "onboarding-designer",
+          "do": "Design first-run flow and permission sequencing.",
+          "done_when": "Aha moment, permissions, and empty states are defined.",
+          "parallel_group": "feature",
+          "optional": true,
+          "condition": "Feature changes first-run experience"
+        }
+      ]
+    },
+    {
+      "id": "mobile-post-launch",
+      "title": "Post-Launch Monitoring Flow",
+      "when": [
+        "fix crashes",
+        "investigate app issues",
+        "analyze crash reports"
+      ],
+      "steps": [
+        {
+          "skill": "crash-analyst",
+          "do": "Symbolicate, isolate the exception, and propose a fix.",
+          "done_when": "Root cause and fix are identified."
+        },
+        {
+          "skill": "mobile-perf-auditor",
+          "do": "Profile the regression when the root cause is performance (ANR, OOM, jank).",
+          "done_when": "Performance fix is verified.",
+          "optional": true,
+          "condition": "Root cause is performance-related"
+        },
+        {
+          "skill": "release-orchestrator",
+          "do": "Plan a hotfix release.",
+          "done_when": "Hotfix version and rollout plan exist.",
+          "optional": true
+        }
+      ]
+    }
+  ],
+  "handoffs": [
+    {
+      "from": "push-notification-planner",
+      "to": "deep-link-architect",
+      "when": "Notification taps must open a specific screen"
+    },
+    {
+      "from": "mobile-security-auditor",
+      "to": "auth-flow-designer",
+      "when": "Findings involve token storage or backend auth design"
+    },
+    {
+      "from": "offline-sync-designer",
+      "to": "sqlite",
+      "when": "Local storage is SQLite-based"
+    }
+  ]
+}
