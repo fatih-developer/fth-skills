@@ -1,5 +1,7 @@
 # Mimari ve Kod Kalitesi Analizi
 
+> **Tarihli anlık görüntü (2026-04).** Bu rapor ecosystem yeniden yapılandırmasından önce üretildi; skill sayıları, yollar ve bulgular güncel değil. Güncel durum için `docs/skill-report/skill-audit-2026-09.md` dosyasına bakın.
+
 ## Mimari Değerlendirme
 
 Bu repo klasik uygulama mimarisi değil; bir paket/katalog mimarisi kullanıyor. Ana sınır `skills/<skill-name>/` dizinleri. Her skill bağımsız dağıtılabilir bir doküman paketi gibi tasarlanmış, repo seviyesinde ise `scripts/validate_curated_skills.py`, `scripts/generate_openai_yaml.py`, `skills.sh.json` ve `README.md` yayın/keşif katmanını oluşturuyor.

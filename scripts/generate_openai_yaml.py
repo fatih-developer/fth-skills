@@ -1,97 +1,78 @@
 #!/usr/bin/env python3
-"""Generate agents/openai.yaml for all skills missing it."""
+"""Create agents/openai.yaml for skills that do not have one yet.
 
+The generated file is a starting point: display_name comes from the folder name,
+short_description from the first sentence of the SKILL.md description (never
+truncated). If that sentence is longer than the validator allows, the script
+says so and you must shorten it by hand.
+
+Usage:
+    python scripts/generate_openai_yaml.py            # all skills missing the file
+    python scripts/generate_openai_yaml.py my-skill   # one skill
+"""
+
+from __future__ import annotations
+
+import json
 import re
+import sys
 from pathlib import Path
 
-SKILLS_ROOT = Path("skills")
+import yaml
 
-SKILL_DISPLAY_NAMES = {
-    "access-policy-designer": "Access Policy Designer",
-    "accessibility-enforcer": "Accessibility Enforcer",
-    "api-mock-designer": "API Mock Designer",
-    "api-observability-planner": "API Observability Planner",
-    "app-store-reviewer": "App Store Reviewer",
-    "auth-flow-designer": "Auth Flow Designer",
-    "breaking-change-detector": "Breaking Change Detector",
-    "changelog-generator": "Changelog Generator",
-    "contract-first-designer": "Contract-First Designer",
-    "crash-analyst": "Crash Analyst",
-    "data-lineage-tracer": "Data Lineage Tracer",
-    "data-masker": "Data Masker",
-    "deep-link-architect": "Deep Link Architect",
-    "index-advisor": "Index Advisor",
-    "migration-strategist": "Migration Strategist",
-    "mobile-perf-auditor": "Mobile Perf Auditor",
-    "mobile-security-auditor": "Mobile Security Auditor",
-    "offline-sync-designer": "Offline Sync Designer",
-    "onboarding-designer": "Onboarding Designer",
-    "protocol-selector": "Protocol Selector",
-    "push-notification-planner": "Push Notification Planner",
-    "query-budget-enforcer": "Query Budget Enforcer",
-    "query-explainer": "Query Explainer",
-    "rate-limit-strategist": "Rate Limit Strategist",
-    "release-orchestrator": "Release Orchestrator",
-    "schema-architect": "Schema Architect",
-    "schema-diff-analyzer": "Schema Diff Analyzer",
-    "sdk-scaffolder": "SDK Scaffolder",
-    "seed-data-generator": "Seed Data Generator",
-    "task-decomposer": "Task Decomposer",
-    "webhook-architect": "Webhook Architect",
-}
+REPO = Path(__file__).resolve().parents[1]
+SKILLS = REPO / "skills"
+MAX_SHORT = 150
+ACRONYMS = {"api", "sdk", "db", "geo", "ugc", "ui", "ux", "b2b", "md"}
 
 
-def extract_description(skill_md: Path) -> str:
+def display_name(folder: str) -> str:
+    return " ".join(w.upper() if w in ACRONYMS else w.capitalize() for w in folder.split("-"))
+
+
+def description(skill_md: Path) -> str:
     text = skill_md.read_text(encoding="utf-8")
-    # Extract from YAML frontmatter
-    m = re.search(r'^---\s*\n.*?description:\s*(.+?)(?:\n\S|\n---)', text, re.DOTALL)
-    if m:
-        desc = m.group(1).strip().replace('\n', ' ')
-        # Truncate to ~120 chars for yaml short_description
-        if len(desc) > 120:
-            desc = desc[:117].rsplit(' ', 1)[0] + '...'
-        return desc
-    return "A specialized skill for AI agents."
+    end = text.find("\n---", 4)
+    return str(yaml.safe_load(text[4:end])["description"]).strip()
 
 
-def make_yaml(display_name: str, short_description: str, default_prompt: str) -> str:
-    return f'''interface:
-  display_name: "{display_name}"
-  short_description: "{short_description}"
-  default_prompt: "{default_prompt}"
-
-policy:
-  allow_implicit_invocation: true
-'''
+def first_sentence(text: str) -> str:
+    match = re.match(r"(.+?[.!?])(\s|$)", text)
+    return (match.group(1) if match else text).strip()
 
 
-created = 0
-for skill_dir in sorted(SKILLS_ROOT.iterdir()):
-    if not skill_dir.is_dir():
-        continue
-    name = skill_dir.name
-    if name not in SKILL_DISPLAY_NAMES:
-        continue
+def render(name: str, short: str) -> str:
+    q = lambda s: json.dumps(s, ensure_ascii=False)  # noqa: E731 - valid YAML double-quoted string
+    return (
+        "interface:\n"
+        f"  display_name: {q(display_name(name))}\n"
+        f"  short_description: {q(short)}\n"
+        f"  default_prompt: {q(f'Use ${name} to help with this task.')}\n"
+        "\n"
+        "policy:\n"
+        "  allow_implicit_invocation: true\n"
+    )
 
-    agents_dir = skill_dir / "agents"
-    yaml_path = agents_dir / "openai.yaml"
 
-    if yaml_path.exists():
-        print(f"[SKIP] {name} already has openai.yaml")
-        continue
+def main() -> int:
+    targets = sys.argv[1:] or sorted(p.name for p in SKILLS.iterdir() if (p / "SKILL.md").exists())
+    created = 0
+    for name in targets:
+        skill_dir = SKILLS / name
+        path = skill_dir / "agents" / "openai.yaml"
+        if path.exists():
+            continue
+        short = first_sentence(description(skill_dir / "SKILL.md"))
+        path.parent.mkdir(exist_ok=True)
+        path.write_text(render(name, short), encoding="utf-8")
+        created += 1
+        print(f"[OK]   {path.relative_to(REPO)}")
+        if len(short) > MAX_SHORT:
+            print(f"[EDIT] short_description is {len(short)} characters; shorten it to {MAX_SHORT} or fewer.")
+        print("[EDIT] Replace the generic default_prompt with one that describes the task.")
+    print(f"Created {created} file(s).")
+    return 0
 
-    skill_md = skill_dir / "SKILL.md"
-    if not skill_md.exists():
-        print(f"[WARN] {name} missing SKILL.md")
-        continue
 
-    desc = extract_description(skill_md)
-    display = SKILL_DISPLAY_NAMES[name]
-    default_prompt = f"Use ${name} to help with this task."
-
-    agents_dir.mkdir(exist_ok=True)
-    yaml_path.write_text(make_yaml(display, desc, default_prompt), encoding="utf-8")
-    print(f"[OK]   Created {yaml_path}")
-    created += 1
-
-print(f"\nDone. Created {created} openai.yaml files.")
+if __name__ == "__main__":
+    sys.exit(main())

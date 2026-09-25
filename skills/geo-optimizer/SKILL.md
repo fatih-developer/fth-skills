@@ -127,8 +127,8 @@ Use `--json` for machine-readable output. Treat its results as evidence for basi
 **Ecosystem:** `@ecosystem-web` — Web, Design & Delivery.
 
 **Workflows:**
-- **Product Page Build Flow** (`web-build-page`, step 4 of 4): last step → summarize the workflow outcome.
-- **Search & AI Visibility Flow** (`web-visibility`, step 2 of 2): last step → summarize the workflow outcome.
+- **Product Page Build Flow** (`web-build-page`, step 4 of 4): last step → once it passes, complete the workflow and report the outcome.
+- **Search & AI Visibility Flow** (`web-visibility`, step 2 of 2): last step → once it passes, complete the workflow and report the outcome.
 
 **Handoff contract:** pass results to the next skill through an inline *Handoff* block in your reply with the fields `skill`, `workflow`, `created_at`, `inputs`, `summary`, and `next` (the handoff contract of `@ecosystem-web`). If a next skill is not installed, continue with its step from the ecosystem map, or install it with `npx skills add fatih-developer/fth-skills --skill <name>` after the user agrees.
 <!-- END GENERATED: handoffs -->

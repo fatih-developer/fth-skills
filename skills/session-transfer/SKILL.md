@@ -206,7 +206,7 @@ Use session-transfer to resume the latest unfinished billing work.
 **Ecosystem:** `@ecosystem-orchestration` — Agent Orchestration.
 
 **Workflows:**
-- **Failure & Context Pressure Flow** (`orch-resilience`, step 3 of 3): last step → summarize the workflow outcome.
+- **Failure & Context Pressure Flow** (`orch-resilience`, step 3 of 3): last step → once it passes, complete the workflow and report the outcome.
 
 **Direct handoffs:**
 - `@memory-ledger` — A resumed session needs an in-task ledger again.

@@ -1,0 +1,34 @@
+[
+  {
+    "query": "Clean up the database.",
+    "should_trigger": true
+  },
+  {
+    "query": "Make the app faster — don't assume anything, check first.",
+    "should_trigger": true
+  },
+  {
+    "query": "Migrate our users to the new system; are you sure about the data format?",
+    "should_trigger": true
+  },
+  {
+    "query": "Update the pricing logic like we discussed.",
+    "should_trigger": true
+  },
+  {
+    "query": "What is 2 + 2?",
+    "should_trigger": false
+  },
+  {
+    "query": "Format this JSON.",
+    "should_trigger": false
+  },
+  {
+    "query": "Translate this sentence to French.",
+    "should_trigger": false
+  },
+  {
+    "query": "Show me the current git branch.",
+    "should_trigger": false
+  }
+]

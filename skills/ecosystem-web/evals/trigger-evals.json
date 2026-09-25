@@ -1,0 +1,34 @@
+[
+  {
+    "query": "Build a landing page for our SaaS that looks great and ranks in search.",
+    "should_trigger": true
+  },
+  {
+    "query": "Why doesn't ChatGPT cite our website? Audit and fix our AI search visibility.",
+    "should_trigger": true
+  },
+  {
+    "query": "Review our dashboard UI and check it against our design tokens.",
+    "should_trigger": true
+  },
+  {
+    "query": "The Coolify deploy failed — fix it and verify the service is healthy.",
+    "should_trigger": true
+  },
+  {
+    "query": "Design the database schema for our blog.",
+    "should_trigger": false
+  },
+  {
+    "query": "Write a Python script to rename files.",
+    "should_trigger": false
+  },
+  {
+    "query": "Plan our B2B pricing.",
+    "should_trigger": false
+  },
+  {
+    "query": "Explain what DNS is.",
+    "should_trigger": false
+  }
+]

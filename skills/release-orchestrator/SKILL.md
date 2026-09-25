@@ -113,7 +113,7 @@ See `references/EXAMPLES.md` for a worked case.
 
 **Workflows:**
 - **Production Release Flow** (`mobile-release`, step 2 of 3): next → `@checkpoint-guardian`.
-- **Post-Launch Monitoring Flow** (`mobile-post-launch`, step 3 of 3): last step → summarize the workflow outcome.
+- **Post-Launch Monitoring Flow** (`mobile-post-launch`, step 3 of 3): last step → once it passes, complete the workflow and report the outcome.
 
 **Handoff contract:** pass results to the next skill through an inline *Handoff* block in your reply with the fields `skill`, `workflow`, `created_at`, `inputs`, `summary`, and `next` (the handoff contract of `@ecosystem-mobile`). If a next skill is not installed, continue with its step from the ecosystem map, or install it with `npx skills add fatih-developer/fth-skills --skill <name>` after the user agrees.
 <!-- END GENERATED: handoffs -->

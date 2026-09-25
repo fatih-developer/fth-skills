@@ -1,0 +1,34 @@
+[
+  {
+    "query": "Design tables for a course platform with students, courses, enrollments, and payments.",
+    "should_trigger": true
+  },
+  {
+    "query": "Normalize this spreadsheet-style customer table into a proper schema with DDL.",
+    "should_trigger": true
+  },
+  {
+    "query": "Model the data for a multi-tenant project management tool in PostgreSQL.",
+    "should_trigger": true
+  },
+  {
+    "query": "We have a 60-column god table; redesign it.",
+    "should_trigger": true
+  },
+  {
+    "query": "Why is this SELECT slow? Here's the EXPLAIN output.",
+    "should_trigger": false
+  },
+  {
+    "query": "Add an index on orders.created_at.",
+    "should_trigger": false
+  },
+  {
+    "query": "Generate 1,000 fake users for testing.",
+    "should_trigger": false
+  },
+  {
+    "query": "Rename a column in production without downtime.",
+    "should_trigger": false
+  }
+]

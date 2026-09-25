@@ -24,7 +24,7 @@ skills/<skill-name>/
 ```markdown
 ---
 name: <skill-name>
-description: What it does and when to trigger. Be specific and "pushy".
+description: "What it does. Use when <concrete trigger phrases>."
 ---
 
 # Skill Title
@@ -53,20 +53,19 @@ evals/         ← Test cases (evals.json)
   └── evals.json
 ```
 
-## Step 4: Validate
+## Step 4: Add the Skill to an Ecosystem
 
-```powershell
+Add the skill as a member of exactly one ecosystem in `skills/ecosystem-<domain>/references/workflows.json`, and into workflow steps or direct handoffs where it belongs. Then regenerate the derived files (hub blocks, the skill's `🔗 Next Steps & Handoffs` section, `skills.sh.json`, README catalog):
+
+```bash
+python scripts/build_ecosystems.py
+```
+
+## Step 5: Validate
+
+```bash
 python scripts/validate_curated_skills.py
+python -m unittest discover -s scripts/tests
 ```
 
-All issues must be resolved before committing.
-
-## Step 5: Commit & Push
-
-```powershell
-git add skills/<skill-name>/
-git commit -m "feat: add <skill-name> skill"
-git push origin main
-```
-
-skills.sh will re-index within ~1 hour of the push.
+Fix every error, then commit the skill together with the regenerated files. CI runs the same checks.

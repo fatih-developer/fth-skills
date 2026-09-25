@@ -11,6 +11,14 @@ This skill allows mobile and frontend developers to construct robust UIs without
 
 ---
 
+## 0. Context Intake
+
+Before designing, make sure you have the inputs below. Read the previous workflow step's artifact first if it exists. Ask only for what is missing, in a single message, and state any assumption you make instead of blocking.
+
+- The contract (OpenAPI/AsyncAPI file or `contract-designer-output.json`); without one, list the endpoints you will assume.
+- Who consumes the mock (frontend, mobile, partner) and which flows they must exercise.
+- Mock tooling already in use (Prism, MSW, WireMock, json-server) or none.
+
 ## 1. Scenario Planning (Static)
 Analyze the API spec and design scenarios that consumers *must* handle:
 - **Happy Path:** Standard CRUD operations.
@@ -26,7 +34,7 @@ A good mock server must be stateful in a single session.
 
 ## 3. Output Generation
 
-**Required Outputs (Must write BOTH to `docs/api-report/`):**
+**Outputs.** In *file mode* — the user wants artifacts, or this skill runs as a step of an ecosystem workflow — write both files below to `docs/api-report/`. In *inline mode* — a quick question — answer in the chat and end with the JSON below as a *Handoff* block instead of creating files.
 
 1. **Human-Readable Markdown (`docs/api-report/api-mock-report.md`)**
 ```markdown
@@ -65,6 +73,10 @@ A good mock server must be stateful in a single session.
 
 ---
 
+## When to Skip
+
+- The backend already exists and is reachable in a shared dev environment, or the user only needs a single example payload.
+
 ## Guardrails
 - **Avoid Over-Engineering:** Mock servers shouldn't recreate complex backend business logic (like computing tax). They just need to faithfully replay expected structural responses.
 - **Schema Validation:** Ensure the mock data strictly adheres to the definitions in the `contract-first-designer`'s OpenAPI spec.
@@ -75,7 +87,7 @@ A good mock server must be stateful in a single session.
 **Ecosystem:** `@ecosystem-api` — API Domain.
 
 **Workflows:**
-- **OpenAPI-First Design Flow** (`api-design`, step 3 of 4): last step → summarize the workflow outcome.
+- **OpenAPI-First Design Flow** (`api-design`, step 3 of 4): last step → once it passes, complete the workflow and report the outcome.
 
 **Handoff contract:** pass results to the next skill through `docs/api-report/api-mock-output.json` with the fields `skill`, `workflow`, `created_at`, `inputs`, `summary`, and `next` (the handoff contract of `@ecosystem-api`). If a next skill is not installed, continue with its step from the ecosystem map, or install it with `npx skills add fatih-developer/fth-skills --skill <name>` after the user agrees.
 <!-- END GENERATED: handoffs -->

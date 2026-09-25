@@ -338,7 +338,7 @@ Before returning any output, verify:
 **Ecosystem:** `@ecosystem-product` — Product & Growth.
 
 **Workflows:**
-- **Product Launch Flow** (`product-launch`, step 5 of 5): last step → summarize the workflow outcome.
+- **Product Launch Flow** (`product-launch`, step 5 of 5): last step → once it passes, complete the workflow and report the outcome.
 - **Creative Content Flow** (`product-content`, step 1 of 2): next → `@prompt-crafter` *(optional)*.
 
 **Handoff contract:** pass results to the next skill through an inline *Handoff* block in your reply with the fields `skill`, `workflow`, `created_at`, `inputs`, `summary`, and `next` (the handoff contract of `@ecosystem-product`). If a next skill is not installed, continue with its step from the ecosystem map, or install it with `npx skills add fatih-developer/fth-skills --skill <name>` after the user agrees.

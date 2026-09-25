@@ -11,6 +11,14 @@ This skill bridges the gap between raw git history and consumer-facing API updat
 
 ---
 
+## 0. Context Intake
+
+Before designing, make sure you have the inputs below. Read the previous workflow step's artifact first if it exists. Ask only for what is missing, in a single message, and state any assumption you make instead of blocking.
+
+- The change source: `breaking-change-output.json`, a contract diff, commits, or merged PRs.
+- Version number and release date.
+- Audience (public developers, partners, internal) and changelog format in use.
+
 ## 1. Input Analysis (Static)
 Parse the provided text (Git commits, PR bodies, or OpenAPI diffs) and filter out internal noise.
 - **Keep:** Added fields, new endpoints, deprecated endpoints, bug fixes that changed API behavior.
@@ -25,7 +33,7 @@ Organize the update into established categories:
 
 ## 3. Output Generation
 
-**Required Outputs (Must write BOTH to `docs/api-report/`):**
+**Outputs.** In *file mode* — the user wants artifacts, or this skill runs as a step of an ecosystem workflow — write both files below to `docs/api-report/`. In *inline mode* — a quick question — answer in the chat and end with the JSON below as a *Handoff* block instead of creating files.
 
 1. **Human-Readable Markdown (`docs/api-report/api-changelog.md`)**
 ```markdown
@@ -61,6 +69,10 @@ Organize the update into established categories:
 
 ---
 
+## When to Skip
+
+- Nothing user-visible changed, or the project already generates changelogs automatically and the user did not ask to edit them.
+
 ## Guardrails
 - **Migration Context:** If there is a breaking change or a deprecation, *always* include a 1-2 sentence instruction on what the developer should use instead.
 - **Tone:** Keep it professional, concise, and focused purely on the API consumer's perspective.
@@ -71,7 +83,7 @@ Organize the update into established categories:
 **Ecosystem:** `@ecosystem-api` — API Domain.
 
 **Workflows:**
-- **API Evolution Flow** (`api-evolution`, step 2 of 2): last step → summarize the workflow outcome.
+- **API Evolution Flow** (`api-evolution`, step 2 of 2): last step → once it passes, complete the workflow and report the outcome.
 
 **Handoff contract:** pass results to the next skill through `docs/api-report/api-changelog-output.json` with the fields `skill`, `workflow`, `created_at`, `inputs`, `summary`, and `next` (the handoff contract of `@ecosystem-api`). If a next skill is not installed, continue with its step from the ecosystem map, or install it with `npx skills add fatih-developer/fth-skills --skill <name>` after the user agrees.
 <!-- END GENERATED: handoffs -->

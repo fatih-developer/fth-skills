@@ -174,7 +174,7 @@ You are gate 3. If gate 1 or 2 already ran for this request, do not ask new ques
 **Ecosystem:** `@ecosystem-reasoning` — Reasoning, Planning Gates & Prompting.
 
 **Workflows:**
-- **Clarification Gate Flow** (`reason-clarify`, step 3 of 3): last step → summarize the workflow outcome.
+- **Clarification Gate Flow** (`reason-clarify`, step 3 of 3): last step → once it passes, complete the workflow and report the outcome.
 
 **Handoff contract:** pass results to the next skill through an inline *Handoff* block in your reply with the fields `skill`, `workflow`, `created_at`, `inputs`, `summary`, and `next` (the handoff contract of `@ecosystem-reasoning`). If a next skill is not installed, continue with its step from the ecosystem map, or install it with `npx skills add fatih-developer/fth-skills --skill <name>` after the user agrees.
 <!-- END GENERATED: handoffs -->

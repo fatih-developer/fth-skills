@@ -1,0 +1,34 @@
+[
+  {
+    "query": "Build a customer portal: backend API, database, and mobile app. Plan the whole thing across domains.",
+    "should_trigger": true
+  },
+  {
+    "query": "Which fth-skills ecosystem should I use for this project, and how do the skills work together?",
+    "should_trigger": true
+  },
+  {
+    "query": "Let an external AI agent read and create orders in our app safely.",
+    "should_trigger": true
+  },
+  {
+    "query": "Context is almost full and we're mid-task — save state so another session can continue.",
+    "should_trigger": true
+  },
+  {
+    "query": "What's 17% of 240?",
+    "should_trigger": false
+  },
+  {
+    "query": "Translate this paragraph into German.",
+    "should_trigger": false
+  },
+  {
+    "query": "Rename this variable across the file.",
+    "should_trigger": false
+  },
+  {
+    "query": "Write a haiku about autumn.",
+    "should_trigger": false
+  }
+]

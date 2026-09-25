@@ -11,6 +11,14 @@ This skill designs the authentication and authorization strategy for an API. It 
 
 ---
 
+## 0. Context Intake
+
+Before designing, make sure you have the inputs below. Read the previous workflow step's artifact first if it exists. Ask only for what is missing, in a single message, and state any assumption you make instead of blocking.
+
+- Client types: browser SPA, mobile app, server-to-server, third-party integrators, AI agents.
+- Identity provider in use or allowed (Auth0, Cognito, Keycloak, Supabase, custom).
+- Compliance or security requirements (SOC 2, PCI, HIPAA, token revocation needs).
+
 ## 1. Flow Selection (Static)
 
 Analyze the consumer type to pick the right strategy:
@@ -32,7 +40,7 @@ Define how permissions are enforced:
 
 ## 4. Output Generation
 
-**Required Outputs (Must write BOTH to `docs/api-report/`):**
+**Outputs.** In *file mode* — the user wants artifacts, or this skill runs as a step of an ecosystem workflow — write both files below to `docs/api-report/`. In *inline mode* — a quick question — answer in the chat and end with the JSON below as a *Handoff* block instead of creating files.
 
 1. **Human-Readable Markdown (`docs/api-report/auth-flow-report.md`)**
 ```markdown
@@ -62,6 +70,10 @@ The API Gateway must validate the JWT Signature and ensure `Scope: read:orders` 
 ```
 
 ---
+
+## When to Skip
+
+- The user only asks how to call an already-designed auth endpoint, or authentication is fully delegated to a managed gateway with no design choices left.
 
 ## Guardrails
 - **JWT in LocalStorage:** Strictly forbid and flag this practice. Push towards `HttpOnly` cookies for web clients.

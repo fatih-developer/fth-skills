@@ -233,7 +233,7 @@ def render_handoffs(skill: str, ecos: dict[str, dict], owners: dict[str, str]) -
                             targets += " (can run in parallel)"
                         follow = f"next → {targets}"
                     else:
-                        follow = "last step → summarize the workflow outcome"
+                        follow = "last step → once it passes, complete the workflow and report the outcome"
                     wf_lines.append(f"- **{wf['title']}** (`{wf['id']}`, {where}): {follow}.")
     if wf_lines:
         lines += ["", "**Workflows:**"] + wf_lines

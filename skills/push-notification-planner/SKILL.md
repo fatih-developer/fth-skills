@@ -115,7 +115,7 @@ See `references/EXAMPLES.md` for a worked case.
 **Ecosystem:** `@ecosystem-mobile` — Mobile App Domain.
 
 **Workflows:**
-- **Feature Architecture Flow** (`mobile-feature-architecture`, step 2 of 4): last step → summarize the workflow outcome.
+- **Feature Architecture Flow** (`mobile-feature-architecture`, step 2 of 4): last step → once it passes, complete the workflow and report the outcome.
 
 **Direct handoffs:**
 - `@deep-link-architect` — Notification taps must open a specific screen.

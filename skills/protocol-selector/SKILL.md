@@ -11,6 +11,14 @@ This skill prevents the "Golden Hammer" anti-pattern (where every problem is sol
 
 ---
 
+## 0. Context Intake
+
+Before designing, make sure you have the inputs below. Read the previous workflow step's artifact first if it exists. Ask only for what is missing, in a single message, and state any assumption you make instead of blocking.
+
+- Clients (browser, mobile, services, IoT) and their network conditions.
+- Latency, payload size, streaming or real-time needs.
+- Team experience and existing infrastructure (gateways, service mesh).
+
 ## 1. Requirement Analysis (Static)
 Analyze the system context based on user inputs:
 - **Clients:** Web Browser? Mobile App? Internal Microservices? IoT Devices?
@@ -28,7 +36,7 @@ Map requirements to the strengths of specific protocols:
 
 ## 3. Output Generation
 
-**Required Outputs (Must write BOTH to `docs/api-report/`):**
+**Outputs.** In *file mode* — the user wants artifacts, or this skill runs as a step of an ecosystem workflow — write both files below to `docs/api-report/`. In *inline mode* — a quick question — answer in the chat and end with the JSON below as a *Handoff* block instead of creating files.
 
 1. **Human-Readable Markdown (`docs/api-report/protocol-selection-report.md`)**
 ```markdown
@@ -59,6 +67,10 @@ Map requirements to the strengths of specific protocols:
 ```
 
 ---
+
+## When to Skip
+
+- The protocol is already fixed by an external constraint (partner mandate, existing gateway) and the user did not ask to revisit it.
 
 ## Guardrails
 - **Beware the gRPC Web Trap:** If suggesting gRPC for a web frontend, you MUST mention `grpc-web` and Envoy proxies as a major infrastructure overhead.

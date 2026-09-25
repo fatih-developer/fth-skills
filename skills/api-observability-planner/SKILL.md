@@ -11,6 +11,14 @@ This skill ensures that when an API goes down, the team knows exactly *why* befo
 
 ---
 
+## 0. Context Intake
+
+Before designing, make sure you have the inputs below. Read the previous workflow step's artifact first if it exists. Ask only for what is missing, in a single message, and state any assumption you make instead of blocking.
+
+- Runtime and stack (language, framework, gateway, cloud) and existing telemetry (OpenTelemetry, Datadog, Prometheus).
+- Critical endpoints and business transactions, with any SLO or latency targets.
+- Where logs, metrics, and traces must end up, and data that must never be logged (PII, tokens).
+
 ## 1. The Three Pillars Strategy (Static)
 
 Define exactly what your framework will emit:
@@ -31,7 +39,7 @@ Define what constitutes "Healthy" and when pagers should go off.
 
 ## 3. Output Generation
 
-**Required Outputs (Must write BOTH to `docs/api-report/`):**
+**Outputs.** In *file mode* — the user wants artifacts, or this skill runs as a step of an ecosystem workflow — write both files below to `docs/api-report/`. In *inline mode* — a quick question — answer in the chat and end with the JSON below as a *Handoff* block instead of creating files.
 
 1. **Human-Readable Markdown (`docs/api-report/api-observability-report.md`)**
 ```markdown
@@ -69,6 +77,10 @@ Inject `traceparent` and `tracestate` headers into all outgoing upstream HTTP/gR
 
 ---
 
+## When to Skip
+
+- The question is about a single log line or metric name, or monitoring is fully owned by an existing platform standard.
+
 ## Guardrails
 - **Log Forging / Injection:** Ensure log sanitization is implemented to prevent multiline log spoofing.
 - **PII in Logs:** Explicitly call out that `passwords`, `tokens`, `credit_cards`, and `emails` must be masked or scrubbed before being written to `stdout` or log aggregators.
@@ -79,7 +91,7 @@ Inject `traceparent` and `tracestate` headers into all outgoing upstream HTTP/gR
 **Ecosystem:** `@ecosystem-api` — API Domain.
 
 **Workflows:**
-- **Production Readiness Flow** (`api-production-readiness`, step 2 of 2): last step → summarize the workflow outcome.
+- **Production Readiness Flow** (`api-production-readiness`, step 2 of 2): last step → once it passes, complete the workflow and report the outcome.
 
 **Handoff contract:** pass results to the next skill through `docs/api-report/api-observability-output.json` with the fields `skill`, `workflow`, `created_at`, `inputs`, `summary`, and `next` (the handoff contract of `@ecosystem-api`). If a next skill is not installed, continue with its step from the ecosystem map, or install it with `npx skills add fatih-developer/fth-skills --skill <name>` after the user agrees.
 <!-- END GENERATED: handoffs -->

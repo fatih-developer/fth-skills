@@ -1,0 +1,65 @@
+{
+  "skill_name": "ecosystem-api",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Design a new public API for our booking platform. Only ecosystem-api and contract-first-designer are installed.",
+      "expected_output": "Picks the api-design workflow, runs preflight showing which step skills are installed or missing, offers once to install missing skills (dry run) or continue in fallback mode, runs contract-first-designer for real, and marks fallback outputs.",
+      "files": [],
+      "assertions": [
+        {
+          "name": "selects_workflow",
+          "description": "Names the OpenAPI-First Design Flow (api-design) as the chosen workflow."
+        },
+        {
+          "name": "preflight_table",
+          "description": "Shows which step skills are installed and which are missing before executing."
+        },
+        {
+          "name": "no_silent_install",
+          "description": "Does not run an install command without the user's agreement; mentions install_all.py dry run or the npx command."
+        },
+        {
+          "name": "fallback_labelled",
+          "description": "Steps for missing skills are either skipped with a reason or performed in fallback mode and labelled as fallback."
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Help me write a single example JSON error response for a 404 in our API.",
+      "expected_output": "Recognizes a narrow request and answers directly or routes to one member skill without running a whole workflow or preflight.",
+      "files": [],
+      "assertions": [
+        {
+          "name": "skips_protocol",
+          "description": "Does not run the full router protocol for a narrow question."
+        },
+        {
+          "name": "answers_directly",
+          "description": "Provides the example error response."
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Release v2 of our payments API; the new spec renames amount to amount_cents.",
+      "expected_output": "Runs the api-evolution workflow: breaking-change-detector classifies the rename as MAJOR with a migration path, then changelog-generator documents it; the handoff uses the contract envelope with workflow api-evolution.",
+      "files": [],
+      "assertions": [
+        {
+          "name": "evolution_workflow",
+          "description": "Chooses the API Evolution Flow."
+        },
+        {
+          "name": "major_change",
+          "description": "Classifies the field rename as a breaking (MAJOR) change."
+        },
+        {
+          "name": "handoff_envelope",
+          "description": "Passes results with skill, workflow, created_at, inputs, summary, and next fields."
+        }
+      ]
+    }
+  ]
+}

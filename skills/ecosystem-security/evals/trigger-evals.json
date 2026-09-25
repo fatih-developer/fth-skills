@@ -1,0 +1,34 @@
+[
+  {
+    "query": "Is this skill I downloaded safe to install? Audit it and give me a trust score.",
+    "should_trigger": true
+  },
+  {
+    "query": "Add runtime protection against prompt injection to our Telegram agent.",
+    "should_trigger": true
+  },
+  {
+    "query": "Run the complete security workflow on our agent platform.",
+    "should_trigger": true
+  },
+  {
+    "query": "Show me how the security skills work together.",
+    "should_trigger": true
+  },
+  {
+    "query": "Design OAuth2 login for our mobile app.",
+    "should_trigger": false
+  },
+  {
+    "query": "Our website SSL certificate expired, how do I renew it?",
+    "should_trigger": false
+  },
+  {
+    "query": "Mask PII in our staging database.",
+    "should_trigger": false
+  },
+  {
+    "query": "Review my React component for accessibility.",
+    "should_trigger": false
+  }
+]

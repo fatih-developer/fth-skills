@@ -35,7 +35,7 @@ Optimize for downstream token efficiency and execution reliability. Do not treat
    - compact Turkish;
    - compact English control language with Turkish proper nouns and domain terms preserved;
    - shallow XML only for staged execution, scope boundaries, or machine-controlled workflows.
-6. Measure the original and candidates with the target model's tokenizer. Use `scripts/count_tokens.cjs` when `tiktoken` is available.
+6. Measure the original and candidates with the target model's tokenizer. Use `scripts/count_tokens.cjs` when `tiktoken` is available; it only knows OpenAI encodings, so for Claude, Gemini, or other models treat its count as an approximation and prefer the provider's token-counting API when you can call it. State which tokenizer produced each number.
 7. Reject any candidate that changes the semantic contract, even when it is shorter.
 8. Prefer the shortest surviving candidate only when the reduction is meaningful:
    - below 10%: retain the clearer version;
@@ -129,7 +129,7 @@ The script emits JSON with character and token counts. If the installed `tiktoke
 **Ecosystem:** `@ecosystem-reasoning` — Reasoning, Planning Gates & Prompting.
 
 **Workflows:**
-- **Prompt Engineering Flow** (`reason-prompting`, step 2 of 2): last step → summarize the workflow outcome.
+- **Prompt Engineering Flow** (`reason-prompting`, step 2 of 2): last step → once it passes, complete the workflow and report the outcome.
 
 **Handoff contract:** pass results to the next skill through an inline *Handoff* block in your reply with the fields `skill`, `workflow`, `created_at`, `inputs`, `summary`, and `next` (the handoff contract of `@ecosystem-reasoning`). If a next skill is not installed, continue with its step from the ecosystem map, or install it with `npx skills add fatih-developer/fth-skills --skill <name>` after the user agrees.
 <!-- END GENERATED: handoffs -->

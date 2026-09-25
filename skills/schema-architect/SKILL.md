@@ -11,6 +11,14 @@ This skill transforms raw business requirements into a robust, normalized, and s
 
 ---
 
+## 0. Context Intake
+
+Before designing, make sure you have the inputs below. Read the previous workflow step's artifact first if it exists. Ask only for what is missing, in a single message, and state any assumption you make instead of blocking.
+
+- Business requirements or user stories, and the entities already known.
+- Target engine and ORM or migration tool.
+- Multi-tenancy, audit, soft-delete, and data retention requirements.
+
 ## 1. Requirement Analysis & Normalization Phase
 Before writing any SQL, analyze the request:
 - **Identify Entities & Relationships:** What are the root domains? (e.g. Users, Orders, Products). What are the cardinalities?
@@ -27,7 +35,7 @@ Scan your intended design against common pitfalls:
 ## 3. Dialect Selection & Output Generation
 Identify the target database (agnostic approach). Generate platform-specific SQL schema.
 
-**Required Outputs (Must write BOTH to `docs/database-report/`):**
+**Outputs.** In *file mode* — the user wants artifacts, or this skill runs as a step of an ecosystem workflow — write both files below to `docs/database-report/`. In *inline mode* — a quick question — answer in the chat and end with the JSON below as a *Handoff* block instead of creating files.
 
 1. **Human-Readable Markdown (`docs/database-report/schema-architect-report.md`)**
 ````markdown
@@ -62,6 +70,10 @@ CREATE TABLE users (
 - **Dynamic (On-Demand):** Only connect to a live database to introspect the current schema if the user explicitly requests it.
 
 ---
+
+## When to Skip
+
+- The user only needs a single column added to an existing table with no modeling decision.
 
 ## Guardrails
 - **No Vague Types:** Do not use `VARCHAR` without limits unless using PostgreSQL `TEXT`. Use proper types (`JSONB`, `NUMERIC(p,s)`, `TIMESTAMPTZ` vs `TIMESTAMP`).

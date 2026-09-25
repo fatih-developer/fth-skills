@@ -11,6 +11,14 @@ This skill focuses on taking a database from State A to State B without causing 
 
 ---
 
+## 0. Context Intake
+
+Before designing, make sure you have the inputs below. Read the previous workflow step's artifact first if it exists. Ask only for what is missing, in a single message, and state any assumption you make instead of blocking.
+
+- Current and target schema, or `schema-diff-output.json`.
+- Table sizes, write traffic, and acceptable lock time.
+- Deployment model (rolling deploys, number of app versions live at once) and migration tool (Prisma, Flyway, Alembic, raw SQL).
+
 ## 1. The Zero-Downtime Pipeline
 When asked "How do I rename this column?" or "How do I split this table?", standard `ALTER TABLE RENAME` breaks the app. 
 Always enforce a backward-compatible migration strategy:
@@ -27,7 +35,7 @@ For breaking changes (e.g., renaming a column `name` to `full_name`):
 
 Provide a numbered timeline mapping Application Code states vs Database changes.
 
-**Required Outputs (Must write BOTH to `docs/database-report/`):**
+**Outputs.** In *file mode* — the user wants artifacts, or this skill runs as a step of an ecosystem workflow — write both files below to `docs/database-report/`. In *inline mode* — a quick question — answer in the chat and end with the JSON below as a *Handoff* block instead of creating files.
 
 1. **Human-Readable Markdown (`docs/database-report/migration-strategist-report.md`)**
 ```markdown
@@ -71,9 +79,14 @@ Every Migration plan must include a clear rollback path if Step 2 or Step 4 fail
 
 ---
 
+## When to Skip
+
+- The database is empty or not yet in production, where a direct migration is acceptable.
+
 ## Guardrails
 - **No `DEFAULT` on new columns for large tables:** In some older SQL versions, adding a column with a default value locks and rewrites the entire table. Use nullable + background backfill.
 - **Data Type Casting:** Be explicitly careful about data truncation passing from State A to State B.
+- **Confirm Before Running:** Never execute a migration or backfill against a shared or production database without explicit user approval (`@checkpoint-guardian` when installed). Produce the plan and scripts; let the user trigger them.
 - **Constraints Last:** Add `NOT NULL`, `UNIQUE`, or Foreign Keys only at the very end of the backfill process.
 
 ## 🔗 Next Steps & Handoffs

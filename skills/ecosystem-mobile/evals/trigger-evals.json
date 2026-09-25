@@ -1,0 +1,34 @@
+[
+  {
+    "query": "Our React Native app launches next week — run a full pre-release audit.",
+    "should_trigger": true
+  },
+  {
+    "query": "Prepare our Flutter app for App Store and Play Store submission.",
+    "should_trigger": true
+  },
+  {
+    "query": "We're adding offline mode, push notifications, and deep links to the app; plan the architecture.",
+    "should_trigger": true
+  },
+  {
+    "query": "Crash rate spiked after the last Android release — investigate and plan a hotfix.",
+    "should_trigger": true
+  },
+  {
+    "query": "Center a div in CSS.",
+    "should_trigger": false
+  },
+  {
+    "query": "Write marketing copy for our app's landing page.",
+    "should_trigger": false
+  },
+  {
+    "query": "What is the difference between Kotlin and Java?",
+    "should_trigger": false
+  },
+  {
+    "query": "Set up a Postgres database for our backend.",
+    "should_trigger": false
+  }
+]

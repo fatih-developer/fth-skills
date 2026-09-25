@@ -1,5 +1,7 @@
 # Proje Genel Bakış
 
+> **Tarihli anlık görüntü (2026-04).** Bu rapor ecosystem yeniden yapılandırmasından önce üretildi; skill sayıları, yollar ve bulgular güncel değil. Güncel durum için `docs/skill-report/skill-audit-2026-09.md` dosyasına bakın.
+
 > Analiz tarihi: 2026-08-07  
 > Analiz eden: Proje Analizcisi Skill v1.0  
 > Kapsam: `skills/` klasörü ve bu klasörü yayınlayan repo metadata/scripts katmanı

@@ -11,6 +11,14 @@ This skill focuses on making database reads remarkably fast while minimizing wri
 
 ---
 
+## 0. Context Intake
+
+Before designing, make sure you have the inputs below. Read the previous workflow step's artifact first if it exists. Ask only for what is missing, in a single message, and state any assumption you make instead of blocking.
+
+- The slow queries (text plus frequency) and ideally their `EXPLAIN ANALYZE` output or `query-explainer-output.json`.
+- Table sizes and write volume for the affected tables.
+- Existing indexes (schema dump or `\d table`).
+
 ## 1. Analysis Phase (Static vs. Dynamic)
 - **Default (Static):** Analyze based on provided SQL queries, schema files, or output from `schema-architect`.
 - **Dynamic (On-Demand):** Only connect to a live database to run `EXPLAIN` or read actual index usage statistics if the user explicitly requests it.
@@ -41,7 +49,7 @@ Optimization isn't just about adding new indexes. Identify candidates for remova
 
 ## 4. Expected Output Structure
 
-**Required Outputs (Must write BOTH to `docs/database-report/`):**
+**Outputs.** In *file mode* — the user wants artifacts, or this skill runs as a step of an ecosystem workflow — write both files below to `docs/database-report/`. In *inline mode* — a quick question — answer in the chat and end with the JSON below as a *Handoff* block instead of creating files.
 
 1. **Human-Readable Markdown (`docs/database-report/index-advisor-report.md`)**
 ````markdown
@@ -75,6 +83,10 @@ DROP INDEX CONCURRENTLY idx_orders_tenant;
 ```
 
 ---
+
+## When to Skip
+
+- The table is tiny, the bottleneck is outside the database (network, N+1 in application), or no query is identified yet (run `@query-explainer` first).
 
 ## Guardrails
 - **Don't Over-Index:** Warn the user if a single table acquires more than 5-7 indexes or if indexes combined overlap the table size.

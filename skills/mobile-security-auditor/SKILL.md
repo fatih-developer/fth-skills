@@ -109,7 +109,7 @@ See `references/EXAMPLES.md` for a worked case.
 **Ecosystem:** `@ecosystem-mobile` — Mobile App Domain.
 
 **Workflows:**
-- **Pre-Release Audit Flow** (`mobile-pre-release-audit`, step 3 of 3): last step → summarize the workflow outcome.
+- **Pre-Release Audit Flow** (`mobile-pre-release-audit`, step 3 of 3): last step → once it passes, complete the workflow and report the outcome.
 
 **Direct handoffs:**
 - `@auth-flow-designer` — Findings involve token storage or backend auth design.

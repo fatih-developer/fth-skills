@@ -422,8 +422,8 @@ For granular guidelines, consult:
 **Ecosystem:** `@ecosystem-security` — Security.
 
 **Workflows:**
-- **Agent Connectivity Flow** (`orch-agent-connectivity`, step 3 of 3, via `@ecosystem-orchestration`): last step → summarize the workflow outcome.
-- **API Security & Scale Flow** (`api-security-scale`, step 3 of 3, via `@ecosystem-api`): last step → summarize the workflow outcome.
+- **Agent Connectivity Flow** (`orch-agent-connectivity`, step 3 of 3, via `@ecosystem-orchestration`): last step → once it passes, complete the workflow and report the outcome.
+- **API Security & Scale Flow** (`api-security-scale`, step 3 of 3, via `@ecosystem-api`): last step → once it passes, complete the workflow and report the outcome.
 - **Skill Audit & Trust Flow** (`sec-skill-audit`, step 1 of 2): next → `@checkpoint-guardian` *(optional)*.
 - **Runtime Protection Flow** (`sec-runtime-guard`, step 1 of 2): next → `@adaptive-guard`.
 

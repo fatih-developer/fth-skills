@@ -11,6 +11,14 @@ This skill helps developers populate empty local or staging databases with massi
 
 ---
 
+## 0. Context Intake
+
+Before designing, make sure you have the inputs below. Read the previous workflow step's artifact first if it exists. Ask only for what is missing, in a single message, and state any assumption you make instead of blocking.
+
+- Schema or `schema-architect-output.json` with foreign keys and constraints.
+- Row counts per table and any realistic distributions needed.
+- Output format (SQL, ORM seed script, CSV) and locale for fake data.
+
 ## 1. Schema Analysis & Topological Sort
 Before generating data, read the schema and understand the relationships:
 - If `orders` depends on `users` and `products`.
@@ -31,7 +39,7 @@ Map column names and data types to specific Faker generators:
 
 Provide an executable seeder script (TypeScript/Prisma, Python, or raw SQL depending on the user's stack). Raw SQL is the default.
 
-**Required Outputs (Must write BOTH to `docs/database-report/`):**
+**Outputs.** In *file mode* — the user wants artifacts, or this skill runs as a step of an ecosystem workflow — write both files below to `docs/database-report/`. In *inline mode* — a quick question — answer in the chat and end with the JSON below as a *Handoff* block instead of creating files.
 
 1. **Human-Readable Markdown (`docs/database-report/seed-data-report.md`)**
 ````markdown
@@ -79,6 +87,10 @@ SET session_replication_role = 'origin';
 
 ---
 
+## When to Skip
+
+- The user needs one or two literal rows for a quick test; write them directly.
+
 ## Guardrails
 - **Performance:** For requesting >10,000 rows, do not output literal SQL `INSERT` statements. Instead, output a Python/Node script using `faker` and fast bulk `COPY` commands.
 - **Unique Constraints:** Be extremely careful with random generators hitting duplicate values on `UNIQUE` columns. Append `id` or sequence numbers to emails/usernames if necessary.
@@ -90,7 +102,7 @@ SET session_replication_role = 'origin';
 **Ecosystem:** `@ecosystem-database` — Database Domain.
 
 **Workflows:**
-- **New Schema Design Flow** (`db-new-schema`, step 4 of 4): last step → summarize the workflow outcome.
+- **New Schema Design Flow** (`db-new-schema`, step 4 of 4): last step → once it passes, complete the workflow and report the outcome.
 
 **Handoff contract:** pass results to the next skill through `docs/database-report/seed-data-output.json` with the fields `skill`, `workflow`, `created_at`, `inputs`, `summary`, and `next` (the handoff contract of `@ecosystem-database`). If a next skill is not installed, continue with its step from the ecosystem map, or install it with `npx skills add fatih-developer/fth-skills --skill <name>` after the user agrees.
 <!-- END GENERATED: handoffs -->

@@ -277,7 +277,7 @@ Before finishing, verify:
 
 **Workflows:**
 - **Prompt Engineering Flow** (`reason-prompting`, step 1 of 2): next → `@turkish-prompt-compiler` *(optional)*.
-- **Creative Content Flow** (`product-content`, step 2 of 2, via `@ecosystem-product`): last step → summarize the workflow outcome.
+- **Creative Content Flow** (`product-content`, step 2 of 2, via `@ecosystem-product`): last step → once it passes, complete the workflow and report the outcome.
 
 **Direct handoffs:**
 - `@ugc-crafter` — The prompt targets UGC-style image or video generation.

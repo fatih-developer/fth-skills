@@ -462,7 +462,7 @@ For granular logic refer to:
 **Ecosystem:** `@ecosystem-security` — Security.
 
 **Workflows:**
-- **Runtime Protection Flow** (`sec-runtime-guard`, step 2 of 2): last step → summarize the workflow outcome.
+- **Runtime Protection Flow** (`sec-runtime-guard`, step 2 of 2): last step → once it passes, complete the workflow and report the outcome.
 
 **Direct handoffs:**
 - `@security-auditor` — An incident requires re-auditing the affected skill.

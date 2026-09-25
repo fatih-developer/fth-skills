@@ -11,6 +11,14 @@ This skill focuses on building outbound webhooks that don't fail silently and do
 
 ---
 
+## 0. Context Intake
+
+Before designing, make sure you have the inputs below. Read the previous workflow step's artifact first if it exists. Ask only for what is missing, in a single message, and state any assumption you make instead of blocking.
+
+- Events to publish and who subscribes (partners, internal services).
+- Existing queue or worker infrastructure (Redis, SQS, BullMQ, Celery).
+- Delivery guarantees and payload privacy requirements.
+
 ## 1. Event Payload Design (Static)
 Design the JSON structure of the event that will be sent.
 - **Envelope Pattern:** Wrap the actual data in a standard envelope containing routing information.
@@ -22,7 +30,7 @@ Design the JSON structure of the event that will be sent.
 ## 2. Delivery & Reliability Strategy
 Define how the system handles failure:
 - **Timeouts & Retries:** Implement exponential backoff (e.g., retry instantly, then 1m, 1h, 6h, 24h).
-- **Dead Letter Queue (DLQ):** Where do messages go after 5 failed retries? (e.g., A database table or queue for manual introspection).
+- **Dead Letter Queue (DLQ):** Where do messages go after the final retry fails (the example policy below uses 3 retries)? (e.g., A database table or queue for manual introspection).
 - **Idempotency:** Force the consumer to implement an idempotency check by providing a unique `event_id`. Provide clear docs on how to do this.
 
 ## 3. Security Design
@@ -32,7 +40,7 @@ A webhook without validation is an open door.
 
 ## 4. Output Generation
 
-**Required Outputs (Must write BOTH to `docs/api-report/`):**
+**Outputs.** In *file mode* — the user wants artifacts, or this skill runs as a step of an ecosystem workflow — write both files below to `docs/api-report/`. In *inline mode* — a quick question — answer in the chat and end with the JSON below as a *Handoff* block instead of creating files.
 
 1. **Human-Readable Markdown (`docs/api-report/webhook-architect-report.md`)**
 ````markdown
@@ -72,6 +80,10 @@ A webhook without validation is an open door.
 
 ---
 
+## When to Skip
+
+- The user is the webhook consumer (receiving side) rather than the provider.
+
 ## Guardrails
 - **Synchronous Delivery Ban:** NEVER send webhooks inline during an HTTP request cycle. They must be offloaded to a background worker (e.g., Redis Queue, BullMQ, Celery).
 - **Fat vs. Thin Payloads:** Recommend "Thin Payloads" (just sending IDs) if data privacy is critical. Warn against sending PII in webhooks unless explicitly required.
@@ -82,7 +94,7 @@ A webhook without validation is an open door.
 **Ecosystem:** `@ecosystem-api` — API Domain.
 
 **Workflows:**
-- **Production Readiness Flow** (`api-production-readiness`, step 1 of 2): last step → summarize the workflow outcome.
+- **Production Readiness Flow** (`api-production-readiness`, step 1 of 2): last step → once it passes, complete the workflow and report the outcome.
 
 **Direct handoffs:**
 - `@rate-limit-strategist` — Consumers need delivery throttling.

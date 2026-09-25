@@ -11,6 +11,14 @@ This skill enforces Zero Trust at the database layer. Instead of relying purely 
 
 ---
 
+## 0. Context Intake
+
+Before designing, make sure you have the inputs below. Read the previous workflow step's artifact first if it exists. Ask only for what is missing, in a single message, and state any assumption you make instead of blocking.
+
+- Database engine and platform (PostgreSQL, Supabase, MySQL) and how the app connects (per-user role or shared role with session settings).
+- Business access rules in plain language (who may read or change which rows or columns).
+- Schema or `schema-architect-output.json`, including tenant and ownership columns.
+
 ## 1. Requirement Translation
 Convert business rules into technical access models.
 *Business Rule:* "Doctors can only see their own patients' records."
@@ -30,7 +38,7 @@ Convert business rules into technical access models.
 
 Generate platform-specific DDL for security policies.
 
-**Required Outputs (Must write BOTH to `docs/database-report/`):**
+**Outputs.** In *file mode* — the user wants artifacts, or this skill runs as a step of an ecosystem workflow — write both files below to `docs/database-report/`. In *inline mode* — a quick question — answer in the chat and end with the JSON below as a *Handoff* block instead of creating files.
 
 1. **Human-Readable Markdown (`docs/database-report/access-policy-report.md`)**
 ````markdown
@@ -78,6 +86,10 @@ WITH CHECK (primary_doctor_id = current_setting('app.current_user_id')::uuid);
 ```
 
 ---
+
+## When to Skip
+
+- Access is enforced only in a single trusted service with no direct database access by users, and the user did not ask for defense in depth.
 
 ## Guardrails
 - **Infinite Recursion:** If a policy on `users` queries the `users` table to check a role, it will infinite-loop. Restrict policy lookups or use a separate `user_roles` mapping table.

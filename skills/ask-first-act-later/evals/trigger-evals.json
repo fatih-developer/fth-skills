@@ -1,0 +1,34 @@
+[
+  {
+    "query": "Don't start coding yet — ask me questions first about this feature.",
+    "should_trigger": true
+  },
+  {
+    "query": "Before you do anything, consult me on the architecture for the new billing module.",
+    "should_trigger": true
+  },
+  {
+    "query": "I want you to ask first and act later on this redesign.",
+    "should_trigger": true
+  },
+  {
+    "query": "Act like a consultant: what do you need to know before building our onboarding?",
+    "should_trigger": true
+  },
+  {
+    "query": "Add a loading spinner to the submit button.",
+    "should_trigger": false
+  },
+  {
+    "query": "Fix the typo in README line 12.",
+    "should_trigger": false
+  },
+  {
+    "query": "Build the login page now; requirements are in spec.md.",
+    "should_trigger": false
+  },
+  {
+    "query": "What is the difference between let and const?",
+    "should_trigger": false
+  }
+]

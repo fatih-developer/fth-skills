@@ -1,0 +1,34 @@
+[
+  {
+    "query": "Take our B2B analytics idea to market: validation, naming, and launch assets.",
+    "should_trigger": true
+  },
+  {
+    "query": "We need a name for our new developer tool and want to check trademarks and domains.",
+    "should_trigger": true
+  },
+  {
+    "query": "Create UGC-style video prompts for our skincare launch campaign.",
+    "should_trigger": true
+  },
+  {
+    "query": "What should we do next in go-to-market? We have 3 pilot customers.",
+    "should_trigger": true
+  },
+  {
+    "query": "Optimize this SQL query.",
+    "should_trigger": false
+  },
+  {
+    "query": "Fix the layout bug on mobile Safari.",
+    "should_trigger": false
+  },
+  {
+    "query": "Write unit tests for the payment service.",
+    "should_trigger": false
+  },
+  {
+    "query": "Summarize this meeting transcript.",
+    "should_trigger": false
+  }
+]

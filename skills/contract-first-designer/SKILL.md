@@ -11,6 +11,14 @@ This skill enforces API design before implementation. It breaks the habit of wri
 
 ---
 
+## 0. Context Intake
+
+Before designing, make sure you have the inputs below. Read the previous workflow step's artifact first if it exists. Ask only for what is missing, in a single message, and state any assumption you make instead of blocking.
+
+- Resources and main use cases, or the feature being built.
+- Protocol (from `protocol-selection-output.json` if it exists) and style conventions (naming, pagination, error format).
+- Existing specs or endpoints the new contract must stay compatible with.
+
 ## 1. Specification Generation (Static)
 
 Analyze the business requirements to output a standard API documentation format.
@@ -33,7 +41,7 @@ Instead of relying only on E2E tests, generate the scenarios required to prove t
 
 ## 3. Output Generation
 
-**Required Outputs (Must write BOTH to `docs/api-report/`):**
+**Outputs.** In *file mode* — the user wants artifacts, or this skill runs as a step of an ecosystem workflow — write both files below to `docs/api-report/`. In *inline mode* — a quick question — answer in the chat and end with the JSON below as a *Handoff* block instead of creating files.
 
 1. **Human-Readable Markdown (`docs/api-report/contract-designer-report.md`)**
 ````markdown
@@ -83,6 +91,10 @@ paths:
 ```
 
 ---
+
+## When to Skip
+
+- The user asks about a single existing endpoint's behavior, or the API is a private function call with no network boundary.
 
 ## Guardrails
 - **No Ambiguous Types:** Avoid `Any` or `Object` types in definitions. Require strict typing (e.g., `string` with `format: uuid`).

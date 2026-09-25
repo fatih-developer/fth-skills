@@ -147,7 +147,7 @@ Still open    : [remaining issues if any]
 
 **Workflows:**
 - **Complex Task Execution Flow** (`orch-complex-task`, step 5 of 6): next → `@agent-reviewer` *(optional)*.
-- **Decision Quality Flow** (`reason-decision`, step 5 of 5, via `@ecosystem-reasoning`): last step → summarize the workflow outcome.
+- **Decision Quality Flow** (`reason-decision`, step 5 of 5, via `@ecosystem-reasoning`): last step → once it passes, complete the workflow and report the outcome.
 
 **Handoff contract:** pass results to the next skill through an inline *Handoff* block in your reply with the fields `skill`, `workflow`, `created_at`, `inputs`, `summary`, and `next` (the handoff contract of `@ecosystem-orchestration`). If a next skill is not installed, continue with its step from the ecosystem map, or install it with `npx skills add fatih-developer/fth-skills --skill <name>` after the user agrees.
 <!-- END GENERATED: handoffs -->

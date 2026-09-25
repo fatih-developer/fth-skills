@@ -39,7 +39,7 @@ hermes skills search <query>
 hermes skills install fatih-developer/fth-skills/<skill-name>
 
 # Example
-hermes skills install fatih-developer/fth-skills/proje-analizcisi
+hermes skills install fatih-developer/fth-skills/project-analyzer
 ```
 
 ### ClawHub
@@ -57,10 +57,10 @@ python scripts/publish_clawhub.py --check-only
 python scripts/publish_clawhub.py
 
 # Dry-run one skill
-python scripts/publish_clawhub.py --skill proje-analizcisi
+python scripts/publish_clawhub.py --skill project-analyzer
 
 # Publish one skill after reviewing the dry-run output
-python scripts/publish_clawhub.py --skill proje-analizcisi --execute
+python scripts/publish_clawhub.py --skill project-analyzer --execute
 
 # Publish all public skills after a successful single-skill smoke test
 python scripts/publish_clawhub.py --execute

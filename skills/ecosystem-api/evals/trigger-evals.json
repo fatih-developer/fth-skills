@@ -1,0 +1,34 @@
+[
+  {
+    "query": "We're starting a public REST API for our booking platform — walk me through the whole design process and which skills to use.",
+    "should_trigger": true
+  },
+  {
+    "query": "Our API needs auth, rate limiting, and to survive a launch-day traffic spike. Plan it end to end.",
+    "should_trigger": true
+  },
+  {
+    "query": "We are shipping v2 of our payments API next month; take us through breaking changes and the changelog.",
+    "should_trigger": true
+  },
+  {
+    "query": "Make our orders API production-ready: webhooks for partners and proper monitoring.",
+    "should_trigger": true
+  },
+  {
+    "query": "What does HTTP status 409 mean?",
+    "should_trigger": false
+  },
+  {
+    "query": "Fix this TypeError in my Express route handler.",
+    "should_trigger": false
+  },
+  {
+    "query": "Design the database tables for a booking platform.",
+    "should_trigger": false
+  },
+  {
+    "query": "Write a README for my CLI tool.",
+    "should_trigger": false
+  }
+]

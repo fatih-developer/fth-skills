@@ -1,0 +1,34 @@
+[
+  {
+    "query": "Should we use Kafka or RabbitMQ? Give me multiple perspectives and a robust recommendation.",
+    "should_trigger": true
+  },
+  {
+    "query": "Red-team this architecture plan and find the risks.",
+    "should_trigger": true
+  },
+  {
+    "query": "Before building anything, help me clarify what this project really needs.",
+    "should_trigger": true
+  },
+  {
+    "query": "Design a system prompt for our support agent and optimize it.",
+    "should_trigger": true
+  },
+  {
+    "query": "Fix the failing unit test in utils.py.",
+    "should_trigger": false
+  },
+  {
+    "query": "Convert this CSV to JSON.",
+    "should_trigger": false
+  },
+  {
+    "query": "What is the capital of Canada?",
+    "should_trigger": false
+  },
+  {
+    "query": "Deploy the app to Coolify.",
+    "should_trigger": false
+  }
+]

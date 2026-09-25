@@ -11,6 +11,14 @@ This skill answers the critical question: *"If I change this column, who dies?"*
 
 ---
 
+## 0. Context Intake
+
+Before designing, make sure you have the inputs below. Read the previous workflow step's artifact first if it exists. Ask only for what is missing, in a single message, and state any assumption you make instead of blocking.
+
+- Target table or column to trace.
+- Where the definitions live: migrations, views, dbt models, ETL code, or live catalog access.
+- Whether live introspection is allowed or only static files.
+
 ## 1. Upstream & Downstream Mapping (Static vs Dynamic)
 
 - **Default (Static):** Analyze based on provided `.sql`, schema files, and application ORM code (e.g. Prisma models).
@@ -35,7 +43,7 @@ Categorize the objects affected by a hypothetical change:
 
 Provide a clear trace map using Markdown or Mermaid.js so the developer can visualize the blast radius.
 
-**Required Outputs (Must write BOTH to `docs/database-report/`):**
+**Outputs.** In *file mode* — the user wants artifacts, or this skill runs as a step of an ecosystem workflow — write both files below to `docs/database-report/`. In *inline mode* — a quick question — answer in the chat and end with the JSON below as a *Handoff* block instead of creating files.
 
 1. **Human-Readable Markdown (`docs/database-report/data-lineage-report.md`)**
 ```markdown
@@ -80,6 +88,10 @@ graph TD;
 
 ---
 
+## When to Skip
+
+- The column is local to one table with no views, triggers, jobs, or downstream consumers.
+
 ## Guardrails
 - **Incomplete Context:** Database artifacts (views, triggers) are reliable to trace inside static SQL files. Remind the user that external soft dependencies (like Metabase or random Python scripts) cannot be guaranteed by DB introspection alone.
 - **Transitive Dependencies:** Ensure you trace at least 2 levels deep (e.g., Table A drives View B, View B drives View C).
@@ -90,7 +102,7 @@ graph TD;
 **Ecosystem:** `@ecosystem-database` — Database Domain.
 
 **Workflows:**
-- **Compliance & Lineage Flow** (`db-compliance`, step 1 of 2): last step → summarize the workflow outcome.
+- **Compliance & Lineage Flow** (`db-compliance`, step 1 of 2): last step → once it passes, complete the workflow and report the outcome.
 
 **Handoff contract:** pass results to the next skill through `docs/database-report/data-lineage-output.json` with the fields `skill`, `workflow`, `created_at`, `inputs`, `summary`, and `next` (the handoff contract of `@ecosystem-database`). If a next skill is not installed, continue with its step from the ecosystem map, or install it with `npx skills add fatih-developer/fth-skills --skill <name>` after the user agrees.
 <!-- END GENERATED: handoffs -->

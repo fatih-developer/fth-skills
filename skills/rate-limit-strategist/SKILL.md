@@ -11,6 +11,14 @@ This skill designs the throttling and quota mechanisms that protect an API from 
 
 ---
 
+## 0. Context Intake
+
+Before designing, make sure you have the inputs below. Read the previous workflow step's artifact first if it exists. Ask only for what is missing, in a single message, and state any assumption you make instead of blocking.
+
+- What must be protected (whole API, expensive endpoints, login) and the abuse seen or expected.
+- Identity available per request (user id, API key, IP, tenant).
+- Infrastructure for counters (gateway, Redis, CDN/WAF) and plan tiers or quotas.
+
 ## 1. Algorithm Selection (Static)
 Select the right rate-limiting algorithm based on traffic characteristics:
 - **Token Bucket / Leaky Bucket:** Best for general APIs. Allows small bursts of traffic (e.g., a burst of 10 requests) but smooths out average flow.
@@ -28,7 +36,7 @@ When a limit is hit, the application must respond gracefully, not just fail. Def
 
 ## 4. Output Generation
 
-**Required Outputs (Must write BOTH to `docs/api-report/`):**
+**Outputs.** In *file mode* — the user wants artifacts, or this skill runs as a step of an ecosystem workflow — write both files below to `docs/api-report/`. In *inline mode* — a quick question — answer in the chat and end with the JSON below as a *Handoff* block instead of creating files.
 
 1. **Human-Readable Markdown (`docs/api-report/rate-limit-report.md`)**
 ````markdown
@@ -74,6 +82,10 @@ When limits are exceeded, return `429 Too Many Requests`.
 ```
 
 ---
+
+## When to Skip
+
+- Limits are fully enforced by a managed platform the user cannot configure, or the endpoint is internal and unreachable from untrusted clients.
 
 ## Guardrails
 - **Header Standardization:** Remind the user that different gateways use different headers (e.g., `X-RateLimit` vs standard IETF `RateLimit`). Pick one and be consistent.

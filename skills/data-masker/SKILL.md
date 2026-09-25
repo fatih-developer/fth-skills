@@ -11,6 +11,14 @@ This skill prevents sensitive production data (PII, PHI, financial records) from
 
 ---
 
+## 0. Context Intake
+
+Before designing, make sure you have the inputs below. Read the previous workflow step's artifact first if it exists. Ask only for what is missing, in a single message, and state any assumption you make instead of blocking.
+
+- Engine and the tables in scope, or permission to scan the schema.
+- Purpose of the copy (staging, analytics, vendor sharing) and applicable regulation (GDPR, KVKK, HIPAA).
+- Columns that must stay joinable or realistic (deterministic masking).
+
 ## 1. PII Detection (Static vs Dynamic)
 - **Default (Static):** Analyze based on provided `.sql`, schema files, or DDL text.
 - **Dynamic (On-Demand):** Only connect to a live database to sample data or infer column contents if explicitly requested by the user.
@@ -42,7 +50,7 @@ Do not just overwrite everything with `'REDACTED'`. Choose the right mathematica
 
 Provide an executable SQL script that can be run on a cloned staging database.
 
-**Required Outputs (Must write BOTH to `docs/database-report/`):**
+**Outputs.** In *file mode* — the user wants artifacts, or this skill runs as a step of an ecosystem workflow — write both files below to `docs/database-report/`. In *inline mode* — a quick question — answer in the chat and end with the JSON below as a *Handoff* block instead of creating files.
 
 1. **Human-Readable Markdown (`docs/database-report/data-masking-report.md`)**
 ````markdown
@@ -85,7 +93,12 @@ ALTER TABLE users ENABLE TRIGGER ALL;
 
 ---
 
+## When to Skip
+
+- The dataset is already synthetic, or no copy of production data leaves the production boundary.
+
 ## Guardrails
+- **Never Mask In Place:** Run masking scripts only on a restored copy, never on the production database itself, and confirm the target connection with the user before executing (`@checkpoint-guardian` when installed).
 - **Performance:** Bulk `UPDATE` on 10 million rows will overwhelm WAL logs. If the table is massive, suggest the `CREATE TABLE AS SELECT (CTAS)` strategy instead of `UPDATE`.
 - **Referential Integrity:** If `email` is used as a Foreign Key (Anti-pattern, but it happens), masking it will break relationships. Detect FKs before masking.
 - **Irreversibility:** Ensure the masking SQL uses one-way functions. Randomization seeds should not be deterministic.
@@ -96,7 +109,7 @@ ALTER TABLE users ENABLE TRIGGER ALL;
 **Ecosystem:** `@ecosystem-database` — Database Domain.
 
 **Workflows:**
-- **Compliance & Lineage Flow** (`db-compliance`, step 2 of 2): last step → summarize the workflow outcome.
+- **Compliance & Lineage Flow** (`db-compliance`, step 2 of 2): last step → once it passes, complete the workflow and report the outcome.
 
 **Direct handoffs:**
 - `@seed-data-generator` — Masked data should be replaced by synthetic fixtures.

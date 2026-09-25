@@ -11,6 +11,14 @@ This skill takes two schema definitions (Source vs Target, or Environment A vs E
 
 ---
 
+## 0. Context Intake
+
+Before designing, make sure you have the inputs below. Read the previous workflow step's artifact first if it exists. Ask only for what is missing, in a single message, and state any assumption you make instead of blocking.
+
+- The two schemas to compare (environment dumps, migration folders, or declarative definitions).
+- Which side is the source of truth.
+- Whether the target holds production data.
+
 ## 1. Diff Extraction & Categorization
 Analyze the two inputs. Group identified changes into three core risk categories:
 
@@ -34,7 +42,7 @@ Analyze the two inputs. Group identified changes into three core risk categories
 ## 2. Sync Plan Generation
 Do not provide a single monolith transaction if dangerous changes exist. Organize changes logically.
 
-**Required Outputs (Must write BOTH to `docs/database-report/`):**
+**Outputs.** In *file mode* — the user wants artifacts, or this skill runs as a step of an ecosystem workflow — write both files below to `docs/database-report/`. In *inline mode* — a quick question — answer in the chat and end with the JSON below as a *Handoff* block instead of creating files.
 
 1. **Human-Readable Markdown (`docs/database-report/schema-diff-report.md`)**
 ````markdown
@@ -76,6 +84,10 @@ ALTER TABLE orders DROP COLUMN customer_id;
 If the diff contains a "🔴 Dangerous" change, explicitly state that the user should engage the `migration-strategist` skill for that specific field to prevent downtime.
 
 ---
+
+## When to Skip
+
+- Both environments are provisioned from the same migration history and are known to be in sync.
 
 ## Guardrails
 - **Data Truncation Warnings:** Always explicitly flag operations where limits are reduced (e.g., `255` down to `50`).

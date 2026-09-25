@@ -182,8 +182,8 @@ End with the distinction that improved eligibility, clarity, and authority do no
 
 **Workflows:**
 - **Search & AI Visibility Flow** (`web-visibility`, step 1 of 2): next → `@geo-optimizer` *(optional)*.
-- **Deploy & Verify Flow** (`web-deploy`, step 3 of 3): last step → summarize the workflow outcome.
-- **Product Launch Flow** (`product-launch`, step 4 of 5, via `@ecosystem-product`): last step → summarize the workflow outcome.
+- **Deploy & Verify Flow** (`web-deploy`, step 3 of 3): last step → once it passes, complete the workflow and report the outcome.
+- **Product Launch Flow** (`product-launch`, step 4 of 5, via `@ecosystem-product`): last step → once it passes, complete the workflow and report the outcome.
 
 **Handoff contract:** pass results to the next skill through an inline *Handoff* block in your reply with the fields `skill`, `workflow`, `created_at`, `inputs`, `summary`, and `next` (the handoff contract of `@ecosystem-web`). If a next skill is not installed, continue with its step from the ecosystem map, or install it with `npx skills add fatih-developer/fth-skills --skill <name>` after the user agrees.
 <!-- END GENERATED: handoffs -->

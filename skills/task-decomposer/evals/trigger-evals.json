@@ -1,0 +1,34 @@
+[
+  {
+    "query": "This is a big migration from Heroku to AWS — break it down into steps with dependencies.",
+    "should_trigger": true
+  },
+  {
+    "query": "Where do I start? I need to build a CRM with auth, billing, and reporting.",
+    "should_trigger": true
+  },
+  {
+    "query": "Plan the project for rewriting our monolith into services.",
+    "should_trigger": true
+  },
+  {
+    "query": "How should I approach implementing SSO across our three apps?",
+    "should_trigger": true
+  },
+  {
+    "query": "Rename the function getUser to fetchUser.",
+    "should_trigger": false
+  },
+  {
+    "query": "What does this regex do?",
+    "should_trigger": false
+  },
+  {
+    "query": "Translate 'good morning' into Turkish.",
+    "should_trigger": false
+  },
+  {
+    "query": "Is 7919 a prime number?",
+    "should_trigger": false
+  }
+]

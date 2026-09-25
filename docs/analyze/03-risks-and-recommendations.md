@@ -1,5 +1,7 @@
 # Risks and Recommendations Report
 
+> **Historical snapshot (2026-04).** This report predates the ecosystem restructuring; skill counts, paths, and findings are out of date. See `docs/skill-report/skill-audit-2026-09.md` for the current state.
+
 **Repository:** `fth-skills` — Curated AI Agent Skill Library  
 **Analysis Date:** 2026-04-12  
 **Analysis Type:** Risks & Recommendations

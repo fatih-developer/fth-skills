@@ -1,0 +1,34 @@
+[
+  {
+    "query": "Delete all records older than 2020 from the production orders table.",
+    "should_trigger": true
+  },
+  {
+    "query": "Deploy this build to production now.",
+    "should_trigger": true
+  },
+  {
+    "query": "Force push the rewritten history to main.",
+    "should_trigger": true
+  },
+  {
+    "query": "Send the newsletter to all 40,000 subscribers.",
+    "should_trigger": true
+  },
+  {
+    "query": "List the files in this folder.",
+    "should_trigger": false
+  },
+  {
+    "query": "Explain how git rebase works.",
+    "should_trigger": false
+  },
+  {
+    "query": "Draft an email to the team (don't send it).",
+    "should_trigger": false
+  },
+  {
+    "query": "Read the config and tell me the port.",
+    "should_trigger": false
+  }
+]

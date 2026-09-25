@@ -11,6 +11,14 @@ This skill acts as the API gatekeeper. It prevents accidental deployment of chan
 
 ---
 
+## 0. Context Intake
+
+Before designing, make sure you have the inputs below. Read the previous workflow step's artifact first if it exists. Ask only for what is missing, in a single message, and state any assumption you make instead of blocking.
+
+- Both contract versions (old and new), or the old one plus the proposed change.
+- Who consumes the API (public, partners, internal only) and the versioning policy.
+- Supported deprecation window, if any.
+
 ## 1. Specification Diff Analysis (Static)
 
 Compare Version A (Current) with Version B (Proposed) and categorize changes based on backward compatibility logic:
@@ -36,7 +44,7 @@ If a breaking change is detected, immediately propose an alternative backward-co
 
 ## 3. Output Generation
 
-**Required Outputs (Must write BOTH to `docs/api-report/`):**
+**Outputs.** In *file mode* — the user wants artifacts, or this skill runs as a step of an ecosystem workflow — write both files below to `docs/api-report/`. In *inline mode* — a quick question — answer in the chat and end with the JSON below as a *Handoff* block instead of creating files.
 
 1. **Human-Readable Markdown (`docs/api-report/breaking-change-report.md`)**
 ```markdown
@@ -67,6 +75,10 @@ If a breaking change is detected, immediately propose an alternative backward-co
 ```
 
 ---
+
+## When to Skip
+
+- There is no previous version (first release) or the change is internal to a service with no external consumers.
 
 ## Guardrails
 - **Ignore Order:** The order of keys in JSON or OpenAPI specs does not constitute a breaking change.

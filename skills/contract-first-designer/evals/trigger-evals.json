@@ -1,0 +1,34 @@
+[
+  {
+    "query": "Write the OpenAPI spec for our orders service before we implement it.",
+    "should_trigger": true
+  },
+  {
+    "query": "We need an AsyncAPI contract for our order events.",
+    "should_trigger": true
+  },
+  {
+    "query": "Frontend and backend keep disagreeing on payloads — let's define the API contract first.",
+    "should_trigger": true
+  },
+  {
+    "query": "Add three endpoints for refunds to our OpenAPI file.",
+    "should_trigger": true
+  },
+  {
+    "query": "Generate a TypeScript SDK from this OpenAPI file.",
+    "should_trigger": false
+  },
+  {
+    "query": "Compare v1 and v2 of our spec for breaking changes.",
+    "should_trigger": false
+  },
+  {
+    "query": "Explain what REST means.",
+    "should_trigger": false
+  },
+  {
+    "query": "Our API returns 500 errors — debug the handler.",
+    "should_trigger": false
+  }
+]

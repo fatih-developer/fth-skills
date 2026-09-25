@@ -11,6 +11,14 @@ This skill bridges the gap between raw database optimizer output and human-reada
 
 ---
 
+## 0. Context Intake
+
+Before designing, make sure you have the inputs below. Read the previous workflow step's artifact first if it exists. Ask only for what is missing, in a single message, and state any assumption you make instead of blocking.
+
+- The execution plan (`EXPLAIN (ANALYZE, BUFFERS)` output preferred) and the query text.
+- Engine and version.
+- Table sizes when the plan does not show them.
+
 ## 1. Plan Ingestion & Translation (Static vs Dynamic)
 - **Default (Static):** Analyze based on user-provided EXPLAIN text/JSON outputs. 
 - **Dynamic (On-Demand):** Only connect to a live database to execute `EXPLAIN (ANALYZE, BUFFERS)` directly if the user explicitly authorizes it and provides the target query.
@@ -29,7 +37,7 @@ Highlight the most expensive parts of the query:
 
 Provide an intuitive breakdown of the issue.
 
-**Required Outputs (Must write BOTH to `docs/database-report/`):**
+**Outputs.** In *file mode* — the user wants artifacts, or this skill runs as a step of an ecosystem workflow — write both files below to `docs/database-report/`. In *inline mode* — a quick question — answer in the chat and end with the JSON below as a *Handoff* block instead of creating files.
 
 1. **Human-Readable Markdown (`docs/database-report/query-explainer-report.md`)**
 ```markdown
@@ -65,6 +73,10 @@ If this is a data-warehouse query, the sort spilled to disk because it needed 45
 ```
 
 ---
+
+## When to Skip
+
+- No plan is available and the user cannot run EXPLAIN; ask for it instead of guessing.
 
 ## Guardrails
 - **Beware of Stats:** Always check if row estimations wildly differ from actual rows. If so, recommend `ANALYZE table_name;` before blindly creating an index.

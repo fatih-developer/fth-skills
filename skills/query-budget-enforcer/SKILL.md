@@ -11,6 +11,14 @@ This skill acts as the financial and operational conscience of the database. It 
 
 ---
 
+## 0. Context Intake
+
+Before designing, make sure you have the inputs below. Read the previous workflow step's artifact first if it exists. Ask only for what is missing, in a single message, and state any assumption you make instead of blocking.
+
+- Engine (PostgreSQL, MySQL, BigQuery, Snowflake) and where queries originate (ORM, BI tool, jobs).
+- Current pain: cost spikes, timeouts, lock contention, N+1 patterns.
+- Budgets already agreed, if any (max rows, timeouts, cost per query).
+
 ## 1. Budget Categories (Static vs Dynamic)
 - **Default (Static):** Analyze queries textually based on known engine constraints (e.g. flagging `SELECT *` without `WHERE` for BigQuery or lack of `LIMIT`).
 - **Dynamic (On-Demand):** Connect to the database or metrics API (e.g. pg_stat_statements) to read historical query execution costs or dry-run estimates only if requested.
@@ -29,7 +37,7 @@ This skill acts as the financial and operational conscience of the database. It 
 
 Review the query and provide a Pass/Fail budget assessment.
 
-**Required Outputs (Must write BOTH to `docs/database-report/`):**
+**Outputs.** In *file mode* — the user wants artifacts, or this skill runs as a step of an ecosystem workflow — write both files below to `docs/database-report/`. In *inline mode* — a quick question — answer in the chat and end with the JSON below as a *Handoff* block instead of creating files.
 
 1. **Human-Readable Markdown (`docs/database-report/query-budget-report.md`)**
 ````markdown
@@ -70,6 +78,10 @@ WHERE event_type = 'click'
 
 ---
 
+## When to Skip
+
+- The workload is a one-off analysis on an isolated replica with no cost or contention risk.
+
 ## Guardrails
 - **Engine Awareness:** BigQuery hates `SELECT *` but loves denormalization. PostgreSQL hates denormalization but `SELECT *` is less deadly if properly indexed. Adjust budgets based on the target engine.
 - **Hard Limits:** Recommend configuring server-side limits like `statement_timeout` (PostgreSQL) or Maximum Bytes Billed (BigQuery) to definitively enforce budgets at the infrastructure layer.
@@ -80,8 +92,8 @@ WHERE event_type = 'click'
 **Ecosystem:** `@ecosystem-database` — Database Domain.
 
 **Workflows:**
-- **Performance Optimization Flow** (`db-performance`, step 3 of 3): last step → summarize the workflow outcome.
-- **Connection Scaling Flow** (`db-scaling`, step 2 of 2): last step → summarize the workflow outcome.
+- **Performance Optimization Flow** (`db-performance`, step 3 of 3): last step → once it passes, complete the workflow and report the outcome.
+- **Connection Scaling Flow** (`db-scaling`, step 2 of 2): last step → once it passes, complete the workflow and report the outcome.
 
 **Handoff contract:** pass results to the next skill through `docs/database-report/query-budget-output.json` with the fields `skill`, `workflow`, `created_at`, `inputs`, `summary`, and `next` (the handoff contract of `@ecosystem-database`). If a next skill is not installed, continue with its step from the ecosystem map, or install it with `npx skills add fatih-developer/fth-skills --skill <name>` after the user agrees.
 <!-- END GENERATED: handoffs -->

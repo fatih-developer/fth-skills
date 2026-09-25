@@ -1,0 +1,49 @@
+name: Validate skills
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: pip install pyyaml
+
+      - name: Generated ecosystem artifacts are up to date
+        run: python scripts/build_ecosystems.py --check
+
+      - name: Validate skills
+        run: python scripts/validate_curated_skills.py
+
+      - name: Tooling tests
+        run: python -m unittest discover -s scripts/tests -v
+
+      - name: session-transfer tests
+        working-directory: skills/session-transfer/scripts
+        run: python -m unittest test_session_transfer -v
+
+      - name: Script syntax
+        run: |
+          find skills scripts -name '*.py' -print0 | xargs -0 python -m py_compile
+          find skills -name '*.sh' -print0 | xargs -0 -n1 bash -n
+          find skills -name '*.cjs' -print0 | xargs -0 -n1 node --check
+
+      - name: Ecosystem installers run
+        run: |
+          for f in skills/ecosystem-*/scripts/install_all.py; do python "$f" --list; done

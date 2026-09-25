@@ -1,5 +1,7 @@
 # Riskler ve Öneriler
 
+> **Tarihli anlık görüntü (2026-04).** Bu rapor ecosystem yeniden yapılandırmasından önce üretildi; skill sayıları, yollar ve bulgular güncel değil. Güncel durum için `docs/skill-report/skill-audit-2026-09.md` dosyasına bakın.
+
 ## Risk Matrisi
 
 | Risk | Kategori | Etki | Olasılık | Öncelik |

@@ -1,0 +1,34 @@
+[
+  {
+    "query": "Design the database for a multi-tenant invoicing SaaS, including access policies and seed data.",
+    "should_trigger": true
+  },
+  {
+    "query": "Our Postgres is slow at peak hours; take me from the query plan to indexes and guardrails.",
+    "should_trigger": true
+  },
+  {
+    "query": "We need to split the users table into users and profiles in production without downtime.",
+    "should_trigger": true
+  },
+  {
+    "query": "We keep hitting 'too many connections' on Postgres — set up pooling properly.",
+    "should_trigger": true
+  },
+  {
+    "query": "Explain what a foreign key is in one sentence.",
+    "should_trigger": false
+  },
+  {
+    "query": "Design REST endpoints for invoices.",
+    "should_trigger": false
+  },
+  {
+    "query": "Write a SQL query that returns the top 5 customers by revenue.",
+    "should_trigger": false
+  },
+  {
+    "query": "Which ORM is more popular, Prisma or Drizzle?",
+    "should_trigger": false
+  }
+]
