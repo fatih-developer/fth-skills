@@ -5,7 +5,7 @@
 **Curated AI agent skills for coding workflows, decision-making, and agentic task safety**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Skills: 69](https://img.shields.io/badge/skills-69%20Public-brightgreen.svg)](#-available-skills)
+[![Skills: 70](https://img.shields.io/badge/skills-70%20Public-brightgreen.svg)](#-available-skills)
 [![Platform: skills.sh](https://img.shields.io/badge/platform-skills.sh-black.svg)](https://skills.sh/)
 
 _Reusable instruction packs for the [skills.sh](https://skills.sh/) ecosystem — works with Claude Code, Cursor, Copilot, Gemini CLI, and more._
@@ -71,7 +71,7 @@ npx clawhub inspect <skill-slug> --files
 
 ---
 
-## 🎯 Available Skills (69 Public)
+## 🎯 Available Skills (70 Public)
 
 The repository is structured into a **Layered Monorepo Architecture**, highly optimized for the **Ecosystem Handoff Pattern**. Skills are not just isolated commands; they are orchestrated capabilities acting together.
 
@@ -153,6 +153,7 @@ These foundational skills provide decision-making, safety, orchestration, and an
 | **tool-selector**       | Planning  | `--skill tool-selector`       | Select optimal tools, plan call sequence, prevent unnecessary tool invocations.                       |
 | **checkpoint-guardian** | Execution | `--skill checkpoint-guardian` | Risk assessment before critical actions. Requires user confirmation for high-risk operations.         |
 | **error-recovery**      | Execution | `--skill error-recovery`      | Classify errors (transient/config/logic/permanent) and apply recovery strategies.                     |
+| **jev-orchestrator**    | Execution | `--skill jev-orchestrator`    | Invoke TypeSafe Jev for bounded semantic decisions (classify, route, grade, filter); code owns rules. |
 | **context-compressor**  | Execution | `--skill context-compressor`  | Compress context by 70% while preserving decisions, errors, and critical data.                        |
 | **memory-ledger**       | Core      | `--skill memory-ledger`       | Structured task memory — tracks decisions, bugs, status throughout multi-step tasks.                  |
 | **multi-brain**         | Core      | `--skill multi-brain`         | Base multi-perspective analysis orchestration pattern.                                                |

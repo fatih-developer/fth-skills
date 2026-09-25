@@ -1,0 +1,42 @@
+[
+  {
+    "query": "Jev MCP is connected. Classify these 40 support tickets into billing, technical, account, security or general and route each to the right queue.",
+    "should_trigger": true
+  },
+  {
+    "query": "Our RAG pipeline pulls 20 passages per query and half are irrelevant. Filter them with Jev before they go to the LLM.",
+    "should_trigger": true
+  },
+  {
+    "query": "This service calls GPT just to return {\"relevant\": true|false} and a label from a fixed list. Can we move those decisions to TypeSafe Jev?",
+    "should_trigger": true
+  },
+  {
+    "query": "Use Jev to decide whether this user request needs a strong model, web research, or human review before our agent picks a tool.",
+    "should_trigger": true
+  },
+  {
+    "query": "Grade these student answers about MVCC as incorrect, partial, correct or fully_correct with the Jev scorer.",
+    "should_trigger": true
+  },
+  {
+    "query": "Calculate the weighted average of these five detector scores and tell me if it exceeds 0.7.",
+    "should_trigger": false
+  },
+  {
+    "query": "Write a friendly refund email to a customer who was charged twice.",
+    "should_trigger": false
+  },
+  {
+    "query": "How many days overdue is this subscription if it was due on 2026-08-01?",
+    "should_trigger": false
+  },
+  {
+    "query": "Design a JWT-based authentication flow for our mobile API.",
+    "should_trigger": false
+  },
+  {
+    "query": "Brainstorm ten names for our new analytics product.",
+    "should_trigger": false
+  }
+]

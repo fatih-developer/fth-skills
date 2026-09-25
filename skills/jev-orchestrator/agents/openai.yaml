@@ -1,0 +1,7 @@
+interface:
+  display_name: "JEV Orchestrator"
+  short_description: "Invoke TypeSafe Jev for bounded semantic decisions: classification, routing, grading, RAG relevance, escalation."
+  default_prompt: "Use $jev-orchestrator to identify bounded semantic judgments in this workflow, invoke the connected Jev tool with the right Choice, Noul, or Score primitive, and keep thresholds and side effects in deterministic code."
+
+policy:
+  allow_implicit_invocation: true

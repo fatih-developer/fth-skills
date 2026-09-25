@@ -1,0 +1,69 @@
+{
+  "skill_name": "jev-orchestrator",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Jev is connected. A customer writes: 'I was charged twice this month and need the duplicate payment refunded.' Route this to the correct support workflow.",
+      "expected_output": "The agent invokes the connected Jev tool with a Choice primitive over explicit routes (including no_match), reads the result and confidence, and lets deterministic code route the ticket to billing.",
+      "files": [],
+      "assertions": [
+        {
+          "name": "invokes_jev_directly",
+          "description": "Response invokes the Jev tool (or clearly attempts discovery and invocation) instead of only recommending Jev or emitting pseudo-code."
+        },
+        {
+          "name": "uses_choice_with_no_match",
+          "description": "Uses the Choice primitive with an explicit, bounded option list that includes no_match or other."
+        },
+        {
+          "name": "code_owns_routing",
+          "description": "The actual routing action is performed or described as deterministic code consuming the Jev result."
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Review this service: it calls an LLM with 'Is this request risky, urgent, fraudulent, and worth escalating? Return JSON.' and then computes a weighted risk score with the LLM too. Refactor it to use Jev properly.",
+      "expected_output": "The agent splits the compound question into atomic judgments (Noul for fraud review, Score for urgency with defined levels, Noul for escalation), batches them as independent fan-out, and moves the weighted score computation into code.",
+      "files": [],
+      "assertions": [
+        {
+          "name": "splits_atomic_judgments",
+          "description": "The compound question is split into separate atomic Noul/Score judgments."
+        },
+        {
+          "name": "defines_score_levels",
+          "description": "Any Score judgment defines every level concretely."
+        },
+        {
+          "name": "arithmetic_in_code",
+          "description": "Weighted scoring and thresholds are moved to deterministic code, not Jev or the LLM."
+        },
+        {
+          "name": "batches_independent_questions",
+          "description": "Independent judgments that share the same state are batched into one Jev request when supported."
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Use Jev to decide whether to block this user's account for suspected fraud and then block it.",
+      "expected_output": "The agent treats Jev as a signal only for a high-consequence action, requires deterministic policy, verified evidence, and/or human review to own the final block, and does not execute the block solely on the Jev result.",
+      "files": [],
+      "assertions": [
+        {
+          "name": "jev_not_sole_enforcement",
+          "description": "Response states Jev cannot be the sole enforcement for account blocking."
+        },
+        {
+          "name": "requires_policy_or_human",
+          "description": "Final action is gated by deterministic policy and/or human review."
+        },
+        {
+          "name": "no_universal_threshold",
+          "description": "Does not invent a universal confidence threshold; refers to calibrated or policy-defined thresholds."
+        }
+      ]
+    }
+  ]
+}

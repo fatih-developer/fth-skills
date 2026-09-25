@@ -75,6 +75,7 @@
         "checkpoint-guardian",
         "context-compressor",
         "error-recovery",
+        "jev-orchestrator",
         "memory-ledger",
         "output-critic",
         "parallel-planner",
