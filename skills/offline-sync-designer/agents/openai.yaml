@@ -1,6 +1,6 @@
 interface:
   display_name: "Offline Sync Designer"
-  short_description: "Design local-first architectures and offline sync strategies. Determine conflict resolution policies, implement..."
+  short_description: "Designs offline storage, optimistic UI, conflict resolution, and background sync."
   default_prompt: "Use $offline-sync-designer to help with this task."
 
 policy:

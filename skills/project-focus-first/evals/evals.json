@@ -1,0 +1,320 @@
+{
+  "skill_name": "project-focus-first",
+  "evals": [
+    {
+      "id": 1,
+      "title": "New web app",
+      "prompt": "Yapay zekâ ile web app geliştirmek istiyorum.",
+      "expected_output": "Trigger: Yes; Ask category question: Yes; Provide app ideas or technologies: No; Stop after question: Yes",
+      "files": [],
+      "assertions": [
+        {
+          "name": "trigger",
+          "description": "Trigger: Yes"
+        },
+        {
+          "name": "ask_category_question",
+          "description": "Ask category question: Yes"
+        },
+        {
+          "name": "provide_app_ideas_or_technologies",
+          "description": "Provide app ideas or technologies: No"
+        },
+        {
+          "name": "stop_after_question",
+          "description": "Stop after question: Yes"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Technology-first request",
+      "prompt": "Yeni SaaS projemde Next.js mi Laravel mi kullanmalıyım?",
+      "expected_output": "Trigger: Yes; Technology comparison before focus: No; Ask category question: Yes",
+      "files": [],
+      "assertions": [
+        {
+          "name": "trigger",
+          "description": "Trigger: Yes"
+        },
+        {
+          "name": "technology_comparison_before_focus",
+          "description": "Technology comparison before focus: No"
+        },
+        {
+          "name": "ask_category_question",
+          "description": "Ask category question: Yes"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Explicit primary focus",
+      "prompt": "Yeni bir AI not alma ürünü geliştiriyorum. Ana odağımız ürün olsun.",
+      "expected_output": "Trigger: Yes; Ask category question again: No; Activate `Ürün`: Yes; Continue from product perspective: Yes",
+      "files": [],
+      "assertions": [
+        {
+          "name": "trigger",
+          "description": "Trigger: Yes"
+        },
+        {
+          "name": "ask_category_question_again",
+          "description": "Ask category question again: No"
+        },
+        {
+          "name": "activate_r_n",
+          "description": "Activate `Ürün`: Yes"
+        },
+        {
+          "name": "continue_from_product_perspective",
+          "description": "Continue from product perspective: Yes"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Primary and secondary focus",
+      "prompt": "Ana odak validasyon, ikincil odak monetizasyon.",
+      "expected_output": "Primary: Validasyon; Secondary: Monetizasyon / İş Modeli; Request clarification: No",
+      "files": [],
+      "assertions": [
+        {
+          "name": "primary",
+          "description": "Primary: Validasyon"
+        },
+        {
+          "name": "secondary",
+          "description": "Secondary: Monetizasyon / İş Modeli"
+        },
+        {
+          "name": "request_clarification",
+          "description": "Request clarification: No"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Multiple categories without priority",
+      "prompt": "Ürün, UX ve teknik tarafı ele alalım.",
+      "expected_output": "Continue immediately: No; Ask which is primary: Yes; Repeat full project analysis: No",
+      "files": [],
+      "assertions": [
+        {
+          "name": "continue_immediately",
+          "description": "Continue immediately: No"
+        },
+        {
+          "name": "ask_which_is_primary",
+          "description": "Ask which is primary: Yes"
+        },
+        {
+          "name": "repeat_full_project_analysis",
+          "description": "Repeat full project analysis: No"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "“All” response",
+      "prompt": "Hepsi önemli.",
+      "expected_output": "Accept “all” as primary: No; Explain one must be primary: Yes; Continue with solution: No",
+      "files": [],
+      "assertions": [
+        {
+          "name": "accept_all_as_primary",
+          "description": "Accept “all” as primary: No"
+        },
+        {
+          "name": "explain_one_must_be_primary",
+          "description": "Explain one must be primary: Yes"
+        },
+        {
+          "name": "continue_with_solution",
+          "description": "Continue with solution: No"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Ambiguous preference",
+      "prompt": "İnsanların uygulamayı sevmesi en önemli şey.",
+      "expected_output": "Silently infer UX: No; Ask minimal distinction between Product and UX: Yes; Continue before answer: No",
+      "files": [],
+      "assertions": [
+        {
+          "name": "silently_infer_ux",
+          "description": "Silently infer UX: No"
+        },
+        {
+          "name": "ask_minimal_distinction_between_product_and_ux",
+          "description": "Ask minimal distinction between Product and UX: Yes"
+        },
+        {
+          "name": "continue_before_answer",
+          "description": "Continue before answer: No"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "title": "Existing focus, aligned request",
+      "prompt": "Context: Project: AI résumé platform; Primary focus: Validasyon\nUser: İlk kullanıcı testini nasıl yapalım?",
+      "expected_output": "Ask focus question again: No; Answer through validation: Yes; Recommend full production architecture: No",
+      "files": [],
+      "assertions": [
+        {
+          "name": "ask_focus_question_again",
+          "description": "Ask focus question again: No"
+        },
+        {
+          "name": "answer_through_validation",
+          "description": "Answer through validation: Yes"
+        },
+        {
+          "name": "recommend_full_production_architecture",
+          "description": "Recommend full production architecture: No"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "title": "Existing focus, off-focus request",
+      "prompt": "Context: Project: AI résumé platform; Primary focus: Ürün\nUser: Veritabanını PostgreSQL mi MongoDB mi yapalım?",
+      "expected_output": "Immediately switch focus: No; Either limit technical discussion to product needs or ask whether focus should change: Yes; Preserve Product until explicit change: Yes",
+      "files": [],
+      "assertions": [
+        {
+          "name": "immediately_switch_focus",
+          "description": "Immediately switch focus: No"
+        },
+        {
+          "name": "either_limit_technical_discussion_to_product_needs_or_ask_whether_focus_should_change",
+          "description": "Either limit technical discussion to product needs or ask whether focus should change: Yes"
+        },
+        {
+          "name": "preserve_product_until_explicit_change",
+          "description": "Preserve Product until explicit change: Yes"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "title": "Explicit focus change",
+      "prompt": "Context: Primary focus: Validasyon\nUser: Validasyon tamam. Şimdi teknik geliştirmeye geçelim.",
+      "expected_output": "New primary focus: Mühendislik / Teknik; Ask full eight-category question: No; Preserve previous focus in history: Yes",
+      "files": [],
+      "assertions": [
+        {
+          "name": "new_primary_focus",
+          "description": "New primary focus: Mühendislik / Teknik"
+        },
+        {
+          "name": "ask_full_eight_category_question",
+          "description": "Ask full eight-category question: No"
+        },
+        {
+          "name": "preserve_previous_focus_in_history",
+          "description": "Preserve previous focus in history: Yes"
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "title": "New project in same conversation",
+      "prompt": "Context: Existing project: AI résumé platform; Primary focus: Ürün\nUser: Şimdi de restoranlar için stok takip uygulaması geliştirelim.",
+      "expected_output": "Detect new project: Yes; Carry over Product automatically: No; Ask category question: Yes",
+      "files": [],
+      "assertions": [
+        {
+          "name": "detect_new_project",
+          "description": "Detect new project: Yes"
+        },
+        {
+          "name": "carry_over_product_automatically",
+          "description": "Carry over Product automatically: No"
+        },
+        {
+          "name": "ask_category_question",
+          "description": "Ask category question: Yes"
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "title": "Simple rewrite",
+      "prompt": "Bu mesajı daha profesyonel yaz: “Toplantıya gelemeyeceğim.”",
+      "expected_output": "Trigger: No; Rewrite directly: Yes",
+      "files": [],
+      "assertions": [
+        {
+          "name": "trigger",
+          "description": "Trigger: No"
+        },
+        {
+          "name": "rewrite_directly",
+          "description": "Rewrite directly: Yes"
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "title": "Scoped bug fix",
+      "prompt": "Bu Oracle sorgusundaki ORA-00904 hatasını düzelt.",
+      "expected_output": "Trigger: No; Solve scoped error: Yes",
+      "files": [],
+      "assertions": [
+        {
+          "name": "trigger",
+          "description": "Trigger: No"
+        },
+        {
+          "name": "solve_scoped_error",
+          "description": "Solve scoped error: Yes"
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "title": "Non-technical user",
+      "prompt": "Teknik bilgim yok. Müşteri randevu uygulaması geliştirmek istiyorum.",
+      "expected_output": "Ask category question first: Yes; Ask database/framework questions first: No; Adapt later questions to goals and outcomes: Yes",
+      "files": [],
+      "assertions": [
+        {
+          "name": "ask_category_question_first",
+          "description": "Ask category question first: Yes"
+        },
+        {
+          "name": "ask_database_framework_questions_first",
+          "description": "Ask database/framework questions first: No"
+        },
+        {
+          "name": "adapt_later_questions_to_goals_and_outcomes",
+          "description": "Adapt later questions to goals and outcomes: Yes"
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "title": "Urgent safety exception",
+      "prompt": "Üretim sistemimiz saldırı altında. Yeni güvenlik projesi yapalım; şu anda verileri nasıl korurum?",
+      "expected_output": "Delay urgent harm-reduction guidance for focus selection: No; Address immediate containment safely first: Yes; Apply focus gate to the longer-term project afterward: Yes",
+      "files": [],
+      "assertions": [
+        {
+          "name": "delay_urgent_harm_reduction_guidance_for_focus_selection",
+          "description": "Delay urgent harm-reduction guidance for focus selection: No"
+        },
+        {
+          "name": "address_immediate_containment_safely_first",
+          "description": "Address immediate containment safely first: Yes"
+        },
+        {
+          "name": "apply_focus_gate_to_the_longer_term_project_afterward",
+          "description": "Apply focus gate to the longer-term project afterward: Yes"
+        }
+      ]
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 interface:
   display_name: "Webhook Architect"
-  short_description: "Architects the provider side of the webhook infrastructure. Not only sends data but designs event schemas and robust..."
+  short_description: "Designs signed, retried, idempotent outbound webhooks with a dead-letter queue."
   default_prompt: "Use $webhook-architect to help with this task."
 
 policy:

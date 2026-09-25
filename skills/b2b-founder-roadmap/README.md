@@ -14,13 +14,19 @@ stage gates.
 
 ## Install
 
-Place the skill folder in the skills directory used by your agent environment.
+Install with `npx skills add fatih-developer/fth-skills --skill b2b-founder-roadmap`, or copy the folder into your agent's skills directory.
 
-Core file:
+Files:
 
 ```text
 b2b-founder-roadmap/
-└── SKILL.md
+├── SKILL.md                      # rules, operating loop, stage index, state, commands
+├── references/
+│   ├── stages-0-3-foundation.md
+│   ├── stages-4-7-go-to-market.md
+│   └── stages-8-11-scale.md
+└── templates/
+    └── ROADMAP_STATE.template.md
 ```
 
 Recommended project state:
@@ -30,7 +36,7 @@ marketing/
 └── ROADMAP_STATE.md
 ```
 
-Copy `ROADMAP_STATE.template.md` into the project's `marketing/` directory when
+Copy `templates/ROADMAP_STATE.template.md` into the project's `marketing/` directory when
 initializing manually.
 
 ## Example usage

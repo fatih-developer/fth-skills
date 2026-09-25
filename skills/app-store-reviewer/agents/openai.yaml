@@ -1,6 +1,6 @@
 interface:
   display_name: "App Store Reviewer"
-  short_description: "Analyze App Store and Play Store rejection reasons, detect guideline violations before submission, and optimize..."
+  short_description: "Checks apps against App Store and Play Store guidelines and fixes store metadata."
   default_prompt: "Use $app-store-reviewer to help with this task."
 
 policy:

@@ -1,6 +1,6 @@
 interface:
   display_name: "Data Lineage Tracer"
-  short_description: "Traces the data source (Data Lineage) of any column or table. Identifies views, triggers, stored procedures, and ETL..."
+  short_description: "Traces upstream and downstream lineage of tables and columns and their blast radius."
   default_prompt: "Use $data-lineage-tracer to help with this task."
 
 policy:

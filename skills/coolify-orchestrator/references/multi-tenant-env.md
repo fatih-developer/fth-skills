@@ -1,5 +1,7 @@
 # Multi-Tenant Env Var Management
 
+> **Safety:** DELETE, stop, restart, redeploy, and bulk env changes affect running services. Get explicit user approval first (see *Security* in `SKILL.md`).
+
 ## Isolation Principle
 
 Each tenant's application must have a completely separate env var set.

@@ -1,5 +1,7 @@
 # Coolify REST API Reference
 
+> **Safety:** DELETE, stop, restart, redeploy, and bulk env changes affect running services. Get explicit user approval first (see *Security* in `SKILL.md`).
+
 For direct API use when MCP is not installed.
 
 Base URL: `$COOLIFY_BASE_URL/api/v1`

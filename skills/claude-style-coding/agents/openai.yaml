@@ -1,6 +1,6 @@
 interface:
   display_name: "Claude Style Coding"
-  short_description: "Forces the agent to act with a Claude-like product mindset, prioritizing user journey, UX states, and visual quality before coding."
+  short_description: "Product-minded implementation with user journey, UX states, and visual polish first."
   default_prompt: "Use $claude-style-coding to help with this task."
 
 policy:

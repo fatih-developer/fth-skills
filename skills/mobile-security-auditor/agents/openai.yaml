@@ -1,6 +1,6 @@
 interface:
   display_name: "Mobile Security Auditor"
-  short_description: "Evaluates mobile app security against the OWASP Mobile Top 10. Implements certificate pinning, secure storage, and..."
+  short_description: "Audits mobile apps against OWASP Mobile Top 10 with remediation code."
   default_prompt: "Use $mobile-security-auditor to help with this task."
 
 policy:

@@ -1,0 +1,22 @@
+[
+  {
+    "query": "Yapay zekâ ile web app geliştirmek istiyorum.",
+    "should_trigger": true
+  },
+  {
+    "query": "Yeni SaaS projemde Next.js mi Laravel mi kullanmalıyım?",
+    "should_trigger": true
+  },
+  {
+    "query": "Yeni bir AI not alma ürünü geliştiriyorum. Ana odağımız ürün olsun.",
+    "should_trigger": true
+  },
+  {
+    "query": "Bu mesajı daha profesyonel yaz: “Toplantıya gelemeyeceğim.”",
+    "should_trigger": false
+  },
+  {
+    "query": "Bu Oracle sorgusundaki ORA-00904 hatasını düzelt.",
+    "should_trigger": false
+  }
+]

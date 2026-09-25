@@ -1,7 +1,7 @@
 interface:
   display_name: "Ask First, Act Later"
-  short_description: "Transitions the agent into a consulting mode where it prioritizes asking targeted, context-aware questions to clarify requirements before taking any action."
+  short_description: "Consultant mode: asks targeted questions and waits before implementing anything."
   default_prompt: "Use $ask-first-act-later to ensure we gather all necessary requirements before proceeding."
 
 policy:
-  allow_implicit_invocation: true
+  allow_implicit_invocation: false

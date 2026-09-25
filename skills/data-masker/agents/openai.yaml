@@ -1,6 +1,6 @@
 interface:
   display_name: "Data Masker"
-  short_description: "Masks production data for test and development environments (Data Masking). Detects PII (email, SSN, credit cards)..."
+  short_description: "Detects PII and masks production data for safe test and staging copies."
   default_prompt: "Use $data-masker to help with this task."
 
 policy:

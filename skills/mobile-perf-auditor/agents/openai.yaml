@@ -1,6 +1,6 @@
 interface:
   display_name: "Mobile Perf Auditor"
-  short_description: "Evaluate mobile app performance holistically across cold start time, FPS drops, memory leaks, battery drain, and..."
+  short_description: "Diagnoses mobile cold start, jank, memory, battery, and bundle-size problems."
   default_prompt: "Use $mobile-perf-auditor to help with this task."
 
 policy:

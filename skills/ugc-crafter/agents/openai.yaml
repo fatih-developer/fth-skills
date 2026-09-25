@@ -1,6 +1,6 @@
 interface:
   display_name: "UGC Crafter"
-  short_description: "Generates structured text prompts for AI image and video models to produce authentic User Generated Content (UGC) style visuals — smartphone footage, testimonials, unboxings, and influencer-style product content."
+  short_description: "Writes prompts for authentic, smartphone-style UGC images and videos with consistent characters."
   default_prompt: "Use $ugc-crafter to generate UGC-style image and video prompts for AI content creation, product ads, and influencer-style campaign visuals."
 
 policy:

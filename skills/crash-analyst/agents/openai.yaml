@@ -1,6 +1,6 @@
 interface:
   display_name: "Crash Analyst"
-  short_description: "Parse and analyze crash reports from tools like Crashlytics or Sentry. Interpret iOS symbolication and Android..."
+  short_description: "Symbolicates mobile crash reports, finds the root cause, and proposes a fix."
   default_prompt: "Use $crash-analyst to help with this task."
 
 policy:

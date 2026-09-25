@@ -1,5 +1,7 @@
 # Container Exec / SSH Fallback
 
+> **Safety:** DELETE, stop, restart, redeploy, and bulk env changes affect running services. Get explicit user approval first (see *Security* in `SKILL.md`).
+
 ## When To Use
 
 Situations where Coolify API is insufficient:

@@ -1,6 +1,6 @@
 interface:
   display_name: "Design Intelligence"
-  short_description: "Design trend-aware, performance-conscious, accessible web interfaces. Generate landing pages, dashboards, e-commerce pages, and more. Or review and audit existing pages with a 12-category rubric."
+  short_description: "Generates or reviews web pages with a 12-category, accessibility-aware design rubric."
   default_prompt: "Use $design-intelligence to design a new page, review an existing UI, or audit a web interface."
 
 policy:

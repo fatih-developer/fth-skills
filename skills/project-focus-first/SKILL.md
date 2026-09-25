@@ -268,118 +268,7 @@ Prefer depth in the active focus over breadth across all categories.
 
 ## Behavior by Primary Focus
 
-### Ürün
-Prioritize:
-
-- User and problem
-- Value proposition
-- Core use case
-- Product boundaries
-- MVP
-- Feature prioritization
-- Product roadmap
-
-Keep technology discussion limited to what is required to make product decisions.
-
-### Marketing / Büyüme
-Prioritize:
-
-- Audience
-- Positioning
-- Message
-- Distribution
-- Acquisition
-- Conversion
-- Retention
-- Growth loops
-
-Treat product or engineering details as supporting constraints only.
-
-### Mühendislik / Teknik
-Prioritize:
-
-- Requirements
-- Architecture
-- Data model
-- Integrations
-- Security
-- Performance
-- Deployment
-- Testing
-- Technical risks
-
-Do not expand the product scope unless technically necessary.
-
-### Araştırma / Keşif
-Prioritize:
-
-- Unknowns
-- Research questions
-- Evidence
-- Sources
-- User and market understanding
-- Competitors
-- Technology landscape
-- Opportunity areas
-
-Avoid presenting unverified assumptions as final decisions.
-
-### Validasyon
-Prioritize:
-
-- Riskiest assumption
-- Testable hypothesis
-- Cheapest meaningful experiment
-- Success and failure criteria
-- Real behavior and demand signals
-- User feedback
-
-Do not recommend substantial implementation before the critical assumptions are tested.
-
-### Tasarım / Kullanıcı Deneyimi (UX)
-Prioritize:
-
-- User journey
-- Task flow
-- Information architecture
-- Screens
-- Interaction
-- Accessibility
-- Usability
-- Onboarding
-
-Do not place visual aesthetics above comprehension and task completion.
-
-### Monetizasyon / İş Modeli
-Prioritize:
-
-- Payer
-- Value exchanged
-- Revenue model
-- Pricing
-- Packaging
-- Costs
-- Margins
-- Unit economics
-- Sales model
-
-Do not create a broad feature list disconnected from willingness to pay.
-
-### Operasyon / Sürdürülebilirlik
-Prioritize:
-
-- Ownership
-- Maintenance
-- Monitoring
-- Support
-- Documentation
-- Data and content operations
-- Reliability
-- Cost control
-- Governance
-- Continuity
-
-Evaluate the ongoing system, not only the initial build.
+Read `references/focus-behaviors.md`: How to behave under each primary focus (decision filters, what to prioritize, what to avoid). Load it once a primary focus is active (for behavior) or when the expected response shape is unclear (for examples).
 
 ---
 
@@ -505,78 +394,7 @@ When a platform requires an action before questions can be asked, perform the re
 
 ## Examples
 
-### Example 1: New application
-
-User:
-
-> Yapay zekâ destekli bir eğitim uygulaması geliştirmek istiyorum.
-
-Assistant:
-
-> Bu çalışma için öncelikli odak noktamız hangisi?
->
-> 1. Ürün  
-> 2. Marketing / Büyüme  
-> 3. Mühendislik / Teknik  
-> 4. Araştırma / Keşif  
-> 5. Validasyon  
-> 6. Tasarım / Kullanıcı Deneyimi (UX)  
-> 7. Monetizasyon / İş Modeli  
-> 8. Operasyon / Sürdürülebilirlik  
->
-> Bir numara veya kategori adıyla cevaplayabilirsin. Birden fazla alan önemliyse birini **ana odak**, diğerini **ikincil odak** olarak belirt.
-
-Stop.
-
-### Example 2: Premature technology request
-
-User:
-
-> Bir SaaS fikrim var. React mı Next.js mi kullanmalıyım?
-
-Assistant asks the focus question. It does not compare React and Next.js yet.
-
-### Example 3: Explicit focus in the first message
-
-User:
-
-> Bir iş takip uygulaması geliştireceğim. Öncelikle fikri doğrulamak istiyorum.
-
-Assistant:
-
-> Ana odak: **Validasyon**
-
-Then answer the user's request through validation, without repeating the focus question.
-
-### Example 4: Equal priorities
-
-User:
-
-> Ürün ve teknik birlikte önemli.
-
-Assistant:
-
-> İkisini de ele alabiliriz; ancak hangisi birincil odak olacak? Diğerini ikincil odak olarak koruyabiliriz.
-
-Stop.
-
-### Example 5: New project in the same conversation
-
-The active project is an AI résumé tool with primary focus `Ürün`.
-
-User:
-
-> Şimdi de restoranlar için rezervasyon sistemi geliştirmek istiyorum.
-
-Assistant treats this as a new project and asks the focus question again.
-
-### Example 6: Isolated bug fix
-
-User:
-
-> Bu SQL sorgusundaki ORA-00904 hatasını düzelt.
-
-Assistant does not trigger this skill. It handles the scoped bug.
+Read `references/examples.md`: Worked conversations: new projects, explicit focus, multiple categories, off-focus requests, focus changes. Load it once a primary focus is active (for behavior) or when the expected response shape is unclear (for examples).
 
 ---
 
@@ -614,9 +432,15 @@ The skill is working correctly when:
 9. Responses prioritize the active goal instead of covering every possible category.
 10. The assistant advances the smallest meaningful next step under the active focus.
 
+## Coexistence with Other Gates
+
+Clarification gates follow one precedence (see `@ecosystem-reasoning`): 1. `@project-focus-first` → 2. `@ask-first-act-later` → 3. `@assumption-checker` → 4. `@plan-hardener`. Run at most one gate per request — the first whose condition holds — and skip any gate whose questions were already answered in this conversation. `@checkpoint-guardian` is separate: it always applies before irreversible actions.
+
+You are gate 1. Run only for a brand-new project with no stated focus. Once the focus is chosen, the later gates must not re-ask anything the focus answer already settled.
+
 ## 🔗 Next Steps & Handoffs
 
-<!-- BEGIN GENERATED: handoffs (generated by scripts/build_ecosystems.py from skills/ecosystem-*/references/workflows.json — do not edit by hand) -->
+<!-- BEGIN GENERATED: handoffs (generated from the ecosystem workflow map by build_ecosystems.py — do not edit by hand) -->
 **Ecosystem:** `@ecosystem-reasoning` — Reasoning, Planning Gates & Prompting.
 
 **Workflows:**
@@ -626,5 +450,5 @@ The skill is working correctly when:
 **Direct handoffs:**
 - `@b2b-founder-roadmap` — The chosen focus is B2B go-to-market.
 
-**Handoff contract:** pass results to the next skill through an inline *Handoff* block in your reply with the fields `skill`, `workflow`, `created_at`, `inputs`, `summary`, and `next` (see `@ecosystem-reasoning` → `references/handoff-contract.md`). If a next skill is not installed, continue with its step from the ecosystem map, or install it with `npx skills add fatih-developer/fth-skills --skill <name>` after the user agrees.
+**Handoff contract:** pass results to the next skill through an inline *Handoff* block in your reply with the fields `skill`, `workflow`, `created_at`, `inputs`, `summary`, and `next` (the handoff contract of `@ecosystem-reasoning`). If a next skill is not installed, continue with its step from the ecosystem map, or install it with `npx skills add fatih-developer/fth-skills --skill <name>` after the user agrees.
 <!-- END GENERATED: handoffs -->

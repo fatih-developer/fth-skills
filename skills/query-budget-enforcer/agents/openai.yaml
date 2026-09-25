@@ -1,6 +1,6 @@
 interface:
   display_name: "Query Budget Enforcer"
-  short_description: "Defines and enforces query resource limits. Detects which queries scan too many rows, inflate memory usage, or..."
+  short_description: "Sets query cost and row-scan budgets and detects N+1 patterns."
   default_prompt: "Use $query-budget-enforcer to help with this task."
 
 policy:

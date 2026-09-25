@@ -1,6 +1,6 @@
 interface:
   display_name: "Release Orchestrator"
-  short_description: "Manage the mobile release lifecycle. Produce version bumps, changelog generation, TestFlight/Internal Track..."
+  short_description: "Plans mobile versions, changelogs, beta tracks, and staged rollouts."
   default_prompt: "Use $release-orchestrator to help with this task."
 
 policy:
