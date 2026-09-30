@@ -1,4 +1,4 @@
-# EXAMPLES — design-intelligence by Page Type
+# Page Examples by Page Type
 
 Concrete examples showing how the rules apply per page type. Each example includes strategy summary, section architecture, and key rule applications.
 
@@ -20,7 +20,7 @@ Concrete examples showing how the rules apply per page type. Each example includ
 1. Hero — single message + primary CTA (above fold)
 2. Trust bar — logos of known customers (Stripe, Vercel, Linear)
 3. Problem statement — why current tools fail (short copy + illustration)
-4. Feature bento — 6-card modular grid (error tracking, performance, uptime, logs, alerts, integrations)
+4. Feature grid — 6 modules sized by importance (error tracking and performance larger; uptime, logs, alerts, integrations smaller)
 5. Metrics proof — 3 large stat blocks ("99.9% uptime", "50ms avg alert latency", "10M events/day")
 6. Testimonials — 2 quotes from known users
 7. Code snippet — real diagnostic output example (shows value immediately)
@@ -31,9 +31,9 @@ Concrete examples showing how the rules apply per page type. Each example includ
 ### Key Rule Applications
 - **Rule 1 (One Primary Message):** Hero H1 = "Understand your production issues before your users notice them" — single, specific, no competing claims
 - **Rule 2 (No Hero Slider):** Static hero with illustration; no auto-rotation
-- **Rule 3 (Modular Layout):** Feature bento grid with 6 cards, each self-contained
+- **Rule 3 (Modular Layout):** Feature grid with 6 self-contained modules, the two core features given more space
 - **Rule 12 (Performance):** Hero illustration is SVG, not raster image; code snippet is syntax-highlighted text
-- **Rule 15 (Functional Motion):** Subtle fade-in on scroll for bento cards; no looping animations
+- **Rule 15 (Functional Motion):** No entrance animation on the grid; state changes animate only on interaction
 - **Rule 27 (Accessibility):** All interactive elements keyboard-accessible; focus states visible; contrast verified
 
 ---
@@ -157,7 +157,7 @@ Concrete examples showing how the rules apply per page type. Each example includ
 
 ### Key Rule Applications
 - **Rule 1 (Primary Message):** Hero tagline is one sentence; no competing message in hero
-- **Rule 3 (Modular Layout):** 4 project cards are equal-sized bento grid; each is self-contained
+- **Rule 3 (Modular Layout):** 4 project entries in a list, lead project larger; each is self-contained
 - **Rule 21 (Human-Centered Aesthetic):** Warm typography, personal photo, personality-driven — not sterile corporate
 - **Rule 25 (Video Background):** Not used — hero is a bold typographic treatment or single large image
 - **Rule 26 (Personalization):** Not applicable — no AI personalization needed
@@ -189,7 +189,7 @@ Concrete examples showing how the rules apply per page type. Each example includ
 
 ### Key Rule Applications
 - **Rule 1 (Primary Message):** "Simple pricing" is the promise — no hidden fees, no feature confusion
-- **Rule 3 (Modular Layout):** 3 plan cards are equal-width bento-style; feature table below is separate module
+- **Rule 3 (Modular Layout):** 3 plan cards of equal width because the plans are parallel choices; feature table below is a separate module
 - **Rule 4 (Hierarchy by Size):** Pro plan card is slightly elevated or highlighted as "most popular"; Free and Team are equal
 - **Rule 9 (Mobile-First):** Plan cards stack vertically on mobile; comparison table collapses to accordion
 - **Rule 16 (Micro-Interaction):** Toggle animates price change; hover on plan card elevates it slightly

@@ -1,0 +1,85 @@
+{
+  "skill_name": "design-system",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "We're launching Rota Kargo, a B2B shipment-tracking app for Turkish SMEs. No brand yet. Competitors: yurticikargo.com, araskargo.com.tr, mngkargo.com.tr. Propose colors and fonts.",
+      "expected_output": "Announces a read-only scan, runs scan_site.py on the competitors, uses find_fonts.py beyond the defaults with Turkish support, writes design-research.md and a directions.json with 2-3 distinct flat-color directions, renders specimen.html with build_specimen.py, and lets the user choose.",
+      "files": [],
+      "assertions": [
+        {
+          "name": "announces_scan",
+          "description": "Says which sites it will read before scanning, or explains why it cannot scan."
+        },
+        {
+          "name": "evidence_cited",
+          "description": "Each direction cites evidence (competitor landscape, type-in-use, domain materials, or project assets)."
+        },
+        {
+          "name": "multiple_directions",
+          "description": "Offers 2-3 directions that differ in stance or hue and in heading font."
+        },
+        {
+          "name": "no_defaults",
+          "description": "Does not propose Inter, Roboto, Open Sans, Poppins, Montserrat, or AI-favorite fonts without a stated reason."
+        },
+        {
+          "name": "no_gradients",
+          "description": "No gradients in any proposed palette or specimen."
+        },
+        {
+          "name": "turkish_checked",
+          "description": "Confirms Turkish (latin-ext) support for proposed fonts."
+        },
+        {
+          "name": "specimen",
+          "description": "Produces or describes the specimen.html comparison and reports check results honestly."
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Our brand color is #E30A17 and our logo uses a condensed bold grotesque. Build our design system.",
+      "expected_output": "Keeps #E30A17 as the brand primary, reads the logo traits to choose a related heading face and a readable body face, builds neutrals, semantic colors and a dark theme around the brand color, checks contrast (including on-primary), and exports DESIGN.md and tokens after the user confirms.",
+      "files": [],
+      "assertions": [
+        {
+          "name": "keeps_brand",
+          "description": "Keeps the existing brand color instead of replacing it."
+        },
+        {
+          "name": "logo_traits",
+          "description": "Uses the logo's letterform traits to choose the heading font without cloning the logo."
+        },
+        {
+          "name": "contrast_measured",
+          "description": "Reports measured contrast values rather than claiming compliance."
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Review this page's CSS: body{font-family:Inter} .hero{background:linear-gradient(135deg,#6366f1,#22d3ee)} .muted{color:#9ca3af} on a white background.",
+      "expected_output": "REVIEW mode flags the gradient, the template indigo/cyan colors, Inter as a default without rationale, and the muted text contrast (#9ca3af on white is about 2.5:1), then recommends revise with the few highest-impact fixes.",
+      "files": [],
+      "assertions": [
+        {
+          "name": "flags_gradient",
+          "description": "Flags the gradient as a violation."
+        },
+        {
+          "name": "flags_contrast",
+          "description": "Identifies the muted text as failing 4.5:1 with a measured value."
+        },
+        {
+          "name": "flags_defaults",
+          "description": "Flags Inter and the indigo/cyan template colors as defaults needing a reason."
+        },
+        {
+          "name": "recommendation",
+          "description": "Ends with approve, revise, or redesign and prioritized fixes."
+        }
+      ]
+    }
+  ]
+}

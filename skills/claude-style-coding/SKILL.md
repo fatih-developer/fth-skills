@@ -164,12 +164,11 @@ Keep the final response concise unless the user asks for a detailed report.
 
 | Need | Skill |
 |---|---|
-| Page strategy, section architecture, or a 12-category UI review | `@design-intelligence` |
-| Design tokens and `DESIGN.md` as the source of visual truth, token linting, extracting a design system from a URL | `@design-md-enforcer` |
+| Palette, typography, DESIGN.md and tokens, page strategy, or a 12-category UI review | `@design-system` |
 | Implementing a user-facing feature with product thinking and every UX state handled | `@claude-style-coding` |
 | Removing generic AI aesthetics (glow, neon gradients, fake proof, uniform cards) and restoring product-specific hierarchy | `@anti-ai-slop-design` |
 
-When more than one applies, run them in the order of the *Product Page Build Flow* in `@ecosystem-web`: tokens → page strategy → anti-slop check → implementation.
+When more than one applies, run them in the order of the *Product Page Build Flow* in `@ecosystem-web`: palette and type (FOUNDATIONS) → DESIGN.md (SPEC) → page strategy (PAGE) → anti-slop check → implementation.
 
 ## 🔗 Next Steps & Handoffs
 
@@ -177,6 +176,7 @@ When more than one applies, run them in the order of the *Product Page Build Flo
 **Ecosystem:** `@ecosystem-web` — Web, Design & Delivery.
 
 **Workflows:**
+- **Palette & Typography Flow** (`web-foundations`, step 4 of 4): last step → once it passes, complete the workflow and report the outcome.
 - **Product Page Build Flow** (`web-build-page`, step 4 of 5): next → `@geo-optimizer` *(optional)*.
 - **Remove the AI Look Flow** (`web-de-slop`, step 3 of 3): last step → once it passes, complete the workflow and report the outcome.
 

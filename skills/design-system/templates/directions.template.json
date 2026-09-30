@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "project": "Rota Kargo (illustrative example)",
+  "language": "tr",
+  "sample": {
+    "headline": "Gönderin nerede, tek bakışta",
+    "body": "Pijamalı hasta yağız şoföre çabucak güvendi. İstanbul, Iğdır ve Şırnak'tan gelen siparişler aynı gün hazırlanır.",
+    "cta": "Gönderi oluştur",
+    "secondary": "Takip numarası gir"
+  },
+  "directions": [
+    {
+      "id": "a",
+      "name": "Liman",
+      "summary": "Operational and calm: port-paperwork neutrals, container green for actions, signal amber for attention.",
+      "rationale": [
+        "Evidence: competitors in the scan use blue and red accents; green is free in the category.",
+        "Atkinson Hyperlegible Next keeps tracking codes and addresses unambiguous for warehouse staff.",
+        "Schibsted Grotesk has the condensed, label-like headlines of freight documents without looking like a template."
+      ],
+      "sources": ["https://fonts.google.com/specimen/Schibsted+Grotesk", "https://fonts.google.com/specimen/Atkinson+Hyperlegible+Next"],
+      "fonts": {
+        "heading": {"family": "Schibsted Grotesk", "weights": [600, 800], "fallback": "sans-serif"},
+        "body": {"family": "Atkinson Hyperlegible Next", "weights": [400, 600], "fallback": "sans-serif"},
+        "mono": {"family": "Martian Mono", "weights": [400], "fallback": "ui-monospace, monospace"}
+      },
+      "type": {"base": 16, "ratio": 1.25, "line_height_body": 1.55, "line_height_heading": 1.1},
+      "radius": "4px",
+      "colors": {
+        "light": {
+          "bg": "#f5f6f3", "surface": "#ffffff", "border": "#cfd3cb", "text": "#1b211d", "text-muted": "#4f5a52",
+          "primary": "#1f5d4c", "on-primary": "#ffffff", "accent": "#a8620a",
+          "success": "#2e7d32", "warning": "#9a5b00", "danger": "#b3261e"
+        },
+        "dark": {
+          "bg": "#141816", "surface": "#1c221f", "border": "#35403a", "text": "#e8ece8", "text-muted": "#a9b4ad",
+          "primary": "#6fbfa4", "on-primary": "#0d1f19", "accent": "#e3a24a",
+          "success": "#7cc882", "warning": "#e0a84d", "danger": "#f08a80"
+        }
+      }
+    },
+    {
+      "id": "b",
+      "name": "Konteyner",
+      "summary": "Industrial and confident: steel greys with container-red actions and heavy, compact headlines.",
+      "rationale": [
+        "Container red is recognizable on a warehouse floor and differs from the category's blue default.",
+        "Chivo at heavy weights gives stencil-like authority; Public Sans keeps dense tables readable."
+      ],
+      "sources": ["https://fonts.google.com/specimen/Chivo", "https://fonts.google.com/specimen/Public+Sans"],
+      "fonts": {
+        "heading": {"family": "Chivo", "weights": [700, 900], "fallback": "sans-serif"},
+        "body": {"family": "Public Sans", "weights": [400, 600], "fallback": "sans-serif"}
+      },
+      "type": {"base": 15, "ratio": 1.2, "line_height_body": 1.5, "line_height_heading": 1.05},
+      "radius": "2px",
+      "colors": {
+        "light": {
+          "bg": "#f2f3f5", "surface": "#ffffff", "border": "#c9cdd3", "text": "#15181c", "text-muted": "#4c535c",
+          "primary": "#a3321c", "on-primary": "#ffffff", "accent": "#3f5872",
+          "success": "#2f7a3d", "warning": "#8f5a00", "danger": "#b0182c"
+        },
+        "dark": {
+          "bg": "#121417", "surface": "#1b1e22", "border": "#353a41", "text": "#eceef1", "text-muted": "#a7aeb8",
+          "primary": "#f08466", "on-primary": "#2a0c05", "accent": "#9db5cf",
+          "success": "#7fc98c", "warning": "#e1ae5a", "danger": "#f58a93"
+        }
+      }
+    },
+    {
+      "id": "c",
+      "name": "Rıhtım",
+      "summary": "Editorial and trustworthy: ink blue on warm paper, slab headlines like shipping labels.",
+      "rationale": [
+        "Zilla Slab echoes stamped shipping labels; Hanken Grotesk keeps UI copy neutral.",
+        "Ink blue is used as text-weight color, not as a glowing brand fill, so it reads as print rather than SaaS."
+      ],
+      "sources": ["https://fonts.google.com/specimen/Zilla+Slab", "https://fonts.google.com/specimen/Hanken+Grotesk"],
+      "fonts": {
+        "heading": {"family": "Zilla Slab", "weights": [600, 700], "fallback": "serif"},
+        "body": {"family": "Hanken Grotesk", "weights": [400, 600], "fallback": "sans-serif"}
+      },
+      "type": {"base": 16, "ratio": 1.333, "line_height_body": 1.6, "line_height_heading": 1.15},
+      "radius": "6px",
+      "colors": {
+        "light": {
+          "bg": "#f4f5f1", "surface": "#fcfcf9", "border": "#d3d5cc", "text": "#1d2230", "text-muted": "#555b69",
+          "primary": "#27406b", "on-primary": "#ffffff", "accent": "#8a6a00",
+          "success": "#3b7a3a", "warning": "#8c5d00", "danger": "#a8322a"
+        },
+        "dark": {
+          "bg": "#15171c", "surface": "#1d2027", "border": "#393d48", "text": "#ecebe6", "text-muted": "#aeb1ba",
+          "primary": "#9fb7e3", "on-primary": "#101a2e", "accent": "#d9b24a",
+          "success": "#8ccf8a", "warning": "#e2b155", "danger": "#f19189"
+        }
+      }
+    }
+  ]
+}

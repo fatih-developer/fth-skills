@@ -1,0 +1,50 @@
+[
+  {
+    "query": "Projemiz için renk paleti ve tipografi önerir misin? Inter veya Poppins olmasın.",
+    "should_trigger": true
+  },
+  {
+    "query": "We need a color palette and font pairing for our logistics SaaS that doesn't look like every AI startup.",
+    "should_trigger": true
+  },
+  {
+    "query": "Create a DESIGN.md with tokens for our app based on our logo and competitors.",
+    "should_trigger": true
+  },
+  {
+    "query": "Suggest fonts that match our logo's letterforms and support Turkish characters.",
+    "should_trigger": true
+  },
+  {
+    "query": "Review this landing page against our design system and flag token drift.",
+    "should_trigger": true
+  },
+  {
+    "query": "Design the section structure for our pricing page.",
+    "should_trigger": true
+  },
+  {
+    "query": "Rakiplerimize göre farklılaşan, gradyansız bir renk sistemi kur.",
+    "should_trigger": true
+  },
+  {
+    "query": "Fix the TypeError in checkout.ts.",
+    "should_trigger": false
+  },
+  {
+    "query": "Write a press release about our Series A.",
+    "should_trigger": false
+  },
+  {
+    "query": "Set up PgBouncer for Postgres.",
+    "should_trigger": false
+  },
+  {
+    "query": "Translate the settings page strings to German.",
+    "should_trigger": false
+  },
+  {
+    "query": "Remove the neon glow and glassmorphism from this hero image brief.",
+    "should_trigger": false
+  }
+]

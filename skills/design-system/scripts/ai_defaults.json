@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "about": "Defaults that make interfaces look template- or AI-generated. A match is a warning, not a ban: keep it when the brand already uses it or the choice is explicitly justified. Review this list periodically; trends move.",
+  "popularity_cutoff": 60,
+  "fonts": {
+    "overused": [
+      "Inter", "Roboto", "Open Sans", "Poppins", "Montserrat", "Lato", "Nunito", "Nunito Sans",
+      "Raleway", "Source Sans 3", "Work Sans", "Rubik", "Mulish", "Figtree", "Arimo", "Noto Sans"
+    ],
+    "ai_favorites": [
+      "Space Grotesk", "Fraunces", "Instrument Serif", "Instrument Sans", "Geist", "Sora", "Syne",
+      "Unbounded", "Bricolage Grotesque", "Plus Jakarta Sans", "Manrope", "Outfit", "DM Sans",
+      "DM Serif Display", "Playfair Display", "Inter Tight", "Clash Display", "Satoshi",
+      "General Sans", "Cabinet Grotesk", "Switzer"
+    ],
+    "allowed_for_code": ["JetBrains Mono", "Geist Mono", "IBM Plex Mono", "Fira Code", "Source Code Pro"]
+  },
+  "colors": [
+    {"hex": "#F4F1EA", "name": "warm cream background (Claude-style)"},
+    {"hex": "#D97757", "name": "terracotta accent (Claude-style)"},
+    {"hex": "#0F172A", "name": "slate-900 navy background"},
+    {"hex": "#020617", "name": "slate-950 near-black background"},
+    {"hex": "#22D3EE", "name": "electric cyan"},
+    {"hex": "#06B6D4", "name": "cyan-500"},
+    {"hex": "#6366F1", "name": "indigo-500 SaaS default"},
+    {"hex": "#4F46E5", "name": "indigo-600 SaaS default"},
+    {"hex": "#8B5CF6", "name": "violet-500"},
+    {"hex": "#7C3AED", "name": "violet-600"},
+    {"hex": "#A855F7", "name": "purple-500"},
+    {"hex": "#3B82F6", "name": "blue-500 framework default"},
+    {"hex": "#2563EB", "name": "blue-600 framework default"},
+    {"hex": "#A3E635", "name": "acid lime"},
+    {"hex": "#C6F432", "name": "acid green on black"}
+  ],
+  "pairs": [
+    {"colors": ["#0F172A", "#22D3EE"], "name": "navy + electric cyan (AI product cliché)"},
+    {"colors": ["#000000", "#A3E635"], "name": "black + acid green"},
+    {"colors": ["#F4F1EA", "#D97757"], "name": "cream + terracotta (Claude-style)"},
+    {"colors": ["#FFFFFF", "#6366F1"], "name": "white + indigo (template SaaS)"}
+  ],
+  "color_threshold": 0.035
+}

@@ -78,7 +78,7 @@ Skills.sh re-indexes automatically within ~1 hour of push.
 
 ## Deprecated Aliases
 
-`proje-analizcisi` → `project-analyzer` and `skill-security` → `security-auditor`. Aliases stay installable, route to the canonical skill, and set `allow_implicit_invocation: false`. Declare them under `deprecated` in the owning `workflows.json`.
+`proje-analizcisi` → `project-analyzer`, `skill-security` → `security-auditor`, and `design-intelligence` / `design-md-enforcer` → `design-system`. Aliases stay installable, route to the canonical skill, and set `allow_implicit_invocation: false`. Declare them under `deprecated` in the owning `workflows.json`.
 
 ## Safety Conventions
 

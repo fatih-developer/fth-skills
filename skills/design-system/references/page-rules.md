@@ -52,9 +52,9 @@ Do not use auto-rotating hero sliders, homepage carousels, or multi-slide banner
 
 Use modular content architecture by default. Chunk content into meaningful units.
 
-**Preferred patterns:**
-- Bento grid
-- Card-based sections
+**Preferred patterns (choose by content, not by habit):**
+- Lists, tables, and editorial sections when items are read in order
+- Grids or cards when items are parallel and independently scannable; vary size only when importance really differs
 - Feature clusters
 - Modular stats + media + text blocks
 - Content blocks with clear semantic separation
@@ -65,7 +65,7 @@ Use modular content architecture by default. Chunk content into meaningful units
 - **Dashboard:** Strongly encouraged — dense data must be chunked into cards, tables, and panels
 - **E-commerce:** Product grid, category cards, cart summary module
 - **Blog:** Article body is linear; sidebar modules, related posts, and author bio are modular
-- **Pricing:** Comparison table or bento grid of plan cards
+- **Pricing:** Comparison table, or plan cards when there are three or fewer plans
 
 ---
 
@@ -143,7 +143,7 @@ Spacing must be systematic and reusable.
 
 ## 8. Rounded Interface Rule
 
-Use soft corners where appropriate for a modern, approachable feel.
+Take the corner radius from `DESIGN.md`. Soft corners suit approachable products; sharp or small radii suit editorial, industrial, or data-dense products equally well.
 
 **Suitable for:**
 - Cards
@@ -335,7 +335,7 @@ Typography must carry hierarchy, not just decoration.
 **Avoid arbitrary size jumps.** Use a consistent type scale (e.g., 12/14/16/18/20/24/32/40/48/64px).
 
 **Per-type modulation:**
-- **Blog:** Typography is the product — use a proven readable combination (e.g., Merriweather + system-ui)
+- **Blog:** Typography is the product — use the reading pairing chosen in FOUNDATIONS mode and test it at real article length
 - **Dashboard:** Dense but readable — labels smaller, values larger, monospace for data
 
 ---
@@ -372,14 +372,14 @@ Large, bold, or expressive typography is acceptable when:
 The interface should feel warm, intentional, and approachable.
 
 **Preferred qualities:**
-- Soft depth (shadows, subtle gradients)
+- Soft depth through subtle shadows and layering; flat color fills, no decorative gradients
 - Clean surfaces
 - Balanced contrast
 - Modern but human character
 - Subtle texture or tactility where useful
 
 **Avoid extremes:**
-- Sterile flatness
+- Sterile emptiness (flat color is not sterile; missing hierarchy and content is)
 - Chaotic overstimulation
 - Novelty for its own sake
 

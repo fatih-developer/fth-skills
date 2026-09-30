@@ -1,7 +1,7 @@
 interface:
-  display_name: "Design MD Enforcer"
-  short_description: "Enforce and manage DESIGN.md specifications, combining design reasoning with token roles."
-  default_prompt: "Use $design-md-enforcer to help with this task."
+  display_name: "Design Md Enforcer (Alias)"
+  short_description: "Deprecated alias for design-system (DESIGN.md or design tokens)."
+  default_prompt: "Use $design-md-enforcer to run design-system for this DESIGN.md or design tokens task."
 
 policy:
-  allow_implicit_invocation: true
+  allow_implicit_invocation: false

@@ -38,6 +38,10 @@ jobs:
         working-directory: skills/session-transfer/scripts
         run: python -m unittest test_session_transfer -v
 
+      - name: design-system tests
+        working-directory: skills/design-system/scripts
+        run: python -m unittest test_design_system -v
+
       - name: Script syntax
         run: |
           find skills scripts -name '*.py' -print0 | xargs -0 python -m py_compile

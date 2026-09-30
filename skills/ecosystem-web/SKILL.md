@@ -17,8 +17,9 @@ This skill is the entry point of its ecosystem. It chooses a workflow, checks wh
 | Skill | Role | Handoff artifact |
 |---|---|---|
 | `@claude-style-coding` | Product-minded implementation: user journey, UX states, and visual quality first. | inline handoff block |
-| `@design-intelligence` | Generates or reviews web pages with a 12-category rubric. | inline handoff block |
-| `@design-md-enforcer` | Extracts and enforces DESIGN.md design-token specifications. | inline handoff block |
+| `@design-system` | Researches and proposes palette and typography directions, writes DESIGN.md and tokens, designs pages, and reviews UI against them. | `design/design-tokens.json` |
+| `@design-intelligence` | Deprecated alias — use `@design-system`. | inline handoff block |
+| `@design-md-enforcer` | Deprecated alias — use `@design-system`. | inline handoff block |
 | `@anti-ai-slop-design` | Removes generic AI aesthetics and restores product-specific hierarchy in designs, reviews, and image briefs. | inline handoff block |
 | `@react-flow` | Audits, repairs, migrates, and scaffolds @xyflow/react projects. | inline handoff block |
 | `@geo-auditor` | Read-only SEO/GEO/AEO audit of public websites. | inline handoff block |
@@ -47,19 +48,30 @@ Follow this protocol whenever this ecosystem is invoked.
 ## Workflows
 
 <!-- BEGIN GENERATED: ecosystem-workflows (generated from the ecosystem workflow map by build_ecosystems.py — do not edit by hand) -->
-### 1. Product Page Build Flow (`web-build-page`)
+### 1. Palette & Typography Flow (`web-foundations`)
+
+**When:** “choose colors and fonts for our product”; “create a design system”; “renk paleti ve tipografi öner”
+
+| # | Skill | Does | Done when | Condition | Parallel group |
+|---|---|---|---|---|---|
+| 1 | `@design-system` | FOUNDATIONS: scan competitors and type in use, find fonts beyond defaults, build 2-3 flat-color directions, and render the specimen. | specimen.html shows 2-3 directions with no FAIL checks and a written rationale. | — | — |
+| 2 | `@anti-ai-slop-design` *(optional)* | Check each direction for generic AI aesthetics before the user chooses. | No direction relies on template colors, glow, or default fonts without a reason. | — | — |
+| 3 | `@design-system` | SPEC: export the chosen direction to DESIGN.md, tokens.css, and the Tailwind theme. | DESIGN.md and tokens exist for the chosen direction. | — | — |
+| 4 | `@claude-style-coding` *(optional)* | Apply the tokens to the codebase. | Components use tokens only; no hardcoded colors or gradients. | The user asked for code changes | — |
+
+### 2. Product Page Build Flow (`web-build-page`)
 
 **When:** “build a landing page”; “design a dashboard”; “create a new web screen”
 
 | # | Skill | Does | Done when | Condition | Parallel group |
 |---|---|---|---|---|---|
-| 1 | `@design-md-enforcer` *(optional)* | Load or create DESIGN.md tokens before styling. | Tokens exist for color, type, spacing, and components. | Project has or needs a design system | — |
-| 2 | `@design-intelligence` | Plan sections and UX rules (GENERATE mode). | Page strategy and section architecture are approved. | — | — |
+| 1 | `@design-system` *(optional)* | FOUNDATIONS + SPEC: research, propose 2-3 palette and type directions, and export the chosen one as DESIGN.md and tokens. | An approved DESIGN.md with tokens exists. | No approved DESIGN.md yet | — |
+| 2 | `@design-system` | PAGE: page strategy, section architecture, and rule check on top of DESIGN.md. | Page strategy and section architecture are approved. | — | — |
 | 3 | `@anti-ai-slop-design` *(optional)* | Check the page direction for generic AI/SaaS patterns and replace them with product-specific choices. | No unjustified glow, gradient, fake proof, or uniform card grid remains in the plan. | Draft leans on generic AI visuals, or the user asked for a less generic look | — |
 | 4 | `@claude-style-coding` | Implement the slice with every UX state handled. | Loading, empty, error, and success states work. | — | — |
 | 5 | `@geo-optimizer` *(optional)* | Add metadata, structured data, and crawlable content. | Page passes the local SEO/GEO checks. | Page is public | — |
 
-### 2. Search & AI Visibility Flow (`web-visibility`)
+### 3. Search & AI Visibility Flow (`web-visibility`)
 
 **When:** “audit our site for SEO”; “why doesn't ChatGPT cite us”; “improve AI search visibility”
 
@@ -68,27 +80,26 @@ Follow this protocol whenever this ecosystem is invoked.
 | 1 | `@geo-auditor` | Audit the public site and set a visibility baseline. | Prioritized findings with evidence. | — | — |
 | 2 | `@geo-optimizer` *(optional)* | Implement the prioritized fixes in the codebase. | Fixes verified locally and live when possible. | Repository access is available | — |
 
-### 3. UI Review Flow (`web-review`)
+### 4. UI Review Flow (`web-review`)
 
 **When:** “review my site”; “audit this page”; “check design consistency”
 
 | # | Skill | Does | Done when | Condition | Parallel group |
 |---|---|---|---|---|---|
-| 1 | `@design-intelligence` | Score the page on 12 categories (REVIEW mode). | Issues are classified by severity. | — | `review` |
-| 2 | `@design-md-enforcer` *(optional)* | Lint the implementation against DESIGN.md tokens. | Token drift is listed with fixes. | — | `review` |
-| 3 | `@anti-ai-slop-design` *(optional)* | Flag generic AI patterns that weaken hierarchy, meaning, or credibility. | The few highest-impact patterns are listed with concrete fixes. | — | `review` |
+| 1 | `@design-system` | REVIEW: score 12 categories and lint the code against DESIGN.md tokens. | Issues are classified by severity and token drift is listed. | — | `review` |
+| 2 | `@anti-ai-slop-design` *(optional)* | Flag generic AI patterns that weaken hierarchy, meaning, or credibility. | The few highest-impact patterns are listed with concrete fixes. | — | `review` |
 
-### 4. Remove the AI Look Flow (`web-de-slop`)
+### 5. Remove the AI Look Flow (`web-de-slop`)
 
 **When:** “remove the AI look”; “make this less generic”; “too shiny, neon, or futuristic”
 
 | # | Skill | Does | Done when | Condition | Parallel group |
 |---|---|---|---|---|---|
 | 1 | `@anti-ai-slop-design` | Audit the design, pick one coherent correction, and apply it within the requested scope. | All seven acceptance checks pass and product identity is preserved. | — | — |
-| 2 | `@design-md-enforcer` *(optional)* | Record the corrected palette, type, and component rules as tokens. | DESIGN.md reflects the corrected choices. | The project has or needs a design system | — |
+| 2 | `@design-system` *(optional)* | SPEC: record the corrected palette, type, and component rules as tokens. | DESIGN.md reflects the corrected choices. | The project has or needs a design system | — |
 | 3 | `@claude-style-coding` *(optional)* | Implement the corrected design with every UX state handled. | Desktop and mobile renders match the correction. | The user asked for code changes | — |
 
-### 5. Deploy & Verify Flow (`web-deploy`)
+### 6. Deploy & Verify Flow (`web-deploy`)
 
 **When:** “deploy to Coolify”; “the deploy failed”; “service is down”
 
@@ -102,7 +113,8 @@ Follow this protocol whenever this ecosystem is invoked.
 
 - `@react-flow` → `@claude-style-coding`: The flow editor needs product-level UX polish.
 - `@claude-style-coding` → `@accessibility-enforcer`: The UI ships inside a mobile app.
-- `@design-intelligence` → `@anti-ai-slop-design`: The generated or reviewed page relies on generic AI/SaaS visuals.
 - `@anti-ai-slop-design` → `@ugc-crafter`: Imagery needs authentic, smartphone-style people or product shots.
 - `@anti-ai-slop-design` → `@accessibility-enforcer`: The design is a mobile app screen.
+- `@design-system` → `@anti-ai-slop-design`: A direction or page relies on generic AI/SaaS visuals.
+- `@design-system` → `@accessibility-enforcer`: The system will be used in a mobile app.
 <!-- END GENERATED: ecosystem-workflows -->

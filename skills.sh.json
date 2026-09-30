@@ -103,8 +103,7 @@
         "anti-ai-slop-design",
         "claude-style-coding",
         "coolify-orchestrator",
-        "design-intelligence",
-        "design-md-enforcer",
+        "design-system",
         "geo-auditor",
         "geo-optimizer",
         "react-flow"
@@ -129,6 +128,8 @@
     {
       "title": "Deprecated Aliases",
       "skills": [
+        "design-intelligence",
+        "design-md-enforcer",
         "proje-analizcisi",
         "skill-security"
       ]

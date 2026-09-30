@@ -19,7 +19,7 @@ This skill is the hub of all fth-skills ecosystems. Route cross-domain requests 
 | `@ecosystem-api` | API Domain | Design, secure, scale, and evolve REST, GraphQL, gRPC, and event-driven APIs with a contract-first workflow. | `api-design`, `api-security-scale`, `api-evolution`, `api-production-readiness` |
 | `@ecosystem-database` | Database Domain | Model, secure, optimize, migrate, and operate SQL databases (PostgreSQL, MySQL, SQLite) with data integrity first. | `db-new-schema`, `db-performance`, `db-evolution`, `db-compliance`, `db-scaling` |
 | `@ecosystem-mobile` | Mobile App Domain | Architect, audit, release, and monitor iOS, Android, React Native, and Flutter apps. | `mobile-pre-release-audit`, `mobile-release`, `mobile-feature-architecture`, `mobile-post-launch` |
-| `@ecosystem-web` | Web, Design & Delivery | Design product-grade web interfaces, keep design systems consistent, make sites visible to search and AI answer engines, and deploy them. | `web-build-page`, `web-visibility`, `web-review`, `web-de-slop`, `web-deploy` |
+| `@ecosystem-web` | Web, Design & Delivery | Design product-grade web interfaces, keep design systems consistent, make sites visible to search and AI answer engines, and deploy them. | `web-foundations`, `web-build-page`, `web-visibility`, `web-review`, `web-de-slop`, `web-deploy` |
 | `@ecosystem-product` | Product & Growth | Take a product from focus to market: B2B go-to-market, naming, creative content, and discoverability. | `product-launch`, `product-naming`, `product-content` |
 | `@ecosystem-security` | Security | Audit skills before deployment, guard agent runtimes against injection and exfiltration, and learn from incidents. | `sec-skill-audit`, `sec-runtime-guard`, `sec-full-lifecycle` |
 

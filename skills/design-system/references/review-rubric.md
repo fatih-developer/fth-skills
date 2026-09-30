@@ -91,7 +91,7 @@ Use this rubric to review existing or generated web pages. Score each category 1
 - 5: Strong modular layout with clear content chunking; information finds itself
 
 **What to look for:**
-- Card clusters, bento grids, or clearly delineated sections
+- Grids, lists, tables, or clearly delineated sections chosen by content
 - Semantic section boundaries (header per section)
 - Grouped related information (features together, testimonials together, specs together)
 - No long uninterrupted walls of text

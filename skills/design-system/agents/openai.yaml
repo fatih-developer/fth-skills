@@ -1,0 +1,7 @@
+interface:
+  display_name: "Design System"
+  short_description: "Evidence-based palettes and font pairings beyond defaults, demoed side by side, then DESIGN.md, tokens, pages, and reviews."
+  default_prompt: "Use $design-system to research our category, propose 2-3 flat-color palette and typography directions with a specimen page, and turn the chosen one into DESIGN.md and tokens."
+
+policy:
+  allow_implicit_invocation: true

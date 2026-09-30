@@ -88,12 +88,11 @@ For a request to remove the AI look, first remove unjustified glow and gradients
 
 | Need | Skill |
 |---|---|
-| Page strategy, section architecture, or a 12-category UI review | `@design-intelligence` |
-| Design tokens and `DESIGN.md` as the source of visual truth, token linting, extracting a design system from a URL | `@design-md-enforcer` |
+| Palette, typography, DESIGN.md and tokens, page strategy, or a 12-category UI review | `@design-system` |
 | Implementing a user-facing feature with product thinking and every UX state handled | `@claude-style-coding` |
 | Removing generic AI aesthetics (glow, neon gradients, fake proof, uniform cards) and restoring product-specific hierarchy | `@anti-ai-slop-design` |
 
-This skill is a corrective lens: it can run alone for an audit or "remove the AI look" request, or as a pass inside the other three. When more than one applies, follow the *Product Page Build Flow* in `@ecosystem-web`: tokens → page strategy → anti-slop check → implementation.
+This skill is a corrective lens: it can run alone for an audit or "remove the AI look" request, or as a pass inside `@design-system` and `@claude-style-coding`. When more than one applies, follow the *Product Page Build Flow* in `@ecosystem-web`: palette and type (FOUNDATIONS) → DESIGN.md (SPEC) → page strategy (PAGE) → anti-slop check → implementation.
 
 ## Acceptance checks
 
@@ -115,9 +114,10 @@ For an audit, lead with the largest visible problem and recommend the few highes
 **Ecosystem:** `@ecosystem-web` — Web, Design & Delivery.
 
 **Workflows:**
+- **Palette & Typography Flow** (`web-foundations`, step 2 of 4): next → `@design-system`.
 - **Product Page Build Flow** (`web-build-page`, step 3 of 5): next → `@claude-style-coding`.
-- **UI Review Flow** (`web-review`, step 3 of 3): last step → once it passes, complete the workflow and report the outcome.
-- **Remove the AI Look Flow** (`web-de-slop`, step 1 of 3): next → `@design-md-enforcer` *(optional)*.
+- **UI Review Flow** (`web-review`, step 2 of 2): last step → once it passes, complete the workflow and report the outcome.
+- **Remove the AI Look Flow** (`web-de-slop`, step 1 of 3): next → `@design-system` *(optional)*.
 
 **Direct handoffs:**
 - `@ugc-crafter` — Imagery needs authentic, smartphone-style people or product shots.
