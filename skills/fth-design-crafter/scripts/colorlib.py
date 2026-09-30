@@ -1,4 +1,4 @@
-"""Small, dependency-free color helpers shared by the design-system scripts.
+"""Small, dependency-free color helpers shared by the fth-design-crafter scripts.
 
 Covers CSS color parsing, WCAG 2 contrast, OKLab/OKLCH conversion, perceptual
 distance, gamut mapping, and tonal ramps. Only the Python standard library is used.

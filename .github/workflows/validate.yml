@@ -38,13 +38,13 @@ jobs:
         working-directory: skills/session-transfer/scripts
         run: python -m unittest test_session_transfer -v
 
-      - name: design-system tests
-        working-directory: skills/design-system/scripts
+      - name: fth-design-crafter tests
+        working-directory: skills/fth-design-crafter/scripts
         run: python -m unittest test_design_system -v
 
       - name: Lint DESIGN.md examples
         run: |
-          for f in design-md/*/DESIGN.md; do python skills/design-system/scripts/lint_design_md.py "$f"; done
+          for f in design-md/*/DESIGN.md; do python skills/fth-design-crafter/scripts/lint_design_md.py "$f"; done
 
       - name: Script syntax
         run: |

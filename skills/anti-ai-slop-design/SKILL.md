@@ -88,11 +88,11 @@ For a request to remove the AI look, first remove unjustified glow and gradients
 
 | Need | Skill |
 |---|---|
-| Palette, typography, DESIGN.md and tokens, page strategy, or a 12-category UI review | `@design-system` |
+| Palette, typography, DESIGN.md and tokens, page strategy, or a 12-category UI review | `@fth-design-crafter` |
 | Implementing a user-facing feature with product thinking and every UX state handled | `@claude-style-coding` |
 | Removing generic AI aesthetics (glow, neon gradients, fake proof, uniform cards) and restoring product-specific hierarchy | `@anti-ai-slop-design` |
 
-This skill is a corrective lens: it can run alone for an audit or "remove the AI look" request, or as a pass inside `@design-system` and `@claude-style-coding`. When more than one applies, follow the *Product Page Build Flow* in `@ecosystem-web`: palette and type (FOUNDATIONS) → DESIGN.md (SPEC) → page strategy (PAGE) → anti-slop check → implementation.
+This skill is a corrective lens: it can run alone for an audit or "remove the AI look" request, or as a pass inside `@fth-design-crafter` and `@claude-style-coding`. When more than one applies, follow the *Product Page Build Flow* in `@ecosystem-web`: palette and type (FOUNDATIONS) → DESIGN.md (SPEC) → page strategy (PAGE) → anti-slop check → implementation.
 
 ## Acceptance checks
 
@@ -114,10 +114,10 @@ For an audit, lead with the largest visible problem and recommend the few highes
 **Ecosystem:** `@ecosystem-web` — Web, Design & Delivery.
 
 **Workflows:**
-- **Palette & Typography Flow** (`web-foundations`, step 2 of 4): next → `@design-system`.
+- **Palette & Typography Flow** (`web-foundations`, step 2 of 4): next → `@fth-design-crafter`.
 - **Product Page Build Flow** (`web-build-page`, step 3 of 5): next → `@claude-style-coding`.
 - **UI Review Flow** (`web-review`, step 2 of 2): last step → once it passes, complete the workflow and report the outcome.
-- **Remove the AI Look Flow** (`web-de-slop`, step 1 of 3): next → `@design-system` *(optional)*.
+- **Remove the AI Look Flow** (`web-de-slop`, step 1 of 3): next → `@fth-design-crafter` *(optional)*.
 
 **Direct handoffs:**
 - `@ugc-crafter` — Imagery needs authentic, smartphone-style people or product shots.

@@ -75,5 +75,5 @@ Follow this protocol whenever this ecosystem is invoked.
 ### Direct handoffs
 
 - `@b2b-founder-roadmap` → `@geo-auditor`: Inbound discovery is the current bottleneck.
-- `@b2b-founder-roadmap` → `@design-system`: A landing page is needed for validation.
+- `@b2b-founder-roadmap` → `@fth-design-crafter`: A landing page is needed for validation.
 <!-- END GENERATED: ecosystem-workflows -->

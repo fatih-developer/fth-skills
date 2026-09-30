@@ -48,7 +48,7 @@ def load_metadata(path: str | None) -> list[dict]:
     elif CACHE.exists() and time.time() - CACHE.stat().st_mtime < CACHE_TTL:
         raw = CACHE.read_text(encoding="utf-8")
     else:
-        req = urllib.request.Request(METADATA_URL, headers={"User-Agent": "fth-skills-design-system/1.0"})
+        req = urllib.request.Request(METADATA_URL, headers={"User-Agent": "fth-skills-fth-design-crafter/1.0"})
         try:
             with urllib.request.urlopen(req, timeout=30) as resp:
                 raw = resp.read().decode("utf-8")

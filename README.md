@@ -182,7 +182,7 @@ _Design product-grade web interfaces, keep design systems consistent, make sites
 |---|---|---|
 | **ecosystem-web** | `--skill ecosystem-web` | Web workflows: page build, search and AI visibility, UI review, and deploy with verification. |
 | **claude-style-coding** | `--skill claude-style-coding` | Product-minded implementation with user journey, UX states, and visual polish first. |
-| **design-system** | `--skill design-system` | Evidence-based palettes and font pairings beyond defaults, demoed side by side, then DESIGN.md, tokens, pages, and reviews. |
+| **fth-design-crafter** | `--skill fth-design-crafter` | Evidence-based palettes and font pairings beyond defaults, demoed side by side, then DESIGN.md, tokens, pages, and reviews. |
 | **anti-ai-slop-design** | `--skill anti-ai-slop-design` | Remove generic AI aesthetics from product design |
 | **react-flow** | `--skill react-flow` | Audit, repair, migrate, and scaffold React Flow projects. |
 | **geo-auditor** | `--skill geo-auditor` | Codeless GEO and SEO audits on live sites |
@@ -217,8 +217,8 @@ Kept so existing installs keep working. They route to the canonical skill and ne
 
 | Alias | Use instead |
 |---|---|
-| `design-intelligence` | `design-system` |
-| `design-md-enforcer` | `design-system` |
+| `design-intelligence` | `fth-design-crafter` |
+| `design-md-enforcer` | `fth-design-crafter` |
 | `proje-analizcisi` | `project-analyzer` |
 | `skill-security` | `security-auditor` |
 <!-- END GENERATED: skill-catalog -->

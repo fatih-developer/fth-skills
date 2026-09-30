@@ -1,4 +1,4 @@
-"""Offline tests for the design-system scripts (standard library only).
+"""Offline tests for the fth-design-crafter scripts (standard library only).
 
 Run: python -m unittest test_design_system -v   (from this scripts/ folder)
 """

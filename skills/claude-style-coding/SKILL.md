@@ -164,7 +164,7 @@ Keep the final response concise unless the user asks for a detailed report.
 
 | Need | Skill |
 |---|---|
-| Palette, typography, DESIGN.md and tokens, page strategy, or a 12-category UI review | `@design-system` |
+| Palette, typography, DESIGN.md and tokens, page strategy, or a 12-category UI review | `@fth-design-crafter` |
 | Implementing a user-facing feature with product thinking and every UX state handled | `@claude-style-coding` |
 | Removing generic AI aesthetics (glow, neon gradients, fake proof, uniform cards) and restoring product-specific hierarchy | `@anti-ai-slop-design` |
 

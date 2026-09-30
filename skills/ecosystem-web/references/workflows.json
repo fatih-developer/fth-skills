@@ -10,14 +10,14 @@
     "claude-style-coding": {
       "role": "Product-minded implementation: user journey, UX states, and visual quality first."
     },
-    "design-system": {
+    "fth-design-crafter": {
       "role": "Researches and proposes palette and typography directions, writes DESIGN.md and tokens, designs pages, and reviews UI against them."
     },
     "design-intelligence": {
-      "role": "Deprecated alias of design-system."
+      "role": "Deprecated alias of fth-design-crafter."
     },
     "design-md-enforcer": {
-      "role": "Deprecated alias of design-system."
+      "role": "Deprecated alias of fth-design-crafter."
     },
     "anti-ai-slop-design": {
       "role": "Removes generic AI aesthetics and restores product-specific hierarchy in designs, reviews, and image briefs."
@@ -46,7 +46,7 @@
       ],
       "steps": [
         {
-          "skill": "design-system",
+          "skill": "fth-design-crafter",
           "do": "FOUNDATIONS: scan competitors and type in use, find fonts beyond defaults, build 2-3 flat-color directions, and render the specimen.",
           "done_when": "specimen.html shows 2-3 directions with no FAIL checks and a written rationale."
         },
@@ -57,7 +57,7 @@
           "optional": true
         },
         {
-          "skill": "design-system",
+          "skill": "fth-design-crafter",
           "do": "SPEC: export the chosen direction to DESIGN.md, tokens.css, and the Tailwind theme.",
           "done_when": "DESIGN.md and tokens exist for the chosen direction."
         },
@@ -80,14 +80,14 @@
       ],
       "steps": [
         {
-          "skill": "design-system",
+          "skill": "fth-design-crafter",
           "do": "FOUNDATIONS + SPEC: research, propose 2-3 palette and type directions, and export the chosen one as DESIGN.md and tokens.",
           "done_when": "An approved DESIGN.md with tokens exists.",
           "optional": true,
           "condition": "No approved DESIGN.md yet"
         },
         {
-          "skill": "design-system",
+          "skill": "fth-design-crafter",
           "do": "PAGE: page strategy, section architecture, and rule check on top of DESIGN.md.",
           "done_when": "Page strategy and section architecture are approved."
         },
@@ -145,7 +145,7 @@
       ],
       "steps": [
         {
-          "skill": "design-system",
+          "skill": "fth-design-crafter",
           "do": "REVIEW: score 12 categories and lint the code against DESIGN.md tokens.",
           "done_when": "Issues are classified by severity and token drift is listed.",
           "parallel_group": "review"
@@ -174,7 +174,7 @@
           "done_when": "All seven acceptance checks pass and product identity is preserved."
         },
         {
-          "skill": "design-system",
+          "skill": "fth-design-crafter",
           "do": "SPEC: record the corrected palette, type, and component rules as tokens.",
           "done_when": "DESIGN.md reflects the corrected choices.",
           "optional": true,
@@ -239,18 +239,18 @@
       "when": "The design is a mobile app screen"
     },
     {
-      "from": "design-system",
+      "from": "fth-design-crafter",
       "to": "anti-ai-slop-design",
       "when": "A direction or page relies on generic AI/SaaS visuals"
     },
     {
-      "from": "design-system",
+      "from": "fth-design-crafter",
       "to": "accessibility-enforcer",
       "when": "The system will be used in a mobile app"
     }
   ],
   "deprecated": {
-    "design-intelligence": "design-system",
-    "design-md-enforcer": "design-system"
+    "design-intelligence": "fth-design-crafter",
+    "design-md-enforcer": "fth-design-crafter"
   }
 }

@@ -361,7 +361,7 @@ Operate like a systems engineer debugging a business.
 
 **Direct handoffs:**
 - `@geo-auditor` — Inbound discovery is the current bottleneck.
-- `@design-system` — A landing page is needed for validation.
+- `@fth-design-crafter` — A landing page is needed for validation.
 
 **Handoff contract:** pass results to the next skill through an inline *Handoff* block in your reply with the fields `skill`, `workflow`, `created_at`, `inputs`, `summary`, and `next` (the handoff contract of `@ecosystem-product`). If a next skill is not installed, continue with its step from the ecosystem map, or install it with `npx skills add fatih-developer/fth-skills --skill <name>` after the user agrees.
 <!-- END GENERATED: handoffs -->

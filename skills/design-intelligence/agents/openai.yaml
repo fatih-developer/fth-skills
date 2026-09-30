@@ -1,7 +1,7 @@
 interface:
   display_name: "Design Intelligence (Alias)"
-  short_description: "Deprecated alias for design-system (page design or UI review)."
-  default_prompt: "Use $design-intelligence to run design-system for this page design or UI review task."
+  short_description: "Deprecated alias for fth-design-crafter (page design or UI review)."
+  default_prompt: "Use $design-intelligence to run fth-design-crafter for this page design or UI review task."
 
 policy:
   allow_implicit_invocation: false

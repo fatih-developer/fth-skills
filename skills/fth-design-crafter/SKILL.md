@@ -1,9 +1,9 @@
 ---
-name: design-system
+name: fth-design-crafter
 description: "Build and enforce a product-specific design system: research competitors and real-world type, propose 2-3 flat-color palette and font-pairing directions beyond overused defaults, demo them side by side, then write DESIGN.md and tokens, design pages on top, and review implementations against them. Use when the user wants a color palette, font or typography choices, a design system, design tokens or DESIGN.md, a landing page or dashboard design, or a UI/design review; also for Turkish requests like 'renk paleti', 'font önerisi', 'tipografi', 'tasarım sistemi'."
 ---
 
-# Design System
+# FTH Design Crafter
 
 One skill for the whole visual system: **FOUNDATIONS** decides color and type from evidence, **SPEC** writes it down as `DESIGN.md` and tokens, **PAGE** designs screens on top of it, **REVIEW** checks pages and code against it.
 
@@ -81,7 +81,7 @@ Standard-library Python; run from the project root with `<skill-dir>` as the fol
 
 | Need | Skill |
 |---|---|
-| Palette, typography, DESIGN.md, tokens, page strategy, UI review | `@design-system` |
+| Palette, typography, DESIGN.md, tokens, page strategy, UI review | `@fth-design-crafter` |
 | Implementing a user-facing feature with product thinking and every UX state handled | `@claude-style-coding` |
 | Removing generic AI aesthetics from an existing design, image brief, or page | `@anti-ai-slop-design` |
 | Mobile screen-reader and touch accessibility audit | `@accessibility-enforcer` |
@@ -96,7 +96,7 @@ Standard-library Python; run from the project root with `<skill-dir>` as the fol
 **Workflows:**
 - **Palette & Typography Flow** (`web-foundations`, step 1 of 4): next → `@anti-ai-slop-design` *(optional)*.
 - **Palette & Typography Flow** (`web-foundations`, step 3 of 4): next → `@claude-style-coding` *(optional)*.
-- **Product Page Build Flow** (`web-build-page`, step 1 of 5): next → `@design-system`.
+- **Product Page Build Flow** (`web-build-page`, step 1 of 5): next → `@fth-design-crafter`.
 - **Product Page Build Flow** (`web-build-page`, step 2 of 5): next → `@anti-ai-slop-design` *(optional)*.
 - **UI Review Flow** (`web-review`, step 1 of 2): last step → once it passes, complete the workflow and report the outcome.
 - **Remove the AI Look Flow** (`web-de-slop`, step 2 of 3): next → `@claude-style-coding` *(optional)*.
