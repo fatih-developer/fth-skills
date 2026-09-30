@@ -9,9 +9,7 @@ screenshots:
   tablet: true
   mobile: true
 outputs:
-  - DESIGN.md
-  - UI_RULES.md
-  - components.md
+  - DESIGN.md          # google-labs-code/design.md format (front-matter tokens + 8 sections)
   - tokens.css
   - tailwind.theme.json
   - preview.html

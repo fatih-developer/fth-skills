@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "project": "Rota Kargo (illustrative example)",
   "language": "tr",
   "sample": {
@@ -12,13 +12,21 @@
     {
       "id": "a",
       "name": "Liman",
+      "reference": "A port's bill of lading and container stowage plan: printed forms on off-white paper, stamped in one ink, read by people checking codes line by line.",
       "summary": "Operational and calm: port-paperwork neutrals, container green for actions, signal amber for attention.",
+      "audience": "Warehouse staff and SME owners tracking dozens of shipments a day, often on a phone.",
       "rationale": [
-        "Evidence: competitors in the scan use blue and red accents; green is free in the category.",
+        "Illustrative: in this example the competitor scan found blue and red accents, so green is a free hue in the category.",
         "Atkinson Hyperlegible Next keeps tracking codes and addresses unambiguous for warehouse staff.",
-        "Schibsted Grotesk has the condensed, label-like headlines of freight documents without looking like a template."
+        "Schibsted Grotesk has the compact, label-like headlines of freight documents without looking like a template."
       ],
       "sources": ["https://fonts.google.com/specimen/Schibsted+Grotesk", "https://fonts.google.com/specimen/Atkinson+Hyperlegible+Next"],
+      "color_names": {"background": "Manifest Paper", "primary": "Container Green", "secondary": "Signal Amber", "on-surface": "Stamp Ink"},
+      "type_notes": {
+        "heading": "compact grotesque with the feel of printed freight forms",
+        "body": "distinct I/l/1 and 0/O for addresses and tracking codes",
+        "mono": "tracking numbers and timestamps"
+      },
       "fonts": {
         "heading": {"family": "Schibsted Grotesk", "weights": [600, 800], "fallback": "sans-serif"},
         "body": {"family": "Atkinson Hyperlegible Next", "weights": [400, 600], "fallback": "sans-serif"},
@@ -26,28 +34,33 @@
       },
       "type": {"base": 16, "ratio": 1.25, "line_height_body": 1.55, "line_height_heading": 1.1},
       "radius": "4px",
+      "donts": ["Don't use rounded, friendly illustration; this is paperwork, not a consumer app."],
       "colors": {
         "light": {
-          "bg": "#f5f6f3", "surface": "#ffffff", "border": "#cfd3cb", "text": "#1b211d", "text-muted": "#4f5a52",
-          "primary": "#1f5d4c", "on-primary": "#ffffff", "accent": "#a8620a",
-          "success": "#2e7d32", "warning": "#9a5b00", "danger": "#b3261e"
+          "background": "#f5f6f3", "surface": "#ffffff", "outline-variant": "#cfd3cb", "on-surface": "#1b211d", "on-surface-variant": "#4f5a52",
+          "primary": "#1f5d4c", "on-primary": "#ffffff", "secondary": "#a8620a",
+          "success": "#2e7d32", "warning": "#9a5b00", "error": "#b3261e"
         },
         "dark": {
-          "bg": "#141816", "surface": "#1c221f", "border": "#35403a", "text": "#e8ece8", "text-muted": "#a9b4ad",
-          "primary": "#6fbfa4", "on-primary": "#0d1f19", "accent": "#e3a24a",
-          "success": "#7cc882", "warning": "#e0a84d", "danger": "#f08a80"
+          "background": "#141816", "surface": "#1c221f", "outline-variant": "#35403a", "on-surface": "#e8ece8", "on-surface-variant": "#a9b4ad",
+          "primary": "#6fbfa4", "on-primary": "#0d1f19", "secondary": "#e3a24a",
+          "success": "#7cc882", "warning": "#e0a84d", "error": "#f08a80"
         }
       }
     },
     {
       "id": "b",
       "name": "Konteyner",
+      "reference": "Stenciled lettering on corten-steel shipping containers and the numbered bay signs of a container yard.",
       "summary": "Industrial and confident: steel greys with container-red actions and heavy, compact headlines.",
+      "audience": "Logistics managers comparing carriers and costs on desktop.",
       "rationale": [
         "Container red is recognizable on a warehouse floor and differs from the category's blue default.",
         "Chivo at heavy weights gives stencil-like authority; Public Sans keeps dense tables readable."
       ],
       "sources": ["https://fonts.google.com/specimen/Chivo", "https://fonts.google.com/specimen/Public+Sans"],
+      "color_names": {"background": "Yard Grey", "primary": "Corten Red", "secondary": "Harbor Steel"},
+      "type_notes": {"heading": "heavy, compact grotesque that reads like stenciled bay numbers", "body": "neutral grotesque that holds up in dense tables"},
       "fonts": {
         "heading": {"family": "Chivo", "weights": [700, 900], "fallback": "sans-serif"},
         "body": {"family": "Public Sans", "weights": [400, 600], "fallback": "sans-serif"}
@@ -56,26 +69,30 @@
       "radius": "2px",
       "colors": {
         "light": {
-          "bg": "#f2f3f5", "surface": "#ffffff", "border": "#c9cdd3", "text": "#15181c", "text-muted": "#4c535c",
-          "primary": "#a3321c", "on-primary": "#ffffff", "accent": "#3f5872",
-          "success": "#2f7a3d", "warning": "#8f5a00", "danger": "#b0182c"
+          "background": "#f2f3f5", "surface": "#ffffff", "outline-variant": "#c9cdd3", "on-surface": "#15181c", "on-surface-variant": "#4c535c",
+          "primary": "#a3321c", "on-primary": "#ffffff", "secondary": "#3f5872",
+          "success": "#2f7a3d", "warning": "#8f5a00", "error": "#b0182c"
         },
         "dark": {
-          "bg": "#121417", "surface": "#1b1e22", "border": "#353a41", "text": "#eceef1", "text-muted": "#a7aeb8",
-          "primary": "#f08466", "on-primary": "#2a0c05", "accent": "#9db5cf",
-          "success": "#7fc98c", "warning": "#e1ae5a", "danger": "#f58a93"
+          "background": "#121417", "surface": "#1b1e22", "outline-variant": "#353a41", "on-surface": "#eceef1", "on-surface-variant": "#a7aeb8",
+          "primary": "#f08466", "on-primary": "#2a0c05", "secondary": "#9db5cf",
+          "success": "#7fc98c", "warning": "#e1ae5a", "error": "#f58a93"
         }
       }
     },
     {
       "id": "c",
       "name": "Rıhtım",
-      "summary": "Editorial and trustworthy: ink blue on warm paper, slab headlines like shipping labels.",
+      "reference": "A shipping line's printed timetable and stamped parcel labels: slab-serif headings, one ink blue, plain paper.",
+      "summary": "Editorial and trustworthy: ink blue on plain paper, slab headlines like shipping labels.",
+      "audience": "Customers checking where their parcel is, mostly on mobile.",
       "rationale": [
         "Zilla Slab echoes stamped shipping labels; Hanken Grotesk keeps UI copy neutral.",
         "Ink blue is used as text-weight color, not as a glowing brand fill, so it reads as print rather than SaaS."
       ],
       "sources": ["https://fonts.google.com/specimen/Zilla+Slab", "https://fonts.google.com/specimen/Hanken+Grotesk"],
+      "color_names": {"background": "Timetable Paper", "primary": "Ledger Blue", "secondary": "Brass"},
+      "type_notes": {"heading": "slab serif with the weight of a rubber stamp", "body": "quiet grotesque for UI copy"},
       "fonts": {
         "heading": {"family": "Zilla Slab", "weights": [600, 700], "fallback": "serif"},
         "body": {"family": "Hanken Grotesk", "weights": [400, 600], "fallback": "sans-serif"}
@@ -84,14 +101,14 @@
       "radius": "6px",
       "colors": {
         "light": {
-          "bg": "#f4f5f1", "surface": "#fcfcf9", "border": "#d3d5cc", "text": "#1d2230", "text-muted": "#555b69",
-          "primary": "#27406b", "on-primary": "#ffffff", "accent": "#8a6a00",
-          "success": "#3b7a3a", "warning": "#8c5d00", "danger": "#a8322a"
+          "background": "#f4f5f1", "surface": "#fcfcf9", "outline-variant": "#d3d5cc", "on-surface": "#1d2230", "on-surface-variant": "#555b69",
+          "primary": "#27406b", "on-primary": "#ffffff", "secondary": "#8a6a00",
+          "success": "#3b7a3a", "warning": "#8c5d00", "error": "#a8322a"
         },
         "dark": {
-          "bg": "#15171c", "surface": "#1d2027", "border": "#393d48", "text": "#ecebe6", "text-muted": "#aeb1ba",
-          "primary": "#9fb7e3", "on-primary": "#101a2e", "accent": "#d9b24a",
-          "success": "#8ccf8a", "warning": "#e2b155", "danger": "#f19189"
+          "background": "#15171c", "surface": "#1d2027", "outline-variant": "#393d48", "on-surface": "#ecebe6", "on-surface-variant": "#aeb1ba",
+          "primary": "#9fb7e3", "on-primary": "#101a2e", "secondary": "#d9b24a",
+          "success": "#8ccf8a", "warning": "#e2b155", "error": "#f19189"
         }
       }
     }

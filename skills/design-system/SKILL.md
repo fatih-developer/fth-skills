@@ -14,7 +14,7 @@ The goal is a system that belongs to this product. It must not look like a templ
 | Request | Mode | Read |
 |---|---|---|
 | Colors, palette, fonts, typography, "make it look like us", new brand look | FOUNDATIONS | `references/research-protocol.md`, `references/color-method.md`, `references/typography-method.md`, `references/font-sources.md` |
-| DESIGN.md, tokens, Tailwind theme, extract a system from a URL, enforce tokens | SPEC | `references/mode-spec.md` |
+| DESIGN.md (google-labs-code/design.md format), tokens, Tailwind theme, extract a system from a URL, lint and enforce | SPEC | `references/mode-spec.md` |
 | Design a page, landing, dashboard, screen structure | PAGE | `references/mode-page.md`, `references/page-rules.md`, `references/page-examples.md` |
 | Review, audit, critique a page or UI code | REVIEW | `references/mode-review.md`, `references/review-rubric.md` |
 
@@ -34,10 +34,10 @@ A full run goes FOUNDATIONS → SPEC → PAGE → REVIEW. Start later only when 
 1. **Collect project evidence:** product, audience, market and language, logo, brand colors, current CSS. For an SVG logo, read its fills and any `font-family`.
 2. **Scan (announce first):** 3-5 competitor or category sites with `scan_site.py`, 2-3 typography-in-use references, and the domain's materials. Skip the live scan when the user declines or no network is available, and say so. Details: `references/research-protocol.md`.
 3. **Find fonts:** translate the product and logo into type traits, then `find_fonts.py search` / `check`. Details: `references/typography-method.md`.
-4. **Build 2-3 directions:** each with a competitor stance, neutrals, one primary, at most one accent, semantic states, a dark theme, a heading/body pairing, and a type scale. Write them to `design/directions.json` using `templates/directions.template.json`.
+4. **Build 2-3 directions:** each with one specific real-world `reference` sentence, a competitor stance, neutrals, one `primary`, at most one `secondary`, semantic states, a dark theme, a heading/body pairing, and a type scale. Color roles use DESIGN.md names (`background`, `surface`, `on-surface`, `outline-variant`, `primary`, `on-primary`, `secondary`, `success`, `warning`, `error`). Write them to `design/directions.json` using `templates/directions.template.json`.
 5. **Check and demo:** `build_specimen.py design/directions.json --landscape design/landscape.json --out design/specimen.html`. Fix every FAIL; answer every WARN in the rationale.
 6. **Present:** a short comparison (stance, fonts, primary, why, open warnings) plus the specimen. When the host can publish or show HTML, show `specimen.html`; otherwise give its path.
-7. **After the user chooses:** go to SPEC and export the chosen direction.
+7. **After the user chooses:** go to SPEC and export the chosen direction as a spec-compliant `DESIGN.md`.
 
 Write the research note from `templates/design-research.template.md`.
 
@@ -48,13 +48,13 @@ Write the research note from `templates/design-research.template.md`.
 | `design/design-research.md` | FOUNDATIONS | Evidence, landscape, defaults avoided, directions, decision |
 | `design/directions.json` | FOUNDATIONS | The 2-3 directions (input to the scripts) |
 | `design/specimen.html` | FOUNDATIONS | Side-by-side demo of the directions on real UI, light and dark |
-| `design/DESIGN.md` | SPEC | Source of truth: intent, rationale, evidence, color and type tables, rules |
-| `design/tokens.css`, `design/tailwind.theme.json`, `design/design-tokens.json` | SPEC | Tokens for code (light, dark, `prefers-color-scheme`) |
+| `design/DESIGN.md` | SPEC | google-labs-code/design.md format: YAML front-matter tokens (colors with `-dark` twins, typography, rounded, spacing, components) + Overview, Colors, Typography, Layout, Elevation & Depth, Shapes, Components, Do's and Don'ts, Evidence |
+| `design/tokens.css`, `design/tailwind.theme.json` | SPEC | CSS variables named like the official export (`--color-*`, `--text-*`, …) with light, dark, and `prefers-color-scheme`; Tailwind v3 theme bound to them |
 | `design/preview.html` | SPEC | The system rendered from `templates/preview.template.html` |
 | Page strategy, section architecture, rule check | PAGE | In the reply, or a doc when requested |
 | Scores, issues, recommendation | REVIEW | In the reply, or a report when requested |
 
-For extracting a reference site, SPEC writes to `design-md/<site-name>/` instead. Other SPEC templates: `templates/DESIGN.template.md`, `templates/components.template.md`, `templates/UI_RULES.template.md`, `templates/review-checklist.template.md`, `templates/tokens.template.css`, `templates/tailwind.theme.template.json`. Extraction examples: `examples/example-input.yaml`, `examples/example-design-analysis.json`.
+For extracting a reference site, SPEC writes to `design-md/<site-name>/` instead, filling `templates/DESIGN.template.md`. Checklist before handoff: `templates/review-checklist.template.md`. Extraction examples: `examples/example-input.yaml`, `examples/example-design-analysis.json`.
 
 ## Scripts
 
@@ -64,7 +64,8 @@ Standard-library Python; run from the project root with `<skill-dir>` as the fol
 |---|---|
 | `scripts/scan_site.py <urls…> [--json]` | Colors (by frequency), fonts, gradient use per site; with several sites, occupied and free accent hues |
 | `scripts/find_fonts.py search / check / css` | Google Fonts candidates beyond the top 60 and default lists, Turkish (latin-ext) check, weights, axes, css2 URL |
-| `scripts/build_specimen.py <directions.json>` | Contrast, gradient, default, similarity, competitor, and font checks; `specimen.html`; `--export <id>` writes DESIGN.md and tokens |
+| `scripts/build_specimen.py <directions.json>` | Contrast, gradient, default, similarity, competitor, and font checks; `specimen.html`; `--export <id>` writes DESIGN.md, tokens.css, tailwind.theme.json (via `scripts/design_md.py`) and lints the result |
+| `scripts/lint_design_md.py <DESIGN.md> [--official]` | Mirrors the official design.md linter and adds no-gradient, dark-twin, prose-reference, placeholder, and default-font rules; `--official` also runs `npx @google/design.md lint` |
 | `scripts/colorlib.py ramp / contrast / oklch / distance` | Tonal ramps, WCAG contrast, OKLCH values, perceptual distance |
 | `scripts/ai_defaults.json` | Overused fonts, AI-favorite fonts, template colors and pairs, popularity cutoff |
 
@@ -104,5 +105,5 @@ Standard-library Python; run from the project root with `<skill-dir>` as the fol
 - `@anti-ai-slop-design` — A direction or page relies on generic AI/SaaS visuals.
 - `@accessibility-enforcer` — The system will be used in a mobile app.
 
-**Handoff contract:** pass results to the next skill through `design/design-tokens.json` with the fields `skill`, `workflow`, `created_at`, `inputs`, `summary`, and `next` (the handoff contract of `@ecosystem-web`). If a next skill is not installed, continue with its step from the ecosystem map, or install it with `npx skills add fatih-developer/fth-skills --skill <name>` after the user agrees.
+**Handoff contract:** pass results to the next skill through an inline *Handoff* block in your reply with the fields `skill`, `workflow`, `created_at`, `inputs`, `summary`, and `next` (the handoff contract of `@ecosystem-web`). If a next skill is not installed, continue with its step from the ecosystem map, or install it with `npx skills add fatih-developer/fth-skills --skill <name>` after the user agrees.
 <!-- END GENERATED: handoffs -->

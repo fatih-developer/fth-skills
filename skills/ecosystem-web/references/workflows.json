@@ -11,8 +11,7 @@
       "role": "Product-minded implementation: user journey, UX states, and visual quality first."
     },
     "design-system": {
-      "role": "Researches and proposes palette and typography directions, writes DESIGN.md and tokens, designs pages, and reviews UI against them.",
-      "artifact": "design/design-tokens.json"
+      "role": "Researches and proposes palette and typography directions, writes DESIGN.md and tokens, designs pages, and reviews UI against them."
     },
     "design-intelligence": {
       "role": "Deprecated alias of design-system."

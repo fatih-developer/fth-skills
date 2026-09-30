@@ -1,53 +1,79 @@
-# SPEC Mode — DESIGN.md and Tokens
+# SPEC Mode — DESIGN.md (google-labs-code/design.md format)
 
-`DESIGN.md` is the single source of visual truth for people and agents. Tokens are **roles**, not raw values, and every decision carries its reason.
+`DESIGN.md` is the single source of visual truth for people and agents. It follows the open **design.md** specification (github.com/google-labs-code/design.md, version `alpha`): machine-readable tokens in YAML front matter, and human-readable rationale in a Markdown body with eight fixed sections.
 
-## Principles
+> The spec's own philosophy: the prose is where the design lives. A specific reference ("a port's bill of lading printed on off-white paper") carries more than a list of adjectives ("modern, clean, premium"); tokens are the exact values the prose applies.
 
-1. **Tokens are roles.** `--primary` is "main action and current selection", not just `#1f5d4c`. `--fs-body` is "default reading size", not just `16px`.
-2. **Components reference roles.** Components never hardcode hex or pixel values; changing a role updates every component that uses it.
-3. **Reasoning is required.** Each color and type decision states why it fits this product, with the evidence from `design-research.md`. Describe the intended feel in product terms, for example:
+## 1. File structure
 
-   ```markdown
-   # Rota Kargo — Style Reference
-   > Freight paperwork, calm operations. Off-white document paper, container-green actions,
-   > signal amber only for exceptions. Compact label-like headlines; highly legible body text
-   > for addresses and tracking codes.
-   ```
+```
+---                      # YAML front matter (tokens, normative)
+version: "alpha"
+name: "…"
+description: "…"
+colors:        {role: "#hex", …, role-dark: "#hex"}
+typography:    {level: {fontFamily, fontSize, fontWeight, lineHeight, letterSpacing}}
+rounded:       {none, sm, md, lg, full}
+spacing:       {xs, sm, md, lg, xl, gutter, margin, max-width}
+components:    {name: {backgroundColor, textColor, typography, rounded, padding, height, width}}
+---
 
-   Avoid atmosphere copy that describes effects instead of the product ("glowing", "frosted glass", "futuristic command center").
+## Overview            (alias: Brand & Style)
+## Colors
+## Typography
+## Layout              (alias: Layout & Spacing)
+## Elevation & Depth   (alias: Elevation)
+## Shapes
+## Components
+## Do's and Don'ts
+## Evidence            (fth-skills addition; unknown sections are allowed after the eight)
+```
 
-## Workflow A — From chosen direction to DESIGN.md
+Sections may be omitted, but those present must keep this order, and a heading may appear only once. List intentionally omitted token groups under `omitted:` with a reason.
 
-1. Run `build_specimen.py <directions.json> --export <id> --out-dir design/`. It writes `DESIGN.md` (intent, rationale, evidence, color and type tables, open checks), `tokens.css`, `tailwind.theme.json`, and `design-tokens.json`.
-2. Complete `DESIGN.md` from `templates/DESIGN.template.md`: components (`templates/components.template.md`), layout and UI rules (`templates/UI_RULES.template.md`), and the review checklist (`templates/review-checklist.template.md`).
-3. Render `templates/preview.template.html` with the tokens so the team sees buttons, forms, cards, and states in the real system.
+## 2. Token rules
+
+- **Colors** use Material-3-style role names so agents and the official linter recognize them: `background`, `on-background`, `surface`, `on-surface`, `on-surface-variant`, `surface-container`, `outline-variant`, `outline`, `primary`, `on-primary`, `primary-container`, `on-primary-container`, `secondary`, `on-secondary`, `error`, `on-error`, plus `success`/`warning` (with `on-*`) and `primary-hover`. `primary` is required. Values are single flat colors; hex is preferred.
+- **Dark theme:** the spec has no theme mechanism, so every color has a `-dark` twin in the same `colors` map (`surface-dark`), and components have `-dark` variants that reference them (`button-primary-dark`). Do not put dark colors under a custom top-level key; the official linter flags token-like unknown keys and exports ignore them.
+- **Typography** uses the recommended level names: `headline-display`, `headline-lg`, `headline-md`, `headline-sm`, `title-md`, `body-lg`, `body-md`, `body-sm`, `label-lg`, `label-md`, `label-sm` (and `code-md` when there is a mono family). `fontSize` and `letterSpacing` need `px`, `em`, or `rem`; `lineHeight` is a unitless multiplier.
+- **Components** reference tokens with `{colors.primary}`, `{typography.label-lg}`, `{rounded.md}`. Every color should be referenced by at least one component (the official `orphaned-tokens` rule), and every `backgroundColor`/`textColor` pair must reach 4.5:1 (`contrast-ratio`). The format has no border property; `input-border` and `divider` carry border colors in `backgroundColor`.
+- **Variants** are separate components with related names: `button-primary`, `button-primary-hover`.
+
+## 3. Prose rules
+
+- **Overview** opens with one specific real-world reference (the `reference` field of the direction), then audience and situation, then the theme note.
+- **Colors** gives each core role a descriptive name, its token (`{colors.primary}`), its hex, and its job; then the light/dark table and measured contrast.
+- **Typography** names each family with the reason it fits, the Google Fonts URL, and which level is used where.
+- **Layout, Elevation & Depth, Shapes, Components** refer to tokens instead of repeating raw values.
+- **Do's and Don'ts** is short and specific: the rules that protect the reference plus the drifts most likely for this product. Always include: flat colors only, no gradients/glow/glass, no values outside the tokens.
+- **Evidence** records direction id, date, rationale, sources, and open checks.
+
+## Workflow A — From the chosen direction
+
+1. Run `build_specimen.py <directions.json> --export <id> --out-dir design/`. It writes `DESIGN.md`, `tokens.css` (CSS variables named like the official `css-tailwind` export: `--color-*`, `--font-*`, `--text-*`, `--leading-*`, `--font-weight-*`, `--radius-*`, `--spacing-*`, with a dark-theme switch), and `tailwind.theme.json` (Tailwind v3, bound to those variables), then lints `DESIGN.md`.
+2. Edit the prose where the product needs more (domain components, layout specifics, extra don'ts). Keep token edits in the front matter, not in the prose.
+3. Lint again: `python <skill-dir>/scripts/lint_design_md.py design/DESIGN.md --official`. Fix every error; treat warnings as blockers before handoff.
+4. Optional exports with the official CLI: `npx @google/design.md export --format css-tailwind design/DESIGN.md` (Tailwind v4 `@theme`) or `--format dtcg` (W3C design tokens).
+5. Render `templates/preview.template.html` next to `tokens.css` so the team sees buttons, forms, cards, and states in the real system.
 
 ## Workflow B — Extract a design system from a URL
 
-1. Run `scan_site.py <url>` for measured colors, fonts, and gradient use. If you can render the page (browser tool or screenshots), add radius, spacing, and component observations; otherwise ask for screenshots or CSS.
-2. Write the package to `design-md/<site-name>/` with at least `DESIGN.md` and `preview.html`. Separate **observed** from **inferred** values and state limitations. See `examples/example-input.yaml` and `examples/example-design-analysis.json` (its `Inter` value is an observed fact about the analyzed site, not a recommendation).
-3. The extraction documents a reference; it does not license a clone. Mark `avoid_clone: true` in the frontmatter.
+1. Run `scan_site.py <url>` for measured colors, fonts, and gradient use. If you can render the page, add radius, spacing, and component observations; otherwise ask for screenshots or CSS.
+2. Fill `templates/DESIGN.template.md` and write it to `design-md/<site-name>/DESIGN.md` with a `preview.html`. Put observed vs inferred values and limitations in `## Evidence`. `examples/example-input.yaml` and `examples/example-design-analysis.json` show the intermediate analysis (its `Inter` value is an observed fact about that site, not a recommendation).
+3. An extraction documents a reference; it does not license a clone.
+4. The linter rejects unfilled `{{placeholders}}`, so a half-filled template cannot be handed off.
 
-## Structure rules for DESIGN.md
+## Validation and drift
 
-- Token tables use `Token | Value | Role` (or light/dark value columns); no loose lists of hex codes.
-- Components are declared in YAML or tables that reference tokens, and use inheritance (`extends`) for variants such as hover or disabled instead of repeating every property.
-- A "Rules" section lists: no gradients (or the documented brand exception), color never the only signal, one primary action per view, and the contrast results.
+When you or another agent change tokens or components:
 
-## Validation and linting
-
-When you or another agent create or change tokens or components:
-
-- **Contrast:** text 4.5:1, large text and UI boundaries 3:1; rerun `build_specimen.py` or `colorlib.py contrast`.
-- **Token integrity:** components reference only tokens defined in `DESIGN.md`.
-- **Role consistency:** a token's use matches its role (no `--danger` for decoration, no `--accent` as a second primary).
-- **Drift:** search the code for hardcoded hex values, `px` font sizes, and `linear-gradient(`/`radial-gradient(`/`conic-gradient(` that bypass tokens.
-
-If a check fails, fix the value or the reference and explain the correction.
+- **Lint:** `lint_design_md.py` mirrors the official rules (broken references, missing primary or typography, section order, duplicate sections, contrast, orphaned tokens, units) and adds fth-skills rules (no gradients, complete `-dark` twins, prose references that resolve, unfilled placeholders, default fonts).
+- **Role consistency:** a token's use matches its role (no `error` for decoration, no `secondary` as a second primary action).
+- **Code drift:** search the code for hardcoded hex values, `px` font sizes outside the scale, and `linear-gradient(`/`radial-gradient(`/`conic-gradient(` that bypass tokens.
+- **Version changes:** compare two versions with `npx @google/design.md diff DESIGN.md DESIGN-v2.md`.
 
 ## Agent behavior
 
 - Read `DESIGN.md` before any UI change.
-- Never hardcode a color or size when a token exists; if a token is missing, propose it in `DESIGN.md` with its role and reason first.
-- Reject UI changes that violate `DESIGN.md`, and say which rule they break.
+- Never hardcode a color or size when a token exists; if a token is missing, add it to the front matter with a role and a reason in the prose first.
+- Reject UI changes that violate `DESIGN.md` and name the rule they break.

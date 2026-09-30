@@ -42,6 +42,10 @@ jobs:
         working-directory: skills/design-system/scripts
         run: python -m unittest test_design_system -v
 
+      - name: Lint DESIGN.md examples
+        run: |
+          for f in design-md/*/DESIGN.md; do python skills/design-system/scripts/lint_design_md.py "$f"; done
+
       - name: Script syntax
         run: |
           find skills scripts -name '*.py' -print0 | xargs -0 python -m py_compile

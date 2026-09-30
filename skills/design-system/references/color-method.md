@@ -23,10 +23,10 @@ Offer 2-3 directions that differ in stance or hue, not three shades of the same 
 
 ## 3. Build order
 
-1. **Neutrals first.** Background, surface, border, text, muted text. Tint them very slightly toward the primary hue or the domain material (OKLCH chroma below about 0.015) so they do not read as framework grey. Avoid the warm-cream + terracotta look and the slate-navy + cyan look (see `scripts/ai_defaults.json`).
-2. **One primary.** The main action and selection color. It must pass 4.5:1 with its `on-primary` text and 3:1 against the background.
-3. **At most one accent.** A different job from primary (focus ring, highlight, data emphasis). Never a second competing call to action.
-4. **Semantic states.** Success, warning, danger (and info if needed) from stable hue families, each at least 3:1 against the background; use them only for state, always with a label or icon.
+1. **Neutrals first.** `background`, `surface`, `outline-variant` (dividers), `on-surface` (text), `on-surface-variant` (muted text). Tint them very slightly toward the primary hue or the domain material (OKLCH chroma below about 0.015) so they do not read as framework grey. Avoid the warm-cream + terracotta look and the slate-navy + cyan look (see `scripts/ai_defaults.json`).
+2. **One `primary`.** The main action and selection color. It must pass 4.5:1 with its `on-primary` text and 3:1 against the background.
+3. **At most one `secondary` (accent).** A different job from primary (focus ring, highlight, data emphasis). Never a second competing call to action.
+4. **Semantic states.** `success`, `warning`, `error` from stable hue families, each at least 3:1 against the background; use them only for state, always with a label or icon.
 5. **Dark theme.** Not an inversion: raise lightness of chromatic roles, lower their chroma, use near-black neutrals with a slight tint rather than pure `#000`, and recheck every pair.
 
 Use `python <skill-dir>/scripts/colorlib.py ramp <hex>` when a role needs a tonal scale (50-950) and `colorlib.py contrast <fg> <bg>` for spot checks.
@@ -37,7 +37,7 @@ Use `python <skill-dir>/scripts/colorlib.py ramp <hex>` when a role needs a tona
 - **Proportion:** most of the surface is neutral; primary is a minority; accent is rare (60-30-10 is a starting heuristic, not a rule).
 - **Saturation budget:** high chroma only where it carries meaning (primary action, state).
 - **Color is never the only signal** for state, errors, links, or selection.
-- **Contrast:** text 4.5:1 (7:1 preferred for long reading), large text and UI boundaries 3:1. `build_specimen.py` checks all role pairs and derives `border-strong` for inputs.
+- **Contrast:** text 4.5:1 (7:1 preferred for long reading), large text and UI boundaries 3:1. `build_specimen.py` checks all role pairs and derives `outline` (3:1 input boundaries) and the `on-*` text colors.
 
 ## 5. Validation
 

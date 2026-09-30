@@ -1,41 +1,41 @@
 <!doctype html>
-<html lang="tr" data-theme="light">
+<html lang="tr">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>{{brand_name}} Design Preview</title>
+  <link rel="stylesheet" href="tokens.css" />
   <style>
+    /* Values come from tokens.css (generated next to DESIGN.md by scripts/design_md.py).
+       The aliases below map this preview's short names onto the DESIGN.md token names. */
     :root {
-      --bg: {{color_bg}};
-      --bg-elevated: {{color_bg_elevated}};
-      --surface: {{color_surface}};
-      --surface-2: {{color_surface_2}};
-      --border: {{color_border}};
-      --text: {{color_text}};
-      --text-muted: {{color_text_muted}};
-      --primary: {{color_primary}};
-      --primary-hover: {{color_primary_hover}};
-      --primary-soft: {{color_primary_soft}};
-      --accent: {{color_accent}};
-      --success: {{color_success}};
-      --warning: {{color_warning}};
-      --danger: {{color_danger}};
-      --info: {{color_info}};
-      --radius-sm: {{radius_sm}};
-      --radius-md: {{radius_md}};
-      --radius-lg: {{radius_lg}};
-      --radius-xl: {{radius_xl}};
-      --shadow-sm: {{shadow_sm}};
-      --shadow-md: {{shadow_md}};
-      --shadow-lg: {{shadow_lg}};
-      --container: {{container_width}};
+      --bg: var(--color-background);
+      --bg-elevated: var(--color-surface);
+      --surface: var(--color-surface);
+      --surface-2: var(--color-surface-container);
+      --border: var(--color-outline-variant);
+      --text: var(--color-on-surface);
+      --text-muted: var(--color-on-surface-variant);
+      --primary: var(--color-primary);
+      --primary-hover: var(--color-primary-hover);
+      --primary-soft: var(--color-primary-container);
+      --accent: var(--color-secondary);
+      --success: var(--color-success);
+      --warning: var(--color-warning);
+      --danger: var(--color-error);
+      --info: var(--color-primary);
+      --radius-xl: var(--radius-lg);
+      --shadow-sm: none;
+      --shadow-md: 0 1px 2px rgb(0 0 0 / 0.08);
+      --shadow-lg: 0 4px 12px rgb(0 0 0 / 0.1);
+      --container: var(--spacing-max-width, 1200px);
     }
 
     * { box-sizing: border-box; }
 
     body {
       margin: 0;
-      font-family: {{font_family}};
+      font-family: var(--font-body-md);
       background: var(--bg);
       color: var(--text);
       line-height: 1.5;

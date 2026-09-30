@@ -17,7 +17,7 @@ This skill is the entry point of its ecosystem. It chooses a workflow, checks wh
 | Skill | Role | Handoff artifact |
 |---|---|---|
 | `@claude-style-coding` | Product-minded implementation: user journey, UX states, and visual quality first. | inline handoff block |
-| `@design-system` | Researches and proposes palette and typography directions, writes DESIGN.md and tokens, designs pages, and reviews UI against them. | `design/design-tokens.json` |
+| `@design-system` | Researches and proposes palette and typography directions, writes DESIGN.md and tokens, designs pages, and reviews UI against them. | inline handoff block |
 | `@design-intelligence` | Deprecated alias — use `@design-system`. | inline handoff block |
 | `@design-md-enforcer` | Deprecated alias — use `@design-system`. | inline handoff block |
 | `@anti-ai-slop-design` | Removes generic AI aesthetics and restores product-specific hierarchy in designs, reviews, and image briefs. | inline handoff block |

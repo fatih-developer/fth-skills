@@ -20,6 +20,8 @@ sys.path.insert(0, str(HERE))
 
 import build_specimen as bs  # noqa: E402
 import colorlib as cl  # noqa: E402
+import design_md  # noqa: E402
+import lint_design_md as lint  # noqa: E402
 import find_fonts as ff  # noqa: E402
 import scan_site as ss  # noqa: E402
 
@@ -106,9 +108,22 @@ class SpecimenTests(unittest.TestCase):
 
     def test_low_contrast_fails(self):
         d = copy.deepcopy(self.spec["directions"][0])
-        d["colors"]["light"]["text-muted"] = "#c8ccc6"
+        d["colors"]["light"]["on-surface-variant"] = "#c8ccc6"
         msgs = [i["message"] for i in bs.check_direction(d, self.defaults, None, None) if i["level"] == "FAIL"]
-        self.assertTrue(any("text-muted on bg" in m for m in msgs))
+        self.assertTrue(any("on-surface-variant on background" in m for m in msgs))
+
+    def test_missing_reference_warns(self):
+        d = copy.deepcopy(self.spec["directions"][0])
+        del d["reference"]
+        warns = [i["message"] for i in bs.check_direction(d, self.defaults, None, None) if i["level"] == "WARN"]
+        self.assertTrue(any("reference" in m for m in warns))
+
+    def test_derived_on_colors_meet_text_contrast(self):
+        for d in self.spec["directions"]:
+            for theme, dark in (("light", False), ("dark", True)):
+                c = bs.complete_theme(d["colors"][theme], dark)
+                for role in ("secondary", "success", "warning", "error"):
+                    self.assertGreaterEqual(cl.contrast_ratio(c["on-" + role], c[role]), 4.5, (d["id"], theme, role))
 
     def test_template_defaults_and_fonts_warn(self):
         d = copy.deepcopy(self.spec["directions"][0])
@@ -130,9 +145,9 @@ class SpecimenTests(unittest.TestCase):
         dirs[1]["colors"]["light"]["primary"] = dirs[0]["colors"]["light"]["primary"]
         self.assertTrue(bs.compare_directions(dirs))
 
-    def test_border_strong_meets_three_to_one(self):
+    def test_outline_meets_three_to_one(self):
         c = bs.complete_theme(self.spec["directions"][0]["colors"]["light"], False)
-        self.assertGreaterEqual(cl.contrast_ratio(c["border-strong"], c["bg"]), 3)
+        self.assertGreaterEqual(cl.contrast_ratio(c["outline"], c["background"]), 3)
 
     def test_render_and_export(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -144,12 +159,114 @@ class SpecimenTests(unittest.TestCase):
             self.assertIn('data-dir="c"', page)
             r = subprocess.run([sys.executable, str(HERE / "build_specimen.py"), str(TEMPLATE), "--export", "b", "--out-dir", tmp], capture_output=True, text=True)
             self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
-            for name in ("DESIGN.md", "tokens.css", "tailwind.theme.json", "design-tokens.json"):
+            for name in ("DESIGN.md", "tokens.css", "tailwind.theme.json"):
                 self.assertTrue((Path(tmp) / name).exists(), name)
             css = (Path(tmp) / "tokens.css").read_text(encoding="utf-8")
-            self.assertIn("--primary: #a3321c;", css)
+            self.assertIn("--color-primary: #a3321c;", css)
+            self.assertIn("--text-body-md:", css)
             self.assertIn('[data-theme="dark"]', css)
             self.assertNotIn("gradient(", css)
+            self.assertIn("0 error(s), 0 warning(s)", r.stdout)
+
+
+class DesignMdTests(unittest.TestCase):
+    def setUp(self):
+        spec = json.loads(TEMPLATE.read_text(encoding="utf-8"))
+        self.d = spec["directions"][0]
+        self.text = design_md.render(self.d, "Test", [])
+        self.data, self.body, err = lint.load_front_matter(self.text)
+        self.assertIsNone(err)
+
+    def test_front_matter_schema(self):
+        self.assertEqual(self.data["version"], "alpha")
+        self.assertLessEqual(set(self.data), lint.KNOWN_TOP)
+        self.assertIn("primary", self.data["colors"])
+        self.assertIn("body-md", self.data["typography"])
+
+    def test_sections_in_spec_order(self):
+        heads = [h for h in lint.sections(self.body) if h in lint.CANONICAL]
+        self.assertEqual(heads, lint.CANONICAL)
+        self.assertEqual(lint.sections(self.body)[-1], "Evidence")
+
+    def test_every_component_reference_resolves(self):
+        for comp, props in self.data["components"].items():
+            for value in props.values():
+                for ref in lint.REF_RE.findall(str(value)):
+                    self.assertIsNotNone(lint.resolve(self.data, ref), f"{comp}: {ref}")
+
+    def test_dark_twins_complete(self):
+        colors = self.data["colors"]
+        light = [k for k in colors if not k.endswith("-dark")]
+        self.assertTrue(all(k + "-dark" in colors for k in light))
+
+    def test_lint_clean(self):
+        report = lint.lint_text(self.text)
+        self.assertEqual(report["summary"]["errors"], 0, report)
+        self.assertEqual(report["summary"]["warnings"], 0, report)
+
+    def test_reference_opens_overview(self):
+        overview = self.body.split("## Overview", 1)[1].split("##", 1)[0].strip()
+        self.assertTrue(overview.startswith(self.d["reference"]))
+
+
+class LintTests(unittest.TestCase):
+    BASE = """---
+name: T
+colors:
+  primary: "#1f5d4c"
+  on-primary: "#ffffff"
+  brand-glow: "linear-gradient(90deg, #111, #222)"
+  lonely: "#123456"
+typography:
+  body-md:
+    fontFamily: Inter
+    fontSize: 16
+components:
+  button:
+    backgroundColor: "{colors.primary}"
+    textColor: "{colors.missing}"
+  bad-contrast:
+    backgroundColor: "#ffffff"
+    textColor: "#dddddd"
+---
+
+## Colors
+
+Uses {colors.nope}.
+
+## Overview
+
+## Colors
+"""
+
+    def rules(self, text):
+        return {f["rule"] for f in lint.lint_text(text)["findings"]}
+
+    def test_rules_fire(self):
+        rules = self.rules(self.BASE)
+        for rule in ("no-gradient", "broken-ref", "section-order", "duplicate-section", "contrast-ratio",
+                     "orphaned-tokens", "dimension", "prose-ref", "default-font"):
+            self.assertIn(rule, rules)
+
+    def test_unfilled_template_is_rejected(self):
+        text = (HERE.parent / "templates" / "DESIGN.template.md").read_text(encoding="utf-8")
+        report = lint.lint_text(text)
+        self.assertIn("placeholder", {f["rule"] for f in report["findings"]})
+        self.assertGreater(report["summary"]["errors"], 0)
+
+    def test_subset_parser_matches_yaml(self):
+        text = design_md.render(json.loads(TEMPLATE.read_text(encoding="utf-8"))["directions"][2], "T", [])
+        raw = text.split("---", 2)[1]
+        parsed = lint.parse_yaml_subset(raw)
+        try:
+            import yaml
+        except ImportError:
+            self.skipTest("PyYAML not installed")
+        self.assertEqual(parsed, yaml.safe_load(raw))
+
+    def test_subset_parser_handles_omitted_list(self):
+        parsed = lint.parse_yaml_subset("name: X\nomitted:\n  - spacing\n  - section: rounded\n    reason: none\n")
+        self.assertEqual(parsed["omitted"], ["spacing", {"section": "rounded", "reason": "none"}])
 
 
 class ScanTests(unittest.TestCase):

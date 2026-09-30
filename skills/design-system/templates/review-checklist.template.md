@@ -13,12 +13,13 @@ Use this checklist before applying a generated design to a real project.
 
 ## Tokens
 
-- [ ] Color tokens are compact and reusable.
-- [ ] Typography scale is documented.
-- [ ] Spacing scale is documented.
-- [ ] Radius scale is documented.
-- [ ] Shadow scale is documented.
-- [ ] Semantic colors are documented.
+- [ ] `DESIGN.md` front matter follows the design.md spec (colors, typography, rounded, spacing, components).
+- [ ] Color roles use the spec names (`background`, `surface`, `on-surface`, `outline`, `primary`, `on-primary`, `secondary`, `error`, ...).
+- [ ] Every color has a `-dark` twin when a dark theme exists.
+- [ ] Colors are flat; no gradient values anywhere.
+- [ ] Typography levels use the recommended names (`headline-*`, `body-*`, `label-*`).
+- [ ] `scripts/lint_design_md.py DESIGN.md` reports 0 errors and 0 warnings.
+- [ ] `npx @google/design.md lint DESIGN.md` agrees (when Node is available).
 - [ ] No unnecessary one-off values are included.
 
 ## Components
@@ -50,9 +51,7 @@ Use this checklist before applying a generated design to a real project.
 
 ## Implementation Readiness
 
-- [ ] `DESIGN.md` is ready.
-- [ ] `UI_RULES.md` is ready.
-- [ ] `components.md` is ready.
-- [ ] `tokens.css` is ready.
-- [ ] `tailwind.theme.json` is ready if Tailwind is used.
-- [ ] Agent instructions are clear.
+- [ ] `DESIGN.md` is ready: Overview opens with a specific reference, sections are in spec order, Do's and Don'ts are specific.
+- [ ] `tokens.css` is ready (light, dark, and `prefers-color-scheme`).
+- [ ] `tailwind.theme.json` is ready if Tailwind v3 is used, or `npx @google/design.md export --format css-tailwind` for Tailwind v4.
+- [ ] `preview.html` renders from `tokens.css`.
