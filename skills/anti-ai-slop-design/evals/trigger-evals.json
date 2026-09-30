@@ -1,0 +1,42 @@
+[
+  {
+    "query": "This landing page looks like every AI startup — neon gradients and glowing orbs. Make it look like a real product.",
+    "should_trigger": true
+  },
+  {
+    "query": "Review our SaaS dashboard; it feels generic and AI-generated.",
+    "should_trigger": true
+  },
+  {
+    "query": "Write an image generation brief for our accounting app's hero image that doesn't look like AI slop.",
+    "should_trigger": true
+  },
+  {
+    "query": "Redesign our corporate site to be less shiny and futuristic, more natural and deliberate.",
+    "should_trigger": true
+  },
+  {
+    "query": "Remove the glassmorphism and gradient text from this pricing page but keep our brand colors.",
+    "should_trigger": true
+  },
+  {
+    "query": "Fix the N+1 query in the orders API.",
+    "should_trigger": false
+  },
+  {
+    "query": "Proofread this blog post for grammar.",
+    "should_trigger": false
+  },
+  {
+    "query": "Add a dark mode toggle that follows the system setting.",
+    "should_trigger": false
+  },
+  {
+    "query": "Write unit tests for the checkout service.",
+    "should_trigger": false
+  },
+  {
+    "query": "Set up PgBouncer for our Postgres cluster.",
+    "should_trigger": false
+  }
+]

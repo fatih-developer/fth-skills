@@ -167,8 +167,9 @@ Keep the final response concise unless the user asks for a detailed report.
 | Page strategy, section architecture, or a 12-category UI review | `@design-intelligence` |
 | Design tokens and `DESIGN.md` as the source of visual truth, token linting, extracting a design system from a URL | `@design-md-enforcer` |
 | Implementing a user-facing feature with product thinking and every UX state handled | `@claude-style-coding` |
+| Removing generic AI aesthetics (glow, neon gradients, fake proof, uniform cards) and restoring product-specific hierarchy | `@anti-ai-slop-design` |
 
-When more than one applies, run them in the order of the *Product Page Build Flow* in `@ecosystem-web`: tokens → page strategy → implementation.
+When more than one applies, run them in the order of the *Product Page Build Flow* in `@ecosystem-web`: tokens → page strategy → anti-slop check → implementation.
 
 ## 🔗 Next Steps & Handoffs
 
@@ -176,7 +177,8 @@ When more than one applies, run them in the order of the *Product Page Build Flo
 **Ecosystem:** `@ecosystem-web` — Web, Design & Delivery.
 
 **Workflows:**
-- **Product Page Build Flow** (`web-build-page`, step 3 of 4): next → `@geo-optimizer` *(optional)*.
+- **Product Page Build Flow** (`web-build-page`, step 4 of 5): next → `@geo-optimizer` *(optional)*.
+- **Remove the AI Look Flow** (`web-de-slop`, step 3 of 3): last step → once it passes, complete the workflow and report the outcome.
 
 **Direct handoffs:**
 - `@accessibility-enforcer` — The UI ships inside a mobile app.

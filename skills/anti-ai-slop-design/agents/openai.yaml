@@ -1,0 +1,14 @@
+interface:
+  display_name: Anti-AI-Slop Design
+  short_description: Remove generic AI aesthetics from product design
+  default_prompt: Use $anti-ai-slop-design to make this design specific to the product,
+    with clear hierarchy and restrained visual effects.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

@@ -125,8 +125,9 @@ When defining components, promote the use of inheritance (`extends`). Instead of
 | Page strategy, section architecture, or a 12-category UI review | `@design-intelligence` |
 | Design tokens and `DESIGN.md` as the source of visual truth, token linting, extracting a design system from a URL | `@design-md-enforcer` |
 | Implementing a user-facing feature with product thinking and every UX state handled | `@claude-style-coding` |
+| Removing generic AI aesthetics (glow, neon gradients, fake proof, uniform cards) and restoring product-specific hierarchy | `@anti-ai-slop-design` |
 
-When more than one applies, run them in the order of the *Product Page Build Flow* in `@ecosystem-web`: tokens → page strategy → implementation.
+When more than one applies, run them in the order of the *Product Page Build Flow* in `@ecosystem-web`: tokens → page strategy → anti-slop check → implementation.
 
 ## 🔗 Next Steps & Handoffs
 
@@ -134,8 +135,9 @@ When more than one applies, run them in the order of the *Product Page Build Flo
 **Ecosystem:** `@ecosystem-web` — Web, Design & Delivery.
 
 **Workflows:**
-- **Product Page Build Flow** (`web-build-page`, step 1 of 4): next → `@design-intelligence`.
-- **UI Review Flow** (`web-review`, step 2 of 2): last step → once it passes, complete the workflow and report the outcome.
+- **Product Page Build Flow** (`web-build-page`, step 1 of 5): next → `@design-intelligence`.
+- **UI Review Flow** (`web-review`, step 2 of 3): last step → once it passes, complete the workflow and report the outcome.
+- **Remove the AI Look Flow** (`web-de-slop`, step 2 of 3): next → `@claude-style-coding` *(optional)*.
 
 **Handoff contract:** pass results to the next skill through an inline *Handoff* block in your reply with the fields `skill`, `workflow`, `created_at`, `inputs`, `summary`, and `next` (the handoff contract of `@ecosystem-web`). If a next skill is not installed, continue with its step from the ecosystem map, or install it with `npx skills add fatih-developer/fth-skills --skill <name>` after the user agrees.
 <!-- END GENERATED: handoffs -->

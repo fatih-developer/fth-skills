@@ -16,6 +16,9 @@
     "design-md-enforcer": {
       "role": "Extracts and enforces DESIGN.md design-token specifications."
     },
+    "anti-ai-slop-design": {
+      "role": "Removes generic AI aesthetics and restores product-specific hierarchy in designs, reviews, and image briefs."
+    },
     "react-flow": {
       "role": "Audits, repairs, migrates, and scaffolds @xyflow/react projects."
     },
@@ -50,6 +53,13 @@
           "skill": "design-intelligence",
           "do": "Plan sections and UX rules (GENERATE mode).",
           "done_when": "Page strategy and section architecture are approved."
+        },
+        {
+          "skill": "anti-ai-slop-design",
+          "do": "Check the page direction for generic AI/SaaS patterns and replace them with product-specific choices.",
+          "done_when": "No unjustified glow, gradient, fake proof, or uniform card grid remains in the plan.",
+          "optional": true,
+          "condition": "Draft leans on generic AI visuals, or the user asked for a less generic look"
         },
         {
           "skill": "claude-style-coding",
@@ -109,6 +119,43 @@
           "done_when": "Token drift is listed with fixes.",
           "parallel_group": "review",
           "optional": true
+        },
+        {
+          "skill": "anti-ai-slop-design",
+          "do": "Flag generic AI patterns that weaken hierarchy, meaning, or credibility.",
+          "done_when": "The few highest-impact patterns are listed with concrete fixes.",
+          "parallel_group": "review",
+          "optional": true
+        }
+      ]
+    },
+    {
+      "id": "web-de-slop",
+      "title": "Remove the AI Look Flow",
+      "when": [
+        "remove the AI look",
+        "make this less generic",
+        "too shiny, neon, or futuristic"
+      ],
+      "steps": [
+        {
+          "skill": "anti-ai-slop-design",
+          "do": "Audit the design, pick one coherent correction, and apply it within the requested scope.",
+          "done_when": "All seven acceptance checks pass and product identity is preserved."
+        },
+        {
+          "skill": "design-md-enforcer",
+          "do": "Record the corrected palette, type, and component rules as tokens.",
+          "done_when": "DESIGN.md reflects the corrected choices.",
+          "optional": true,
+          "condition": "The project has or needs a design system"
+        },
+        {
+          "skill": "claude-style-coding",
+          "do": "Implement the corrected design with every UX state handled.",
+          "done_when": "Desktop and mobile renders match the correction.",
+          "optional": true,
+          "condition": "The user asked for code changes"
         }
       ]
     },
@@ -150,6 +197,21 @@
       "from": "claude-style-coding",
       "to": "accessibility-enforcer",
       "when": "The UI ships inside a mobile app"
+    },
+    {
+      "from": "design-intelligence",
+      "to": "anti-ai-slop-design",
+      "when": "The generated or reviewed page relies on generic AI/SaaS visuals"
+    },
+    {
+      "from": "anti-ai-slop-design",
+      "to": "ugc-crafter",
+      "when": "Imagery needs authentic, smartphone-style people or product shots"
+    },
+    {
+      "from": "anti-ai-slop-design",
+      "to": "accessibility-enforcer",
+      "when": "The design is a mobile app screen"
     }
   ]
 }

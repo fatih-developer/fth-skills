@@ -5,7 +5,7 @@
 **Curated AI agent skills for coding workflows, decision-making, and agentic task safety**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Skills: 79](https://img.shields.io/badge/skills-79%20Public-brightgreen.svg)](#-available-skills)
+[![Skills: 80](https://img.shields.io/badge/skills-80%20Public-brightgreen.svg)](#-available-skills)
 [![Platform: skills.sh](https://img.shields.io/badge/platform-skills.sh-black.svg)](https://skills.sh/)
 
 _Reusable instruction packs for the [skills.sh](https://skills.sh/) ecosystem — works with Claude Code, Cursor, Copilot, Gemini CLI, and more._
@@ -71,7 +71,7 @@ npx clawhub inspect <skill-slug> --files
 
 ---
 
-## 🎯 Available Skills (79 Public)
+## 🎯 Available Skills (80 Public)
 
 Skills are grouped into **ecosystems**. Each ecosystem has a hub skill (`ecosystem-*`) that picks a workflow, checks which member skills are installed, runs them in order with explicit handoffs, and falls back gracefully when a member is missing. Install a hub to get the routing, then add members as you need them.
 
@@ -174,9 +174,9 @@ _Architect, audit, release, and monitor iOS, Android, React Native, and Flutter 
 | **onboarding-designer** | `--skill onboarding-designer` | Designs mobile first-run flows, permission sequencing, and early retention hooks. |
 | **crash-analyst** | `--skill crash-analyst` | Symbolicates mobile crash reports, finds the root cause, and proposes a fix. |
 
-### Web, Design & Delivery (7 + hub)
+### Web, Design & Delivery (8 + hub)
 
-_Design product-grade web interfaces, keep design systems consistent, make sites visible to search and AI answer engines, and deploy them._ Workflows: `web-build-page`, `web-visibility`, `web-review`, `web-deploy`.
+_Design product-grade web interfaces, keep design systems consistent, make sites visible to search and AI answer engines, and deploy them._ Workflows: `web-build-page`, `web-visibility`, `web-review`, `web-de-slop`, `web-deploy`.
 
 | Skill | Install | Description |
 |---|---|---|
@@ -184,6 +184,7 @@ _Design product-grade web interfaces, keep design systems consistent, make sites
 | **claude-style-coding** | `--skill claude-style-coding` | Product-minded implementation with user journey, UX states, and visual polish first. |
 | **design-intelligence** | `--skill design-intelligence` | Generates or reviews web pages with a 12-category, accessibility-aware design rubric. |
 | **design-md-enforcer** | `--skill design-md-enforcer` | Enforce and manage DESIGN.md specifications, combining design reasoning with token roles. |
+| **anti-ai-slop-design** | `--skill anti-ai-slop-design` | Remove generic AI aesthetics from product design |
 | **react-flow** | `--skill react-flow` | Audit, repair, migrate, and scaffold React Flow projects. |
 | **geo-auditor** | `--skill geo-auditor` | Codeless GEO and SEO audits on live sites |
 | **geo-optimizer** | `--skill geo-optimizer` | Improves visibility in AI and classic searches |

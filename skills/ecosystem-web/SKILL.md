@@ -19,6 +19,7 @@ This skill is the entry point of its ecosystem. It chooses a workflow, checks wh
 | `@claude-style-coding` | Product-minded implementation: user journey, UX states, and visual quality first. | inline handoff block |
 | `@design-intelligence` | Generates or reviews web pages with a 12-category rubric. | inline handoff block |
 | `@design-md-enforcer` | Extracts and enforces DESIGN.md design-token specifications. | inline handoff block |
+| `@anti-ai-slop-design` | Removes generic AI aesthetics and restores product-specific hierarchy in designs, reviews, and image briefs. | inline handoff block |
 | `@react-flow` | Audits, repairs, migrates, and scaffolds @xyflow/react projects. | inline handoff block |
 | `@geo-auditor` | Read-only SEO/GEO/AEO audit of public websites. | inline handoff block |
 | `@geo-optimizer` | Implements and verifies SEO/GEO/AEO changes in a web codebase. | inline handoff block |
@@ -54,8 +55,9 @@ Follow this protocol whenever this ecosystem is invoked.
 |---|---|---|---|---|---|
 | 1 | `@design-md-enforcer` *(optional)* | Load or create DESIGN.md tokens before styling. | Tokens exist for color, type, spacing, and components. | Project has or needs a design system | — |
 | 2 | `@design-intelligence` | Plan sections and UX rules (GENERATE mode). | Page strategy and section architecture are approved. | — | — |
-| 3 | `@claude-style-coding` | Implement the slice with every UX state handled. | Loading, empty, error, and success states work. | — | — |
-| 4 | `@geo-optimizer` *(optional)* | Add metadata, structured data, and crawlable content. | Page passes the local SEO/GEO checks. | Page is public | — |
+| 3 | `@anti-ai-slop-design` *(optional)* | Check the page direction for generic AI/SaaS patterns and replace them with product-specific choices. | No unjustified glow, gradient, fake proof, or uniform card grid remains in the plan. | Draft leans on generic AI visuals, or the user asked for a less generic look | — |
+| 4 | `@claude-style-coding` | Implement the slice with every UX state handled. | Loading, empty, error, and success states work. | — | — |
+| 5 | `@geo-optimizer` *(optional)* | Add metadata, structured data, and crawlable content. | Page passes the local SEO/GEO checks. | Page is public | — |
 
 ### 2. Search & AI Visibility Flow (`web-visibility`)
 
@@ -74,8 +76,19 @@ Follow this protocol whenever this ecosystem is invoked.
 |---|---|---|---|---|---|
 | 1 | `@design-intelligence` | Score the page on 12 categories (REVIEW mode). | Issues are classified by severity. | — | `review` |
 | 2 | `@design-md-enforcer` *(optional)* | Lint the implementation against DESIGN.md tokens. | Token drift is listed with fixes. | — | `review` |
+| 3 | `@anti-ai-slop-design` *(optional)* | Flag generic AI patterns that weaken hierarchy, meaning, or credibility. | The few highest-impact patterns are listed with concrete fixes. | — | `review` |
 
-### 4. Deploy & Verify Flow (`web-deploy`)
+### 4. Remove the AI Look Flow (`web-de-slop`)
+
+**When:** “remove the AI look”; “make this less generic”; “too shiny, neon, or futuristic”
+
+| # | Skill | Does | Done when | Condition | Parallel group |
+|---|---|---|---|---|---|
+| 1 | `@anti-ai-slop-design` | Audit the design, pick one coherent correction, and apply it within the requested scope. | All seven acceptance checks pass and product identity is preserved. | — | — |
+| 2 | `@design-md-enforcer` *(optional)* | Record the corrected palette, type, and component rules as tokens. | DESIGN.md reflects the corrected choices. | The project has or needs a design system | — |
+| 3 | `@claude-style-coding` *(optional)* | Implement the corrected design with every UX state handled. | Desktop and mobile renders match the correction. | The user asked for code changes | — |
+
+### 5. Deploy & Verify Flow (`web-deploy`)
 
 **When:** “deploy to Coolify”; “the deploy failed”; “service is down”
 
@@ -89,4 +102,7 @@ Follow this protocol whenever this ecosystem is invoked.
 
 - `@react-flow` → `@claude-style-coding`: The flow editor needs product-level UX polish.
 - `@claude-style-coding` → `@accessibility-enforcer`: The UI ships inside a mobile app.
+- `@design-intelligence` → `@anti-ai-slop-design`: The generated or reviewed page relies on generic AI/SaaS visuals.
+- `@anti-ai-slop-design` → `@ugc-crafter`: Imagery needs authentic, smartphone-style people or product shots.
+- `@anti-ai-slop-design` → `@accessibility-enforcer`: The design is a mobile app screen.
 <!-- END GENERATED: ecosystem-workflows -->

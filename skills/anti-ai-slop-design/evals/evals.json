@@ -1,0 +1,65 @@
+{
+  "skill_name": "anti-ai-slop-design",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Audit this hero section: dark navy background, cyan-to-purple gradient headline 'The Future of Intelligent Work', a glowing brain illustration, logos of Google, Stripe and Notion under 'Trusted by', and three identical feature cards. The product is an invoice-matching tool for accounting teams.",
+      "expected_output": "Leads with the largest problem (the hero does not show the invoice-matching task), flags the unsupported customer logos as invented social proof, recommends a few high-impact changes (concrete offer and action, real product surface, neutral surfaces with one accent), and does not claim checks it did not perform.",
+      "files": [],
+      "assertions": [
+        {
+          "name": "leads_with_largest_problem",
+          "description": "Starts with the most damaging issue rather than a long undifferentiated list."
+        },
+        {
+          "name": "flags_unsupported_proof",
+          "description": "Calls out the customer logos as unsupported unless the user confirms they are real."
+        },
+        {
+          "name": "product_specific_fix",
+          "description": "Replaces the abstract AI motif with the product's actual task or surface."
+        },
+        {
+          "name": "few_high_impact_changes",
+          "description": "Recommends a small number of prioritized changes."
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Our brand is intentionally vibrant: magenta primary color, playful illustrations, dark mode by default. Make the settings page feel less AI-generated.",
+      "expected_output": "Preserves the vibrant brand, illustrations, and dark mode; targets only unjustified patterns (e.g., uniform cards, decorative badges, nonsemantic glow) and avoids forcing a bland or beige redesign.",
+      "files": [],
+      "assertions": [
+        {
+          "name": "preserves_brand",
+          "description": "Keeps magenta, playful illustration, and dark mode instead of rejecting them as common."
+        },
+        {
+          "name": "avoids_forced_blandness",
+          "description": "Does not push the design toward beige, monochrome, or minimalism by default."
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Here is our product page code for a coffee grinder store. Remove the generic AI look and implement the changes.",
+      "expected_output": "Prioritizes product info, price, variants, and purchase controls; edits code with semantic HTML and existing tokens; does not invent delivery or return policies; reports which renders were actually checked.",
+      "files": [],
+      "assertions": [
+        {
+          "name": "ecommerce_priorities",
+          "description": "Puts product information, price, variants, and purchase action first."
+        },
+        {
+          "name": "no_invented_policies",
+          "description": "Does not invent shipping, return, or guarantee details."
+        },
+        {
+          "name": "honest_verification",
+          "description": "States which checks were performed and which were not."
+        }
+      ]
+    }
+  ]
+}
